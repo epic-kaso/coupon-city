@@ -42,12 +42,13 @@ if (!defined('BASEPATH'))
  */
 
 $route['default_controller'] = "home";
-$route['coupons'] = "home/index/0/all";
-$route['coupons/(:num)'] = "home/index/$1/all";
-$route['coupons/(:num)/(:num)'] = "home/index/$1/$2";
 
-$route['category/all'] = "home/index/0";
-$route['category/'] = "";
+$route['categories'] = "home/index/all";
+$route['categories/all'] = "home/index/all";
+$route['categories/(:num)'] = "home/index/all/$1";
+$route['categories/(:any)'] = "home/index/$1";
+$route['categories/(:any)/(:num)'] = "home/index/$1/$2";
+
 
 $route['sell'] = 'merchant/index';
 $route['contact'] = 'static_pages/contact';

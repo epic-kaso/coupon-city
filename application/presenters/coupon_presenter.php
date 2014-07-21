@@ -38,7 +38,7 @@ class Coupon_presenter extends Presenter {
         $seed = rand(1, $count);
         $row = $this->coupon_model->get($seed);
         if (empty($row) || $row == FALSE) {
-            $row = new stdClass();
+            $row = new Couponview();
             $row->empty = true;
             $row->name = 'No Coupon Available';
             $row->description = "N/A";
@@ -55,6 +55,14 @@ class Coupon_presenter extends Presenter {
 
     public function create_summary($row) {
         $row->summary = ellipsize($row->description, 30, 1);
+    }
+
+}
+
+class Couponview {
+
+    public function __get($param) {
+        return 'N/A';
     }
 
 }

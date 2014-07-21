@@ -1,5 +1,7 @@
 <ul class="nav nav-tabs nav-stacked nav-coupon-category">
-    <li <?php echo (!is_numeric($this->uri->segment(4))) ? 'class="active"' : '' ?>>
+    <li
+    <?php echo (is_all($this->uri->segment(2))) ? 'class="active"' : '' ?>
+        >
         <a href="<?= $categories->base_url ?>">
             <i class="icon-ticket"></i>All
         </a>
@@ -12,3 +14,11 @@
         </li>
     <?php } ?>
 </ul>
+<?php
+
+function is_all($url) {
+    return strcmp($url, 'all') === 0 ||
+            empty($url) ||
+            is_numeric($url);
+}
+?>

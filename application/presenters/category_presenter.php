@@ -29,14 +29,14 @@ class Category_presenter extends Presenter {
 
     private function process($data) {
         foreach ($data as $value) {
-            $value->link = $this->base_url . '/' . $value->id;
-            $value->active = $this->is_active($value->id);
+            $value->link = $this->base_url . '/' . $value->slug;
+            $value->active = $this->is_active($value->slug);
         }
         return $data;
     }
 
-    private function is_active($id) {
-        return $this->uri->segment(4) == $id;
+    private function is_active($slug) {
+        return $this->uri->segment(2) == $slug;
     }
 
 }

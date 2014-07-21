@@ -17,18 +17,18 @@ class Home extends MY_Controller {
         $this->load->library('qpagination');
     }
 
-    public function index($page = 0, $category = 'all') {
+    public function index($category = 'all', $page = 0) {
         $limit = 20;
         $total = $this->_count_coupons($category);
-        $base_url = base_url('coupons/');
+        $base_url = base_url('categories/' . $category);
 
-        $coupons = $this->_coupons($limit, $page, $category);
+        $coupons = $this->_coupons($limit, $page, $this->category->fetch_id_by_slug($category));
         $coupon_presenter = new Coupon_presenter($coupons);
         $this->data['title'] = 'All Projects';
-        $this->data['categories'] = new Category_presenter($this->category->get_all(), site_url('home/index/0/'));
+        $this->data['categories'] = new Category_presenter($this->category->get_all(), base_url('categories'));
         $this->data['coupons'] = $coupon_presenter;
         $this->data['featured_item'] = $coupon_presenter->featured_item();
-        $config = $this->_use_pagination($total, $limit, $base_url, 2);
+        $config = $this->_use_pagination($total, $limit, $base_url, 3);
         $config['cur_page'] = $page;
         $this->pagination->initialize($config);
         $this->data['links'] = $this->pagination->create_links();
@@ -72,7 +72,7 @@ class Home extends MY_Controller {
     }
 
     public function _coupons($limit, $page, $category = 'all') {
-        if (!is_numeric($category)) {
+        if (strcmp($category, 'all') === 0) {
             $coupons = $this->coupons
                     ->limit($limit, $page * $limit)
                     ->get_all();
@@ -103,10 +103,10 @@ class Home extends MY_Controller {
     }
 
     private function _count_coupons($category = 'all') {
-        if (!is_numeric($category)) {
+        if (strcmp('all', $category) === 0) {
             $count = $this->coupons->count_all();
         } else {
-            $count = $this->coupons->count_by(array('category_id' => $category));
+            $count = $this->coupons->count_by(array('category_id' => $this->category->fetch_id_by_slug($category)));
         }
         return $count;
     }

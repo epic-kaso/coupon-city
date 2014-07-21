@@ -33,4 +33,11 @@ class Category_model extends MY_Model {
         return url_title($response);
     }
 
+    public function fetch_id_by_slug($slug) {
+        if ($slug === 'all' || empty($slug)) {
+            return 'all';
+        }
+        return $this->get_by(array('slug' => $slug))->id;
+    }
+
 }
