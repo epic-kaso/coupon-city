@@ -4,7 +4,7 @@
 <?= partial('partials/account/_create_user', array()); ?>
 <?= partial('partials/account/_forgot_password', array()); ?>
 <!-- SEARCH AREA -->
-<?= partial('partials/_search', array('query' => $search_query)); ?>
+<?= partial('partials/_search', array('query' => @$search_query)); ?>
 <!-- END SEARCH AREA -->
 <!-- PAGE TITLE -->
 <div class="top-title-area">
