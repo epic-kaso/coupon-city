@@ -1,0 +1,24 @@
+<div class="span5">
+    <label>Coupon Full Description</label>
+    <textarea name="coupon_description" ng-model="coupon.description" class="span5" style="height: 200px;">        
+    </textarea>
+</div>
+<div class="span3"> 
+        <label>Location & Areas </label>
+        <input name="coupon_publish" ng-model="coupon.location" type="text" class="span3">
+        <label class="checkbox">
+            <input name="coupon_publish" ng-model="coupon.published" ng-true-value='1' ng-false-value='0' checked="true" type="checkbox">Make Available to All Users Immediately
+        </label>
+        <hr/>
+        <label>Select Brand To Publish With</label>
+        <select name="brand" ng-model="coupon.brand_id">
+            <option value="1">Default</option>                
+        </select>
+        <hr/>
+        <label>Select Coupon Category</label>
+        <select required="" name="brand" ng-model="coupon.category_id">
+            <option ng-repeat="cat in categories" value="{{cat.id}}">{{cat.name}}</option>                
+        </select>
+       <a ui-sref="addcoupon-step3"  class="btn btn-primary btn-large">Next &RightArrow;</a>
+</div>
+

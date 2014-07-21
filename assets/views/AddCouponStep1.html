@@ -1,0 +1,40 @@
+<div class="span5" style="border: thin dashed #003bb3;">
+    <div id="my-awesome-dropzone"
+         class="dropzone" >
+    </div>
+</div>
+<div class="span3">  
+    <div ng-show="coupon_form.coupon_name.$dirty && !coupon_form.coupon_name.$pristine" class="invalid">Invalid.
+      <span ng-show="coupon_form.coupon_name.$error.required">You need to Specify coupon name.</span>
+    </div>
+    <label>Name</label>
+    <input name="coupon_name" required ng-model="coupon.name" type="text" placeholder="email@domain.com" class="span3">
+    <div ng-show="coupon_form.coupon_summary.$dirty && !coupon_form.coupon_summary.$pristine" class="invalid">
+      <span ng-show="coupon_form.coupon_summary.$error.required">You Summarize a bit.</span>
+    </div>
+    <label>Summary</label>
+    <textarea name="coupon_summary" required ng-model="coupon.summary" class="span3"></textarea>
+    <div ng-show="coupon_form.old_price.$dirty && !coupon_form.old_price.$pristine" class="invalid">
+      <span ng-show="coupon_form.old_price.$error.required">You need to Specify Old Price.</span>
+    </div>
+    <label>Old Price</label>
+    <input name="old_price" ng-change="calculatePercentDiscount()" required ng-model="coupon.old_price" type="number" placeholder="Old Price" class="span3">
+    <div ng-show="coupon_form.new_price.$dirty && !coupon_form.new_price.$pristine" class="invalid">
+      <span ng-show="coupon_form.new_price.$error.required">You need to Specify New Price.</span>
+    </div>
+    <label>New Price</label>
+    <input name="new_price" ng-change="calculatePercentDiscount()" required ng-model="coupon.new_price" type="number" placeholder="New Price" class="span3">
+    <label>Percentage Discount</label>
+    <input name="percentage_discount" ng-change="calculateNewPrice() " required ng-model="coupon.discount" type="number" placeholder="Percentage Discount" class="span3">
+    <div ng-show="coupon_form.start_date.$dirty && !coupon_form.start_date.$pristine" class="invalid">
+      <span ng-show="coupon_form.start_date.$error.required">You need to Specify Start Date.</span>
+    </div>
+    <label>Start Date</label>
+    <input ng-required='true' type='text' name="start_date" class="span3" datepicker-popup='yyyy-MM-dd' format='yyyy-MM-dd' ng-model="coupon.start_date" />
+    <div ng-show="coupon_form.end_date.$dirty && !coupon_form.start_date.$pristine" class="invalid">
+      <span ng-show="coupon_form.end_date.$error.required">You need to Specify Start Date.</span>
+    </div>
+    <label>End Date Date</label>
+    <input ng-required='true' type='text' name="end_date" class="span3" datepicker-popup='yyyy-MM-dd' format='yyyy-MM-dd' ng-model="coupon.end_date" min-date='coupon.start_date' />
+    <a ui-sref="addcoupon-step2"  class="btn btn-primary btn-large">Next &RightArrow;</a>
+</div>

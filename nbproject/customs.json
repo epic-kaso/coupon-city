@@ -1,0 +1,10 @@
+{
+    "elements": {
+        "datepicker": {}
+    },
+    "attributes": {
+        "ui-sref": {
+            "context": "a"
+        }
+    }
+}
