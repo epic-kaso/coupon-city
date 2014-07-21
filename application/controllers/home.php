@@ -158,6 +158,46 @@ class Home extends MY_Controller {
         return $config;
     }
 
+    public function _check_fb_state() {
+
+        $user = $this->facebook->getUser();
+
+        if ($user) {
+            try {
+                $data['user_profile'] = $this->facebook->api('/me');
+            } catch (FacebookApiException $e) {
+                $user = null;
+            }
+        } else {
+            $this->facebook->destroySession();
+        }
+
+        if ($user) {
+
+            $data['logout_url'] = site_url('welcome/logout'); // Logs off application
+            // OR
+            // Logs off FB!
+            // $data['logout_url'] = $this->facebook->getLogoutUrl();
+        } else {
+            $data['login_url'] = $this->facebook->getLoginUrl(array(
+                'redirect_uri' => site_url('welcome/login'),
+                'scope' => array("email") // permissions here
+            ));
+        }
+        $this->load->view('login', $data);
+    }
+
+    public function logout() {
+
+        $this->load->library('facebook');
+
+        // Logs off session from website
+        $this->facebook->destroySession();
+        // Make sure you destory website session as well.
+
+        redirect('welcome/login');
+    }
+
 }
 
 /* End of file welcome.php */
