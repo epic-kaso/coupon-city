@@ -46,6 +46,9 @@ $route['coupons'] = "home/index/0/all";
 $route['coupons/(:num)'] = "home/index/$1/all";
 $route['coupons/(:num)/(:num)'] = "home/index/$1/$2";
 
+$route['category/all'] = "home/index/0";
+$route['category/'] = "";
+
 $route['sell'] = 'merchant/index';
 $route['contact'] = 'static_pages/contact';
 $route['about'] = 'static_pages/about_us';
