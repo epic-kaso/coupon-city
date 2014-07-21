@@ -29,3 +29,5 @@
     </div>
 </div>
 
+<?= partial('partials/_footer_nav', array()); ?>
+

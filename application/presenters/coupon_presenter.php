@@ -23,13 +23,22 @@ class Coupon_presenter extends Presenter {
             $row->name = 'No Coupon Available';
             return array($row);
         } else {
-
-            foreach ($this->data as $row) {
-                $row->remaining = $this->_calculate_remaining_time($row->start_date, $row->end_date);
-                $this->create_summary($row);
+            if (is_array($this->data)) {
+                foreach ($this->data as $row) {
+                    $this->process($row);
+                }
+                return $this->data;
+            } else {
+                return $this->process($this->data);
             }
-            return $this->data;
         }
+    }
+
+    private function process($row) {
+        $row->remaining = $this->_calculate_remaining_time($row->start_date, $row->end_date);
+        $row->link = base_url('coupon/' . $row->slug);
+        $this->create_summary($row);
+        return $row;
     }
 
     public function featured_item() {
@@ -42,6 +51,9 @@ class Coupon_presenter extends Presenter {
             $row->empty = true;
             $row->name = 'No Coupon Available';
             $row->description = "N/A";
+        } else {
+            $row->remaining = $this->_calculate_remaining_time($row->start_date, $row->end_date);
+            $this->create_summary($row);
         }
         return $row;
     }

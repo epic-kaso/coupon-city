@@ -61,6 +61,8 @@ $route['search/(:num)'] = 'home/search/$1/all/';
 $route['search/(:any)'] = 'home/search/0/all/$1';
 $route['search/(:num)/(:any)'] = 'home/search/$1/$2/';
 $route['search/(:num)/(:any)/(:any)'] = 'home/search/$1/$2/$3';
+
+$route['coupon/(:any)'] = 'home/coupon/$1';
 //$route['api/user'] = 'api/user/index';
 //$route['api/user/(:num)'] = 'api/user/index/$1';
 //$route['api/user/(:any)'] = 'api/user';

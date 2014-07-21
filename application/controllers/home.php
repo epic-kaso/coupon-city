@@ -71,6 +71,16 @@ class Home extends MY_Controller {
         $this->data['links'] = $this->qpagination->create_links();
     }
 
+    public function coupon($slug) {
+        $coupon = $this->coupons->get_by_slug($slug);
+        if (empty($coupon) || !is_object($coupon)) {
+            show_404('static_pages/error_page');
+        } else {
+            $coupon_presenter = new Coupon_presenter($coupon);
+            $this->data['featured_item'] = $coupon_presenter->items();
+        }
+    }
+
     public function _coupons($limit, $page, $category = 'all') {
         if (strcmp($category, 'all') === 0) {
             $coupons = $this->coupons

@@ -31,7 +31,7 @@ class Coupon_model extends MY_Model {
      */
 
     public $protected_attributes = array('id');
-    public $before_create = array('created_at', 'updated_at', 'calculate_discount', 'calculate_commision', 'transform_start_end_date');
+    public $before_create = array('ensure_unique_slug', 'created_at', 'updated_at', 'calculate_discount', 'calculate_commision', 'transform_start_end_date');
     public $has_many = array('coupon_media' => array('model' => 'coupon_media_model', 'primary_key' => 'coupon_id'));
     public $belongs_to = array('merchant' => array('model' => 'merchant_model'));
     public $validate = array(
@@ -60,6 +60,10 @@ class Coupon_model extends MY_Model {
             'label' => 'end_date',
             'rules' => 'required')
     );
+
+    public function get_by_slug($slug) {
+        return $this->get_by(array('slug' => $slug));
+    }
 
     public function calculate_discount($row) {
         if (is_object($row)) {
@@ -118,6 +122,23 @@ class Coupon_model extends MY_Model {
         } else {
             return FALSE;
         }
+    }
+
+    public function ensure_unique_slug($row) {
+        $db = DB('default');
+        $query = $db->limit(1)->get_where($this->_table, array('slug' => $row->slug));
+
+        $db->close();
+        if ($query->num_rows() !== 0) {
+            return $this->increase_slug_name($row->slug);
+        } else {
+            return $row;
+        }
+    }
+
+    public function increase_slug_name($slug) {
+        $this->load->helper('string');
+        return increment_string($slug, '_');
     }
 
     public function search($query, $location = null) {
