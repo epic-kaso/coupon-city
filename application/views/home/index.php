@@ -1,7 +1,7 @@
 <?= partial('partials/_header_nav', array()); ?>
 <!-- LOGIN REGISTER LINKS CONTENT -->
-<?= partial('partials/account/_login', array()); ?>
-<?= partial('partials/account/_create_user', array()); ?>
+<?= partial('partials/account/_login', array('show_fb_login', TRUE)); ?>
+<?= partial('partials/account/_create_user', array('show_fb_login', TRUE)); ?>
 <?= partial('partials/account/_forgot_password', array()); ?>
 
 <!-- END LOGIN REGISTER LINKS CONTENT -->

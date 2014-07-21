@@ -159,36 +159,16 @@ class Home extends MY_Controller {
         return $config;
     }
 
-    public function fb() {
-        $this->view = FALSE;
-        $data = array();
-        $user = $this->facebook->getUser();
-        if ($user) {
-            try {
-                $data['user_profile'] = $this->facebook->api('/me');
-            } catch (Exception $e) {
-                $user = null;
-            }
+    public function fb_login() {
+        $fb_user = $this->input->post('fb_user');
+        if ($fb_user === FALSE) {
+            header('content-type: application/json');
+            echo json_encode(array('error' => 'invalid fb user supplied'));
+            exit();
         } else {
-            $this->facebook->destroySession();
+            header('content-type: application/json');
+            echo json_encode(array('user' => $fb_user));
         }
-
-        if ($user) {
-            $data['logout_url'] = site_url('home/logout'); // Logs off application
-        } else {
-            $data['login_url'] = $this->facebook->getLoginUrl(array(
-                'redirect_uri' => site_url('home/fb'),
-                'scope' => array("email") // permissions here
-            ));
-        }
-        $this->load->view('login', $data);
-    }
-
-    public function logout() {
-        // Logs off session from website
-        $this->facebook->destroySession();
-        // Make sure you destory website session as well.
-        redirect(base_url());
     }
 
 }

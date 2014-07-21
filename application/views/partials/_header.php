@@ -30,5 +30,5 @@
         <link rel="stylesheet" href="<?= base_url('assets/css/mystyles.css'); ?>">
     </head>
 
-    <body ng-app="myUserApp">
+    <body>
         <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/schemes/teal.css'); ?>" title="teal" media="all" />
