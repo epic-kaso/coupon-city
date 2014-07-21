@@ -8,14 +8,18 @@
 
 
 <!-- TOP AREA -->
+<div class="container">
+    <?= $breadcrumbs ?>
+</div>
+
 <?= partial('partials/_featured_item', $featured_item); ?>
 <!-- END TOP AREA -->
 
 
 <!-- SEARCH AREA -->
 <?= partial('partials/_search', array()); ?>
-<!-- END SEARCH AREA -->
 <div class="gap"></div>
+<!-- END SEARCH AREA -->
 
 <!-- //////////////////////////////////
 //////////////END MAIN HEADER//////////

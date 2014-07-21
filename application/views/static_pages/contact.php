@@ -9,6 +9,7 @@
 <!-- PAGE TITLE -->
 <div class="top-title-area">
     <div class="container">
+        <?= $breadcrumbs ?>
         <h1 class="title-page">Contact Us</h1>
     </div>
 </div>
