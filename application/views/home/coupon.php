@@ -7,6 +7,7 @@
 <!-- END LOGIN REGISTER LINKS CONTENT -->
 <!-- SEARCH AREA -->
 <?= partial('partials/_search', array('query' => @$search_query)); ?>
+<?= $breadcrumbs ?>
 <!-- END SEARCH AREA -->
 <div class="top-title-area">
     <div class="container">

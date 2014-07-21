@@ -8,6 +8,7 @@
 <!-- END SEARCH AREA -->
 <!-- PAGE TITLE -->
 <div class="top-title-area">
+    <?= $breadcrumbs ?>
     <div class="container">
         <h1 class="title-page">About Us</h1>
     </div>

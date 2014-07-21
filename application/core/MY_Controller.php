@@ -26,9 +26,11 @@ class MY_Controller extends CI_Controller {
         $view = (is_string($this->view) && !empty($this->view)) ? $this->view : $view;
 
         if ($this->view !== FALSE) {
+            $this->data['breadcrumbs'] = '';
             $this->data['error_msg'] = $this->session->flashdata('error_msg');
             $this->data['success_msg'] = $this->session->flashdata('success_msg');
             $this->data['yield'] = $this->load->view($view, $this->data, TRUE);
+
 
             if (is_string($this->layout) && !empty($this->layout)) {
                 $layout = $this->layout;
