@@ -7,9 +7,7 @@
 <?= partial('partials/_search', array('query' => @$search_query)); ?>
 <!-- END SEARCH AREA -->
 <!-- END PAGE TITLE -->
-
-<div class="gap"></div>
-
+<?= $breadcrumbs ?>
 <!-- //////////////////////////////////
 //////////////END MAIN HEADER//////////
 ////////////////////////////////////-->

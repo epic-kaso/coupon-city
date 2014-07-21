@@ -8,9 +8,7 @@
 <!-- SEARCH AREA -->
 <?= partial('partials/_search', array('query' => $search_query)); ?>
 <!-- END SEARCH AREA -->
-
-
-<div class="gap"></div>
+<?= $breadcrumbs ?>
 
 <div class="container">
     <div class="row">

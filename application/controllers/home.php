@@ -14,6 +14,7 @@ class Home extends MY_Controller {
         $this->load->model('category_model', 'category');
         $this->load->model('coupon_model', 'coupons');
         $this->load->library('pagination');
+        $this->load->library('breadcrumbs');
         $this->load->library('qpagination');
     }
 
@@ -165,7 +166,7 @@ class Home extends MY_Controller {
         if ($user) {
             try {
                 $data['user_profile'] = $this->facebook->api('/me');
-            } catch (FacebookApiException $e) {
+            } catch (Exception $e) {
                 $user = null;
             }
         } else {
@@ -173,10 +174,10 @@ class Home extends MY_Controller {
         }
 
         if ($user) {
-            $data['logout_url'] = site_url('welcome/logout'); // Logs off application
+            $data['logout_url'] = site_url('home/logout'); // Logs off application
         } else {
             $data['login_url'] = $this->facebook->getLoginUrl(array(
-                'redirect_uri' => base_url('/'),
+                'redirect_uri' => site_url('home/fb'),
                 'scope' => array("email") // permissions here
             ));
         }
