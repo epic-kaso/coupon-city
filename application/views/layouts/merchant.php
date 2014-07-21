@@ -1,7 +1,7 @@
 <?php
 echo partial('partials/_header', array('title' => 'Couponcity'));
 ?>
-<div>
+<div ng-app="myUserApp">
     <?= $yield ?>
 </div>
 <?php

@@ -1,4 +1,9 @@
 <!-- Scripts queries -->
+<?php
+if (!isset($app_type)) {
+    $app_type = 'app';
+}
+?>
 <script src="<?= base_url('assets/js/lib/jquery.min.js'); ?>"></script>
 <script src="<?php echo base_url() ?>assets/js/lib/dropzone.min.js"></script>
 <script src="<?= base_url('assets/js/boostrap.min.js'); ?>"></script>
@@ -23,11 +28,12 @@
 
 <script src="<?php echo base_url() ?>assets/js/lib/ui-bootstrap-tpls.min.js"></script>
 <script src="<?php echo base_url() ?>assets/js/lib/angular-ui-router.min.js"></script>
-<script src="<?php echo base_url() ?>assets/js/app/app.js"></script>
-<script src="<?php echo base_url() ?>assets/js/app/services.js"></script>
-<script src="<?php echo base_url() ?>assets/js/app/controllers.js"></script>
-<script src="<?php echo base_url() ?>assets/js/app/filters.js"></script>
-<script src="<?php echo base_url() ?>assets/js/app/directives.js"></script>
+<script src="<?php echo base_url() ?>assets/js/lib/angular-facebook.min.js"></script>
+<script src="<?php echo base_url() ?>assets/js/<?= $app_type ?>/app.js"></script>
+<script src="<?php echo base_url() ?>assets/js/<?= $app_type ?>/services.js"></script>
+<script src="<?php echo base_url() ?>assets/js/<?= $app_type ?>/controllers.js"></script>
+<script src="<?php echo base_url() ?>assets/js/<?= $app_type ?>/filters.js"></script>
+<script src="<?php echo base_url() ?>assets/js/<?= $app_type ?>/directives.js"></script>
 
 </body>
 

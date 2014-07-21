@@ -1,9 +1,9 @@
 <?php
 echo partial('partials/_header', array('title' => 'Couponcity'));
 ?>
-<div>
+<div ng-app="endUserApp">
     <?= $yield ?>
 </div>
 <?php
-echo partial('partials/_footer', array('year' => time('y')));
+echo partial('partials/_footer', array('app_type' => 'user'));
 ?>
