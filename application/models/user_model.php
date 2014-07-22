@@ -27,15 +27,69 @@ class User_model extends MY_Model {
     public $validate = array(
         array('field' => 'email',
             'label' => 'email',
-            'rules' => 'required|valid_email|is_unique[merchants.email]'),
+            'rules' => 'trim|required|valid_email|is_unique[users.email]'),
         array('field' => 'password',
             'label' => 'password',
-            'rules' => 'required')
+            'rules' => 'trim|required')
     );
 
     public function encrypt_password($row) {
         $row['password'] = sha1($row['password']);
         return $row;
+    }
+
+    public function login_email($email, $password) {
+        $user = $this
+                ->with('coupons')
+                ->get_by(array('email' => $email, 'password' => sha1($password)));
+        if (!empty($user) && is_object($user)) {
+            return $user;
+        } else {
+            return FALSE;
+        }
+    }
+
+    public function is_unique_email($email) {
+        $db = DB('default');
+        $query = $db->limit(1)->get_where($this->_table, array('email' => $email));
+
+        $db->close();
+        if ($query->num_rows() !== 0) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+
+    public function is_fb_oauth_enabled($email) {
+        $db = DB('default');
+        $query = $db->limit(1)->get_where($this->_table, array('email' => $email, 'oauth_enabled' => 1));
+
+        $db->close();
+        if ($query->num_rows() !== 0) {
+            return $query->row;
+        } else {
+            return FALSE;
+        }
+    }
+
+    public function enable_fb_oauth($email, $fb_id) {
+        $user = $this->get_by(array('email' => $email));
+        if (!$user) {
+            return FALSE;
+        } else {
+            $this->update($user->id, array('fb_oauth_id' => $fb_id, 'oauth_enabled' => 1));
+            return $this->get_by(array('email' => $email));
+        }
+    }
+
+    public function create_fb($data) {
+        $id = $this->insert($data);
+        return $id;
+    }
+
+    public function login_fb($email, $fb_id) {
+        return $this->get_by(array('email' => $email, 'fb_oauth_id' => $fb_id));
     }
 
 }

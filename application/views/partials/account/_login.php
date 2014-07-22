@@ -3,11 +3,12 @@
     <h3>Member Login</h3>
     <h5>Welcome back, friend. Login to get started</h5>
     <div class="row-fluid">
-        <form class="dialog-form">
+        <form class="dialog-form" action="<?= base_url('login'); ?>" method="post">
+            <input type="hidden" name="redirect" value="<?= current_url(); ?>" />
             <label>E-mail</label>
-            <input type="text" placeholder="email@domain.com" class="span12">
+            <input name="email" type="text" placeholder="email@domain.com" class="span12">
             <label>Password</label>
-            <input type="password" placeholder="My secret password" class="span12">
+            <input name="password" type="password" placeholder="My secret password" class="span12">
             <label class="checkbox">
                 <input type="checkbox">Remember me
             </label>

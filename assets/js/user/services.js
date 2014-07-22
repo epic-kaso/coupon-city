@@ -7,7 +7,7 @@
 // In this case it is a simple value service.
 angular.module('endUserApp.services', []).
         value('version', '0.1')
-        .factory('FacebookService', function($http, $q) {
+        .factory('FacebookService', function($http, $q,$location) {
             var FB_DATA_URL = "http://localhost/coupon-city/index.php/home/fb_login";
             var response = {
                 /**
@@ -15,7 +15,7 @@ angular.module('endUserApp.services', []).
                  * school_id,form,class,session
                  */
                 login: function(params) {
-
+                    params.redirect_url = $location.absUrl();
                     var data = $.param({'fb_user': params});
                     var deferred = $q.defer();
                     $http.post(FB_DATA_URL, data, {

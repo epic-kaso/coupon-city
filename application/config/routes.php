@@ -49,12 +49,19 @@ $route['categories/(:num)'] = "home/index/all/$1";
 $route['categories/(:any)'] = "home/index/$1";
 $route['categories/(:any)/(:num)'] = "home/index/$1/$2";
 
+$route['login'] = "home/login";
+$route['logout'] = "home/logout";
+$route['signup'] = "home/signup";
 
 $route['sell'] = 'merchant/index';
-$route['contact'] = 'static_pages/contact';
-$route['about'] = 'static_pages/about_us';
-$route['how-it-works'] = 'static_pages/how_it_works';
-$route['help-faq'] = 'static_pages/help_faq';
+$route['sell/login'] = 'merchant/login';
+$route['sell/logout'] = "merchant/logout";
+$route['sell/signup'] = 'merchant/create';
+
+$route['contact'] = 'home/contact';
+$route['about'] = 'home/about_us';
+$route['how-it-works'] = 'home/how_it_works';
+$route['help-faq'] = 'home/help_faq';
 
 $route['search'] = 'home/search/0/all/';
 $route['search/(:num)'] = 'home/search/$1/all/';
@@ -66,7 +73,7 @@ $route['coupon/(:any)'] = 'home/coupon/$1';
 //$route['api/user'] = 'api/user/index';
 //$route['api/user/(:num)'] = 'api/user/index/$1';
 //$route['api/user/(:any)'] = 'api/user';
-$route['404_override'] = 'static_pages/error_page';
+$route['404_override'] = 'home/error_page';
 
 
 /* End of file routes.php */

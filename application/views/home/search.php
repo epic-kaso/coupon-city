@@ -11,6 +11,12 @@
 <?= $breadcrumbs ?>
 
 <div class="container">
+    <?php if (!empty($success_msg)) { ?>
+        <div class='alert alert-success'><p><?= $success_msg ?></p></div>
+    <?php } ?>
+    <?php if (!empty($error_msg)) { ?>
+        <div class='alert alert-error'><p><?= $error_msg ?></p></div>
+    <?php } ?>
     <div class="row">
         <div class="span12">
             <p class="coupon-search-title">

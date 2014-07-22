@@ -9,10 +9,13 @@ require_once APPPATH . 'presenters/coupon_presenter.php';
 
 class Home extends MY_Controller {
 
+    const USER_SESSION_VARIABLE = "user";
+
     public function __construct() {
         parent::__construct();
         $this->load->model('category_model', 'category');
         $this->load->model('coupon_model', 'coupons');
+        $this->load->model('user_model', 'user');
         $this->load->library('pagination');
         $this->load->library('breadcrumbs');
         $this->load->library('qpagination');
@@ -33,6 +36,53 @@ class Home extends MY_Controller {
         $config['cur_page'] = $page;
         $this->pagination->initialize($config);
         $this->data['links'] = $this->pagination->create_links();
+    }
+
+    public function login() {
+        $this->view = FALSE;
+        $email = $this->input->post('email');
+        $password = $this->input->post('password');
+        $redirect_url = $this->input->post('redirect');
+
+        if ($email === FALSE || $password === FALSE) {
+            $this->session->set_flashdata('login_error', 'Username or password is invalid');
+        } else {
+            $user = $this->user->login_email($email, $password);
+            if (!$user) {
+                $this->session->set_flashdata('login_error', 'Username/password combination doesnt belong to any accoutn');
+            } else {
+                $this->_create_session($user);
+            }
+        }
+        redirect($redirect_url);
+    }
+
+    public function logout() {
+        $this->session->unset_userdata(array(Home::USER_SESSION_VARIABLE => '', 'user_logged_in' => FALSE));
+        redirect(base_url());
+    }
+
+    public function signup() {
+        $this->view = FALSE;
+        $password = $this->input->post('password');
+        $re_password = $this->input->post('re_password');
+        $redirect_url = $this->input->post('redirect');
+
+        if ($password !== FALSE && $re_password !== FALSE && strcmp($password, $re_password) === 0) {
+            $data = $this->input->post();
+            unset($data['re_password']);
+            unset($data['redirect']);
+            $response = $this->user->insert($data);
+            if (!$response) {
+                $this->session->set_flashdata('login_error', 'Error Occured. ' . print_r($response, true));
+            } else {
+                $user = $this->user->get($response);
+                $this->_create_session($user);
+            }
+        } else {
+            $this->session->set_flashdata('login_error', 'Password Mismatch');
+        }
+        redirect($redirect_url);
     }
 
     public function search($page = 0, $location = 'all', $search = 'helloworld') {
@@ -82,7 +132,27 @@ class Home extends MY_Controller {
         }
     }
 
-    public function _coupons($limit, $page, $category = 'all') {
+    public function contact() {
+
+    }
+
+    public function about_us() {
+
+    }
+
+    public function how_it_works() {
+
+    }
+
+    public function help_faq() {
+
+    }
+
+    public function error_page() {
+
+    }
+
+    private function _coupons($limit, $page, $category = 'all') {
         if (strcmp($category, 'all') === 0) {
             $coupons = $this->coupons
                     ->limit($limit, $page * $limit)
@@ -96,7 +166,7 @@ class Home extends MY_Controller {
         return $coupons;
     }
 
-    public function _search_coupons($limit, $page, $query = null, $location = 'all') {
+    private function _search_coupons($limit, $page, $query = null, $location = 'all') {
         if ($query === null) {
             return;
         }
@@ -137,7 +207,7 @@ class Home extends MY_Controller {
         return $count;
     }
 
-    public function _use_pagination($total, $per_page, $base_url, $segment = 3) {
+    private function _use_pagination($total, $per_page, $base_url, $segment = 3) {
         $config['base_url'] = $base_url;
         $config['total_rows'] = $total;
         $config['uri_segment'] = $segment;
@@ -160,14 +230,69 @@ class Home extends MY_Controller {
     }
 
     public function fb_login() {
+        $this->view = FALSE;
         $fb_user = $this->input->post('fb_user');
         if ($fb_user === FALSE) {
             header('content-type: application/json');
             echo json_encode(array('error' => 'invalid fb user supplied'));
             exit();
         } else {
-            header('content-type: application/json');
-            echo json_encode(array('user' => $fb_user));
+            $data = array();
+            $data['first_name'] = $fb_user['first_name'];
+            $data['last_name'] = $fb_user['last_name'];
+            $data['email'] = $fb_user['email'];
+            $data['oauth_enabled'] = 1;
+            $data['fb_oauth_id'] = $fb_user['id'];
+            $redirect_url = $fb_user['redirect_url'];
+
+            $state = $this->_process_fb_login($data);
+            if (!$state) {
+                $this->session->set_flashdata('login_error', 'Error Occured while loggining through facebook');
+            }
+            redirect($redirect_url);
+        }
+    }
+
+    private function _process_fb_login($data) {
+        $is_new_user = $this->user->is_unique_email($data['email']);
+        if ($is_new_user) {
+            $id = $this->user->create_fb($data);
+            if (!$id) {
+                return FALSE;
+            }
+            $user = $this->user->login_fb($data['email'], $data['fb_oauth_id']);
+        } else {
+            $user = $this->user->is_fb_oauth_enabled($data['email']);
+            if (!$user) {
+                $user = $this->user->enable_fb_oauth($data['email'], $data['fb_oauth_id']);
+            }
+        }
+        $this->_create_session($user);
+        return TRUE;
+    }
+
+    private function _create_session($user) {
+        $data = array(Home::USER_SESSION_VARIABLE => array('id' => $user->id,
+                'timestamp' => time(),
+                'coupons' => $user->coupons,
+                'email' => $user->email
+            ),
+            'user_logged_in' => true);
+        $this->session->set_userdata($data);
+    }
+
+    private function _is_logged_in($redirect = null) {
+        $data = $this->session->userdata(Home::USER_SESSION_VARIABLE);
+        if (!empty($data) && is_array($data) && is_numeric($data['id'])) {
+            $status = TRUE;
+        } else {
+            $status = FALSE;
+        }
+        if (!$status || !$this->session->userdata('user_logged_in')) {
+            if (is_null($redirect)) {
+                $redirect = base_url();
+            }
+            redirect($redirect);
         }
     }
 

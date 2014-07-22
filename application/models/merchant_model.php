@@ -25,10 +25,10 @@ class Merchant_model extends MY_Model {
     public $validate = array(
         array('field' => 'email',
             'label' => 'email',
-            'rules' => 'required|valid_email|is_unique[merchants.email]'),
+            'rules' => 'trim|required|valid_email|is_unique[merchants.email]'),
         array('field' => 'password',
             'label' => 'password',
-            'rules' => 'required')
+            'rules' => 'trim|required')
     );
 
     public function encrypt_password($row) {

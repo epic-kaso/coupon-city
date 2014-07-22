@@ -9,12 +9,12 @@ if (!isset($active)) {
 <header class="main">
     <div class="container">
         <div class="row">
-            <div class="span2">
+            <div class="span1">
                 <a href="index-2.html">
                     <img src="<?= base_url('assets/img/logo_200.png'); ?>" alt="logo" title="logo" class="logo">
                 </a>
             </div>
-            <div class="span8">
+            <div class="span6">
                 <!-- MAIN NAVIGATION -->
                 <div class="flexnav-menu-button" id="flexnav-menu-button">Menu</div>
                 <nav>
@@ -33,14 +33,28 @@ if (!isset($active)) {
                 </nav>
                 <!-- END MAIN NAVIGATION -->
             </div>
-            <div class="span2">
+            <div class="span5">
                 <!-- LOGIN REGISTER LINKS -->
-                <ul class="login-register">
-                    <li><a class="popup-text" href="#login-dialog" data-effect="mfp-move-from-top"><i class="icon-signin"></i>Sign in</a>
-                    </li>
-                    <li><a class="popup-text" href="#register-dialog" data-effect="mfp-move-from-top"><i class="icon-edit"></i>Sign up</a>
-                    </li>
-                </ul>
+                <?php
+                $current_user = @$this->session->userdata(Home::USER_SESSION_VARIABLE);
+                if (empty($current_user) || !$current_user) {
+                    ?>
+                    <ul class="login-register">
+                        <li><a class="popup-text" href="#login-dialog" data-effect="mfp-move-from-top"><i class="icon-signin"></i>Sign in</a>
+                        </li>
+                        <li><a class="popup-text" href="#register-dialog" data-effect="mfp-move-from-top"><i class="icon-edit"></i>Sign up</a>
+                        </li>
+                    </ul>
+                <?php } else { ?>
+                    <ul class="nav nav-pills">
+                        <li class="active"><a href="#"><?= $current_user['email']; ?></a>
+                        </li>
+                        <li><a  href="index-hero-image.html">Account Settings | </a>
+                        </li>
+                        <li><a href="<?= base_url('logout'); ?>">Logout</a>
+                        </li>
+                    </ul>
+                <?php } ?>
             </div>
         </div>
     </div>

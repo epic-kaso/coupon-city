@@ -20,6 +20,12 @@
 
 
 <div class="container">
+    <?php if (!empty($success_msg)) { ?>
+        <div class='alert alert-success'><p><?= $success_msg ?></p></div>
+    <?php } ?>
+    <?php if (!empty($error_msg)) { ?>
+        <div class='alert alert-error'><p><?= $error_msg ?></p></div>
+    <?php } ?>
     <div class="row row-reverce coupon">
         <?= partial('partials/_featured_item', $featured_item); ?>
     </div>
@@ -67,7 +73,7 @@
                 <div class="span3">
                     <!-- COUPON THUMBNAIL -->
                     <a href="#" class="coupon-thumb coupon-thumb-hold">
-                        <img src="img/the_hidden_power_of_the_heart_800x600.jpg" alt="Image Alternative text" title="The Hidden Power of the Heart" />
+                        <img src="<?= base_url('assets') ?>/img/the_hidden_power_of_the_heart_800x600.jpg" alt="Image Alternative text" title="The Hidden Power of the Heart" />
                         <div class="coupon-inner">
                             <h5 class="coupon-title">Beach Holidays</h5>
                             <p class="coupon-desciption">Inceptos tellus aliquet scelerisque velit fames tellus ac</p>
@@ -81,7 +87,7 @@
                 <div class="span3">
                     <!-- COUPON THUMBNAIL -->
                     <a href="#" class="coupon-thumb coupon-thumb-hold">
-                        <img src="img/amaze_800x600.jpg" alt="Image Alternative text" title="AMaze" />
+                        <img src="<?= base_url('assets') ?>/img/amaze_800x600.jpg" alt="Image Alternative text" title="AMaze" />
                         <div class="coupon-inner">
                             <h5 class="coupon-title">New Glass Collection</h5>
                             <p class="coupon-desciption">Rutrum pulvinar sed ridiculus sed leo amet facilisi</p>
@@ -95,7 +101,7 @@
                 <div class="span3">
                     <!-- COUPON THUMBNAIL -->
                     <a href="#" class="coupon-thumb coupon-thumb-hold">
-                        <img src="img/ana_29_800x600.jpg" alt="Image Alternative text" title="Ana 29" />
+                        <img src="<?= base_url('assets') ?>/img/ana_29_800x600.jpg" alt="Image Alternative text" title="Ana 29" />
                         <div class="coupon-inner">
                             <h5 class="coupon-title">Hot Summer Collection</h5>
                             <p class="coupon-desciption">Etiam ad dis et neque dictumst est euismod</p>
@@ -109,7 +115,7 @@
                 <div class="span3">
                     <!-- COUPON THUMBNAIL -->
                     <a href="#" class="coupon-thumb coupon-thumb-hold">
-                        <img src="img/food_is_pride_800x600.jpg" alt="Image Alternative text" title="Food is Pride" />
+                        <img src="<?= base_url('assets') ?>/img/food_is_pride_800x600.jpg" alt="Image Alternative text" title="Food is Pride" />
                         <div class="coupon-inner">
                             <h5 class="coupon-title">Best Pasta</h5>
                             <p class="coupon-desciption">Nostra pharetra platea mus nec viverra et molestie</p>

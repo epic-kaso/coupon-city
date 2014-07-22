@@ -37,28 +37,28 @@ class Coupon_model extends MY_Model {
     public $validate = array(
         array('field' => 'name',
             'label' => 'name',
-            'rules' => 'required'),
+            'rules' => 'trim|required'),
         array('field' => 'description',
             'label' => 'description',
-            'rules' => 'required'),
+            'rules' => 'trim|required'),
         array('field' => 'old_price',
             'label' => 'old_price',
-            'rules' => 'required'),
+            'rules' => 'trim|required'),
         array('field' => 'new_price',
             'label' => 'new_price|callback_is_valid_new_price[old_price]',
-            'rules' => 'required'),
+            'rules' => 'trim|required'),
         array('field' => 'category_id',
             'label' => 'category_id',
-            'rules' => 'required'),
+            'rules' => 'trim|required'),
         array('field' => 'merchant_id',
             'label' => 'merchant_id',
-            'rules' => 'required'),
+            'rules' => 'trim|required'),
         array('field' => 'start_date',
             'label' => 'start_date',
-            'rules' => 'required'),
+            'rules' => 'trim|required'),
         array('field' => 'end_date',
             'label' => 'end_date',
-            'rules' => 'required')
+            'rules' => 'trim|required')
     );
 
     public function get_by_slug($slug) {

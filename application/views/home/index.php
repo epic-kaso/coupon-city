@@ -9,10 +9,19 @@
 
 <!-- TOP AREA -->
 <div class="container">
+    <?php if (!empty($success_msg)) { ?>
+        <div class='alert alert-success'><p><?= $success_msg ?></p></div>
+    <?php } ?>
+    <?php if (!empty($error_msg)) { ?>
+        <div class='alert alert-error'><p><?= $error_msg ?></p></div>
+    <?php } ?>
     <?= $breadcrumbs ?>
 </div>
-
-<?= partial('partials/_featured_item', $featured_item); ?>
+<?php
+if (strcmp(site_url(), current_url()) === 0) {
+    echo partial('partials/_featured_item', $featured_item);
+}
+?>
 <!-- END TOP AREA -->
 
 
@@ -42,7 +51,7 @@
             </div>
             <div class="pagination">
                 <?= $links ?>
-                <?php //echo partial('partials/_pagination', $pagination); ?>
+                <?php //echo partial('partials/_pagination', $pagination);  ?>
             </div>
             <div class="gap"></div>
         </div>

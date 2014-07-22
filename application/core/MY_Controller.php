@@ -27,7 +27,8 @@ class MY_Controller extends CI_Controller {
 
         if ($this->view !== FALSE) {
             $this->data['breadcrumbs'] = '';
-            $this->data['error_msg'] = $this->session->flashdata('error_msg');
+            $this->data['error_msg'] = $this->session->flashdata('login_error') .
+                    $this->session->flashdata('error_msg');
             $this->data['success_msg'] = $this->session->flashdata('success_msg');
             $this->data['yield'] = $this->load->view($view, $this->data, TRUE);
 
