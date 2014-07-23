@@ -78,7 +78,13 @@ class User_model extends MY_Model {
             return FALSE;
         } else {
             $this->update($user->id, $data);
-            return $this->get_by(array('email' => $email));
+            $user = $this->get_by(array('email' => $email));
+            if (!$user) {
+                return $user;
+            } else {
+                $this->_create_session($user);
+                return $user;
+            }
         }
     }
 
@@ -88,7 +94,13 @@ class User_model extends MY_Model {
     }
 
     public function login_fb($email, $fb_id) {
-        return $this->get_by(array('email' => $email, 'fb_oauth_id' => $fb_id));
+        $user = $this->get_by(array('email' => $email, 'fb_oauth_id' => $fb_id));
+        if (!$user) {
+            return $user;
+        } else {
+            $this->_create_session($user);
+            return $user;
+        }
     }
 
     public function is_profile_complete($user_id) {
