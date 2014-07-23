@@ -14,7 +14,7 @@
 class Category_model extends MY_Model {
 
     public $_table = 'category';
-    public $protected_attributes = array('id');
+    //public $protected_attributes = array('id');
     public $before_create = array('create_slug');
 
     public function create_slug($row) {
@@ -37,7 +37,12 @@ class Category_model extends MY_Model {
         if ($slug === 'all' || empty($slug)) {
             return 'all';
         }
-        return $this->get_by(array('slug' => $slug))->id;
+        $cat = $this->get_by(array('slug' => $slug));
+        if (!$cat) {
+            return 'all';
+        } else {
+            return $cat->id;
+        }
     }
 
 }

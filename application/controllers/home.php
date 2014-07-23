@@ -24,12 +24,16 @@ class Home extends MY_Controller {
     public function index($category = 'all', $page = 0) {
         $limit = 20;
         $total = $this->_count_coupons($category);
-        $base_url = base_url('categories/' . $category);
+        $base_url = base_url('index.php/categories/' . $category);
 
+        //echo $category;
+        //print_r($this->category->fetch_id_by_slug($category));
         $coupons = $this->_coupons($limit, $page, $this->category->fetch_id_by_slug($category));
+        //print_r($coupons);
+
         $coupon_presenter = new Coupon_presenter($coupons);
         $this->data['title'] = 'All Projects';
-        $this->data['categories'] = new Category_presenter($this->category->get_all(), base_url('categories'));
+        $this->data['categories'] = new Category_presenter($this->category->get_all(), base_url('index.php/categories'));
         $this->data['coupons'] = $coupon_presenter;
         $this->data['featured_item'] = $coupon_presenter->featured_item();
         $config = $this->_use_pagination($total, $limit, $base_url, 3);
@@ -97,7 +101,7 @@ class Home extends MY_Controller {
         $limit = 20;
         $coupons = $this->_search_coupons($limit, $page, $search, $location);
         $total = $this->_search_count_coupons($search, $location);
-        $base_url = base_url('search/');
+        $base_url = base_url('index.php/search/');
 
 
         $coupon_presenter = new Coupon_presenter($coupons);
@@ -125,7 +129,7 @@ class Home extends MY_Controller {
     public function coupon($slug) {
         $coupon = $this->coupons->get_by_slug($slug);
         if (empty($coupon) || !is_object($coupon)) {
-            show_404('static_pages/error_page');
+            show_404('home/error_page');
         } else {
             $coupon_presenter = new Coupon_presenter($coupon);
             $this->data['featured_item'] = $coupon_presenter->items();
@@ -244,12 +248,17 @@ class Home extends MY_Controller {
             $data['oauth_enabled'] = 1;
             $data['fb_oauth_id'] = $fb_user['id'];
             $redirect_url = $fb_user['redirect_url'];
+            //print_r($fb_user);
+            //print_r($data);
 
             $state = $this->_process_fb_login($data);
+            header('content-type: application/json');
             if (!$state) {
-                $this->session->set_flashdata('login_error', 'Error Occured while loggining through facebook');
+                echo json_encode(array('error' => 'Error Occured while loggining through facebook'));
+            } else {
+                echo json_encode(array('success' => true, 'redirect' => $redirect_url));
             }
-            redirect($redirect_url);
+            exit();
         }
     }
 
@@ -264,17 +273,23 @@ class Home extends MY_Controller {
         } else {
             $user = $this->user->is_fb_oauth_enabled($data['email']);
             if (!$user) {
-                $user = $this->user->enable_fb_oauth($data['email'], $data['fb_oauth_id']);
+                $user = $this->user->enable_fb_oauth($data['email'], $data);
             }
         }
         $this->_create_session($user);
+        $this->session->set_userdata('fb_login', true);
         return TRUE;
     }
 
     private function _create_session($user) {
+        if (@property_exists($user, 'coupons')) {
+            $coups = $user->coupons;
+        } else {
+            $coups = array();
+        }
         $data = array(Home::USER_SESSION_VARIABLE => array('id' => $user->id,
                 'timestamp' => time(),
-                'coupons' => $user->coupons,
+                'coupons' => $coups,
                 'email' => $user->email
             ),
             'user_logged_in' => true);
@@ -290,7 +305,7 @@ class Home extends MY_Controller {
         }
         if (!$status || !$this->session->userdata('user_logged_in')) {
             if (is_null($redirect)) {
-                $redirect = base_url();
+                $redirect = base_url('index.php/');
             }
             redirect($redirect);
         }

@@ -12,26 +12,10 @@
  * @author kaso
  */
 class Coupon_model extends MY_Model {
-    /*
-     * $this->post->get_all();
-
-      $this->post->get(1);
-      $this->post->get_by('title', 'Pigs CAN Fly!');
-      $this->post->get_many_by('status', 'open');
-
-      $this->post->insert(array(
-      'status' => 'open',
-      'title' => "I'm too sexy for my shirt"
-      ));
-
-      $this->post->update(1, array( 'status' => 'closed' ));
-
-      $this->post->delete(1);
-
-     */
 
     public $protected_attributes = array('id');
     public $before_create = array('ensure_unique_slug', 'created_at', 'updated_at', 'calculate_discount', 'calculate_commision', 'transform_start_end_date');
+    public $after_get = array('format_numbers');
     public $has_many = array('coupon_media' => array('model' => 'coupon_media_model', 'primary_key' => 'coupon_id'));
     public $belongs_to = array('merchant' => array('model' => 'merchant_model'));
     public $validate = array(
@@ -69,11 +53,11 @@ class Coupon_model extends MY_Model {
         if (is_object($row)) {
             $old_price = $row->old_price;
             $new_price = $row->new_price;
-            $row->discount = ceil(($old_price - $new_price) / $old_price * 100.0);
+            $row->discount = ($old_price - $new_price) / $old_price * 100.0;
         } else {
             $old_price = $row['old_price'];
             $new_price = $row['new_price'];
-            $row['discount'] = ceil(($old_price - $new_price) / $old_price * 100.0);
+            $row['discount'] = ($old_price - $new_price) / $old_price * 100.0;
         }
         return $row;
     }
@@ -87,6 +71,22 @@ class Coupon_model extends MY_Model {
             $old_price = $row['old_price'];
             $new_price = $row['new_price'];
             $row['commision'] = ceil(($old_price - $new_price) / 100 * 10.0);
+        }
+        return $row;
+    }
+
+    public function format_numbers($row) {
+        if (@property_exists($row, 'discount')) {
+            $balance = $row->discount;
+            $row->discount = number_format($balance, 2);
+        }
+        if (@property_exists($row, 'old_price')) {
+            $old_price = $row->old_price;
+            $row->old_price = number_format($old_price, 2);
+        }
+        if (@property_exists($row, 'old_price')) {
+            $new_price = $row->new_price;
+            $row->new_price = number_format($new_price, 2);
         }
         return $row;
     }

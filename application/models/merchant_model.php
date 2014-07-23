@@ -18,8 +18,6 @@ class Merchant_model extends MY_Model {
     //public $belongs_to = array('merchant' => array('model' => 'merchant_model'));
 
     public $has_many = array(
-        'merchant_image' => array('model' => 'merchant_image_model', 'primary_key' => 'merchant_id'),
-        'merchant_information' => array('model' => 'merchant_information_model', 'primary_key' => 'merchant_id'),
         'coupons' => array('model' => 'coupon_model', 'primary_key' => 'merchant_id')
     );
     public $validate = array(

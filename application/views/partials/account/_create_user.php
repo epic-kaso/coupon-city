@@ -3,7 +3,7 @@
     <h3>Member Register</h3>
     <h5>Ready to get best offers? Let's get started!</h5>
     <div class="row-fluid">
-        <form class="dialog-form" action="<?= base_url('signup') ?>" method="post">
+        <form class="dialog-form" action="<?= base_url('index.php/signup') ?>" method="post">
             <input type="hidden" name="redirect" value="<?= current_url(); ?>" />
             <label>E-mail</label>
             <input type="text" name="email" placeholder="email@domain.com" class="span12">

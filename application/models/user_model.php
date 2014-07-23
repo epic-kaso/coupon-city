@@ -15,14 +15,12 @@ class User_model extends MY_Model {
 
     public $protected_attributes = array('id');
     public $before_create = array('created_at', 'updated_at', 'encrypt_password');
-    //public $belongs_to = array('merchant' => array('model' => 'merchant_model'));
+    
     public $has_many = array(
-        'transactions' => array('model' => 'transaction_model'),
-        'user_information' => array('model' => 'user_information_model'),
-        'user_coupons' => array('model' => 'user_coupon_model')
+        'activities' => array('model' => 'user_activity_model'),
+        'coupons' => array('model' => 'user_coupon_model'),
+        'wallet' => array('model' => 'wallet_model')
     );
-    //public $belongs_to = array('user' => array('model' => 'user_model'));
-    //public $has_many = array('comments' => array('model' => 'model_comments'));
 
     public $validate = array(
         array('field' => 'email',
@@ -30,11 +28,13 @@ class User_model extends MY_Model {
             'rules' => 'trim|required|valid_email|is_unique[users.email]'),
         array('field' => 'password',
             'label' => 'password',
-            'rules' => 'trim|required')
+            'rules' => 'trim')
     );
 
     public function encrypt_password($row) {
-        $row['password'] = sha1($row['password']);
+        if (array_key_exists('password', $row)) {
+            $row['password'] = sha1($row['password']);
+        }
         return $row;
     }
 
@@ -67,18 +67,18 @@ class User_model extends MY_Model {
 
         $db->close();
         if ($query->num_rows() !== 0) {
-            return $query->row;
+            return $query->row();
         } else {
             return FALSE;
         }
     }
 
-    public function enable_fb_oauth($email, $fb_id) {
+    public function enable_fb_oauth($email, $data) {
         $user = $this->get_by(array('email' => $email));
         if (!$user) {
             return FALSE;
         } else {
-            $this->update($user->id, array('fb_oauth_id' => $fb_id, 'oauth_enabled' => 1));
+            $this->update($user->id, $data);
             return $this->get_by(array('email' => $email));
         }
     }

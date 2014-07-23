@@ -31,8 +31,8 @@ app.config([
         .controller('LoginController', [
             '$scope',
             '$timeout',
-            'Facebook', 'FacebookService',
-            function($scope, $timeout, Facebook, FacebookService) {
+            'Facebook', 'FacebookService','$window',
+            function($scope, $timeout, Facebook, FacebookService,$window) {
 
                 // Define user empty data :/
                 $scope.user = function(response) {
@@ -40,9 +40,16 @@ app.config([
                     FacebookService.login(response)
                             .then(function(response) {
                                 console.log(response);
+                                if(response.success){
+                                    $window.location = response.redirect;
+                                }
                             }, function(response) {
                                 console.log(response);
                             });
+                };
+                
+                $scope.logout = function(){
+                    $window.location = 'http://couponcity.com.ng/index.php/logout';
                 };
 
                 /**
@@ -130,18 +137,11 @@ app.config([
                     console.log('Status: ', data);
                     if (data.status == 'connected') {
                         $scope.$apply(function() {
-                            $scope.salutation = true;
-                            $scope.byebye = false;
-                        });
+                                $scope.me();
+                            });
                     } else {
                         $scope.$apply(function() {
-                            $scope.salutation = false;
-                            $scope.byebye = true;
-
-                            // Dismiss byebye message after two seconds
-                            $timeout(function() {
-                                $scope.byebye = false;
-                            }, 2000);
+                            $scope.logout();
                         });
                     }
 

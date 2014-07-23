@@ -3,7 +3,7 @@
     <h3>Member Login</h3>
     <h5>Welcome back, friend. Login to get started</h5>
     <div class="row-fluid">
-        <form class="dialog-form" action="<?= base_url('login'); ?>" method="post">
+        <form class="dialog-form" action="<?= base_url('index.php/login'); ?>" method="post">
             <input type="hidden" name="redirect" value="<?= current_url(); ?>" />
             <label>E-mail</label>
             <input name="email" type="text" placeholder="email@domain.com" class="span12">
@@ -16,7 +16,10 @@
         </form>
         <hr/>
         <?php if (@show_fb_login) { ?>
-            <button ng-disabled="!facebookReady" class="btn btn-primary btn-block" ng-click="IntentLogin()">Login with Facebook</button>
+            <span ng-disabled="!facebookReady" class="btn btn-primary" ng-click="IntentLogin()" style="height: 24px;padding: 5px;">
+                Login with Facebook <img style="width:24px;height:24px;" src="<?= base_url('assets/images/loader.gif') ?>"
+            </span>
+
         <?php } ?>
         <div class="gap gap-small"></div>
         <ul class="dialog-alt-links">
