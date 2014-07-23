@@ -13,6 +13,8 @@
  */
 class Coupon_model extends MY_Model {
 
+    private $key = "CouponCity1234,.+@#";
+    private $JOIN_CHAR = "_";
     public $protected_attributes = array('id');
     public $before_create = array('ensure_unique_slug', 'created_at', 'updated_at', 'calculate_discount', 'calculate_commision', 'transform_start_end_date');
     public $after_get = array('format_numbers');
@@ -176,6 +178,62 @@ class Coupon_model extends MY_Model {
             $result_2 = $this->count_likes_by($query_array_descriptn);
             return array_merge($result_1, $result_2);
         }
+    }
+
+    public function generate_user_coupon($coupon_code, $user_email) {
+        $ci = & get_instance();
+        $ci->load->library('encrypt');
+        return $ci->encrypt->encode($coupon_code . $this->JOIN_CHAR . $user_email, $this->key);
+    }
+
+    public function validate_user_coupon($code) {
+        $info = $this->retrieve_coupon_code($code);
+        $ci = & get_instance();
+        if (!$info) {
+            return FALSE;
+        }
+        $email = $info['email'];
+        $coupon_code = $info['coupon_code'];
+
+        $coupon = $this->get_by(array('coupon_code' => $coupon_code));
+        $ci->load->model('user_model', 'user');
+        $user = $ci->user->get_by(array('email' => $email));
+        if (!$coupon || !$user) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+
+    private function retrieve_coupon_code($code) {
+        $ci = & get_instance();
+        $ci->load->library('encrypt');
+        $enc = explode($this->JOIN_CHAR, $ci->encrypt->decode($code, $this->key));
+        if (is_array($enc) && count($enc) >= 2) {
+            return array('coupon_code' => $enc[0], 'email' => $enc[1]);
+        } else {
+            return FALSE;
+        }
+    }
+
+    public function test_encrpt() {
+        $c_code = 'sghjkl;lkjhgfghjkl;lkjhgfdfghjk';
+        $email = 'akason47@gmail.com';
+        $value = $this->generate_user_coupon($c_code, $email);
+
+        $resp = $this->retrieve_coupon_code($value);
+
+        $test = $resp['coupon_code'] === $c_code;
+
+        $expected_result = TRUE;
+
+        $test_name = 'Adds one plus one';
+
+        $ci = & get_instance();
+        $ci->load->library('unit_test');
+        $ci->unit->run($test, $expected_result, $test_name);
+
+        echo $ci->unit->report();
     }
 
 }

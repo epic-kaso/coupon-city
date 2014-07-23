@@ -828,4 +828,10 @@ class MY_Model extends CI_Model {
         return $this->_temporary_return_type == 'array' ? $method . '_array' : $method;
     }
 
+    public function __get($attr) {
+        if (isset(get_instance()->$attr)) {
+            return get_instance()->$attr;
+        }
+    }
+
 }

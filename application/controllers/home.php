@@ -54,8 +54,6 @@ class Home extends MY_Controller {
             $user = $this->user->login_email($email, $password);
             if (!$user) {
                 $this->session->set_flashdata('login_error', 'Username/password combination doesnt belong to any accoutn');
-            } else {
-                $this->_create_session($user);
             }
         }
         redirect($redirect_url);
@@ -279,21 +277,6 @@ class Home extends MY_Controller {
         $this->_create_session($user);
         $this->session->set_userdata('fb_login', true);
         return TRUE;
-    }
-
-    private function _create_session($user) {
-        if (@property_exists($user, 'coupons')) {
-            $coups = $user->coupons;
-        } else {
-            $coups = array();
-        }
-        $data = array(Home::USER_SESSION_VARIABLE => array('id' => $user->id,
-                'timestamp' => time(),
-                'coupons' => $coups,
-                'email' => $user->email
-            ),
-            'user_logged_in' => true);
-        $this->session->set_userdata($data);
     }
 
     private function _is_logged_in($redirect = null) {
