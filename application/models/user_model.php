@@ -114,11 +114,27 @@ class User_model extends MY_Model {
     }
 
     public function add_coupon($user_id, $coupon_id) {
+
         if ($this->is_profile_complete($user_id)) {
-            if (is_numeric($coupon_id)) {
+            $user = $this->get($user_id);
+            if (is_numeric($coupon_id) && $this->is_valid_coupon($coupon_id)) {
                 $ci = & get_instance();
                 $ci->load->model('coupon_model', 'coupon');
                 $coupon_code = $ci->coupon->get($coupon_id)->coupon_code;
+                $user_coupon_code = $ci->coupon->generate_user_coupon($coupon_code, $user->email);
+
+                $ci->load->model('user_coupon_model', 'users_coupons');
+                $resp = $ci->users_coupons->insert(
+                        array(
+                            'user_id' => $user_id,
+                            'coupon_id' => $coupon_id,
+                            'user_coupon_code' => $user_coupon_code
+                ));
+
+                if (!$resp)
+                    return $resp;
+                else
+                    return $user_coupon_code;
             } else {
                 return FALSE;
             }
@@ -140,6 +156,17 @@ class User_model extends MY_Model {
             ),
             'user_logged_in' => true);
         $this->session->set_userdata($data);
+    }
+
+    private function is_valid_coupon($coupon_id) {
+        $ci = & get_instance();
+        $ci->load->model('coupon_model', 'coupon');
+        $coupon = $ci->coupon->get($coupon_id);
+        if (!$coupon) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
     }
 
 }
