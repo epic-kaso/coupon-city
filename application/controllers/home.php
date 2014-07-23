@@ -24,7 +24,7 @@ class Home extends MY_Controller {
     public function index($category = 'all', $page = 0) {
         $limit = 20;
         $total = $this->_count_coupons($category);
-        $base_url = base_url('index.php/categories/' . $category);
+        $base_url = base_url('categories/' . $category);
 
         //echo $category;
         //print_r($this->category->fetch_id_by_slug($category));
@@ -33,7 +33,7 @@ class Home extends MY_Controller {
 
         $coupon_presenter = new Coupon_presenter($coupons);
         $this->data['title'] = 'All Projects';
-        $this->data['categories'] = new Category_presenter($this->category->get_all(), base_url('index.php/categories'));
+        $this->data['categories'] = new Category_presenter($this->category->get_all(), base_url('categories'));
         $this->data['coupons'] = $coupon_presenter;
         $this->data['featured_item'] = $coupon_presenter->featured_item();
         $config = $this->_use_pagination($total, $limit, $base_url, 3);
@@ -305,7 +305,7 @@ class Home extends MY_Controller {
         }
         if (!$status || !$this->session->userdata('user_logged_in')) {
             if (is_null($redirect)) {
-                $redirect = base_url('index.php/');
+                $redirect = base_url();
             }
             redirect($redirect);
         }

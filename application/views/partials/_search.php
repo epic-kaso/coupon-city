@@ -8,7 +8,7 @@ if (!isset($query)) {
 <div class="search-area">
     <div class="container">
         <div class="row-fluid">
-            <form action="<?= base_url('index.php/search'); ?>">
+            <form action="<?= base_url('search'); ?>">
                 <div class="span8">
                     <label><i class="icon-search"></i>I am searching for</label>
                     <div class="search-area-division search-area-division-input">
