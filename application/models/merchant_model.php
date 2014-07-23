@@ -34,4 +34,29 @@ class Merchant_model extends MY_Model {
         return $row;
     }
 
+    public function is_profile_complete($user_id){
+        $user = $this->get_by($user_id);
+        $is_complete = $user->is_profile_complete;
+        return $is_complete === 1;
+    }
+
+    public function set_profile_complete($user_id,$value = 1){
+        return $this->update($user_id,array('is_profile_complete',$value));
+    }
+
+    public function add_coupon($merchant_id,$coupon_data_array){
+        if($this->is_profile_complete($merchant_id)){
+            if(is_array($coupon_data_array)){
+                $coupon_data_array['merchant_id'] = array_key_exists('merchant_id',$coupon_data_array) ? $coupon_data_array['merchant_id'] : $merchant_id;
+                $ci =&  get_instance();
+                $ci->load->model('coupon_model','coupon');
+                return $ci->coupon->insert($coupon_data_array);
+            }else{
+                throw new Exception('Coupon Data Must be an array of key, value pair');
+            }
+        }else{
+            throw new Exception('Merchant Profile Incomplete');
+        }
+    }
+
 }

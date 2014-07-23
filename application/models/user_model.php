@@ -92,4 +92,39 @@ class User_model extends MY_Model {
         return $this->get_by(array('email' => $email, 'fb_oauth_id' => $fb_id));
     }
 
+    public function is_profile_complete($user_id){
+        $user = $this->get_by($user_id);
+        $is_complete = $user->is_profile_complete;
+        return $is_complete === 1;
+    }
+
+    public function set_profile_complete($user_id,$value = 1){
+        return $this->update($user_id,array('is_profile_complete',$value));
+    }
+
+    public function add_coupon($user_id,$coupon_id){
+        if($this->is_profile_complete($user_id)){
+            if(is_numeric($coupon_id)){
+                $ci =&  get_instance();
+                $ci->load->model('coupon_model','coupon');
+                $coupon_code =  $ci->coupon->get($coupon_id)->coupon_code;
+
+            }else{
+                throw new Exception('Coupon Data Must be a number');
+            }
+        }else{
+            throw new Exception('Merchant Profile Incomplete');
+        }
+    }
+
+    private function _generate_user_coupon_code($coupon_code,$user_email){
+        $ci =&  get_instance();
+        $ci->load->library('encrypt');
+        $ci->encrypt->encode($coupon_code,$user_email);
+    }
+
+    private function _validate_user_coupon_code(){
+
+    }
+
 }
