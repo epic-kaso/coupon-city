@@ -1,0 +1,7 @@
+RewriteEngine on
+RewriteCond $1 !^(index\.php|assets|uploads|user_guide|robots\.txt)
+RewriteRule ^(.*)$ index.php/$1 [L]
+
+ErrorDocument 404 http://localhost/coupon-city/404
+ErrorDocument 403 http://localhost/coupon-city/404
+ErrorDocument 500 http://localhost/coupon-city/404

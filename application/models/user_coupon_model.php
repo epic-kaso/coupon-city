@@ -19,4 +19,21 @@ class User_coupon_model extends MY_Model {
 
     //public $has_many = array('comments' => array('model' => 'model_comments'));
     //put your code here
+
+
+    public function get_coupons_for($user_id) {
+        $ci = & get_instance();
+        $ci->load->model('coupon_model', 'coupon');
+        $coupons = array();
+        $coupon_ids = $this->get_many_by(array('user_id' => $user_id));
+
+        foreach ($coupon_ids as $value) {
+            $coupon = $ci->coupon->get($value->key);
+            $coupon->user_coupon_code = $coupon_ids->user_coupon_code;
+            $coupons[] = $coupon;
+        }
+
+        return $coupons;
+    }
+
 }

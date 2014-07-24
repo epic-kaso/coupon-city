@@ -3,6 +3,7 @@
 <?= partial('partials/account/_login', array('show_fb_login', TRUE)); ?>
 <?= partial('partials/account/_create_user', array('show_fb_login', TRUE)); ?>
 <?= partial('partials/account/_forgot_password', array()); ?>
+<?= partial('partials/_wallet', array()); ?>
 
 <!-- END LOGIN REGISTER LINKS CONTENT -->
 

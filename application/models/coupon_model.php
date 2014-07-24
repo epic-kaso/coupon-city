@@ -13,6 +13,8 @@
  */
 class Coupon_model extends MY_Model {
 
+    const COUPON_PER_UNIT_PRICE = 50;
+
     private $key = "CouponCity1234,.+@#";
     private $JOIN_CHAR = "_";
     public $protected_attributes = array('id');
@@ -228,6 +230,47 @@ class Coupon_model extends MY_Model {
         }
     }
 
+    public function get_coupons_similar_to($coupon_id, $limit = 4) {
+        $coupon = $this->get($coupon_id);
+        return $this->limit($limit)
+                        ->search_many_by(array('name' => $coupon->name));
+    }
+
+    public function grab_coupon($coupon_id, $user_id) {
+        if (!is_numeric($coupon_id) || !is_numeric($user_id)) {
+            return FALSE;
+        }
+        $CI = & get_instance();
+        $CI->load->model('wallet_model', 'wallet');
+        $CI->load->model('user_model', 'user');
+        $CI->load->model('user_coupon_model', 'user_coupon');
+
+        $coupon = $this->get($coupon_id);
+        $user = $CI->user->get($user_id);
+
+        $wallet_balance = $CI->wallet->get_user_wallet_balance($user_id);
+
+        $amt = $this->_calculate_coupon_price($coupon_id);
+        if ($wallet_balance >= $amt) {
+            $CI->wallet->debit_wallet($user_id, $amt);
+            $user_coupon = $this->generate_user_coupon($coupon->coupon_code, $user->email);
+            $CI->user_coupon->insert(
+                    array(
+                        'coupon_id' => $coupon_id,
+                        'user_id' => $user_id,
+                        'user_coupon_code' => $user_coupon
+            ));
+
+            return $user_coupon;
+        } else {
+            return array('error' => 'Insufficient Account balance');
+        }
+    }
+
+    private function _calculate_coupon_price($coupon_id) {
+        return Coupon_model::COUPON_PER_UNIT_PRICE;
+    }
+
     public function test_encrpt() {
         $c_code = 'sghjkl;lkjhgfghjkl;lkjhgfdfghjk';
         $email = 'akason47@gmail.com';
@@ -246,12 +289,6 @@ class Coupon_model extends MY_Model {
         $ci->unit->run($test, $expected_result, $test_name);
 
         echo $ci->unit->report();
-    }
-
-    public function get_coupons_similar_to($coupon_id, $limit = 4) {
-        $coupon = $this->get($coupon_id);
-        return $this->limit($limit)
-                        ->search_many_by(array('name' => $coupon->name));
     }
 
 }
