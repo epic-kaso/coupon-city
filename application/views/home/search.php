@@ -7,8 +7,9 @@
 <!-- END LOGIN REGISTER LINKS CONTENT -->
 <!-- SEARCH AREA -->
 <?= partial('partials/_search', array('query' => $search_query)); ?>
-<!-- END SEARCH AREA -->
-<?= $breadcrumbs ?>
+<div class="container">
+    <?= $breadcrumbs ?>
+</div>
 
 <div class="container">
     <?php if (!empty($success_msg)) { ?>

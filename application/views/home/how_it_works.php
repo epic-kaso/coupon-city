@@ -5,11 +5,11 @@
 <?= partial('partials/account/_forgot_password', array()); ?>
 <!-- SEARCH AREA -->
 <?= partial('partials/_search', array('query' => @$search_query)); ?>
-<!-- END SEARCH AREA -->
-<!-- PAGE TITLE -->
+<div class="container">
+    <?= $breadcrumbs ?>
+</div>
 <div class="top-title-area">
     <div class="container">
-        <?= $breadcrumbs ?>
         <h1 class="title-page">How it Works</h1>
     </div>
 </div>
