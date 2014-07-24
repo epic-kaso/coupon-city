@@ -3,8 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/coupon-city/application/presenters/coupon_presenter.php</file>
-            <file>file:/C:/xampp/htdocs/coupon-city/application/views/partials/_featured_item.php</file>
+            <file>file:/C:/xampp/htdocs/coupon-city/application/views/home/index.php</file>
+            <file>file:/C:/xampp/htdocs/coupon-city/index.php</file>
+            <file>file:/C:/xampp/htdocs/coupon-city/application/views/home/about_us.php</file>
+            <file>file:/C:/xampp/htdocs/coupon-city/application/config/email.php</file>
+            <file>file:/C:/xampp/htdocs/coupon-city/application/views/home/search.php</file>
+            <file>file:/C:/xampp/htdocs/coupon-city/application/views/partials/_footer_nav.php</file>
+            <file>file:/C:/xampp/htdocs/coupon-city/application/config/config.php</file>
         </group>
     </open-files>
 </project-private>
