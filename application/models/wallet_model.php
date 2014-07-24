@@ -44,4 +44,39 @@ class Wallet_model extends MY_Model {
         return $row;
     }
 
+    public function get_user_wallet($user_id) {
+        $wallet = $this->get_by(array('user_id' => $user_id));
+        if (!$wallet) {
+            $this->insert(array('user_id' => $user_id, 'balance' => 0));
+            $wallet = $this->get_by(array('user_id' => $user_id));
+        }
+        return $wallet;
+    }
+
+    public function get_user_wallet_balance($user_id) {
+        $wallet = $this->get_by(array('user_id' => $user_id));
+        if (!$wallet) {
+            $this->insert(array('user_id' => $user_id, 'balance' => 0));
+            return 0;
+        } else {
+            return $wallet->balance;
+        }
+    }
+
+    public function credit_wallet($user_id, $amount) {
+        $wallet = $this->get_by(array('user_id' => $user_id));
+        $current_balance = $wallet;
+        $current_balance += $amount;
+
+        return $this->update($wallet->id, array('balance' => $current_balance));
+    }
+
+    public function debit_wallet($user_id, $amount) {
+        $wallet = $this->get_by(array('user_id' => $user_id));
+        $current_balance = $wallet;
+        $current_balance -= $amount;
+
+        return $this->update($wallet->id, array('balance' => $current_balance));
+    }
+
 }

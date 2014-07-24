@@ -116,30 +116,31 @@ class User_model extends MY_Model {
     public function add_coupon($user_id, $coupon_id) {
 
         if ($this->is_profile_complete($user_id)) {
-            $user = $this->get($user_id);
             if (is_numeric($coupon_id) && $this->is_valid_coupon($coupon_id)) {
                 $ci = & get_instance();
                 $ci->load->model('coupon_model', 'coupon');
-                $coupon_code = $ci->coupon->get($coupon_id)->coupon_code;
-                $user_coupon_code = $ci->coupon->generate_user_coupon($coupon_code, $user->email);
 
-                $ci->load->model('user_coupon_model', 'users_coupons');
-                $resp = $ci->users_coupons->insert(
-                        array(
-                            'user_id' => $user_id,
-                            'coupon_id' => $coupon_id,
-                            'user_coupon_code' => $user_coupon_code
-                ));
-
-                if (!$resp)
-                    return $resp;
-                else
-                    return $user_coupon_code;
+                return $ci->coupon->grab_coupon($coupon_id, $user_id);
             } else {
                 return FALSE;
             }
         } else {
             return FALSE;
+        }
+    }
+
+    public function get_my_coupon($user_id, $coupon_id) {
+
+    }
+
+    public function get_my_coupons($user_id) {
+        $ci = & get_instance();
+        $ci->load->model('user_coupon_model', 'user_coupon');
+        $couponz = $ci->user_coupon->get_coupons_for($user_id);
+        if (empty($couponz)) {
+            return FALSE;
+        } else {
+            return $couponz;
         }
     }
 
@@ -169,4 +170,22 @@ class User_model extends MY_Model {
         }
     }
 
+    /*
+     *
+     *  $coupon_code = $ci->coupon->get($coupon_id)->coupon_code;
+      $user_coupon_code = $ci->coupon->generate_user_coupon($coupon_code, $user->email);
+
+      $ci->load->model('user_coupon_model', 'users_coupons');
+      $resp = $ci->users_coupons->insert(
+      array(
+      'user_id' => $user_id,
+      'coupon_id' => $coupon_id,
+      'user_coupon_code' => $user_coupon_code
+      ));
+
+      if (!$resp)
+      return $resp;
+      else
+      return $user_coupon_code;
+     */
 }
