@@ -49,6 +49,9 @@ $route['categories/(:num)'] = "home/index/all/$1";
 $route['categories/(:any)'] = "home/index/$1";
 $route['categories/(:any)/(:num)'] = "home/index/$1/$2";
 
+$route['wallet/success/(:num)'] = "wallet/success/$1";
+$route['wallet/failure/(:num)'] = "wallet/failure/$1";
+
 $route['login'] = "home/login";
 $route['logout'] = "home/logout";
 $route['signup'] = "home/signup";
