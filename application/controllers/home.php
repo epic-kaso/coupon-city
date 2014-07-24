@@ -78,8 +78,7 @@ class Home extends MY_Controller {
             if (!$response) {
                 $this->session->set_flashdata('login_error', 'Error Occured. ' . print_r($response, true));
             } else {
-                $user = $this->user->get($response);
-                $this->_create_session($user);
+                $this->user->login_email($data['email'], $password);
             }
         } else {
             $this->session->set_flashdata('login_error', 'Password Mismatch');
