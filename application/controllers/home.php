@@ -26,10 +26,7 @@ class Home extends MY_Controller {
         $total = $this->_count_coupons($category);
         $base_url = base_url('categories/' . $category);
 
-        //echo $category;
-        //print_r($this->category->fetch_id_by_slug($category));
         $coupons = $this->_coupons($limit, $page, $this->category->fetch_id_by_slug($category));
-        //print_r($coupons);
 
         $coupon_presenter = new Coupon_presenter($coupons);
         $this->data['title'] = 'All Projects';
@@ -40,6 +37,7 @@ class Home extends MY_Controller {
         $config['cur_page'] = $page;
         $this->pagination->initialize($config);
         $this->data['links'] = $this->pagination->create_links();
+        $this->data['breadcrumbs'] = $this->_get_crumbs();
     }
 
     public function login() {
@@ -121,6 +119,7 @@ class Home extends MY_Controller {
 
 
         $this->data['links'] = $this->qpagination->create_links();
+        $this->data['breadcrumbs'] = $this->_get_crumbs();
     }
 
     public function coupon($slug) {
@@ -130,23 +129,24 @@ class Home extends MY_Controller {
         } else {
             $coupon_presenter = new Coupon_presenter($coupon);
             $this->data['featured_item'] = $coupon_presenter->items();
+            $this->data['breadcrumbs'] = $this->_get_crumbs();
         }
     }
 
     public function contact() {
-
+        $this->data['breadcrumbs'] = $this->_get_crumbs();
     }
 
     public function about_us() {
-
+        $this->data['breadcrumbs'] = $this->_get_crumbs();
     }
 
     public function how_it_works() {
-
+        $this->data['breadcrumbs'] = $this->_get_crumbs();
     }
 
     public function help_faq() {
-
+        $this->data['breadcrumbs'] = $this->_get_crumbs();
     }
 
     public function error_page() {
@@ -292,6 +292,21 @@ class Home extends MY_Controller {
             }
             redirect($redirect);
         }
+    }
+
+    private function _get_crumbs() {
+        $uri = uri_string();
+        $uris = explode('/', $uri);
+
+        $v = "";
+        foreach ($uris as $value) {
+            $v .= $value;
+            $this->breadcrumbs->push($value, base_url($v));
+        }
+
+        $this->breadcrumbs->unshift('Home', base_url());
+
+        return $this->breadcrumbs->show();
     }
 
 }

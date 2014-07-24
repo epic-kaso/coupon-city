@@ -26,7 +26,6 @@ class MY_Controller extends CI_Controller {
         $view = (is_string($this->view) && !empty($this->view)) ? $this->view : $view;
 
         if ($this->view !== FALSE) {
-            $this->data['breadcrumbs'] = '';
             $this->data['error_msg'] = $this->session->flashdata('login_error') .
                     $this->session->flashdata('error_msg');
             $this->data['success_msg'] = $this->session->flashdata('success_msg');

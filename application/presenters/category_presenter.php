@@ -22,7 +22,7 @@ class Category_presenter extends Presenter {
             $row = new stdClass();
             $row->name = 'No Category Available';
             $row->link = "#";
-            $row->active = "false";
+            $row->active = false;
             return array($row);
         } else {
             return $this->process($this->data);
