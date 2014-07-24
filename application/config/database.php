@@ -66,11 +66,11 @@ if (defined('ENVIRONMENT')) {
         /* ----------------PRODUCTION SERVER DETAILS ------------------------------ */
 
         case 'production':
-            $db['default']['hostname'] = $_SERVER['RDS_HOSTNAME'];
-            $db['default']['port'] = $_SERVER['RDS_PORT'];
-            $db['default']['username'] = $_SERVER['RDS_USERNAME'];
-            $db['default']['password'] = $_SERVER['RDS_PASSWORD'];
-            $db['default']['database'] = $_SERVER['RDS_DB_NAME'];
+            $dbhost = $_SERVER['RDS_HOSTNAME'];
+            $dbport = $_SERVER['RDS_PORT'];
+            $username = $_SERVER['RDS_USERNAME'];
+            $password = $_SERVER['RDS_PASSWORD'];
+            $dbname = $_SERVER['RDS_DB_NAME'];
             break;
         default:
             exit('The application environment is not set correctly.');
