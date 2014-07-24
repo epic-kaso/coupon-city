@@ -16,9 +16,9 @@ class User_model extends MY_Model {
     public $protected_attributes = array('id');
     public $before_create = array('created_at', 'updated_at', 'encrypt_password');
     public $has_many = array(
-        'activities' => array('model' => 'user_activity_model'),
-        'coupons' => array('model' => 'user_coupon_model'),
-        'wallet' => array('model' => 'wallet_model')
+        'activities' => array('model' => 'user_activity_model', 'primary_key' => 'user_id'),
+        'coupons' => array('model' => 'user_coupon_model', 'primary_key' => 'user_id'),
+        'wallet' => array('model' => 'wallet_model', 'primary_key' => 'user_id')
     );
     public $validate = array(
         array('field' => 'email',
