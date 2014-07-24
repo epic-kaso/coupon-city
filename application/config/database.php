@@ -52,9 +52,29 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = '';
-$db['default']['database'] = 'kouponcity';
+
+if (defined('ENVIRONMENT')) {
+    switch (ENVIRONMENT) {
+        /* ----------------DEVELOPMENT SERVER DETAILS ------------------------------ */
+        case 'development':
+        case 'testing':
+            $db['default']['username'] = 'root';
+            $db['default']['password'] = '';
+            $db['default']['database'] = 'kouponcity';
+            break;
+
+        /* ----------------PRODUCTION SERVER DETAILS ------------------------------ */
+
+        case 'production':
+            $db['default']['username'] = 'root';
+            $db['default']['password'] = '';
+            $db['default']['database'] = '*';
+            break;
+        default:
+            exit('The application environment is not set correctly.');
+    }
+}
+
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
