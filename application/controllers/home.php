@@ -157,10 +157,12 @@ class Home extends MY_Controller {
         if (strcmp($category, 'all') === 0) {
             $coupons = $this->coupons
                     ->limit($limit, $page * $limit)
+                    ->with('coupon_medias')
                     ->get_all();
         } else {
             $coupons = $this->coupons
                     ->limit($limit, $page * $limit)
+                    ->with('coupon_medias')
                     ->get_many_by('category_id', $category);
         }
 

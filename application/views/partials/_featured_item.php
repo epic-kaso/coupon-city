@@ -30,18 +30,32 @@
                 <!-- START BOOTSTRAP CAROUSEL -->
                 <div id="my-carousel" class="carousel slide">
                     <div class="carousel-inner">
-                        <div class="active item">
-                            <img src="<?= base_url('assets') ?>/img/cascada_960x540.jpg" alt="Image Alternative text" title="cascada" />
-                        </div>
-                        <div class="item">
-                            <img src="<?= base_url('assets') ?>/img/waipio_valley_960x540.jpg" alt="Image Alternative text" title="waipio valley" />
-                        </div>
-                        <div class="item">
-                            <img src="<?= base_url('assets') ?>/img/the_best_mode_of_transport_here_in_maldives_960x540.jpg" alt="Image Alternative text" title="the best mode of transport here in maldives" />
-                        </div>
+                        <?php
+                        $index = 0;
+                        if (property_exists($featured_item, 'coupon_medias') && !empty($featured_item->coupon_medias)) {
+                            foreach ($featured_item->coupon_medias as $media) {
+                                ?>
+                                <div class = "<?= ($index === 0 ? 'active ' : '') ?>item">
+                                    <img src = "<?= base_url($media->media_url) ?>" alt = "Image Alternative text" title = "cascada" />
+                                </div>
+                                <?php
+                                $index++;
+                            }
+                        } else {
+                            ?>
+                            <div class = "active item">
+                                <img src = "<?= base_url('assets/images/no_image.png') ?>" alt = "Image Alternative text" title = "cascada" />
+                            </div>
+                            <?php
+                        }
+                        ?>
                     </div>
-                    <a class="carousel-control left" href="#my-carousel" data-slide="prev"></a>
-                    <a class="carousel-control right" href="#my-carousel" data-slide="next"></a>
+                    <?php
+                    if ($index > 1) {
+                        ?>
+                        <a class="carousel-control left" href="#my-carousel" data-slide="prev"></a>
+                        <a class="carousel-control right" href="#my-carousel" data-slide="next"></a>
+                    <?php } ?>
                 </div>
                 <!-- END BOOTSTRAP CAROUSEL -->
             </div>

@@ -15,7 +15,7 @@ foreach ($coupons->items() as $coupon) {
         <div class="span3">
             <!-- COUPON THUMBNAIL -->
             <a href="<?= $coupon->link ?>" class="coupon-thumb">
-                <img src="<?= base_url('assets') ?>/img/the_violin_800x600.jpg" alt="Image Alternative text" title="The Violin" />
+                <img src="<?= base_url($coupon->cover_image_url) ?>" alt="Image Alternative text" title="The Violin" />
                 <div class="coupon-inner">
                     <h5 class="coupon-title"><?= $coupon->name ?></h5>
                     <p class="coupon-desciption"><?= $coupon->summary ?></p>

@@ -19,7 +19,7 @@ if (!isset($active)) {
                 <div class="flexnav-menu-button" id="flexnav-menu-button">Menu</div>
                 <nav>
                     <ul class="nav nav-pills flexnav" id="flexnav" data-breakpoint="800">
-                        <li <?= ($active === 'home') ? 'class="active"' : ''; ?>><a href="<?= base_url('index.php'); ?>">Home</a>
+                        <li <?= ($active === 'home') ? 'class="active"' : ''; ?>><a href="<?= base_url(); ?>">Home</a>
                         </li>
                         <li  <?= ($active === 'how-it-works') ? 'class="active"' : ''; ?>><a href="<?= base_url('how-it-works'); ?>">How it works</a>
                         </li>
