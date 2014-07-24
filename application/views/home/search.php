@@ -11,7 +11,7 @@
     <?= $breadcrumbs ?>
 </div>
 
-<div class="container">
+<div class="container-fluid">
     <?php if (!empty($success_msg)) { ?>
         <div class='alert alert-success'><p><?= $success_msg ?></p></div>
     <?php } ?>

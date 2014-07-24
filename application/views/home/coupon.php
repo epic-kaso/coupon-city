@@ -7,14 +7,14 @@
 <!-- END LOGIN REGISTER LINKS CONTENT -->
 <!-- SEARCH AREA -->
 <?= partial('partials/_search', array('query' => @$search_query)); ?>
-<div class="container">
-    <?= $breadcrumbs ?>
-</div>
 <!-- END SEARCH AREA -->
 <div class="top-title-area">
     <div class="container">
         <h1 class="title-page"><?= $featured_item->name ?></h1>
     </div>
+</div>
+<div class="container">
+    <?= $breadcrumbs ?>
 </div>
 
 <div class="gap"></div>
@@ -28,6 +28,7 @@
     <?php if (!empty($error_msg)) { ?>
         <div class='alert alert-error'><p><?= $error_msg ?></p></div>
     <?php } ?>
+
     <div class="row row-reverce coupon">
         <?= partial('partials/_featured_item', $featured_item); ?>
     </div>
@@ -130,8 +131,9 @@
         -->
         <div class="gap gap-small"></div>
     </div>
+</div>
 
 
 
 
-    <?= partial('partials/_footer_nav', array()); ?>
+<?= partial('partials/_footer_nav', array()); ?>
