@@ -56,7 +56,7 @@ $autoload['packages'] = array();
   |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
  */
 
-$autoload['libraries'] = array('database', 'curl', 'session', 'facebook', 'breadcrumbs');
+$autoload['libraries'] = array('database', 'curl', 'session', 'breadcrumbs');
 
 
 /*

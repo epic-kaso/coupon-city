@@ -32,6 +32,11 @@ class Test extends CI_Controller {
         echo $this->curl->simple_delete('api/merchant/index/' . $id);
     }
 
+    public function test_coupon_gen() {
+        $this->load->model('coupon_model', 'coupon');
+        $this->coupon->test_encrpt();
+    }
+
 }
 
 /* End of file welcome.php */

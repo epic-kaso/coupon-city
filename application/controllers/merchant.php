@@ -9,6 +9,8 @@ require_once APPPATH . 'presenters/coupon_presenter.php';
 
 class Merchant extends MY_Controller {
 
+    const USER_SESSION_VARIABLE = "merchant";
+
     public function __construct() {
         parent::__construct();
         $this->load->model('merchant_model', 'merchant');
@@ -53,8 +55,6 @@ class Merchant extends MY_Controller {
             if (!$response) {
                 //var_dump($response);
                 $this->session->set_flashdata('error', 'Something went wrong!');
-            } else {
-                $this->_create_session($response->id);
             }
         } else {
             $this->session->set_flashdata('error', 'Invalid Username and/or Password');
@@ -100,11 +100,6 @@ class Merchant extends MY_Controller {
         $config['cur_page'] = $page;
         $this->pagination->initialize($config);
         $this->data['links'] = $this->pagination->create_links();
-    }
-
-    private function _create_session($id) {
-        $data = array('merchant' => array('id' => $id, 'timestamp' => time(), 'images' => array()), 'logged_in' => true);
-        $this->session->set_userdata($data);
     }
 
     private function _coupons($limit, $page, $category = 'all') {

@@ -21,13 +21,13 @@ if (!isset($active)) {
                     <ul class="nav nav-pills flexnav" id="flexnav" data-breakpoint="800">
                         <li <?= ($active === 'home') ? 'class="active"' : ''; ?>><a href="<?= base_url('index.php'); ?>">Home</a>
                         </li>
-                        <li  <?= ($active === 'how-it-works') ? 'class="active"' : ''; ?>><a href="<?= base_url('index.php/how-it-works'); ?>">How it works</a>
+                        <li  <?= ($active === 'how-it-works') ? 'class="active"' : ''; ?>><a href="<?= base_url('how-it-works'); ?>">How it works</a>
                         </li>
-                        <li <?= ($active === 'about') ? 'class="active"' : ''; ?>><a href="<?= base_url('index.php/about'); ?>">About us</a>
+                        <li <?= ($active === 'about') ? 'class="active"' : ''; ?>><a href="<?= base_url('about'); ?>">About us</a>
                         </li>
-                        <li  <?= ($active === 'contact') ? 'class="active"' : ''; ?>><a href="<?= base_url('index.php/contact'); ?>">Contact</a>
+                        <li  <?= ($active === 'contact') ? 'class="active"' : ''; ?>><a href="<?= base_url('contact'); ?>">Contact</a>
                         </li>
-                        <li  <?= ($active === 'help-faq') ? 'class="active"' : ''; ?>><a href="<?= base_url('index.php/help-faq'); ?>">Help & FAQ</a>
+                        <li  <?= ($active === 'help-faq') ? 'class="active"' : ''; ?>><a href="<?= base_url('help-faq'); ?>">Help & FAQ</a>
                         </li>
                     </ul>
                 </nav>

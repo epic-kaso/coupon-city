@@ -24,7 +24,7 @@ class Home extends MY_Controller {
     public function index($category = 'all', $page = 0) {
         $limit = 20;
         $total = $this->_count_coupons($category);
-        $base_url = base_url('index.php/categories/' . $category);
+        $base_url = base_url('categories/' . $category);
 
         //echo $category;
         //print_r($this->category->fetch_id_by_slug($category));
@@ -33,7 +33,7 @@ class Home extends MY_Controller {
 
         $coupon_presenter = new Coupon_presenter($coupons);
         $this->data['title'] = 'All Projects';
-        $this->data['categories'] = new Category_presenter($this->category->get_all(), base_url('index.php/categories'));
+        $this->data['categories'] = new Category_presenter($this->category->get_all(), base_url('categories'));
         $this->data['coupons'] = $coupon_presenter;
         $this->data['featured_item'] = $coupon_presenter->featured_item();
         $config = $this->_use_pagination($total, $limit, $base_url, 3);
@@ -54,8 +54,6 @@ class Home extends MY_Controller {
             $user = $this->user->login_email($email, $password);
             if (!$user) {
                 $this->session->set_flashdata('login_error', 'Username/password combination doesnt belong to any accoutn');
-            } else {
-                $this->_create_session($user);
             }
         }
         redirect($redirect_url);
@@ -80,8 +78,7 @@ class Home extends MY_Controller {
             if (!$response) {
                 $this->session->set_flashdata('login_error', 'Error Occured. ' . print_r($response, true));
             } else {
-                $user = $this->user->get($response);
-                $this->_create_session($user);
+                $this->user->login_email($data['email'], $password);
             }
         } else {
             $this->session->set_flashdata('login_error', 'Password Mismatch');
@@ -276,24 +273,8 @@ class Home extends MY_Controller {
                 $user = $this->user->enable_fb_oauth($data['email'], $data);
             }
         }
-        $this->_create_session($user);
         $this->session->set_userdata('fb_login', true);
         return TRUE;
-    }
-
-    private function _create_session($user) {
-        if (@property_exists($user, 'coupons')) {
-            $coups = $user->coupons;
-        } else {
-            $coups = array();
-        }
-        $data = array(Home::USER_SESSION_VARIABLE => array('id' => $user->id,
-                'timestamp' => time(),
-                'coupons' => $coups,
-                'email' => $user->email
-            ),
-            'user_logged_in' => true);
-        $this->session->set_userdata($data);
     }
 
     private function _is_logged_in($redirect = null) {
@@ -305,7 +286,7 @@ class Home extends MY_Controller {
         }
         if (!$status || !$this->session->userdata('user_logged_in')) {
             if (is_null($redirect)) {
-                $redirect = base_url('index.php/');
+                $redirect = base_url();
             }
             redirect($redirect);
         }

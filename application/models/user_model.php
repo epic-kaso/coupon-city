@@ -15,13 +15,11 @@ class User_model extends MY_Model {
 
     public $protected_attributes = array('id');
     public $before_create = array('created_at', 'updated_at', 'encrypt_password');
-    
     public $has_many = array(
-        'activities' => array('model' => 'user_activity_model'),
-        'coupons' => array('model' => 'user_coupon_model'),
-        'wallet' => array('model' => 'wallet_model')
+        'activities' => array('model' => 'user_activity_model', 'primary_key' => 'user_id'),
+        'coupons' => array('model' => 'user_coupon_model', 'primary_key' => 'user_id'),
+        'wallet' => array('model' => 'wallet_model', 'primary_key' => 'user_id')
     );
-
     public $validate = array(
         array('field' => 'email',
             'label' => 'email',
@@ -43,6 +41,7 @@ class User_model extends MY_Model {
                 ->with('coupons')
                 ->get_by(array('email' => $email, 'password' => sha1($password)));
         if (!empty($user) && is_object($user)) {
+            $this->_create_session($user);
             return $user;
         } else {
             return FALSE;
@@ -79,7 +78,13 @@ class User_model extends MY_Model {
             return FALSE;
         } else {
             $this->update($user->id, $data);
-            return $this->get_by(array('email' => $email));
+            $user = $this->get_by(array('email' => $email));
+            if (!$user) {
+                return $user;
+            } else {
+                $this->_create_session($user);
+                return $user;
+            }
         }
     }
 
@@ -89,42 +94,79 @@ class User_model extends MY_Model {
     }
 
     public function login_fb($email, $fb_id) {
-        return $this->get_by(array('email' => $email, 'fb_oauth_id' => $fb_id));
+        $user = $this->get_by(array('email' => $email, 'fb_oauth_id' => $fb_id));
+        if (!$user) {
+            return $user;
+        } else {
+            $this->_create_session($user);
+            return $user;
+        }
     }
 
-    public function is_profile_complete($user_id){
+    public function is_profile_complete($user_id) {
         $user = $this->get_by($user_id);
         $is_complete = $user->is_profile_complete;
         return $is_complete === 1;
     }
 
-    public function set_profile_complete($user_id,$value = 1){
-        return $this->update($user_id,array('is_profile_complete',$value));
+    public function set_profile_complete($user_id, $value = 1) {
+        return $this->update($user_id, array('is_profile_complete', $value));
     }
 
-    public function add_coupon($user_id,$coupon_id){
-        if($this->is_profile_complete($user_id)){
-            if(is_numeric($coupon_id)){
-                $ci =&  get_instance();
-                $ci->load->model('coupon_model','coupon');
-                $coupon_code =  $ci->coupon->get($coupon_id)->coupon_code;
+    public function add_coupon($user_id, $coupon_id) {
 
-            }else{
-                throw new Exception('Coupon Data Must be a number');
+        if ($this->is_profile_complete($user_id)) {
+            $user = $this->get($user_id);
+            if (is_numeric($coupon_id) && $this->is_valid_coupon($coupon_id)) {
+                $ci = & get_instance();
+                $ci->load->model('coupon_model', 'coupon');
+                $coupon_code = $ci->coupon->get($coupon_id)->coupon_code;
+                $user_coupon_code = $ci->coupon->generate_user_coupon($coupon_code, $user->email);
+
+                $ci->load->model('user_coupon_model', 'users_coupons');
+                $resp = $ci->users_coupons->insert(
+                        array(
+                            'user_id' => $user_id,
+                            'coupon_id' => $coupon_id,
+                            'user_coupon_code' => $user_coupon_code
+                ));
+
+                if (!$resp)
+                    return $resp;
+                else
+                    return $user_coupon_code;
+            } else {
+                return FALSE;
             }
-        }else{
-            throw new Exception('Merchant Profile Incomplete');
+        } else {
+            return FALSE;
         }
     }
 
-    private function _generate_user_coupon_code($coupon_code,$user_email){
-        $ci =&  get_instance();
-        $ci->load->library('encrypt');
-        $ci->encrypt->encode($coupon_code,$user_email);
+    private function _create_session($user) {
+        if (@property_exists($user, 'coupons')) {
+            $coups = $user->coupons;
+        } else {
+            $coups = array();
+        }
+        $data = array(Home::USER_SESSION_VARIABLE => array('id' => $user->id,
+                'timestamp' => time(),
+                'coupons' => $coups,
+                'email' => $user->email
+            ),
+            'user_logged_in' => true);
+        $this->session->set_userdata($data);
     }
 
-    private function _validate_user_coupon_code(){
-
+    private function is_valid_coupon($coupon_id) {
+        $ci = & get_instance();
+        $ci->load->model('coupon_model', 'coupon');
+        $coupon = $ci->coupon->get($coupon_id);
+        if (!$coupon) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
     }
 
 }
