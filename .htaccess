@@ -4,3 +4,4 @@ RewriteRule ^(.*)$ index.php/$1 [L]
 
 ErrorDocument 404 http://localhost/coupon-city/404
 ErrorDocument 403 http://localhost/coupon-city/404
+ErrorDocument 500 http://localhost/coupon-city/404
