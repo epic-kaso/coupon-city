@@ -1,1 +1,4 @@
 .elasticbeanstalk/
+/.idea
+/nbproject
+/user_guide
