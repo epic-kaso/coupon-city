@@ -37,10 +37,13 @@ class User_model extends MY_Model {
     }
 
     public function login_email($email, $password) {
+
         $user = $this
                 ->with('coupons')
                 ->get_by(array('email' => $email, 'password' => sha1($password)));
+
         if (!empty($user) && is_object($user)) {
+            $user->wallet = $this->get_wallet($user->id);
             $this->_create_session($user);
             return $user;
         } else {
@@ -98,6 +101,7 @@ class User_model extends MY_Model {
         if (!$user) {
             return $user;
         } else {
+            $user->wallet = $this->get_wallet($user->id);
             $this->_create_session($user);
             return $user;
         }
@@ -153,10 +157,18 @@ class User_model extends MY_Model {
         $data = array(Home::USER_SESSION_VARIABLE => array('id' => $user->id,
                 'timestamp' => time(),
                 'coupons' => $coups,
-                'email' => $user->email
+                'email' => $user->email,
+                'wallet' => $user->wallet->balance
             ),
             'user_logged_in' => true);
         $this->session->set_userdata($data);
+    }
+
+    private function get_wallet($user_id) {
+        $ci = & get_instance();
+        $ci->load->model('wallet_model', 'wallet');
+        $wallet = $ci->wallet->get_user_wallet($user_id);
+        return $wallet;
     }
 
     private function is_valid_coupon($coupon_id) {
