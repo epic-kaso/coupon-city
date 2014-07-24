@@ -41,16 +41,11 @@ class Coupon_presenter extends Presenter {
         return $row;
     }
 
-    public function featured_item() {
+    public function featured_item($id = 1) {
         $this->load->model('coupon_model');
-        $count = $this->coupon_model->count_all();
-        $seed = rand(1, $count);
-        $row = $this->coupon_model->get($seed);
+        $row = $this->coupon_model->with('coupon_medias')->get($id);
         if (empty($row) || $row == FALSE) {
-            $row = new Couponview();
-            $row->empty = true;
-            $row->name = 'No Coupon Available';
-            $row->description = "N/A";
+            return FALSE;
         } else {
             $row->remaining = $this->_calculate_remaining_time($row->start_date, $row->end_date);
             $this->create_summary($row);

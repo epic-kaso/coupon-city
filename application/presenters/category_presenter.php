@@ -21,6 +21,8 @@ class Category_presenter extends Presenter {
         if (empty($this->data)) {
             $row = new stdClass();
             $row->name = 'No Category Available';
+            $row->link = "#";
+            $row->active = "false";
             return array($row);
         } else {
             return $this->process($this->data);

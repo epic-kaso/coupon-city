@@ -52,6 +52,7 @@
         <div class="row row-wrap">
 
         </div>
+        <!--
         <div class="span10">
             <h3>Similar Offers</h3>
         </div>
@@ -66,14 +67,12 @@
             </ul>
         </div>
     </div>
-    <!-- START CONTENT SLIDER -->
     <div class="wilto-slider-wrap" id="wilto-slider-wrap">
         <div id="wilto-slider" class="wilto-slider">
             <div class="wilto-slide row-fluid row-wrap">
                 <div class="span3">
-                    <!-- COUPON THUMBNAIL -->
                     <a href="#" class="coupon-thumb coupon-thumb-hold">
-                        <img src="<?= base_url('assets') ?>/img/the_hidden_power_of_the_heart_800x600.jpg" alt="Image Alternative text" title="The Hidden Power of the Heart" />
+                        <img src="/img/the_hidden_power_of_the_heart_800x600.jpg" alt="Image Alternative text" title="The Hidden Power of the Heart" />
                         <div class="coupon-inner">
                             <h5 class="coupon-title">Beach Holidays</h5>
                             <p class="coupon-desciption">Inceptos tellus aliquet scelerisque velit fames tellus ac</p>
@@ -85,9 +84,8 @@
                     </a>
                 </div>
                 <div class="span3">
-                    <!-- COUPON THUMBNAIL -->
                     <a href="#" class="coupon-thumb coupon-thumb-hold">
-                        <img src="<?= base_url('assets') ?>/img/amaze_800x600.jpg" alt="Image Alternative text" title="AMaze" />
+                        <img src="/img/amaze_800x600.jpg" alt="Image Alternative text" title="AMaze" />
                         <div class="coupon-inner">
                             <h5 class="coupon-title">New Glass Collection</h5>
                             <p class="coupon-desciption">Rutrum pulvinar sed ridiculus sed leo amet facilisi</p>
@@ -99,9 +97,8 @@
                     </a>
                 </div>
                 <div class="span3">
-                    <!-- COUPON THUMBNAIL -->
                     <a href="#" class="coupon-thumb coupon-thumb-hold">
-                        <img src="<?= base_url('assets') ?>/img/ana_29_800x600.jpg" alt="Image Alternative text" title="Ana 29" />
+                        <img src="/img/ana_29_800x600.jpg" alt="Image Alternative text" title="Ana 29" />
                         <div class="coupon-inner">
                             <h5 class="coupon-title">Hot Summer Collection</h5>
                             <p class="coupon-desciption">Etiam ad dis et neque dictumst est euismod</p>
@@ -113,9 +110,8 @@
                     </a>
                 </div>
                 <div class="span3">
-                    <!-- COUPON THUMBNAIL -->
                     <a href="#" class="coupon-thumb coupon-thumb-hold">
-                        <img src="<?= base_url('assets') ?>/img/food_is_pride_800x600.jpg" alt="Image Alternative text" title="Food is Pride" />
+                        <img src="/img/food_is_pride_800x600.jpg" alt="Image Alternative text" title="Food is Pride" />
                         <div class="coupon-inner">
                             <h5 class="coupon-title">Best Pasta</h5>
                             <p class="coupon-desciption">Nostra pharetra platea mus nec viverra et molestie</p>
@@ -129,11 +125,11 @@
             </div>
         </div>
     </div>
-    <!-- END CONTENT SLIDER -->
-    <div class="gap gap-small"></div>
-</div>
+        -->
+        <div class="gap gap-small"></div>
+    </div>
 
 
 
 
-<?= partial('partials/_footer_nav', array()); ?>
+    <?= partial('partials/_footer_nav', array()); ?>

@@ -17,8 +17,8 @@ class Coupon_model extends MY_Model {
     private $JOIN_CHAR = "_";
     public $protected_attributes = array('id');
     public $before_create = array('ensure_unique_slug', 'created_at', 'updated_at', 'calculate_discount', 'calculate_commision', 'transform_start_end_date');
-    public $after_get = array('format_numbers');
-    public $has_many = array('coupon_media' => array('model' => 'coupon_media_model', 'primary_key' => 'coupon_id'));
+    public $after_get = array('format_numbers', 'get_coupon_cover_image');
+    public $has_many = array('coupon_medias' => array('model' => 'coupon_media_model', 'primary_key' => 'coupon_id'));
     public $belongs_to = array('merchant' => array('model' => 'merchant_model'));
     public $validate = array(
         array('field' => 'name',
@@ -48,7 +48,7 @@ class Coupon_model extends MY_Model {
     );
 
     public function get_by_slug($slug) {
-        return $this->get_by(array('slug' => $slug));
+        return $this->with('coupon_medias')->get_by(array('slug' => $slug));
     }
 
     public function calculate_discount($row) {
@@ -89,6 +89,18 @@ class Coupon_model extends MY_Model {
         if (@property_exists($row, 'old_price')) {
             $new_price = $row->new_price;
             $row->new_price = number_format($new_price, 2);
+        }
+        return $row;
+    }
+
+    public function get_coupon_cover_image($row) {
+        $ci = & get_instance();
+        $ci->load->model('coupon_media_model', 'media');
+        $image_url = $ci->media->get_cover_media($row->id);
+        if (!$image_url) {
+            $row->cover_image_url = Coupon_media_model::DEFAULT_MEDIA_URL;
+        } else {
+            $row->cover_image_url = $image_url;
         }
         return $row;
     }
@@ -234,6 +246,12 @@ class Coupon_model extends MY_Model {
         $ci->unit->run($test, $expected_result, $test_name);
 
         echo $ci->unit->report();
+    }
+
+    public function get_coupons_similar_to($coupon_id, $limit = 4) {
+        $coupon = $this->get($coupon_id);
+        return $this->limit($limit)
+                        ->search_many_by(array('name' => $coupon->name));
     }
 
 }

@@ -7,9 +7,9 @@
         </a>
     </li>
     <?php foreach ($categories->items() as $value) { ?>
-        <li <?php echo $value->active ? 'class="active"' : '' ?> >
-            <a href="<?= $value->link ?>">
-                <i class="icon-angle-right"></i><?= $value->name ?>
+        <li <?php echo @$value->active ? 'class="active"' : '' ?> >
+            <a href="<?= @$value->link ?>">
+                <i class="icon-angle-right"></i><?= @$value->name ?>
             </a>
         </li>
     <?php } ?>
