@@ -6,8 +6,7 @@
             <div class = "row row-reverce coupon">
                 <div class = "span3">
                     <div class = "box">
-                        <h4><? = $featured_item->name
-                            ?></h4>
+                        <h4><?= $featured_item->name ?></h4>
                         <p><?= $featured_item->summary ?></p><a class="btn btn-primary btn-large btn-block" href="#">₦<?= $featured_item->new_price ?> Grab Now</a>
                         <ul class="list coupon-meta">
                             <li>
