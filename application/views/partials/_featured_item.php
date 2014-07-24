@@ -1,16 +1,13 @@
-<?php
-if (!$featured_item) {
-    return;
-} else {
-    ?>
+<?php if ($featured_item !== FALSE) { ?>
 
-    <div class="top-area">
-        <div class="container">
-            <div class="gap"></div>
-            <div class="row row-reverce coupon">
-                <div class="span3">
-                    <div class="box">
-                        <h4><?= $featured_item->name ?></h4>
+    <div class = "top-area">
+        <div class = "container">
+            <div class = "gap"></div>
+            <div class = "row row-reverce coupon">
+                <div class = "span3">
+                    <div class = "box">
+                        <h4><? = $featured_item->name
+                            ?></h4>
                         <p><?= $featured_item->summary ?></p><a class="btn btn-primary btn-large btn-block" href="#">₦<?= $featured_item->new_price ?> Grab Now</a>
                         <ul class="list coupon-meta">
                             <li>
@@ -61,7 +58,7 @@ if (!$featured_item) {
                             ?>
                             <a class="carousel-control left" href="#my-carousel" data-slide="prev"></a>
                             <a class="carousel-control right" href="#my-carousel" data-slide="next"></a>
-    <?php } ?>
+                        <?php } ?>
                     </div>
                     <!-- END BOOTSTRAP CAROUSEL -->
                 </div>
@@ -70,5 +67,5 @@ if (!$featured_item) {
         </div>
     </div>
 
-<?php }
-?>
+    <?php
+}?>
