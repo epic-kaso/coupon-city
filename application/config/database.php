@@ -52,10 +52,32 @@ $active_group = 'default';
 $active_record = TRUE;
 
 
-$db['default']['hostname'] = $_SERVER['RDS_HOSTNAME'];
-$db['default']['username'] = $_SERVER['RDS_USERNAME'];
-$db['default']['password'] = $_SERVER['RDS_PASSWORD'];
-$db['default']['database'] = $_SERVER['RDS_DB_NAME'];
+if (defined('ENVIRONMENT')) {
+    switch (ENVIRONMENT) {
+        /* ----------------DEVELOPMENT SERVER DETAILS ------------------------------ */
+        case 'development':
+        case 'testing':
+
+            $db['default']['hostname'] = 'localhost';
+            $db['default']['username'] = 'root';
+            $db['default']['password'] = '';
+            $db['default']['database'] = 'kouponcity';
+            break;
+
+        /* ----------------PRODUCTION SERVER DETAILS ------------------------------ */
+
+        case 'production':
+            $db['default']['hostname'] = $_SERVER['RDS_HOSTNAME'];
+            $db['default']['username'] = $_SERVER['RDS_USERNAME'];
+            $db['default']['password'] = $_SERVER['RDS_PASSWORD'];
+            $db['default']['database'] = $_SERVER['RDS_DB_NAME'];
+            break;
+
+        default:
+            exit('The application environment is not set correctly.');
+    }
+}
+
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
@@ -67,6 +89,7 @@ $db['default']['dbcollat'] = 'utf8_general_ci';
 $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
+
 
 
 
