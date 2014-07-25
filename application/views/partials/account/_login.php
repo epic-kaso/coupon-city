@@ -17,7 +17,7 @@
         <hr/>
         <?php if (@show_fb_login) { ?>
             <span ng-disabled="!facebookReady" class="btn btn-primary" ng-click="IntentLogin()" style="height: 24px;padding: 5px;">
-                Login with Facebook <img style="width:24px;height:24px;" src="<?= base_url('assets/images/loader.gif') ?>"
+                <p ng-hide="is_logging_in">Login with Facebook</p><p ng-show="is_logging_in" >Please wait a moment... <img ng-show="is_logging_in" style="width:24px;height:24px;" src="<?= base_url('assets/images/loader.gif') ?>" /></p>
             </span>
 
         <?php } ?>
