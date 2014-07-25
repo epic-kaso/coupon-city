@@ -53,7 +53,7 @@ if (!isset($active)) {
                         </li>
                         <li><a href="<?= base_url('settings') ?>"><span class="active icon-gears"></span> Settings</a>
                         </li>
-                        <li><a href="<?= base_url('logout'); ?>">Logout</a>
+                        <li><a href="<?= base_url('logout'); ?>" ng-click="logout" >Logout</a>
                         </li>
                     </ul>
                 <?php } ?>

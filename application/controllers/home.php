@@ -316,6 +316,7 @@ class Home extends MY_Controller {
             if (!$user) {
                 $user = $this->user->enable_fb_oauth($data['email'], $data);
             }
+            $this->user->login_fb($data['email'], $data['fb_oauth_id']);
         }
         $this->session->set_userdata('fb_login', true);
         return TRUE;

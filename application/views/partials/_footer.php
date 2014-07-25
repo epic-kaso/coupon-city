@@ -29,6 +29,7 @@ if (!isset($app_type)) {
 <script src="<?php echo base_url() ?>assets/js/lib/ui-bootstrap-tpls.min.js"></script>
 <script src="<?php echo base_url() ?>assets/js/lib/angular-ui-router.min.js"></script>
 <script src="<?php echo base_url() ?>assets/js/lib/angular-facebook.min.js"></script>
+<script src="<?php echo base_url() ?>assets/js/lib/angular-cookies.min.js"></script>
 <script src="<?php echo base_url() ?>assets/js/<?= $app_type ?>/app.js"></script>
 <script src="<?php echo base_url() ?>assets/js/<?= $app_type ?>/services.js"></script>
 <script src="<?php echo base_url() ?>assets/js/<?= $app_type ?>/controllers.js"></script>

@@ -96,7 +96,6 @@ class User_model extends MY_Model {
             if (!$user) {
                 return $user;
             } else {
-                $this->_create_session($user);
                 return $user;
             }
         }

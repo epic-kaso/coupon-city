@@ -39,8 +39,13 @@ class Wallet_model extends MY_Model {
     }
 
     public function format_numbers($row) {
-        $balance = $row->balance;
-        $row->balance = number_format($balance, 2);
+        if (is_object($row)) {
+            $balance = $row->balance;
+            $row->balance = number_format($balance, 2);
+        } else {
+            $balance = $row['balance'];
+            $row['balance'] = number_format($balance, 2);
+        }
         return $row;
     }
 
