@@ -14,9 +14,10 @@ app.controller('MyCtrl2', ['$scope', function($scope) {
 app.controller('LoginController', [
     '$scope',
     '$timeout',
-    'Facebook', 'FacebookService', '$window',
-    function($scope, $timeout, Facebook, FacebookService, $window) {
+    'Facebook', 'FacebookService', '$window', '$cookieStore',
+    function($scope, $timeout, Facebook, FacebookService, $window, $cookieStore) {
         $scope.is_logging_in = false;
+        $scope.fb_logged = $cookieStore.get('fb_logged') || false;
 
         // Define user empty data :/
         $scope.user = function(response) {
@@ -24,9 +25,8 @@ app.controller('LoginController', [
             FacebookService.login(response)
                     .then(function(response) {
                         console.log(response);
-                        if (response.success) {
-                            $window.location = response.redirect;
-                        }
+                        $window.location = response.redirect;
+                        $scope.fb_logged = $cookieStore.put('fb_logged', true);
                     }, function(response) {
                         console.log(response);
                     });
@@ -59,10 +59,15 @@ app.controller('LoginController', [
                     $scope.$apply(function() {
                         $scope.me();
                     });
-                }
-                else {
+                } else if (response.status === 'not_authorized') {
                     $scope.$apply(function() {
                         $scope.login();
+                        $scope.is_logging_in = false;
+                    });
+                } else {
+                    $scope.$apply(function() {
+                        $scope.login();
+                        $scope.is_logging_in = false;
                     });
                 }
             });
@@ -79,7 +84,8 @@ app.controller('LoginController', [
                         $scope.me();
                     });
                 } else {
-                    alert('login failed');
+                    //alert('login failed');
+                    $scope.is_logging_in = false;
                 }
 
             }, {
@@ -107,12 +113,17 @@ app.controller('LoginController', [
          * Logout
          */
         $scope.logout = function() {
-            Facebook.logout(function() {
-                $scope.$apply(function() {
-                    $scope.logged = false;
-                    $window.location = 'http://couponcity.com.ng/index.php/logout';
+            if ($scope.fb_logged) {
+                Facebook.logout(function() {
+                    $scope.$apply(function() {
+                        $scope.fb_logged = false;
+                        $cookieStore.remove('fb_logged');
+                        $window.location = base_url + '/logout';
+                    });
                 });
-            });
+            } else {
+                $window.location = base_url + '/logout';
+            }
         };
 
         /**
@@ -120,7 +131,7 @@ app.controller('LoginController', [
          */
         $scope.$on('Facebook:statusChange', function(ev, data) {
             console.log('Status: ', data);
-            $scope.is_logging_in = true;
+            //$scope.IntentLogin();
             if (data.status === 'connected') {
                 $scope.$apply(function() {
                     $scope.me();

@@ -5,6 +5,7 @@
 var app = angular.module('endUserApp', [
     'ui.router',
     'facebook',
+    'ngCookies',
     'endUserApp.filters',
     'endUserApp.services',
     'endUserApp.directives',
