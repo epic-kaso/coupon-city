@@ -52,7 +52,7 @@ if (strcmp(site_url(), current_url()) === 0) {
             </div>
             <div class="pagination">
                 <?= $links ?>
-                <?php //echo partial('partials/_pagination', $pagination);  ?>
+                <?php //echo partial('partials/_pagination', $pagination);   ?>
             </div>
             <div class="gap"></div>
         </div>

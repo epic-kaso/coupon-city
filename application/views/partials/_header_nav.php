@@ -47,11 +47,11 @@ if (!isset($active)) {
                     </ul>
                 <?php } else { ?>
                     <ul class="nav nav-pills flexnav">
-                        <li><a href="#"><?= $current_user['email']; ?></a>
+                        <li><a href="<?= base_url('profile'); ?>"><?= $current_user['email']; ?></a>
                         </li>
                         <li><a class="popup-text" href="#wallet-dialog" data-effect="mfp-move-from-top"><span class="active icon-credit-card"> </span>₦ <?= $current_user['wallet']; ?></a>
                         </li>
-                        <li><a href="<?= base_url('index.php/logout'); ?>">Logout</a>
+                        <li><a href="<?= base_url('logout'); ?>">Logout</a>
                         </li>
                     </ul>
                 <?php } ?>

@@ -62,6 +62,8 @@ $route['merchant/login'] = 'merchant/login';
 $route['merchant/logout'] = "merchant/logout";
 $route['merchant/edit-profile'] = "merchant/edit_profile";
 $route['merchant/signup'] = 'merchant/create';
+$route['merchant/add-coupon'] = "merchant/add_coupon";
+$route['merchant/my-coupons'] = 'merchant/my_coupons';
 
 $route['contact'] = 'home/contact';
 $route['about'] = 'home/about_us';

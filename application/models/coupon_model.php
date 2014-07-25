@@ -98,11 +98,11 @@ class Coupon_model extends MY_Model {
     public function get_coupon_cover_image($row) {
         $ci = & get_instance();
         $ci->load->model('coupon_media_model', 'media');
-        $image_url = @$ci->media->get_cover_media($row->id);
+        $image_url = $ci->media->get_cover_media($row->id);
         if (!$image_url) {
-            @$row->cover_image_url = Coupon_media_model::DEFAULT_MEDIA_URL;
+            $row->cover_image_url = Coupon_media_model::DEFAULT_MEDIA_URL;
         } else {
-            @$row->cover_image_url = $image_url;
+            $row->cover_image_url = $image_url;
         }
         return $row;
     }

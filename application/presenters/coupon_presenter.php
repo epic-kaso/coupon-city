@@ -43,7 +43,7 @@ class Coupon_presenter extends Presenter {
 
     public function featured_item($id = 1) {
         $this->load->model('coupon_model');
-        $row = $this->coupon_model->with('coupon_medias')->get($id);
+        $row = null; //$this->coupon_model->with('coupon_medias')->get($id);
         if (empty($row) || $row == FALSE) {
             return FALSE;
         } else {
