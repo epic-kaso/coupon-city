@@ -32,34 +32,39 @@ class Merchant extends MY_Controller {
     }
 
     public function create() {
-        $this->view = FALSE;
-        $password = $this->input->post('password');
-        $re_password = $this->input->post('re_password');
-        if ($password !== FALSE && $re_password !== FALSE && strcmp($password, $re_password) === 0) {
-            $data = $this->input->post();
-            unset($data['re_password']);
-            $response = $this->merchant->insert($data);
-            $this->_create_session($response);
-            redirect('merchant/index');
+        $this->load->helper('url');
+
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('password', 'Password', 'required|matches[re_password]');
+        $this->form_validation->set_rules('re_password', 'Repeat Password', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[merchants.email]');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->view = TRUE;
         } else {
-            echo 'error: password missmatch';
+            $this->view = FALSE;
+            $password = $this->input->post('password');
+            $email = $this->input->post('email');
+            $this->_process_signup($email, $password);
         }
     }
 
     public function login() {
-        $this->view = FALSE;
-        $password = $this->input->post('password');
-        $email = $this->input->post('email');
-        if ($password !== FALSE && $email !== FALSE) {
-            $response = $this->merchant->get_by(array('email' => $email, 'password' => sha1($password)));
-            if (!$response) {
-                //var_dump($response);
-                $this->session->set_flashdata('error', 'Something went wrong!');
-            }
+        $this->load->helper('url');
+
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->view = TRUE;
         } else {
-            $this->session->set_flashdata('error', 'Invalid Username and/or Password');
+            $this->view = FALSE;
+            $password = $this->input->post('password');
+            $email = $this->input->post('email');
+            $this->_process_login($email, $password);
         }
-        redirect('merchant/index');
     }
 
     public function logout() {
@@ -164,6 +169,33 @@ class Merchant extends MY_Controller {
         }
         if (!$status || !$this->session->userdata('logged_in')) {
             redirect('merchant/index');
+        }
+    }
+
+    private function _process_login($email, $password) {
+        $this->view = FALSE;
+        if ($password !== FALSE && $email !== FALSE) {
+            $response = $this->merchant->login_email($email, $password);
+            if (!$response) {
+                $this->session->set_flashdata('error_msg', 'Invalid Username/Password!');
+                redirect(base_url('sell/login'));
+            } else {
+                redirect(base_url('sell'), 'refresh');
+            }
+        } else {
+            $this->session->set_flashdata('error_msg', 'Invalid Username and/or Password Supplied');
+            redirect(base_url('sell/login'));
+        }
+    }
+
+    private function _process_signup($email, $password) {
+        $response = $this->merchant->create_email($email, $password);
+        if (!$response) {
+            //var_dump($response);
+            $this->session->set_flashdata('error_msg', 'Something went wrong!');
+            redirect(base_url('sell/signup'));
+        } else {
+            redirect('merchant/index', 'refresh');
         }
     }
 

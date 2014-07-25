@@ -41,6 +41,16 @@ class Merchant_model extends MY_Model {
         }
     }
 
+    public function create_email($email, $password) {
+        $user = $this->insert(array('email' => $email, 'password' => sha1($password)));
+        if (!empty($user)) {
+            $this->_create_session($this->get($user));
+            return $user;
+        } else {
+            return FALSE;
+        }
+    }
+
     public function encrypt_password($row) {
         if (array_key_exists('password', $row)) {
             $row['password'] = sha1($row['password']);
