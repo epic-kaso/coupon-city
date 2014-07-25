@@ -18,7 +18,13 @@
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-define('ENVIRONMENT', 'testing'); //'development');
+//define('ENVIRONMENT', 'testing'); //'development');
+
+if ($_SERVER['SERVER_NAME']=='localhost')
+   define('ENVIRONMENT', 'testing', 'development');
+else
+   define('ENVIRONMENT', 'production');
+
 /*
  * ---------------------------------------------------------------
  * ERROR REPORTING
