@@ -1,7 +1,15 @@
-RewriteEngine on
+RewriteEngine On
+
+#Checks to see if the user is attempting to access a valid file,
+#such as an image or css document, if this isn't true it sends the
+#request to index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+#This last condition enables access to the images and css folders, and the robots.txt file
 RewriteCond $1 !^(index\.php|assets|uploads|user_guide|robots\.txt)
 RewriteRule ^(.*)$ index.php/$1 [L]
 
-ErrorDocument 404 http://localhost/coupon-city/404
-ErrorDocument 403 http://localhost/coupon-city/404
-ErrorDocument 500 http://localhost/coupon-city/404
+ErrorDocument 404 /index.php/error/404
+ErrorDocument 403 /index.php/error/403
+ErrorDocument 500 /index.php/error/500
+

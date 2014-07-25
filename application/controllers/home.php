@@ -149,8 +149,8 @@ class Home extends MY_Controller {
         $this->data['breadcrumbs'] = $this->_get_crumbs();
     }
 
-    public function error_page() {
-
+    public function error_page($code = 404) {
+        $this->data['code'] = $code;
     }
 
     private function _coupons($limit, $page, $category = 'all') {

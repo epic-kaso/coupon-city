@@ -20,7 +20,7 @@
 <div class="container">
     <h1 class="title-hero">
 
-        404
+        <?= $code ?>
 
     </h1>
     <h1>Sorry, the page you requested was not found.</h1>

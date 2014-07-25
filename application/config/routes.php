@@ -74,6 +74,9 @@ $route['search/(:num)/(:any)/(:any)'] = 'home/search/$1/$2/$3';
 
 $route['coupons'] = "home/index/all";
 $route['coupons/(:any)'] = 'home/coupon/$1';
+
+$route['error'] = 'home/error_page';
+$route['error/(:num)'] = 'home/error_page/$1';
 //$route['api/user'] = 'api/user/index';
 //$route['api/user/(:num)'] = 'api/user/index/$1';
 //$route['api/user/(:any)'] = 'api/user';
