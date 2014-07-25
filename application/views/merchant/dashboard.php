@@ -22,6 +22,9 @@
 </div>
 <!-- END LOGIN REGISTER LINKS CONTENT -->
 <!-- END SEARCH AREA -->
+<div class="container">
+    <?= $breadcrumbs ?>
+</div>
 <div class="gap"></div>
 
 <!-- //////////////////////////////////
@@ -37,6 +40,7 @@
 <div class="container">
     <div class="row">
         <div class="span12">
+
             <?php if (!empty($success_msg)) { ?>
                 <div class='alert alert-success'><p><?= $success_msg ?></p></div>
             <?php } ?>
@@ -46,7 +50,7 @@
             <div class="row row-wrap">
                 <div class="span3">
                     <!-- COUPON THUMBNAIL -->
-                    <a href="<?= site_url('merchant/add_coupon'); ?>" class="coupon-thumb">
+                    <a href="<?= base_url('merchant/add-coupon'); ?>" class="coupon-thumb">
                         <div class="text-center" style="background-color: #ffffff">
                             <span class="icon-plus-sign" style="font-size: 150px;">
                             </span>
@@ -57,23 +61,12 @@
                 </div>
                 <div class="span3">
                     <!-- COUPON THUMBNAIL -->
-                    <a href="<?= site_url('merchant/my_coupons'); ?>" class="coupon-thumb">
+                    <a href="<?= base_url('merchant/my-coupons'); ?>" class="coupon-thumb">
                         <div class="text-center" style="background-color: #ffffff">
                             <span class="icon-ticket" style="font-size: 150px;">
                             </span>
                         </div><div class="coupon-inner">
                             <h3 class="coupon-title">My Coupons</h3>
-                        </div>
-                    </a>
-                </div>
-                <div class="span3">
-                    <!-- COUPON THUMBNAIL -->
-                    <a href="#" class="coupon-thumb">
-                        <div class="text-center" style="background-color: #ffffff;padding-top: 10px;">
-                            <span class="icon-briefcase" style="font-size: 140px;">
-                            </span>
-                        </div><div class="coupon-inner">
-                            <h3 class="coupon-title">My Brands</h3>
                         </div>
                     </a>
                 </div>
@@ -90,7 +83,7 @@
                 </div>
                 <div class="span3">
                     <!-- COUPON THUMBNAIL -->
-                    <a href="#" class="coupon-thumb">
+                    <a href="<?= base_url('merchant/settings'); ?>" class="coupon-thumb">
                         <div class="text-center" style="background-color: #ffffff">
                             <span class="icon-edit" style="font-size: 150px;">
                             </span>
@@ -102,7 +95,7 @@
                 </div>
                 <div class="span3">
                     <!-- COUPON THUMBNAIL -->
-                    <a href="#" class="coupon-thumb">
+                    <a href="<?= base_url('help-faq') ?>" class="coupon-thumb">
                         <div class="text-center" style="background-color: #ffffff">
                             <span class="icon-question-sign" style="font-size: 150px;">
                             </span>
@@ -115,7 +108,7 @@
 
                 <div class="span3">
                     <!-- COUPON THUMBNAIL -->
-                    <a href="#" class="coupon-thumb">
+                    <a href="<?= base_url('contact') ?>" class="coupon-thumb">
                         <div class="text-center" style="background-color: #ffffff">
                             <span class="icon-envelope" style="font-size: 150px;">
                             </span>

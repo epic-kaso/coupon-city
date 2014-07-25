@@ -1,3 +1,6 @@
+<div class="container">
+    <?= $breadcrumbs ?>
+</div>
 <div class="container" style="margin-top: 100px;">
     <div class="row">
         <div class="offset3 span6">

@@ -1,6 +1,6 @@
 <script>
     var my_globals = {};
-    my_globals.base_url = 'http://localhost/koupon/';
+    my_globals.base_url = '<?= base_url(); ?>'
     my_globals.categories = <?= json_encode($categories->items()); ?>
 </script>
 <style>
@@ -87,6 +87,9 @@
 </div>
 <!-- END LOGIN REGISTER LINKS CONTENT -->
 <!-- END SEARCH AREA -->
+<div class="container">
+    <?= $breadcrumbs ?>
+</div>
 <div class="gap"></div>
 
 <!-- //////////////////////////////////

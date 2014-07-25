@@ -19,6 +19,7 @@ class Merchant extends MY_Controller {
         $this->load->model('category_model', 'category');
         $this->load->model('coupon_model', 'coupons');
         $this->load->library('pagination');
+        $this->load->library('breadcrumbs');
         $this->load->helper('file');
     }
 
@@ -37,6 +38,7 @@ class Merchant extends MY_Controller {
         $merchant = $this->session->userdata('merchant');
         $this->data['logged_in'] = $this->session->userdata('logged_in');
         $this->data['merchant'] = $this->merchant->get($merchant['id']);
+        $this->data['breadcrumbs'] = $this->_get_crumbs();
     }
 
     public function create() {
@@ -50,6 +52,7 @@ class Merchant extends MY_Controller {
 
         if ($this->form_validation->run() == FALSE) {
             $this->view = TRUE;
+            $this->data['breadcrumbs'] = $this->_get_crumbs();
         } else {
             $this->view = FALSE;
             $password = $this->input->post('password');
@@ -67,6 +70,7 @@ class Merchant extends MY_Controller {
 
         if ($this->form_validation->run() == FALSE) {
             $this->view = TRUE;
+            $this->data['breadcrumbs'] = $this->_get_crumbs();
         } else {
             $this->view = FALSE;
             $password = $this->input->post('password');
@@ -86,6 +90,7 @@ class Merchant extends MY_Controller {
 
     public function add_coupon() {
         $this->data['logged_in'] = FALSE;
+        $this->data['breadcrumbs'] = $this->_get_crumbs();
         $merchant = $this->session->userdata('merchant');
         $this->data['logged_in'] = $this->session->userdata('logged_in');
         $this->data['merchant'] = $this->merchant->get($merchant['id']);
@@ -97,17 +102,18 @@ class Merchant extends MY_Controller {
         $error = !$this->session->flashdata('error_msg') ? 'Please Login or Create an Account' :
                 $this->session->flashdata('error_msg');
         $this->session->flashdata('error_msg', $error);
+        $this->data['breadcrumbs'] = $this->_get_crumbs();
 
         $this->data['logged_in'] = $this->session->userdata('logged_in');
         $this->data['merchant'] = $this->merchant->get($merchant['id']);
 
         $limit = 20;
         $total = $this->_count_coupons($category);
-        $base_url = base_url(Merchant::MERCHANT_URL . '/my_coupons/');
+        $base_url = base_url(Merchant::MERCHANT_URL . '/my-coupons/');
 
         $coupons = $this->_coupons($limit, $page, $category);
         $coupon_presenter = new Coupon_presenter($coupons);
-        $this->data['categories'] = new Category_presenter($this->category->get_all(), base_url(Merchant::MERCHANT_URL . '/my_coupons/'));
+        $this->data['categories'] = new Category_presenter($this->category->get_all(), base_url(Merchant::MERCHANT_URL . '/my-coupons/'));
         $this->data['coupons'] = $coupon_presenter;
         $config = $this->_use_pagination($total, $limit, $base_url);
         $config['cur_page'] = $page;
@@ -121,6 +127,7 @@ class Merchant extends MY_Controller {
         $this->data['profile'] = new Merchant_presenter($merchant);
         $this->data['merchant'] = $merchant;
         $this->data['logged_in'] = $this->session->userdata('logged_in');
+        $this->data['breadcrumbs'] = $this->_get_crumbs();
     }
 
     public function edit_profile() {
@@ -128,6 +135,7 @@ class Merchant extends MY_Controller {
         $merchant = $this->merchant->get_current();
         $this->data['profile'] = $this->merchant->profile_info($merchant);
         $this->data['merchant'] = $merchant;
+        $this->data['breadcrumbs'] = $this->_get_crumbs();
         $this->data['logged_in'] = $this->session->userdata('logged_in');
         $this->load->helper('url');
 
@@ -145,6 +153,46 @@ class Merchant extends MY_Controller {
             $this->session->set_flashdata('success_msg', 'Profile Saved!');
             redirect(Merchant::MERCHANT_URL . '/profile');
         }
+    }
+
+    public function change_password() {
+        $this->view = FALSE;
+        $merchant = $this->merchant->get_current();
+        $password = trim($this->input->post('password'));
+        $repassword = trim($this->input->post('re_password'));
+        $redirect_url = $this->input->post('redirect');
+
+        if ($password !== FALSE && $repassword !== FALSE) {
+            $this->_process_change_password($password, $repassword, $merchant, $redirect_url);
+        } else {
+            $this->session->set_flashdata('error_msg', 'Password Fields cant be empty');
+            redirect($redirect_url);
+        }
+    }
+
+    private function _process_change_password($password, $repassword, $merchant, $redirect_url) {
+        if (strcmp($password, $repassword) == 0) {
+            if (sha1($password) === $merchant->password) {
+                $this->session->set_flashdata('error_msg', 'You can\'t change from same password to same!');
+                redirect($redirect_url);
+            } else {
+                $this->merchant->update($merchant->id, array('password' => sha1($password)));
+                $this->session->set_flashdata('success_msg', 'Password Changed!');
+                redirect($redirect_url);
+            }
+        } else {
+            $this->session->set_flashdata('error_msg', 'Password Fields Must Match');
+            redirect($redirect_url);
+        }
+    }
+
+    public function settings() {
+        $this->_is_logged_in();
+        $this->data['breadcrumbs'] = $this->_get_crumbs();
+        $merchant = $this->merchant->get_current();
+        $this->data['profile'] = new Merchant_presenter($merchant);
+        $this->data['merchant'] = $merchant;
+        $this->data['logged_in'] = $this->session->userdata('logged_in');
     }
 
     private function _coupons($limit, $page, $category = 'all') {
@@ -237,6 +285,19 @@ class Merchant extends MY_Controller {
         } else {
             redirect(base_url(Merchant::MERCHANT_URL), 'refresh');
         }
+    }
+
+    private function _get_crumbs() {
+        $uri = uri_string();
+        $uris = explode('/', $uri);
+
+        $v = "";
+        foreach ($uris as $value) {
+            $v .= '/' . $value;
+            $this->breadcrumbs->push($value, base_url($v));
+        }
+
+        return $this->breadcrumbs->show();
     }
 
 }

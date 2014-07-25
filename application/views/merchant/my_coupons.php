@@ -22,6 +22,9 @@
 </div>
 <!-- END LOGIN REGISTER LINKS CONTENT -->
 <!-- END SEARCH AREA -->
+<div class="container">
+    <?= $breadcrumbs ?>
+</div>
 <div class="gap"></div>
 <?php if ($logged_in) { ?>
     <div class="container">

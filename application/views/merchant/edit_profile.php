@@ -1,4 +1,7 @@
 <?= partial('partials/merchant/_header_nav', array('logged_in' => $logged_in, 'merchant' => @$merchant)); ?>
+<div class="container">
+    <?= $breadcrumbs ?>
+</div>
 <div class="gap"></div>
 <div class="container">
     <div class="row">

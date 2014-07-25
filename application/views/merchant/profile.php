@@ -17,6 +17,9 @@ is_profile_complete	int(1)
 
 -->
 <?= partial('partials/merchant/_header_nav', array('logged_in' => $logged_in, 'merchant' => @$merchant)); ?>
+<div class="container">
+    <?= $breadcrumbs ?>
+</div>
 <div class="gap"></div>
 <div class="row">
     <div class="offset3 span6">

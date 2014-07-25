@@ -300,7 +300,7 @@ class Home extends MY_Controller {
 
         $v = "";
         foreach ($uris as $value) {
-            $v .= $value;
+            $v .= '/' . $value;
             $this->breadcrumbs->push($value, base_url($v));
         }
 
