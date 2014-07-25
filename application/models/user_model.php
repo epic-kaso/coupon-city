@@ -20,6 +20,7 @@ class User_model extends MY_Model {
         'coupons' => array('model' => 'user_coupon_model', 'primary_key' => 'user_id'),
         'wallet' => array('model' => 'wallet_model', 'primary_key' => 'user_id')
     );
+    public $after_get = array('add_status_field');
     public $validate = array(
         array('field' => 'email',
             'label' => 'email',
@@ -32,6 +33,16 @@ class User_model extends MY_Model {
     public function encrypt_password($row) {
         if (array_key_exists('password', $row)) {
             $row['password'] = sha1($row['password']);
+        }
+        return $row;
+    }
+
+    public function add_status_field($row) {
+        $is_complete = $row->is_profile_complete;
+        if ($is_complete === 1) {
+            $row->status = 'Complete';
+        } else {
+            $row->status = 'Incomplete';
         }
         return $row;
     }
@@ -180,6 +191,39 @@ class User_model extends MY_Model {
         } else {
             return TRUE;
         }
+    }
+
+    public function get_current() {
+        $d = $this->session->userdata(Home::USER_SESSION_VARIABLE);
+        return $this->get($d['id']);
+    }
+
+    public function profile_info($user) {
+        $user = get_object_vars($user);
+        $keys = array('email',
+            'is_profile_complete',
+            'created_at',
+            'updated_at',
+            'id',
+            'status',
+            'password',
+            'active',
+            'activation_code',
+            'oauth_enabled',
+            'fb_oauth_id');
+
+        foreach ($keys as $v) {
+            if (array_key_exists($v, $user)) {
+                unset($user[$v]);
+            }
+        }
+        foreach ($user as $key => $value) {
+            unset($user[$key]);
+            $key = ucwords(str_ireplace('_', ' ', $key));
+            $user[$key] = $value;
+        }
+
+        return $user;
     }
 
     /*

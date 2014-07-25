@@ -55,6 +55,16 @@ $route['wallet/failure/(:num)'] = "wallet/failure/$1";
 $route['login'] = "home/login";
 $route['logout'] = "home/logout";
 $route['signup'] = "home/signup";
+$route['contact'] = 'home/contact';
+$route['about'] = 'home/about_us';
+$route['how-it-works'] = 'home/how_it_works';
+$route['help-faq'] = 'home/help_faq';
+$route['profile'] = 'home/profile';
+$route['edit-profile'] = 'home/edit_profile';
+$route['settings'] = 'home/settings';
+$route['my-coupons'] = 'home/my_coupons';
+$route['grab_coupon/(:any)'] = 'home/grab_coupon/$1';
+
 
 $route['merchant'] = 'merchant/index';
 $route['merchant/dashboard'] = 'merchant/dashboard';
@@ -65,10 +75,6 @@ $route['merchant/signup'] = 'merchant/create';
 $route['merchant/add-coupon'] = "merchant/add_coupon";
 $route['merchant/my-coupons'] = 'merchant/my_coupons';
 
-$route['contact'] = 'home/contact';
-$route['about'] = 'home/about_us';
-$route['how-it-works'] = 'home/how_it_works';
-$route['help-faq'] = 'home/help_faq';
 
 $route['search'] = 'home/search/0/all/';
 $route['search/(:num)'] = 'home/search/$1/all/';

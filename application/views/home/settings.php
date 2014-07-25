@@ -1,22 +1,9 @@
-<!--
-id	int(10)
-email	varchar(100)
-password	varchar(100)
-business_name	text
-contact_name	text
-address_one	text
-address_two	text
-area	text
-business_category	text
-mobile_number	varchar(20)
-short_description	text
-website	text
-logo	text
-opening_hours	text
-is_profile_complete	int(1)
-
--->
-<?= partial('partials/merchant/_header_nav', array('logged_in' => $logged_in, 'merchant' => @$merchant)); ?>
+<?= partial('partials/_header_nav', array('logged_in' => $logged_in, 'user' => @$user)); ?>
+<!-- LOGIN REGISTER LINKS CONTENT -->
+<?= partial('partials/account/_login', array('show_fb_login', TRUE)); ?>
+<?= partial('partials/account/_create_user', array('show_fb_login', TRUE)); ?>
+<?= partial('partials/account/_forgot_password', array()); ?>
+<?= partial('partials/_wallet', array()); ?>
 <div class="container">
     <?= $breadcrumbs ?>
 </div>
@@ -54,8 +41,8 @@ is_profile_complete	int(1)
     <i class="icon-edit-sign dialog-icon"></i>
     <h3>Change Password</h3>
     <div class="row-fluid">
-        <form class="dialog-form" action="<?= base_url('merchant/change_password'); ?>" method="post">
-            <input type="hidden" name="redirect" value="<?= current_url(); ?>" />
+        <form class="dialog-form" action="<?= base_url('change_password'); ?>" method="post">
+            <input type="hidden" name="redirect" value="<?= str_replace('index.php', '', current_url()); ?>" />
             <input type="hidden" name="user_id" value="<?= $profile->id; ?>" />
             <label>New Password</label>
             <input name="password" type="password" placeholder="" class="span12">

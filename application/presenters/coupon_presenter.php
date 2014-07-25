@@ -37,6 +37,7 @@ class Coupon_presenter extends Presenter {
     private function process($row) {
         $row->remaining = $this->_calculate_remaining_time($row->start_date, $row->end_date);
         $row->link = base_url('coupons/' . $row->slug);
+        $row->grab_link = base_url('grab_coupon/' . $row->slug);
         $this->create_summary($row);
         return $row;
     }
@@ -48,6 +49,7 @@ class Coupon_presenter extends Presenter {
             return FALSE;
         } else {
             $row->remaining = $this->_calculate_remaining_time($row->start_date, $row->end_date);
+            $row->grab_link = base_url('grab_coupon/' . $row->slug);
             $this->create_summary($row);
         }
         return $row;

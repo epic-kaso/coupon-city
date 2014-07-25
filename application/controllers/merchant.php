@@ -151,7 +151,7 @@ class Merchant extends MY_Controller {
             $this->view = FALSE;
             $response = $this->merchant->update($merchant->id, $this->input->post(), TRUE);
             $this->session->set_flashdata('success_msg', 'Profile Saved!');
-            redirect(Merchant::MERCHANT_URL . '/profile');
+            redirect(base_url(Merchant::MERCHANT_URL . '/profile'));
         }
     }
 

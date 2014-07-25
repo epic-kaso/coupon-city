@@ -1,11 +1,11 @@
 <!-- END LOGIN REGISTER LINKS CONTENT -->
 <!-- SEARCH AREA -->
-<?= partial('partials/merchant/_header_nav', array('logged_in' => $logged_in, 'merchant' => @$merchant)); ?>
+<?= partial('partials/_header_nav', array('logged_in' => $logged_in, 'user' => @$user)); ?>
 <!-- LOGIN REGISTER LINKS CONTENT -->
-
-<?= partial('partials/merchant/_login', array('logged_in' => $logged_in, 'merchant' => @$merchant)); ?>
-
-<?= partial('partials/merchant/_register', array('logged_in' => $logged_in, 'merchant' => @$merchant)); ?>
+<?= partial('partials/account/_login', array('show_fb_login', TRUE)); ?>
+<?= partial('partials/account/_create_user', array('show_fb_login', TRUE)); ?>
+<?= partial('partials/account/_forgot_password', array()); ?>
+<?= partial('partials/_wallet', array()); ?>
 
 
 <div id="password-recover-dialog" class="mfp-with-anim mfp-hide mfp-dialog clearfix">

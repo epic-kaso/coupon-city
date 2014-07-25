@@ -55,7 +55,7 @@ is_profile_complete	int(1)
     <h3>Change Password</h3>
     <div class="row-fluid">
         <form class="dialog-form" action="<?= base_url('merchant/change_password'); ?>" method="post">
-            <input type="hidden" name="redirect" value="<?= current_url(); ?>" />
+            <input type="hidden" name="redirect" value="<?= str_replace('index.php', '', current_url()); ?>" />
             <input type="hidden" name="user_id" value="<?= $profile->id; ?>" />
             <label>New Password</label>
             <input name="password" type="password" placeholder="" class="span12">

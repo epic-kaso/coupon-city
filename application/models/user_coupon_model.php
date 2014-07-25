@@ -21,14 +21,18 @@ class User_coupon_model extends MY_Model {
     //put your code here
 
 
-    public function get_coupons_for($user_id) {
+    public function get_coupons_for($user_id, $cat = 'all') {
         $ci = & get_instance();
         $ci->load->model('coupon_model', 'coupon');
         $coupons = array();
         $coupon_ids = $this->get_many_by(array('user_id' => $user_id));
 
         foreach ($coupon_ids as $value) {
-            $coupon = $ci->coupon->get($value->key);
+            if ($cat == 'all') {
+                $coupon = $ci->coupon->get($value->key);
+            } else {
+                $coupon = $ci->coupon->get_by(array('id' => $value->key, 'category_id' => $cat));
+            }
             $coupon->user_coupon_code = $coupon_ids->user_coupon_code;
             $coupons[] = $coupon;
         }

@@ -6,6 +6,7 @@ if (!defined('BASEPATH')) {
 
 require_once APPPATH . 'presenters/category_presenter.php';
 require_once APPPATH . 'presenters/coupon_presenter.php';
+require_once APPPATH . 'presenters/user_presenter.php';
 
 class Home extends MY_Controller {
 
@@ -133,6 +134,23 @@ class Home extends MY_Controller {
         }
     }
 
+    public function grab_coupon($slug) {
+        $this->view = FALSE;
+        $this->_is_logged_in();
+        $user = $this->user->get_current();
+        $coupon = $this->coupons->get_by_slug($slug);
+
+        $response = $this->coupons->grab_coupon($coupon->id, $user->id);
+
+        if (!$response || (is_array($response) && array_key_exists('error', $response))) {
+            $this->session->set_flashdata('error_msg', 'Couldn\'t grab coupon!.Check that you have money in your wallet ');
+            redirect(base_url('coupons/' . $slug));
+        } else {
+            $this->session->set_flashdata('success_msg', 'Grabbed successfully. Coupon Code: ' . $response);
+            redirect(base_url('coupons/' . $slug));
+        }
+    }
+
     public function contact() {
         $this->data['breadcrumbs'] = $this->_get_crumbs();
     }
@@ -169,6 +187,18 @@ class Home extends MY_Controller {
         return $coupons;
     }
 
+    private function _my_coupons($limit, $page, $category = 'all') {
+        $user = $this->user->get_current();
+        $this->load->model('user_coupon_model', 'user_coupons');
+
+        if (strcmp('all', $category) === 0) {
+            $coupons = $this->user_coupons->get_coupons_for($user->id);
+        } else {
+            $coupons = $this->user_coupons->get_coupons_for($user->id, $this->category->fetch_id_by_slug($category));
+        }
+        return $coupons;
+    }
+
     private function _search_coupons($limit, $page, $query = null, $location = 'all') {
         if ($query === null) {
             return;
@@ -191,6 +221,18 @@ class Home extends MY_Controller {
             $count = $this->coupons->count_all();
         } else {
             $count = $this->coupons->count_by(array('category_id' => $this->category->fetch_id_by_slug($category)));
+        }
+        return $count;
+    }
+
+    private function _count_my_coupons($category = 'all') {
+        $user = $this->user->get_current();
+        $this->load->model('user_coupon_model', 'user_coupons');
+
+        if (strcmp('all', $category) === 0) {
+            $count = count($this->user_coupons->get_coupons_for($user->id));
+        } else {
+            $count = count($this->user_coupons->get_coupons_for($user->id, $this->category->fetch_id_by_slug($category)));
         }
         return $count;
     }
@@ -311,60 +353,60 @@ class Home extends MY_Controller {
 
     public function profile() {
         $this->_is_logged_in();
-        $merchant = $this->merchant->get_current();
-        $this->data['profile'] = new Merchant_presenter($merchant);
-        $this->data['merchant'] = $merchant;
+        $user = $this->user->get_current();
+        $this->data['profile'] = new User_presenter($user);
+        $this->data['user'] = $user;
         $this->data['logged_in'] = $this->session->userdata('logged_in');
         $this->data['breadcrumbs'] = $this->_get_crumbs();
     }
 
     public function edit_profile() {
         $this->_is_logged_in();
-        $merchant = $this->merchant->get_current();
-        $this->data['profile'] = $this->merchant->profile_info($merchant);
-        $this->data['merchant'] = $merchant;
+        $user = $this->user->get_current();
+        $this->data['profile'] = $this->user->profile_info($user);
+        $this->data['user'] = $user;
         $this->data['breadcrumbs'] = $this->_get_crumbs();
         $this->data['logged_in'] = $this->session->userdata('logged_in');
         $this->load->helper('url');
 
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('business_name', 'Business Name', 'trim|required');
-        $this->form_validation->set_rules('contact_name', 'Contact Name', 'trim|required');
-        $this->form_validation->set_rules('mobile_number', 'Mobile Number', 'required');
+        $this->form_validation->set_rules('first_name', 'First Name', 'trim|required');
+        $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required');
+        $this->form_validation->set_rules('phone', 'Phone Number', 'required');
 
         if ($this->form_validation->run() == FALSE) {
             $this->view = TRUE;
         } else {
             $this->view = FALSE;
-            $response = $this->merchant->update($merchant->id, $this->input->post(), TRUE);
+            $this->user->update($user->id, $this->input->post(), TRUE);
             $this->session->set_flashdata('success_msg', 'Profile Saved!');
-            redirect(Merchant::MERCHANT_URL . '/profile');
+            redirect(base_url('profile'));
         }
     }
 
     public function change_password() {
         $this->view = FALSE;
-        $merchant = $this->merchant->get_current();
+        $user = $this->user->get_current();
         $password = trim($this->input->post('password'));
         $repassword = trim($this->input->post('re_password'));
         $redirect_url = $this->input->post('redirect');
 
         if ($password !== FALSE && $repassword !== FALSE) {
-            $this->_process_change_password($password, $repassword, $merchant, $redirect_url);
+            $this->_process_change_password($password, $repassword, $user, $redirect_url);
         } else {
             $this->session->set_flashdata('error_msg', 'Password Fields cant be empty');
             redirect($redirect_url);
         }
     }
 
-    private function _process_change_password($password, $repassword, $merchant, $redirect_url) {
+    private function _process_change_password($password, $repassword, $user, $redirect_url) {
         if (strcmp($password, $repassword) == 0) {
-            if (sha1($password) === $merchant->password) {
+            if (sha1($password) === $user->password) {
                 $this->session->set_flashdata('error_msg', 'You can\'t change from same password to same!');
                 redirect($redirect_url);
             } else {
-                $this->merchant->update($merchant->id, array('password' => sha1($password)));
+                $this->merchant->update($user->id, array('password' => sha1($password)));
                 $this->session->set_flashdata('success_msg', 'Password Changed!');
                 redirect($redirect_url);
             }
@@ -377,29 +419,30 @@ class Home extends MY_Controller {
     public function settings() {
         $this->_is_logged_in();
         $this->data['breadcrumbs'] = $this->_get_crumbs();
-        $merchant = $this->merchant->get_current();
-        $this->data['profile'] = new Merchant_presenter($merchant);
-        $this->data['merchant'] = $merchant;
+        $user = $this->user->get_current();
+        $this->data['profile'] = new User_presenter($user);
+        $this->data['user'] = $user;
         $this->data['logged_in'] = $this->session->userdata('logged_in');
     }
 
     public function my_coupons($category = 'all', $page = 0) {
-        $merchant = $this->session->userdata('merchant');
+        $this->_is_logged_in();
+        $user = $this->user->get_current();
         $error = !$this->session->flashdata('error_msg') ? 'Please Login or Create an Account' :
                 $this->session->flashdata('error_msg');
         $this->session->flashdata('error_msg', $error);
         $this->data['breadcrumbs'] = $this->_get_crumbs();
 
         $this->data['logged_in'] = $this->session->userdata('logged_in');
-        $this->data['merchant'] = $this->merchant->get($merchant['id']);
+        $this->data['user'] = $user;
 
         $limit = 20;
-        $total = $this->_count_coupons($category);
-        $base_url = base_url(Merchant::MERCHANT_URL . '/my-coupons/');
+        $total = $this->_count_my_coupons($category);
+        $base_url = base_url('my-coupons/');
 
-        $coupons = $this->_coupons($limit, $page, $category);
+        $coupons = $this->_my_coupons($limit, $page, $category);
         $coupon_presenter = new Coupon_presenter($coupons);
-        $this->data['categories'] = new Category_presenter($this->category->get_all(), base_url(Merchant::MERCHANT_URL . '/my-coupons/'));
+        $this->data['categories'] = new Category_presenter($this->category->get_all(), base_url('my-coupons/'));
         $this->data['coupons'] = $coupon_presenter;
         $config = $this->_use_pagination($total, $limit, $base_url);
         $config['cur_page'] = $page;

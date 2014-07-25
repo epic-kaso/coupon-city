@@ -5,9 +5,6 @@
 <?= partial('partials/account/_forgot_password', array()); ?>
 <!-- SEARCH AREA -->
 <?= partial('partials/_search', array('query' => @$search_query)); ?>
-<div class="container">
-    <?= $breadcrumbs ?>
-</div>
 <!-- //////////////////////////////////
 //////////////END MAIN HEADER//////////
 ////////////////////////////////////-->
