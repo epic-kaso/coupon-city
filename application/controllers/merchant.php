@@ -21,6 +21,8 @@ class Merchant extends MY_Controller {
     }
 
     public function index() {
+        $this->_is_logged_in();
+
         $this->data['logged_in'] = FALSE;
         $error = !$this->session->flashdata('error_msg') ? 'Please Login or Create an Account' :
                 $this->session->flashdata('error_msg');
@@ -73,7 +75,7 @@ class Merchant extends MY_Controller {
             delete_files('./uploads/temps');
         }
         $this->session->sess_destroy();
-        redirect('merchant/index');
+        redirect(base_url('sell/login'));
     }
 
     public function add_coupon() {
@@ -168,7 +170,7 @@ class Merchant extends MY_Controller {
             $status = FALSE;
         }
         if (!$status || !$this->session->userdata('logged_in')) {
-            redirect('merchant/index');
+            redirect('sell/login');
         }
     }
 
@@ -195,7 +197,7 @@ class Merchant extends MY_Controller {
             $this->session->set_flashdata('error_msg', 'Something went wrong!');
             redirect(base_url('sell/signup'));
         } else {
-            redirect('merchant/index', 'refresh');
+            redirect(base_url('sell'), 'refresh');
         }
     }
 
