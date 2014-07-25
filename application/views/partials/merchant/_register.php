@@ -7,7 +7,7 @@
     <h3>Member Register</h3>
     <h5>Ready to get best offers? Let's get started!</h5>
     <div class="row-fluid">
-        <form class="dialog-form" method="post" action="<?= base_url('sell/signup'); ?>">
+        <form class="dialog-form" method="post" action="<?= base_url(Merchant::MERCHANT_URL . '/signup'); ?>">
             <label>E-mail</label>
             <input name="email" type="text" placeholder="email@domain.com" class="span12">
             <label>Password</label>

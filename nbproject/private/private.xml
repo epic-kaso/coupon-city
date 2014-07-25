@@ -3,16 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/coupon-city/application/views/home/index.php</file>
-            <file>file:/C:/xampp/htdocs/coupon-city/index.php</file>
-            <file>file:/C:/xampp/htdocs/coupon-city/application/config/routes.php</file>
-            <file>file:/C:/xampp/htdocs/coupon-city/application/models/user_model.php</file>
-            <file>file:/C:/xampp/htdocs/coupon-city/system/core/Loader.php</file>
-            <file>file:/C:/xampp/htdocs/coupon-city/.htaccess</file>
-            <file>file:/C:/xampp/htdocs/coupon-city/application/views/partials/account/_login.php</file>
-            <file>file:/C:/xampp/htdocs/coupon-city/application/views/partials/_header_nav.php</file>
-            <file>file:/C:/xampp/htdocs/coupon-city/application/models/wallet_model.php</file>
-            <file>file:/C:/xampp/htdocs/coupon-city/application/views/partials/_wallet.php</file>
+            <file>file:/C:/xampp/htdocs/coupon-city/application/controllers/merchant.php</file>
+            <file>file:/C:/xampp/htdocs/coupon-city/application/models/merchant_model.php</file>
+            <file>file:/C:/xampp/htdocs/coupon-city/application/views/merchant/index.php</file>
+            <file>file:/C:/xampp/htdocs/coupon-city/application/views/merchant/create.php</file>
+            <file>file:/C:/xampp/htdocs/coupon-city/application/views/merchant/login.php</file>
         </group>
     </open-files>
 </project-private>

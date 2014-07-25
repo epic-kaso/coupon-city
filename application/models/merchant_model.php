@@ -15,6 +15,7 @@ class Merchant_model extends MY_Model {
 
     public $protected_attributes = array('id');
     public $before_create = array('created_at', 'updated_at', 'encrypt_password');
+    public $after_get = array('add_status_field');
     //public $belongs_to = array('merchant' => array('model' => 'merchant_model'));
 
     public $has_many = array(
@@ -28,6 +29,16 @@ class Merchant_model extends MY_Model {
             'label' => 'password',
             'rules' => 'trim|required')
     );
+
+    public function add_status_field($row) {
+        $is_complete = $row->is_profile_complete;
+        if ($is_complete === 1) {
+            $row->status = 'Complete';
+        } else {
+            $row->status = 'Incomplete';
+        }
+        return $row;
+    }
 
     public function login_email($email, $password) {
         $user = $this
@@ -55,6 +66,7 @@ class Merchant_model extends MY_Model {
         if (array_key_exists('password', $row)) {
             $row['password'] = sha1($row['password']);
         }
+
         return $row;
     }
 
@@ -96,6 +108,29 @@ class Merchant_model extends MY_Model {
                 'coupons' => $coups),
             'logged_in' => true);
         $this->session->set_userdata($data);
+    }
+
+    public function get_current() {
+        $d = $this->session->userdata(Merchant::USER_SESSION_VARIABLE);
+        return $this->get($d['id']);
+    }
+
+    public function profile_info($merchant) {
+        $merchant = get_object_vars($merchant);
+        $keys = array('email', 'is_profile_complete', 'created_at', 'updated_at', 'id', 'status', 'password');
+        foreach ($keys as $v) {
+            if (array_key_exists($v, $merchant)) {
+                unset($merchant[$v]);
+            }
+        }
+
+        foreach ($merchant as $key => $value) {
+            unset($merchant[$key]);
+            $key = ucwords(str_ireplace('_', ' ', $key));
+            $merchant[$key] = $value;
+        }
+
+        return $merchant;
     }
 
 }

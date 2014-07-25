@@ -6,10 +6,12 @@ if (!defined('BASEPATH')) {
 
 require_once APPPATH . 'presenters/category_presenter.php';
 require_once APPPATH . 'presenters/coupon_presenter.php';
+require_once APPPATH . 'presenters/merchant_presenter.php';
 
 class Merchant extends MY_Controller {
 
     const USER_SESSION_VARIABLE = "merchant";
+    const MERCHANT_URL = 'merchant';
 
     public function __construct() {
         parent::__construct();
@@ -22,7 +24,11 @@ class Merchant extends MY_Controller {
 
     public function index() {
         $this->_is_logged_in();
+        redirect(base_url(Merchant::MERCHANT_URL . '/dashboard'));
+    }
 
+    public function dashboard() {
+        $this->_is_logged_in();
         $this->data['logged_in'] = FALSE;
         $error = !$this->session->flashdata('error_msg') ? 'Please Login or Create an Account' :
                 $this->session->flashdata('error_msg');
@@ -75,7 +81,7 @@ class Merchant extends MY_Controller {
             delete_files('./uploads/temps');
         }
         $this->session->sess_destroy();
-        redirect(base_url('sell/login'));
+        redirect(base_url(Merchant::MERCHANT_URL . '/login'));
     }
 
     public function add_coupon() {
@@ -83,10 +89,10 @@ class Merchant extends MY_Controller {
         $merchant = $this->session->userdata('merchant');
         $this->data['logged_in'] = $this->session->userdata('logged_in');
         $this->data['merchant'] = $this->merchant->get($merchant['id']);
-        $this->data['categories'] = new Category_presenter($this->category->get_all(), site_url('home/index/0/'));
+        $this->data['categories'] = new Category_presenter($this->category->get_all(), base_url(Merchant::MERCHANT_URL));
     }
 
-    public function my_coupons($page = 0, $category = 'all') {
+    public function my_coupons($category = 'all', $page = 0) {
         $merchant = $this->session->userdata('merchant');
         $error = !$this->session->flashdata('error_msg') ? 'Please Login or Create an Account' :
                 $this->session->flashdata('error_msg');
@@ -97,16 +103,48 @@ class Merchant extends MY_Controller {
 
         $limit = 20;
         $total = $this->_count_coupons($category);
-        $base_url = site_url('merchant/my_coupons/');
+        $base_url = base_url(Merchant::MERCHANT_URL . '/my_coupons/');
 
         $coupons = $this->_coupons($limit, $page, $category);
         $coupon_presenter = new Coupon_presenter($coupons);
-        $this->data['categories'] = new Category_presenter($this->category->get_all(), site_url('merchant/my_coupons/0/'));
+        $this->data['categories'] = new Category_presenter($this->category->get_all(), base_url(Merchant::MERCHANT_URL . '/my_coupons/'));
         $this->data['coupons'] = $coupon_presenter;
         $config = $this->_use_pagination($total, $limit, $base_url);
         $config['cur_page'] = $page;
         $this->pagination->initialize($config);
         $this->data['links'] = $this->pagination->create_links();
+    }
+
+    public function profile() {
+        $this->_is_logged_in();
+        $merchant = $this->merchant->get_current();
+        $this->data['profile'] = new Merchant_presenter($merchant);
+        $this->data['merchant'] = $merchant;
+        $this->data['logged_in'] = $this->session->userdata('logged_in');
+    }
+
+    public function edit_profile() {
+        $this->_is_logged_in();
+        $merchant = $this->merchant->get_current();
+        $this->data['profile'] = $this->merchant->profile_info($merchant);
+        $this->data['merchant'] = $merchant;
+        $this->data['logged_in'] = $this->session->userdata('logged_in');
+        $this->load->helper('url');
+
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('business_name', 'Business Name', 'trim|required');
+        $this->form_validation->set_rules('contact_name', 'Contact Name', 'trim|required');
+        $this->form_validation->set_rules('mobile_number', 'Mobile Number', 'required');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->view = TRUE;
+        } else {
+            $this->view = FALSE;
+            $response = $this->merchant->update($merchant->id, $this->input->post(), TRUE);
+            $this->session->set_flashdata('success_msg', 'Profile Saved!');
+            redirect(Merchant::MERCHANT_URL . '/profile');
+        }
     }
 
     private function _coupons($limit, $page, $category = 'all') {
@@ -170,7 +208,7 @@ class Merchant extends MY_Controller {
             $status = FALSE;
         }
         if (!$status || !$this->session->userdata('logged_in')) {
-            redirect('sell/login');
+            redirect(base_url(Merchant::MERCHANT_URL . '/login'));
         }
     }
 
@@ -180,13 +218,13 @@ class Merchant extends MY_Controller {
             $response = $this->merchant->login_email($email, $password);
             if (!$response) {
                 $this->session->set_flashdata('error_msg', 'Invalid Username/Password!');
-                redirect(base_url('sell/login'));
+                redirect(base_url(Merchant::MERCHANT_URL . '/login'));
             } else {
-                redirect(base_url('sell'), 'refresh');
+                redirect(base_url(Merchant::MERCHANT_URL), 'refresh');
             }
         } else {
             $this->session->set_flashdata('error_msg', 'Invalid Username and/or Password Supplied');
-            redirect(base_url('sell/login'));
+            redirect(base_url(Merchant::MERCHANT_URL . '/login'));
         }
     }
 
@@ -195,9 +233,9 @@ class Merchant extends MY_Controller {
         if (!$response) {
             //var_dump($response);
             $this->session->set_flashdata('error_msg', 'Something went wrong!');
-            redirect(base_url('sell/signup'));
+            redirect(base_url(Merchant::MERCHANT_URL . '/signup'));
         } else {
-            redirect(base_url('sell'), 'refresh');
+            redirect(base_url(Merchant::MERCHANT_URL), 'refresh');
         }
     }
 

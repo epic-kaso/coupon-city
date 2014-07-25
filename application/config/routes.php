@@ -56,10 +56,12 @@ $route['login'] = "home/login";
 $route['logout'] = "home/logout";
 $route['signup'] = "home/signup";
 
-$route['sell'] = 'merchant/index';
-$route['sell/login'] = 'merchant/login';
-$route['sell/logout'] = "merchant/logout";
-$route['sell/signup'] = 'merchant/create';
+$route['merchant'] = 'merchant/index';
+$route['merchant/dashboard'] = 'merchant/dashboard';
+$route['merchant/login'] = 'merchant/login';
+$route['merchant/logout'] = "merchant/logout";
+$route['merchant/edit-profile'] = "merchant/edit_profile";
+$route['merchant/signup'] = 'merchant/create';
 
 $route['contact'] = 'home/contact';
 $route['about'] = 'home/about_us';

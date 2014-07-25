@@ -20,10 +20,11 @@
  */
 //define('ENVIRONMENT', 'testing'); //'development');
 
-if ($_SERVER['SERVER_NAME']=='localhost')
-   define('ENVIRONMENT', 'testing', 'development');
-else
-   define('ENVIRONMENT', 'production');
+if ($_SERVER['SERVER_NAME'] == 'localhost') {
+    define('ENVIRONMENT', 'development');
+} else {
+    define('ENVIRONMENT', 'production');
+}
 
 /*
  * ---------------------------------------------------------------

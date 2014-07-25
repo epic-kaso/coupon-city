@@ -8,7 +8,7 @@
     <h3>Member Login</h3>
     <h5>Welcome back, friend. Login to get started</h5>
     <div class="row-fluid">
-        <form class="dialog-form" method="post" action="<?= base_url('sell/login'); ?>">
+        <form class="dialog-form" method="post" action="<?= base_url(Merchant::MERCHANT_URL . '/login'); ?>">
             <label>E-mail</label>
             <input name="email" type="text" placeholder="email@domain.com" class="span12">
             <label>Password</label>
