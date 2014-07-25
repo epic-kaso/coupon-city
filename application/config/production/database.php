@@ -51,10 +51,11 @@ if (!defined('BASEPATH'))
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = '';
-$db['default']['database'] = 'kouponcity';
+
+$db['default']['hostname'] = $_SERVER['RDS_HOSTNAME'];
+$db['default']['username'] = $_SERVER['RDS_USERNAME'];
+$db['default']['password'] = $_SERVER['RDS_PASSWORD'];
+$db['default']['database'] = $_SERVER['RDS_DB_NAME'];
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
