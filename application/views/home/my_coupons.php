@@ -1,30 +1,3 @@
-<!-- END LOGIN REGISTER LINKS CONTENT -->
-<!-- SEARCH AREA -->
-<?= partial('partials/_header_nav', array('logged_in' => $logged_in, 'user' => @$user)); ?>
-<!-- LOGIN REGISTER LINKS CONTENT -->
-<?= partial('partials/account/_login', array('show_fb_login', TRUE)); ?>
-<?= partial('partials/account/_create_user', array('show_fb_login', TRUE)); ?>
-<?= partial('partials/account/_forgot_password', array()); ?>
-<?= partial('partials/_wallet', array()); ?>
-
-
-<div id="password-recover-dialog" class="mfp-with-anim mfp-hide mfp-dialog clearfix">
-    <i class="icon-retweet dialog-icon"></i>
-    <h3>Password Recovery</h3>
-    <h5>Fortgot your password? Don't worry we can deal with it</h5>
-    <div class="row-fluid">
-        <form class="dialog-form">
-            <label>E-mail</label>
-            <input type="text" placeholder="email@domain.com" class="span12">
-            <input type="submit" value="Request new password" class="btn btn-primary">
-        </form>
-    </div>
-</div>
-<!-- END LOGIN REGISTER LINKS CONTENT -->
-<!-- END SEARCH AREA -->
-<div class="container">
-    <?= $breadcrumbs ?>
-</div>
 <div class="gap"></div>
 <?php if ($logged_in) { ?>
     <div class="container">

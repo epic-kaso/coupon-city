@@ -28,6 +28,10 @@
 
         <!-- Your custom styles (blank file) -->
         <link rel="stylesheet" href="<?= base_url('assets/css/mystyles.css'); ?>">
+
+        <script>
+            var base_url = "<?= base_url(); ?>";
+        </script>
     </head>
 
     <body>

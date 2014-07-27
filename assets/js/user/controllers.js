@@ -140,3 +140,29 @@ app.controller('LoginController', [
         });
     }
 ]);
+
+
+app.controller('WalletController', function($scope, TransactionService) {
+    $scope.wallet = {};
+    $scope.wallet.processing = false;
+    //$scope.wallet.redirect = "";
+
+    $scope.wallet.submit = function($event) {
+        $scope.wallet.processing = true;
+        TransactionService.generate_code($scope.wallet.amount)
+                .then(function(response) {
+                    console.log(response);
+            $scope.wallet.processing = false;
+                    if (response.status == 'success') {
+                        $scope.wallet.redirect += "?code=" + response.code;
+                        console.log($scope.wallet.redirect);                        
+                        $('form#payment_form').submit();
+                    }
+                }, function(data) {
+                    $scope.wallet.processing = false;
+                    console.log(data);
+                });
+                
+                console.log($event);
+            };
+});

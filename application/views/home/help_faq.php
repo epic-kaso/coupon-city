@@ -1,20 +1,9 @@
-<?= partial('partials/_header_nav', array('active' => 'help-faq')); ?>
-<!-- LOGIN REGISTER LINKS CONTENT -->
-<?= partial('partials/account/_login', array('show_fb_login', TRUE)); ?>
-<?= partial('partials/account/_create_user', array('show_fb_login', TRUE)); ?>
-<?= partial('partials/account/_forgot_password', array()); ?>
-<!-- SEARCH AREA -->
-<?= partial('partials/_search', array('query' => @$search_query)); ?>
-
+<!-- END PAGE TITLE -->
 <div class="top-title-area">
     <div class="container">
         <h1 class="title-page">Help & FAQ</h1>
     </div>
 </div>
-<div class="container">
-    <?= $breadcrumbs ?>
-</div>
-<!-- END PAGE TITLE -->
 
 <div class="gap"></div>
 

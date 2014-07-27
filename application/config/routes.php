@@ -51,6 +51,7 @@ $route['categories/(:any)/(:num)'] = "home/index/$1/$2";
 
 $route['wallet/success/(:num)'] = "wallet/success/$1";
 $route['wallet/failure/(:num)'] = "wallet/failure/$1";
+$route['wallet/generate-transaction-code/(:num)'] = "wallet/generate_transaction_code/$1";
 
 $route['login'] = "home/login";
 $route['logout'] = "home/logout";

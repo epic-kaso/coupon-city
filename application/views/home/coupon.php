@@ -1,21 +1,10 @@
-<?= partial('partials/_header_nav', array('active' => 'coupon')); ?>
-<!-- LOGIN REGISTER LINKS CONTENT -->
-<?= partial('partials/account/_login', array()); ?>
-<?= partial('partials/account/_create_user', array()); ?>
-<?= partial('partials/account/_forgot_password', array()); ?>
-
-<!-- END LOGIN REGISTER LINKS CONTENT -->
-<!-- SEARCH AREA -->
-<?= partial('partials/_search', array('query' => @$search_query)); ?>
 <!-- END SEARCH AREA -->
 <div class="top-title-area">
     <div class="container">
         <h1 class="title-page"><?= $featured_item->name ?></h1>
     </div>
 </div>
-<div class="container">
-    <?= $breadcrumbs ?>
-</div>
+
 
 <div class="gap"></div>
 

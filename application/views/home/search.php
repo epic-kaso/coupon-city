@@ -1,23 +1,4 @@
-<?= partial('partials/_header_nav', array('active' => 'search')); ?>
-<!-- LOGIN REGISTER LINKS CONTENT -->
-<?= partial('partials/account/_login', array()); ?>
-<?= partial('partials/account/_create_user', array()); ?>
-<?= partial('partials/account/_forgot_password', array()); ?>
-
-<!-- END LOGIN REGISTER LINKS CONTENT -->
-<!-- SEARCH AREA -->
-<?= partial('partials/_search', array('query' => $search_query)); ?>
-<div class="container">
-    <?= $breadcrumbs ?>
-</div>
-
 <div class="container-fluid">
-    <?php if (!empty($success_msg)) { ?>
-        <div class='alert alert-success'><p><?= $success_msg ?></p></div>
-    <?php } ?>
-    <?php if (!empty($error_msg)) { ?>
-        <div class='alert alert-error'><p><?= $error_msg ?></p></div>
-    <?php } ?>
     <div class="row">
         <div class="span12">
             <p class="coupon-search-title">

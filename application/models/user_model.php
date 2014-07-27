@@ -13,6 +13,8 @@
  */
 class User_model extends MY_Model {
 
+    const USER_SESSION_VARIABLE = "user";
+
     public $protected_attributes = array('id');
     public $before_create = array('created_at', 'updated_at', 'encrypt_password');
     public $has_many = array(
@@ -193,7 +195,7 @@ class User_model extends MY_Model {
     }
 
     public function get_current() {
-        $d = $this->session->userdata(Home::USER_SESSION_VARIABLE);
+        $d = $this->session->userdata(self::USER_SESSION_VARIABLE);
         return $this->get($d['id']);
     }
 
