@@ -40,4 +40,15 @@ class User_coupon_model extends MY_Model {
         return $coupons;
     }
 
+    public function get_coupon($user_id, $coupon_id) {
+        $ci = & get_instance();
+        $ci->load->model('coupon_model', 'coupon');
+        $coupon_id = $this->get_by(array('user_id' => $user_id, 'coupon_id' => $coupon_id));
+        if (!$coupon_id) {
+            return FALSE;
+        }
+        $coupon = $ci->coupon->get($coupon_id->coupon_id);
+        return $coupon;
+    }
+
 }

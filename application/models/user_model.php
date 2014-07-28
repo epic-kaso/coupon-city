@@ -16,13 +16,13 @@ class User_model extends MY_Model {
     const USER_SESSION_VARIABLE = "user";
 
     public $protected_attributes = array('id');
-    public $before_create = array('created_at', 'updated_at', 'encrypt_password');
+    public $before_create = array('created_at', 'updated_at', 'encrypt_password', 'verify_balance');
     public $has_many = array(
         'activities' => array('model' => 'user_activity_model', 'primary_key' => 'user_id'),
         'coupons' => array('model' => 'user_coupon_model', 'primary_key' => 'user_id'),
         'wallet' => array('model' => 'wallet_model', 'primary_key' => 'user_id')
     );
-    public $after_get = array('add_status_field');
+    public $after_get = array('add_status_field', 'format_wallet_balance');
     public $validate = array(
         array('field' => 'email',
             'label' => 'email',
@@ -113,7 +113,6 @@ class User_model extends MY_Model {
         if (!$user) {
             return $user;
         } else {
-            $user->wallet = $this->get_wallet($user->id);
             $this->_create_session($user);
             return $user;
         }
@@ -146,7 +145,14 @@ class User_model extends MY_Model {
     }
 
     public function get_my_coupon($user_id, $coupon_id) {
-
+        $ci = & get_instance();
+        $ci->load->model('user_coupon_model', 'user_coupon');
+        $couponz = $ci->user_coupon->get_coupon($user_id, $coupon_id);
+        if (empty($couponz)) {
+            return FALSE;
+        } else {
+            return $couponz;
+        }
     }
 
     public function get_my_coupons($user_id) {
@@ -166,21 +172,11 @@ class User_model extends MY_Model {
         } else {
             $coups = array();
         }
-        $data = array(Home::USER_SESSION_VARIABLE => array('id' => $user->id,
-                'timestamp' => time(),
-                'coupons' => $coups,
-                'email' => $user->email,
-                'wallet' => $user->wallet->balance
-            ),
-            'user_logged_in' => true);
+        $data = array(Home::USER_SESSION_VARIABLE =>
+            array('id' => $user->id,
+                'email' => $user->email
+        ));
         $this->session->set_userdata($data);
-    }
-
-    private function get_wallet($user_id) {
-        $ci = & get_instance();
-        $ci->load->model('wallet_model', 'wallet');
-        $wallet = $ci->wallet->get_user_wallet($user_id);
-        return $wallet;
     }
 
     private function is_valid_coupon($coupon_id) {
@@ -227,22 +223,68 @@ class User_model extends MY_Model {
         return $user;
     }
 
-    /*
-     *
-     *  $coupon_code = $ci->coupon->get($coupon_id)->coupon_code;
-      $user_coupon_code = $ci->coupon->generate_user_coupon($coupon_code, $user->email);
+    //----------------------------------------------------
+    //-------------------------------------------------------
+    //--------------WALLET
 
-      $ci->load->model('user_coupon_model', 'users_coupons');
-      $resp = $ci->users_coupons->insert(
-      array(
-      'user_id' => $user_id,
-      'coupon_id' => $coupon_id,
-      'user_coupon_code' => $user_coupon_code
-      ));
 
-      if (!$resp)
-      return $resp;
-      else
-      return $user_coupon_code;
-     */
+    public function verify_balance($row) {
+        if (is_object($row)) {
+            $balance = $row->wallet_balance;
+            if (is_numeric($balance)) {
+                $row->wallet_balance = $balance;
+            } else {
+                $row->wallet_balance = 0;
+            }
+        } else {
+            $balance = $row['wallet_balance'];
+            if (is_numeric($balance)) {
+                $row['wallet_balance'] = $balance;
+            } else {
+                $row['wallet_balance'] = 0;
+            }
+        }
+        return $row;
+    }
+
+    public function format_wallet_balance($row) {
+        if (is_object($row)) {
+            $balance = $row->balance;
+            $row->balance = number_format($balance, 2);
+        } else {
+            $balance = $row['balance'];
+            $row['balance'] = number_format($balance, 2);
+        }
+        return $row;
+    }
+
+    public function get_wallet($user_id) {
+        return $this->get_wallet_balance($user_id);
+    }
+
+    public function get_wallet_balance($user_id) {
+        $wallet = $this->get($user_id)->wallet_balance;
+        if (!$wallet) {
+            return 0;
+        } else {
+            return $wallet;
+        }
+    }
+
+    public function credit_wallet($user_id, $amount) {
+        $wallet = $this->get($user_id)->wallet_balance;
+        $current_balance = $wallet;
+        $current_balance -= $amount;
+
+        return $this->update($user_id, array('wallet_balance' => $current_balance));
+    }
+
+    public function debit_wallet($user_id, $amount) {
+        $wallet = $this->get($user_id)->wallet_balance;
+        $current_balance = $wallet;
+        $current_balance -= $amount;
+
+        return $this->update($user_id, array('wallet_balance' => $current_balance));
+    }
+
 }

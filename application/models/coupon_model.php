@@ -13,7 +13,7 @@
  */
 class Coupon_model extends MY_Model {
 
-    const COUPON_PER_UNIT_PRICE = 50;
+    const COMMISION_PERCENT = 20.0;
 
     private $key = "CouponCity1234,.+@#";
     private $JOIN_CHAR = "_";
@@ -49,10 +49,6 @@ class Coupon_model extends MY_Model {
             'rules' => 'trim|required')
     );
 
-    public function get_by_slug($slug) {
-        return $this->with('coupon_medias')->get_by(array('slug' => $slug));
-    }
-
     public function calculate_discount($row) {
         if (is_object($row)) {
             $old_price = $row->old_price;
@@ -70,39 +66,11 @@ class Coupon_model extends MY_Model {
         if (is_object($row)) {
             $old_price = $row->old_price;
             $new_price = $row->new_price;
-            $row->commision = ceil(($old_price - $new_price) / 100 * 10.0);
+            $row->commision = ceil(($old_price - $new_price) / 100 * Coupon_model::COMMISION_PERCENT);
         } else {
             $old_price = $row['old_price'];
             $new_price = $row['new_price'];
-            $row['commision'] = ceil(($old_price - $new_price) / 100 * 10.0);
-        }
-        return $row;
-    }
-
-    public function format_numbers($row) {
-        if (@property_exists($row, 'discount')) {
-            $balance = $row->discount;
-            $row->discount = number_format($balance, 2);
-        }
-        if (@property_exists($row, 'old_price')) {
-            $old_price = $row->old_price;
-            $row->old_price = number_format($old_price, 2);
-        }
-        if (@property_exists($row, 'old_price')) {
-            $new_price = $row->new_price;
-            $row->new_price = number_format($new_price, 2);
-        }
-        return $row;
-    }
-
-    public function get_coupon_cover_image($row) {
-        $ci = & get_instance();
-        $ci->load->model('coupon_media_model', 'media');
-        $image_url = $ci->media->get_cover_media($row->id);
-        if (!$image_url) {
-            $row->cover_image_url = Coupon_media_model::DEFAULT_MEDIA_URL;
-        } else {
-            $row->cover_image_url = $image_url;
+            $row['commision'] = ceil(($old_price - $new_price) / 100 * Coupon_model::COMMISION_PERCENT);
         }
         return $row;
     }
@@ -157,14 +125,63 @@ class Coupon_model extends MY_Model {
         return increment_string($slug, '_');
     }
 
-    public function search($query, $location = null) {
-        if (empty($query)) {
-            throw new Exception('query string cant be null');
+    //--COUPON READ RELATED METHODS---------------
+
+    public function get_by_slug($slug) {
+        return $this->with('coupon_medias')->get_by(array('slug' => $slug));
+    }
+
+    public function format_numbers($row) {
+        if (@property_exists($row, 'discount')) {
+            $balance = $row->discount;
+            $row->discount = number_format($balance, 2);
         }
-        if (empty($location)) {
-            return $this->search_many_by(array('name' => $query));
+        if (@property_exists($row, 'old_price')) {
+            $old_price = $row->old_price;
+            $row->old_price = number_format($old_price, 2);
+        }
+        if (@property_exists($row, 'old_price')) {
+            $new_price = $row->new_price;
+            $row->new_price = number_format($new_price, 2);
+        }
+        return $row;
+    }
+
+    public function get_coupon_cover_image($row) {
+        $ci = & get_instance();
+        $ci->load->model('coupon_media_model', 'media');
+        $image_url = $ci->media->get_cover_media($row->id);
+        if (!$image_url) {
+            $row->cover_image_url = Coupon_media_model::DEFAULT_MEDIA_URL;
         } else {
-            return $this->search_many_by(array('name' => $query, 'location' => $location));
+            $row->cover_image_url = $image_url;
+        }
+        return $row;
+    }
+
+    public function search($query, $location = null, $with_descripton = FALSE) {
+        $query_array = array('name' => $query, 'location' => $location);
+        $query_array_descriptn = array('description' => $query, 'location' => $location);
+
+        if (!$with_descripton) {
+            if (empty($query)) {
+                throw new Exception('query string cant be null');
+            }
+            if (empty($location)) {
+                unset($query_array['location']);
+            }
+            return $this->search_many_by($query_array);
+        } else {
+            if (empty($query)) {
+                throw new Exception('query string cant be null');
+            }
+            if (empty($location)) {
+                unset($query_array_descriptn['location']);
+                unset($query_array['location']);
+            }
+            $result_1 = $this->search_many_by($query_array);
+            $result_2 = $this->search_many_by($query_array_descriptn);
+            return array_merge($result_1, $result_2);
         }
     }
 
@@ -193,6 +210,45 @@ class Coupon_model extends MY_Model {
             return array_merge($result_1, $result_2);
         }
     }
+
+    public function grab_coupon($coupon_id, $user_id) {
+        if (!is_numeric($coupon_id) || !is_numeric($user_id)) {
+            return FALSE;
+        }
+        $CI = & get_instance();
+        $CI->load->model('wallet_model', 'wallet');
+        $CI->load->model('user_model', 'user');
+        $CI->load->model('user_coupon_model', 'user_coupon');
+
+        $coupon = $this->get($coupon_id);
+        $user = $CI->user->get($user_id);
+
+        $wallet_balance = $CI->wallet->get_user_wallet_balance($user_id);
+
+        $amt = $this->_calculate_coupon_price($coupon);
+        if ($wallet_balance >= $amt) {
+            $CI->wallet->debit_wallet($user_id, $amt);
+            $user_coupon = $this->generate_user_coupon($coupon->coupon_code, $user->email);
+            $CI->user_coupon->insert(
+                    array(
+                        'coupon_id' => $coupon_id,
+                        'user_id' => $user_id,
+                        'user_coupon_code' => $user_coupon
+            ));
+
+            return $user_coupon;
+        } else {
+            return array('error' => 'Insufficient Account balance');
+        }
+    }
+
+    public function get_coupons_similar_to($coupon_id, $limit = 4) {
+        $coupon = $this->get($coupon_id);
+        return $this->limit($limit)
+                        ->search_many_by(array('name' => $coupon->name));
+    }
+
+    //-- UTILITY METHODS
 
     public function generate_user_coupon($coupon_code, $user_email) {
         $ci = & get_instance();
@@ -230,45 +286,9 @@ class Coupon_model extends MY_Model {
         }
     }
 
-    public function get_coupons_similar_to($coupon_id, $limit = 4) {
-        $coupon = $this->get($coupon_id);
-        return $this->limit($limit)
-                        ->search_many_by(array('name' => $coupon->name));
-    }
+    private function _calculate_coupon_price($coupon) {
 
-    public function grab_coupon($coupon_id, $user_id) {
-        if (!is_numeric($coupon_id) || !is_numeric($user_id)) {
-            return FALSE;
-        }
-        $CI = & get_instance();
-        $CI->load->model('wallet_model', 'wallet');
-        $CI->load->model('user_model', 'user');
-        $CI->load->model('user_coupon_model', 'user_coupon');
-
-        $coupon = $this->get($coupon_id);
-        $user = $CI->user->get($user_id);
-
-        $wallet_balance = $CI->wallet->get_user_wallet_balance($user_id);
-
-        $amt = $this->_calculate_coupon_price($coupon_id);
-        if ($wallet_balance >= $amt) {
-            $CI->wallet->debit_wallet($user_id, $amt);
-            $user_coupon = $this->generate_user_coupon($coupon->coupon_code, $user->email);
-            $CI->user_coupon->insert(
-                    array(
-                        'coupon_id' => $coupon_id,
-                        'user_id' => $user_id,
-                        'user_coupon_code' => $user_coupon
-            ));
-
-            return $user_coupon;
-        } else {
-            return array('error' => 'Insufficient Account balance');
-        }
-    }
-
-    private function _calculate_coupon_price($coupon_id) {
-        return Coupon_model::COUPON_PER_UNIT_PRICE;
+        return $coupon->new_price;
     }
 
     public function test_encrpt() {
