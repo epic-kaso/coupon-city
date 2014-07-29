@@ -164,6 +164,21 @@ class Coupon_model extends MY_Model {
         return increment_string($slug, '_');
     }
 
+    /*
+     * advanced pricing spec
+     * array=>'advanced_pricing'
+     *  array=>'first'
+     *          array=>'count','value'
+     *          array=>'price','value'
+     * array=>'second'
+     *          array=>'count','value'
+     *          array=>'price','value'
+     * array=>'third'
+     *          array=>'count','value'
+     *          array=>'price','value'
+     *
+     */
+
     public function advanced_pricing_to_json($row) {
         if (is_object($row)) {
             $advanced_pricing = $row->advanced_pricing;
@@ -195,6 +210,21 @@ class Coupon_model extends MY_Model {
         return $this->with('coupon_medias')->get_by(array('slug' => $slug));
     }
 
+    /*
+     * advanced pricing spec
+     * array=>'advanced_pricing'
+     *  array=>'first'
+     *          array=>'count','value'
+     *          array=>'price','value'
+     * array=>'second'
+     *          array=>'count','value'
+     *          array=>'price','value'
+     * array=>'third'
+     *          array=>'count','value'
+     *          array=>'price','value'
+     *
+     */
+
     public function advanced_pricing_to_object($row) {
         if ($row->is_advanced_pricing === 1) {
             if (is_object($row)) {
@@ -218,7 +248,7 @@ class Coupon_model extends MY_Model {
             $row->old_price = number_format($old_price, 2);
         }
         if (@property_exists($row, 'old_price')) {
-            $new_price = $row->new_price;
+            $new_price = $this->_calculate_coupon_price($row); // $row->new_price;
             $row->new_price = number_format($new_price, 2);
         }
         return $row;
@@ -363,9 +393,41 @@ class Coupon_model extends MY_Model {
         }
     }
 
-    private function _calculate_coupon_price($coupon) {
+    /*
+     * advanced pricing spec
+     * array=>'advanced_pricing'
+     *  array=>'first'
+     *          array=>'count','value'
+     *          array=>'price','value'
+     * array=>'second'
+     *          array=>'count','value'
+     *          array=>'price','value'
+     * array=>'third'
+     *          array=>'count','value'
+     *          array=>'price','value'
+     *
+     */
 
+    private function _calculate_coupon_price($coupon) {
+        if ($this->is_advanced_price($coupon->id)) {
+            $ci = & get_instance();
+            $ci->load->model('coupon_sale_model', 'coupon_sale');
+            $total = $ci->coupon_sale->get_total_count($coupon->id);
+            $coupon = $this->_process_advanced_pricing($coupon, $total);
+        }
         return $coupon->new_price;
+    }
+
+    private function _process_advanced_pricing($coupon, $total) {
+        if (!empty($coupon->advanced_pricing) && count($coupon->advanced_pricing) > 0) {
+            foreach ($coupon->advanced_pricing as $key => $value) {
+                if ($value['count'] <= $total) {
+                    $coupon->new_price = $value['price'];
+                    break;
+                }
+            }
+        }
+        return $coupon;
     }
 
     public function is_deal_open($coupon_id) {
