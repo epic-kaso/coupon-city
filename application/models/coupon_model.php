@@ -18,7 +18,7 @@ class Coupon_model extends MY_Model {
     private $key = "CouponCity1234,.+@#";
     private $JOIN_CHAR = "_";
     public $protected_attributes = array('id');
-    public $before_create = array('ensure_unique_slug', 'created_at', 'updated_at',
+    public $before_create = array('ensure_unique_slug', 'generate_merchant_coupon_code', 'created_at', 'updated_at',
         'calculate_discount', 'calculate_commision', 'transform_start_end_date', 'advanced_pricing_to_json');
     public $after_get = array('advanced_pricing_to_object', 'update_status', 'format_numbers', 'get_coupon_cover_image');
     public $has_many = array('coupon_medias' => array('model' => 'coupon_media_model', 'primary_key' => 'coupon_id'));
@@ -74,6 +74,24 @@ class Coupon_model extends MY_Model {
             $row['commision'] = ceil(($old_price - $new_price) / 100 * Coupon_model::COMMISION_PERCENT);
         }
         return $row;
+    }
+
+    public function generate_merchant_coupon_code($row) {
+        $code = random_string('alnum', 11);
+        $db = DB('default');
+        $query = $db->limit(1)->get_where($this->_table, array('coupon_code' => $code));
+
+        $db->close();
+        if ($query->num_rows() !== 0) {
+            return $this->generate_merchant_coupon_code($row);
+        } else {
+            if (is_object($row)) {
+                $row->coupon_code = $code;
+            } else {
+                $row['coupon_code'] = $code;
+            }
+            return $row;
+        }
     }
 
     public function transform_start_end_date($row) {

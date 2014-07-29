@@ -68,7 +68,7 @@ $autoload['libraries'] = array('database', 'curl', 'session', 'breadcrumbs');
   |	$autoload['helper'] = array('url', 'file');
  */
 
-$autoload['helper'] = array('partial', 'url', 'date');
+$autoload['helper'] = array('partial', 'url', 'date', 'string');
 
 
 /*
