@@ -32,6 +32,11 @@ class User_model extends MY_Model {
             'rules' => 'trim')
     );
 
+    //------------------------------------------------
+    //------------------------------------------------
+    //-------------------USER RELATED-----------------
+
+
     public function encrypt_password($row) {
         if (array_key_exists('password', $row)) {
             $row['password'] = sha1($row['password']);
@@ -225,7 +230,7 @@ class User_model extends MY_Model {
 
     //----------------------------------------------------
     //-------------------------------------------------------
-    //--------------WALLET
+    //--------------WALLET RELATED---------------------------
 
 
     public function verify_balance($row) {
