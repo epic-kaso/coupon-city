@@ -10,8 +10,11 @@ require_once APPPATH . 'presenters/presenter.php';
 
 class Coupon_presenter extends Presenter {
 
-    public function __construct($object) {
+    protected $is_merchant;
+
+    public function __construct($object, $merchant = FALSE) {
         parent::__construct($object);
+        $this->is_merchant = $merchant;
         $this->load->helper('date');
         $this->load->helper('text');
     }
@@ -45,8 +48,26 @@ class Coupon_presenter extends Presenter {
     private function process($row) {
         $row->remaining = $this->_calculate_remaining_time($row->start_date, $row->end_date);
         $row->link = base_url('coupons/' . $row->slug);
-        $row->grab_link = base_url('grab_coupon/' . $row->slug);
+        if (!is_null($row->quantity) && $row->quantity <= 0) {
+            $row->inactive = TRUE;
+            $row->grab_link = "";
+        } else {
+            $row->inactive = FALSE;
+            $row->grab_link = base_url('grab_coupon/' . $row->slug);
+        }
         $this->create_summary($row);
+        if (!$this->is_merchant) {
+            $this->add_merchant_params($row);
+        }
+        return $row;
+    }
+
+    private function add_merchant_params($row) {
+        $ci = & get_instance();
+        $ci->load->model(array('coupon_sale_model', 'coupon_view_model', 'coupon_redemption_model'));
+        $row->view_count = $ci->coupon_view_model->get_total_count($row->id);
+        $row->sales_count = $ci->coupon_sale_model->get_total_count($row->id);
+        $row->redemption_count = $ci->coupon_redemption_model->get_total_count($row->id);
         return $row;
     }
 
@@ -58,6 +79,13 @@ class Coupon_presenter extends Presenter {
         } else {
             $row->remaining = $this->_calculate_remaining_time($row->start_date, $row->end_date);
             $row->grab_link = base_url('grab_coupon/' . $row->slug);
+            if (!is_null($row->quantity) && $row->quantity <= 0) {
+                $row->inactive = TRUE;
+                $row->grab_link = "";
+            } else {
+                $row->inactive = FALSE;
+                $row->grab_link = base_url('grab_coupon/' . $row->slug);
+            }
             $this->create_summary($row);
         }
         return $row;

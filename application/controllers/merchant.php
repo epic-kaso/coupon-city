@@ -111,7 +111,9 @@ class Merchant extends MY_Controller {
         $total = $this->_count_coupons($category);
         $base_url = base_url(Merchant::MERCHANT_URL . '/my-coupons/');
 
-        $coupons = $this->_coupons($limit, $page, $category);
+        $coupons = $this->_coupons($limit, $page, $this->category->fetch_id_by_slug($category));
+        //print_r($coupons);
+
         $coupon_presenter = new Coupon_presenter($coupons);
         $this->data['categories'] = new Category_presenter($this->category->get_all(), base_url(Merchant::MERCHANT_URL . '/my-coupons/'));
         $this->data['coupons'] = $coupon_presenter;
@@ -195,18 +197,18 @@ class Merchant extends MY_Controller {
         $this->data['logged_in'] = $this->session->userdata('logged_in');
     }
 
-    private function _coupons($limit, $page, $category = 'all') {
+    private function _coupons($limit, $page, $category_id = 'all') {
         $merchant = $this->session->userdata('merchant');
-        if (!is_numeric($category)) {
+        if (strcmp($category_id, 'all') === 0) {
             $coupons = $this->coupons
                     ->limit($limit, $page * $limit)
-                    ->with('coupon_media')
+                    ->with('coupon_medias')
                     ->get_many_by(array('merchant_id' => $merchant['id']));
         } else {
             $coupons = $this->coupons
                     ->limit($limit, $page * $limit)
-                    ->with('coupon_media')
-                    ->get_many_by(array('merchant_id' => $merchant['id'], 'category_id' => $category));
+                    ->with('coupon_medias')
+                    ->get_many_by(array('merchant_id' => $merchant['id'], 'category_id' => $category_id));
         }
 
         return $coupons;
@@ -220,7 +222,7 @@ class Merchant extends MY_Controller {
             $count = $this->coupons
                     ->count_by(
                     array(
-                        'category_id' => $category,
+                        'category_id' => $this->category->fetch_id_by_slug($category),
                         'merchant_id' => $merchant['id']
             ));
         }

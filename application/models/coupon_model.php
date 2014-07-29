@@ -20,7 +20,7 @@ class Coupon_model extends MY_Model {
     public $protected_attributes = array('id');
     public $before_create = array('ensure_unique_slug', 'generate_merchant_coupon_code', 'created_at', 'updated_at',
         'calculate_discount', 'calculate_commision', 'transform_start_end_date', 'advanced_pricing_to_json');
-    public $after_get = array('advanced_pricing_to_object', 'update_status', 'format_numbers', 'get_coupon_cover_image');
+    public $after_get = array('update_status', 'get_coupon_cover_image', 'advanced_pricing_to_object', 'format_numbers',);
     public $has_many = array('coupon_medias' => array('model' => 'coupon_media_model', 'primary_key' => 'coupon_id'));
     public $belongs_to = array('merchant' => array('model' => 'merchant_model'));
     public $validate = array(
@@ -147,16 +147,37 @@ class Coupon_model extends MY_Model {
         }
     }
 
-    public function ensure_unique_slug($row) {
-        $db = DB('default');
-        $query = $db->limit(1)->get_where($this->_table, array('slug' => $row->slug));
+    public function generate_slug($row) {
 
-        $db->close();
-        if ($query->num_rows() !== 0) {
-            return $this->increase_slug_name($row->slug);
+    }
+
+    public function ensure_unique_slug($row) {
+        if (is_object($row)) {
+            if (!property_exists($row, 'slug')) {
+                $row->slug = url_title($row->name);
+            }
+
+            $db = DB('default');
+            $query = $db->limit(1)->get_where($this->_table, array('slug' => $row->slug));
+
+            $db->close();
+            if ($query->num_rows() !== 0) {
+                $row->slug = $this->increase_slug_name($row->slug);
+            }
         } else {
-            return $row;
+            if (!array_key_exists('slug', $row)) {
+                $row['slug'] = url_title($row['name']);
+            }
+
+            $db = DB('default');
+            $query = $db->limit(1)->get_where($this->_table, array('slug' => $row['slug']));
+
+            $db->close();
+            if ($query->num_rows() !== 0) {
+                $row['slug'] = $this->increase_slug_name($row['slug']);
+            }
         }
+        return $row;
     }
 
     public function increase_slug_name($slug) {
@@ -236,7 +257,7 @@ class Coupon_model extends MY_Model {
      */
 
     public function advanced_pricing_to_object($row) {
-        if ($row->is_advanced_pricing === 1) {
+        if ($row->is_advanced_pricing == 1) {
             if (is_object($row)) {
                 $obj = json_decode($row->advanced_pricing, true);
                 $row->advanced_pricing = $obj;
@@ -431,7 +452,7 @@ class Coupon_model extends MY_Model {
     private function _process_advanced_pricing($coupon, $total) {
         if (!empty($coupon->advanced_pricing) && count($coupon->advanced_pricing) > 0) {
             foreach ($coupon->advanced_pricing as $value) {
-                if ($value['count'] <= $total) {
+                if ($total <= $value['count']) {
                     $coupon->new_price = $value['price'];
                     break;
                 }

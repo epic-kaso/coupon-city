@@ -7,7 +7,17 @@
                 <div class = "span3">
                     <div class = "box">
                         <h4><?= $featured_item->name ?></h4>
-                        <p><?= $featured_item->summary ?></p><a class="btn btn-primary btn-large btn-block" href="<?= $featured_item->grab_link ?>">₦<?= $featured_item->new_price ?> Grab Now</a>
+                        <p><?= $featured_item->summary ?></p>
+                        <a class="btn btn-primary btn-large btn-block <?= $featured_item->inactive ? 'disabled' : '' ?>"
+                           href="<?= $featured_item->grab_link ?>">
+                               <?php if ($featured_item->inactive) { ?>
+                                Out of Stock
+                            <?php } else {
+                                ?>
+
+                                ₦<?= $featured_item->new_price ?> Grab Now
+                            <?php } ?>
+                        </a>
                         <ul class="list coupon-meta">
                             <li>
                                 <ul class="list coupon-list-prices">

@@ -3,7 +3,8 @@
 ////////////////////////////////////-->
 <?php
 if (!isset($active)) {
-    $active = 'home';
+    $u = uri_string();
+    $active = empty($u) ? 'home' : $u;
 }
 ?>
 <header class="main">

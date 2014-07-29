@@ -76,6 +76,7 @@ $route['merchant/edit-profile'] = "merchant/edit_profile";
 $route['merchant/signup'] = 'merchant/create';
 $route['merchant/add-coupon'] = "merchant/add_coupon";
 $route['merchant/my-coupons'] = 'merchant/my_coupons';
+$route['merchant/my-coupons/(:any)'] = 'merchant/my_coupons/$1';
 
 
 $route['search'] = 'home/search/0/all/';

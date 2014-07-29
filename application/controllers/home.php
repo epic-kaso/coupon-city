@@ -180,8 +180,8 @@ class Home extends MY_Controller {
         $this->data['breadcrumbs'] = $this->_get_crumbs();
     }
 
-    private function _coupons($limit, $page, $category = 'all') {
-        if (strcmp($category, 'all') === 0) {
+    private function _coupons($limit, $page, $category_id = 'all') {
+        if (strcmp($category_id, 'all') === 0) {
             $coupons = $this->coupons
                     ->limit($limit, $page * $limit)
                     ->with('coupon_medias')
@@ -190,7 +190,7 @@ class Home extends MY_Controller {
             $coupons = $this->coupons
                     ->limit($limit, $page * $limit)
                     ->with('coupon_medias')
-                    ->get_many_by('category_id', $category);
+                    ->get_many_by('category_id', $category_id);
         }
 
         return $coupons;

@@ -34,7 +34,7 @@
             </div>
             <div class="span9">
                 <div class="row row-wrap">
-                    <?= partial('partials/_display_coupons', $coupons); ?>
+                    <?= partial('partials/merchant/_display_coupons', $coupons); ?>
                 </div>
                 <div class="pagination">
                     <?= $links ?>

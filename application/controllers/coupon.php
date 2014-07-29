@@ -26,6 +26,8 @@ class Coupon extends CI_Controller {
         $data = $this->input->post();
         $data['merchant_id'] = $m['id'];
         unset($data['images']);
+        unset($data['brand_id']);
+        unset($data['commision']);
 
         $id = $this->coupons->insert($data);
         if (is_bool($id) && $id == FALSE) {

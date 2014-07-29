@@ -42,7 +42,7 @@ class Fileupload {
             if ($response) {
                 $fullpath = $data['upload_data']['full_path'];
                 $name = $data['upload_data']['file_name'];
-                $path = base_url('uploads/coupons/' . $name);
+                $path = 'uploads/coupons/' . $nameS;
                 return array(
                     'url' => $path,
                     'full_path' => $fullpath,
@@ -58,7 +58,7 @@ class Fileupload {
         $config = array();
         $config['image_library'] = 'gd2';
         $config['source_image'] = $path;
-        $config['maintain_ratio'] = TRUE;
+        $config['maintain_ratio'] = FALSE;
         $config['width'] = 800;
         $config['height'] = 600;
         $config['quality'] = 70;
