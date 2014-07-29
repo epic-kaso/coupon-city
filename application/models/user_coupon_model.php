@@ -31,7 +31,10 @@ class User_coupon_model extends MY_Model {
             if ($cat == 'all') {
                 $coupon = $ci->coupon->get($value->coupon_id);
             } else {
-                $coupon = $ci->coupon->get_by(array('id' => $value->coupon_id, 'category_id' => $cat));
+                $coupon = $ci->coupon->get($value->coupon_id);
+                if ($coupon == FALSE || $coupon->category_id != $cat) {
+                    continue;
+                }
             }
             $coupon->user_coupon_code = $value->user_coupon_code;
             $coupons[] = $coupon;
