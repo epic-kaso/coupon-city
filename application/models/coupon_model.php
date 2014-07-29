@@ -183,6 +183,11 @@ class Coupon_model extends MY_Model {
         if (is_object($row) && $row->is_advanced_pricing == 1) {
             $advanced_pricing = $row->advanced_pricing;
             if (is_array($advanced_pricing)) {
+                foreach ($advanced_pricing as $key => $value) {
+                    if (empty($value['price']) || empty($value['count'])) {
+                        unset($advanced_pricing[$key]);
+                    }
+                }
                 $jsn = json_encode($advanced_pricing);
                 $row->is_advanced_pricing = 1;
                 $row->advanced_pricing = $jsn;
@@ -190,8 +195,14 @@ class Coupon_model extends MY_Model {
                 $row->is_advanced_pricing = 0;
             }
         } else if (is_array($row) && $row['is_advanced_pricing'] == 1) {
+
             $advanced_pricing = $row['advanced_pricing'];
             if (is_array($advanced_pricing)) {
+                foreach ($advanced_pricing as $key => $value) {
+                    if (empty($value['price']) || empty($value['count'])) {
+                        unset($advanced_pricing[$key]);
+                    }
+                }
                 $jsn = json_encode($advanced_pricing);
                 $row['is_advanced_pricing'] = 1;
                 $row['advanced_pricing'] = $jsn;

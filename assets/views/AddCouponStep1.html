@@ -35,51 +35,75 @@
     </div>
     <div ng-show="coupon.is_advanced_pricing == 0">
         <label>New Price</label>
-        <input name="new_price" ng-change="calculatePercentDiscount()" required ng-model="coupon.new_price" type="number" placeholder="New Price" class="span3">
+        <input name="new_price" ng-change="calculatePercentDiscount(null,null)" required ng-model="coupon.new_price" type="number" placeholder="New Price" class="span3">
         <label>Percentage Discount</label>
-        <input name="percentage_discount" ng-change="calculateNewPrice()" required ng-model="coupon.discount" type="number" placeholder="Percentage Discount" class="span3">     
+        <input name="percentage_discount" ng-change="calculateNewPrice(null,null)" required ng-model="coupon.discount" type="number" placeholder="Percentage Discount" class="span3">     
     </div>
 
-    <div ng-show="coupon.is_advanced_pricing == 1">
-        <table class="table-responsive">
+    <div ng-show="coupon.is_advanced_pricing == 1" class="text-center">
+        <table>
             <thead>
                 <tr>
                     <td><label>New Price</label></td>
-                    <td><label>No of Sales</label></td>
-                    <td><label>Discount Percent</label></td>
+                    <td colspan="2"><label>Sales Range</label></td>
+                    <td><label>% Discount</label></td>
                 </tr>
             </thead>
             <tr>
                 <td>
-                    <input name="advanced_prcing[first][price]" ng-change="calculatePercentDiscount()" required ng-model="coupon.advanced_pricing.first.price" type="number" placeholder="New Price">
+                    <input name="advanced_pricing[first][price]" 
+                           ng-change="calculate_advanced_discount('first',coupon.advanced_pricing.first.price,coupon.advanced_pricing.first.discount)" 
+                           required ng-model="coupon.advanced_pricing.first.price" type="number" placeholder="New Price" class="span1">
                 </td>
                 <td>
-                    <input name="advanced_prcing[first][count]" ng-change="calculatePercentDiscount()" required ng-model="coupon.advanced_pricing.first.count" type="number" placeholder="New Price">
+                    <label class="span1">0 -</label>
                 </td>
                 <td>
-                    <input name="advanced_prcing[first][percentage_discount]" ng-change="calculateNewPrice()" required ng-model="coupon.advanced_pricing.first.discount" type="number" placeholder="Percentage Discount">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input name="advanced_prcing[second][price]" ng-change="calculatePercentDiscount()" required ng-model="coupon.advanced_pricing.second.price" type="number" placeholder="New Price">
+                    <input name="advanced_pricing[first][count]" 
+                           required ng-model="coupon.advanced_pricing.first.count" 
+                           type="number" placeholder="New Price" class="span1">
                 </td>
                 <td>
-                    <input name="advanced_prcing[second][count]" ng-change="calculatePercentDiscount()" required ng-model="coupon.advanced_pricing.second.count" type="number" placeholder="New Price" >
-                </td>
-                <td>
-                    <input name="advanced_prcing[second][percentage_discount]" ng-change="calculateNewPrice()" required ng-model="coupon.advanced_pricing.second.discount" type="number" placeholder="Percentage Discount">
+                    <input name="advanced_pricing[first][percentage_discount]" 
+                           ng-change="calculate_advanced_price('first',coupon.advanced_pricing.first.price,coupon.advanced_pricing.first.discount)" 
+                           required ng-model="coupon.advanced_pricing.first.discount" type="number" placeholder="Percentage Discount" class="span1">
                 </td>
             </tr>
             <tr>
                 <td>
-                    <input name="advanced_prcing[third][price]" ng-change="calculatePercentDiscount()" required ng-model="coupon.advanced_pricing.third.price" type="number" placeholder="New Price">
+                    <input name="advanced_pricing[second][price]" ng-change="calculate_advanced_discount('second',coupon.advanced_pricing.second.price,coupon.advanced_pricing.second.discount)" 
+                           required ng-model="coupon.advanced_pricing.second.price" type="number" placeholder="New Price" class="span1">
                 </td>
                 <td>
-                    <input name="advanced_prcing[third][count]" ng-change="calculatePercentDiscount()" required ng-model="coupon.advanced_pricing.third.count" type="number" placeholder="New Price">
+                    <label class="span1" ng-bind="coupon.advanced_pricing.first.count+1 + ' -'"></label>
                 </td>
                 <td>
-                    <input name="advanced_prcing[third][percentage_discount]" ng-change="calculateNewPrice()" required ng-model="coupon.advanced_pricing.third.discount" type="number" placeholder="Percentage Discount">
+                    <input name="advanced_pricing[second][count]" required 
+                           ng-model="coupon.advanced_pricing.second.count" type="number" placeholder="New Price" class="span1" >
+                </td>
+                <td>
+                    <input name="advanced_pricing[second][percentage_discount]" 
+                           ng-change="calculate_advanced_price('second',coupon.advanced_pricing.second.price,coupon.advanced_pricing.second.discount)" 
+                           required ng-model="coupon.advanced_pricing.second.discount" type="number" placeholder="Percentage Discount" class="span1">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input name="advanced_pricing[third][price]" 
+                           ng-change="calculate_advanced_discount('third',coupon.advanced_pricing.third.price,coupon.advanced_pricing.third.discount)" 
+                           required ng-model="coupon.advanced_pricing.third.price" type="number" placeholder="New Price" class="span1">
+                </td>
+                <td>
+                    <label class="span1" ng-bind="coupon.advanced_pricing.second.count+1 + ' -'"></label>
+                </td>
+                <td>
+                    <input name="advanced_pricing[third][count]" required 
+                           ng-model="coupon.advanced_pricing.third.count" type="number" placeholder="New Price" class="span1">
+                </td>
+                <td>
+                    <input name="advanced_pricing[third][percentage_discount]" 
+                           ng-change="calculate_advanced_price('third',coupon.advanced_pricing.third.price,coupon.advanced_pricing.third.discount)" 
+                           required ng-model="coupon.advanced_pricing.third.discount" type="number" placeholder="Percentage Discount" class="span1">
                 </td>
             </tr>
         </table>
