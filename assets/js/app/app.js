@@ -81,6 +81,7 @@ app.controller('CouponUploadController', ['$scope', '$http', '$filter', '$window
         $scope.categories = my_globals.categories;
 
         $scope.coupon = {
+            'is_advanced_pricing': 0,
             'old_price': 0,
             'new_price': 0,
             'discount': 0,
@@ -124,8 +125,8 @@ app.controller('CouponUploadController', ['$scope', '$http', '$filter', '$window
             //$scope.$apply();
         };
         $scope.calculate_advanced_discount = function(position,price_model,discount_model) {
-            console.log(price_model);
-            console.log(discount_model);
+            //console.log(price_model);
+            //console.log(discount_model);
             var $old_p = $scope.coupon.old_price;
             var $new_p = null;
             var $discount = null;
@@ -141,13 +142,13 @@ app.controller('CouponUploadController', ['$scope', '$http', '$filter', '$window
             discount_model = $discount;
             $scope.coupon.advanced_pricing[position]["discount"] = discount_model;
 
-            console.log(price_model);
-            console.log(discount_model);
+            //console.log(price_model);
+            //console.log(discount_model);
         };
 
         $scope.calculate_advanced_price = function(position,price_model, discount_model) {
-            console.log(price_model);
-            console.log(discount_model);
+            //console.log(price_model);
+            //console.log(discount_model);
             var $old_p = $scope.coupon.old_price;
             var $discount = null;
             $discount = discount_model;
@@ -163,8 +164,8 @@ app.controller('CouponUploadController', ['$scope', '$http', '$filter', '$window
 
             }
              $scope.coupon.advanced_pricing[position]["price"] = price_model;
-            console.log(price_model);
-            console.log(discount_model);
+            //console.log(price_model);
+            //console.log(discount_model);
 
         };
 
