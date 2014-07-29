@@ -180,27 +180,26 @@ class Coupon_model extends MY_Model {
      */
 
     public function advanced_pricing_to_json($row) {
-        if (is_object($row)) {
+        if (is_object($row) && $row->is_advanced_pricing == 1) {
             $advanced_pricing = $row->advanced_pricing;
-        } else {
-            $advanced_pricing = $row['advanced_pricing'];
-        }
-        if (is_array($advanced_pricing)) {
-            $jsn = json_encode($advanced_pricing);
-            if (is_object($row)) {
+            if (is_array($advanced_pricing)) {
+                $jsn = json_encode($advanced_pricing);
                 $row->is_advanced_pricing = 1;
                 $row->advanced_pricing = $jsn;
             } else {
+                $row->is_advanced_pricing = 0;
+            }
+        } else if (is_array($row) && $row['is_advanced_pricing'] == 1) {
+            $advanced_pricing = $row['advanced_pricing'];
+            if (is_array($advanced_pricing)) {
+                $jsn = json_encode($advanced_pricing);
                 $row['is_advanced_pricing'] = 1;
                 $row['advanced_pricing'] = $jsn;
-            }
-        } else {
-            if (is_object($row)) {
-                $row->is_advanced_pricing = 0;
             } else {
                 $row['is_advanced_pricing'] = 0;
             }
         }
+
         return $row;
     }
 
@@ -409,7 +408,7 @@ class Coupon_model extends MY_Model {
      */
 
     private function _calculate_coupon_price($coupon) {
-        if ($this->is_advanced_price($coupon->id)) {
+        if ($coupon->is_advanced_pricing == 1) {
             $ci = & get_instance();
             $ci->load->model('coupon_sale_model', 'coupon_sale');
             $total = $ci->coupon_sale->get_total_count($coupon->id);
@@ -420,7 +419,7 @@ class Coupon_model extends MY_Model {
 
     private function _process_advanced_pricing($coupon, $total) {
         if (!empty($coupon->advanced_pricing) && count($coupon->advanced_pricing) > 0) {
-            foreach ($coupon->advanced_pricing as $key => $value) {
+            foreach ($coupon->advanced_pricing as $value) {
                 if ($value['count'] <= $total) {
                     $coupon->new_price = $value['price'];
                     break;
@@ -435,7 +434,7 @@ class Coupon_model extends MY_Model {
         if (!$coupon) {
             return FALSE;
         } else {
-            return $coupon->deal_status === 1;
+            return $coupon->deal_status == 1;
         }
     }
 
@@ -444,7 +443,7 @@ class Coupon_model extends MY_Model {
         if (!$coupon) {
             return FALSE;
         } else {
-            return $coupon->is_advanced_pricing === 1;
+            return $coupon->is_advanced_pricing == 1;
         }
     }
 
