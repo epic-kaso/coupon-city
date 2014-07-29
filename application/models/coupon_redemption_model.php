@@ -37,7 +37,15 @@ class Coupon_redemption_model extends MY_Model {
 
     public function get_total_count($coupon_id) {
         if (!is_null($coupon_id)) {
-            $v = $this->get_by(array($this->COUPON_ID => $coupon_id))->redemption_count;
+            $v = $this->get_by(array($this->COUPON_ID => $coupon_id));
+            if (!$v) {
+                return 0;
+            }
+            if (is_object($v)) {
+                $v = $v->redemption_count;
+            } else {
+                $v = $v['redemption_count'];
+            }
             if (!is_numeric($v))
                 return 0;
             else

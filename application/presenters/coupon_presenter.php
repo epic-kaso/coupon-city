@@ -59,7 +59,7 @@ class Coupon_presenter extends Presenter {
         if (!$this->is_merchant) {
             $this->add_merchant_params($row);
         } else {
-            check_current_user_coupons($row);
+            $row = $this->check_current_user_coupons($row);
         }
         return $row;
     }
@@ -79,6 +79,7 @@ class Coupon_presenter extends Presenter {
 
         $user = $ci->user_model->get_current();
         if (!$user) {
+            $row->user_owns_coupon = FALSE;
             return $row;
         } else {
             $status = $ci->user_coupon_model->user_owns_coupon($user->id, $row->id);
@@ -86,6 +87,8 @@ class Coupon_presenter extends Presenter {
                 $row->inactive = TRUE;
                 $row->grab_link = "";
                 $row->user_owns_coupon = TRUE;
+            } else {
+                $row->user_owns_coupon = FALSE;
             }
         }
 
@@ -111,7 +114,7 @@ class Coupon_presenter extends Presenter {
             if (!$this->is_merchant) {
                 $this->add_merchant_params($row);
             } else {
-                check_current_user_coupons($row);
+                $row = $this->check_current_user_coupons($row);
             }
         }
         return $row;
