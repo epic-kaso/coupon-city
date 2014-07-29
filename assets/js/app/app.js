@@ -2,7 +2,7 @@
 
 
 // Declare app level module which depends on filters, and services
-var app = angular.module('myUserApp', [
+var app = angular.module('myMerchantApp', [
     'ui.bootstrap',
     'ui.router',
     'myUserApp.filters',
@@ -188,3 +188,36 @@ app.controller('CouponUploadController', ['$scope', '$http', '$filter', '$window
             e.preventDefault();
         };
     }]);
+app.controller('VerifyCouponController',['$scope','$http',function($scope,$http){
+        $scope.is_success = false;
+        $scope.is_failure = false;
+        $scope.is_working = false;
+        $scope.message = "";
+        
+        
+        $scope.verify_coupon = function(coupon,e){
+            $scope.is_working = true;
+            var formdata = $.param(coupon);
+            $http.post(my_globals.base_url + 'merchant/verify-coupon', formdata, {
+                headers: {
+                    'content-type': 'application/x-www-form-urlencoded'
+                }
+            }).
+                    success(function(data, status, headers, config) {
+                        $scope.is_working = false;
+                        if(data.is_valid){
+                            $scope.is_success = true;
+                        }else{
+                            $scope.is_failure = true;
+                        }
+                        $scope.message = data.message;
+                        // console.log(data);
+                    }).
+                    error(function(data, status, headers, config) {
+                       $scope.is_working = false;
+                       $scope.is_failure = true;
+                       $scope.message = status;
+                    });
+            e.preventDefault();
+        };
+}]);

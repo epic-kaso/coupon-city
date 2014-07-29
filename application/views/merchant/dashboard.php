@@ -6,6 +6,7 @@
 <?= partial('partials/merchant/_login', array('logged_in' => $logged_in, 'merchant' => @$merchant)); ?>
 
 <?= partial('partials/merchant/_register', array('logged_in' => $logged_in, 'merchant' => @$merchant)); ?>
+<?= partial('partials/merchant/_redeem_coupon', array()); ?>
 
 
 <div id="password-recover-dialog" class="mfp-with-anim mfp-hide mfp-dialog clearfix">
@@ -56,6 +57,17 @@
                             </span>
                         </div><div class="coupon-inner">
                             <h3 class="coupon-title">Add a Coupon</h3>
+                        </div>
+                    </a>
+                </div>
+                <div class="span3">
+                    <!-- COUPON THUMBNAIL -->
+                    <a href="#verify-dialog" data-effect="mfp-move-from-top" class="coupon-thumb popup-text">
+                        <div class="text-center" style="background-color: #ffffff">
+                            <span class="icon-tags" style="font-size: 150px;">
+                            </span>
+                        </div><div class="coupon-inner">
+                            <h3 class="coupon-title">Verify a Coupon</h3>
                         </div>
                     </a>
                 </div>

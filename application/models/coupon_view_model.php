@@ -30,7 +30,8 @@ class Coupon_view_model extends MY_Model {
 
     public function get_total_count($coupon_id) {
         if (!is_null($coupon_id)) {
-            $v = $this->count_by(array($this->COUPON_ID => $coupon_id));
+            $v = $this->get_by(array($this->COUPON_ID => $coupon_id))->view_count;
+            ;
             if (!is_numeric($v))
                 return 0;
             else

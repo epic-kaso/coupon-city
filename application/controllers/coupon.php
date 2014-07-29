@@ -74,6 +74,30 @@ class Coupon extends CI_Controller {
         }
     }
 
+    public function verify_coupon() {
+        if (!$this->_is_logged_in()) {
+            header('content-type: application/json');
+            echo json_encode(array('error' => 'merchant not logged in'));
+            //redirect('merchant/index');
+            exit();
+        }
+
+        $code = $this->input->post('coupon_code');
+        if ($code !== FALSE) {
+            $response = @$this->coupons->validate_user_coupon($code);
+            if ($response) {
+                $result = array('is_valid' => $response, 'message' => 'Successfully Validated.');
+            } else {
+                $result = array('is_valid' => $response, 'message' => 'This Coupon Code is Invalid');
+            }
+        } else {
+            $result = array('is_valid' => false, 'message' => 'This Coupon Code is Invalid');
+        }
+
+        header('content-type: application/json');
+        echo json_encode($result);
+    }
+
     private function _is_logged_in() {
         $data = $this->session->userdata('merchant');
         if (!empty($data) && is_array($data) && is_numeric($data['id'])) {

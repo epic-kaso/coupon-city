@@ -354,18 +354,18 @@ class Coupon_model extends MY_Model {
             return FALSE;
         }
         $CI = & get_instance();
-        $CI->load->model('wallet_model', 'wallet');
         $CI->load->model('user_model', 'user');
         $CI->load->model('user_coupon_model', 'user_coupon');
+        $CI->load->model('coupon_sale_model', 'coupon_sale');
 
         $coupon = $this->get($coupon_id);
         $user = $CI->user->get($user_id);
 
-        $wallet_balance = $CI->wallet->get_user_wallet_balance($user_id);
+        $wallet_balance = $user->wallet_balance;
 
         $amt = $this->_calculate_coupon_price($coupon);
         if ($wallet_balance >= $amt) {
-            $CI->wallet->debit_wallet($user_id, $amt);
+            $CI->user->debit_wallet($user_id, $amt);
             $user_coupon = $this->generate_user_coupon($coupon->coupon_code, $user->email);
             $CI->user_coupon->insert(
                     array(
@@ -373,6 +373,8 @@ class Coupon_model extends MY_Model {
                         'user_id' => $user_id,
                         'user_coupon_code' => $user_coupon
             ));
+
+            $CI->coupon_sale->increase_sale($coupon_id, $user_id);
 
             return $user_coupon;
         } else {
@@ -409,6 +411,8 @@ class Coupon_model extends MY_Model {
         if (!$coupon || !$user) {
             return FALSE;
         } else {
+            $ci->load->model('coupon_redemption_model', 'redeem');
+            $ci->redeem->increase_redemption($coupon->id, $user->id);
             return TRUE;
         }
     }

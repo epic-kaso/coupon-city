@@ -145,11 +145,13 @@ class Home extends MY_Controller {
         $response = $this->coupons->grab_coupon($coupon->id, $user->id);
 
         if (!$response || (is_array($response) && array_key_exists('error', $response))) {
+            // echo 'Couldn\'t grab coupon!.Check that you have money in your wallet ';
             $this->session->set_flashdata('error_msg', 'Couldn\'t grab coupon!.Check that you have money in your wallet ');
-            redirect(base_url('coupons/' . $slug));
+            redirect(base_url('coupons/' . $slug), 'refresh');
         } else {
+            //echo 'success : ' . $response;
             $this->session->set_flashdata('success_msg', 'Grabbed successfully. Coupon Code: ' . $response);
-            redirect(base_url('coupons/' . $slug));
+            redirect(base_url('coupons/' . $slug), 'refresh');
         }
     }
 
@@ -338,11 +340,13 @@ class Home extends MY_Controller {
         } else {
             $status = FALSE;
         }
-        if (!$status || !$this->session->userdata('user_logged_in')) {
+        if (!$status) {
             if (is_null($redirect)) {
                 $redirect = base_url();
             }
             redirect($redirect);
+        } else {
+            return $status;
         }
     }
 

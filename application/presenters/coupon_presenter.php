@@ -87,6 +87,9 @@ class Coupon_presenter extends Presenter {
                 $row->grab_link = base_url('grab_coupon/' . $row->slug);
             }
             $this->create_summary($row);
+            if (!$this->is_merchant) {
+                $this->add_merchant_params($row);
+            }
         }
         return $row;
     }

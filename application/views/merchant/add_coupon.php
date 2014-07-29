@@ -1,6 +1,5 @@
 <script>
-    var my_globals = {};
-    my_globals.base_url = '<?= base_url(); ?>'
+    my_globals = my_globals || {};
     my_globals.categories = <?= json_encode($categories->items()); ?>
 </script>
 <style>

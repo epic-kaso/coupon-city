@@ -22,7 +22,7 @@ class User_model extends MY_Model {
         'coupons' => array('model' => 'user_coupon_model', 'primary_key' => 'user_id'),
         'wallet' => array('model' => 'wallet_model', 'primary_key' => 'user_id')
     );
-    public $after_get = array('add_status_field', 'format_wallet_balance');
+    public $after_get = array('add_status_field'); //, 'format_wallet_balance');
     public $validate = array(
         array('field' => 'email',
             'label' => 'email',
@@ -278,18 +278,16 @@ class User_model extends MY_Model {
 
     public function credit_wallet($user_id, $amount) {
         $wallet = $this->get($user_id)->wallet_balance;
-        $current_balance = $wallet;
-        $current_balance -= $amount;
+        $current_balance = $wallet + $amount;
 
-        return $this->update($user_id, array('wallet_balance' => $current_balance));
+        return $this->update($user_id, array('wallet_balance' => $current_balance), TRUE);
     }
 
     public function debit_wallet($user_id, $amount) {
         $wallet = $this->get($user_id)->wallet_balance;
-        $current_balance = $wallet;
-        $current_balance -= $amount;
+        $current_balance = $wallet - $amount;
 
-        return $this->update($user_id, array('wallet_balance' => $current_balance));
+        return $this->update($user_id, array('wallet_balance' => $current_balance), TRUE);
     }
 
 }

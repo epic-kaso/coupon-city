@@ -25,7 +25,7 @@ class Coupon_sale_model extends MY_Model {
         } else {
             $temp = json_decode($coupon[$this->USER_IDS], TRUE);
             $temp[] = $user_id;
-            $coupon[$this->USER_IDS] = $temp;
+            $coupon[$this->USER_IDS] = json_encode($temp);
             $coupon[$this->COUNT] = $coupon[$this->COUNT] + 1;
             return $this->update($coupon['id'], $coupon);
         }
@@ -33,7 +33,7 @@ class Coupon_sale_model extends MY_Model {
 
     public function get_total_count($coupon_id) {
         if (!is_null($coupon_id)) {
-            $v = $this->count_by(array($this->COUPON_ID => $coupon_id));
+            $v = $this->get_by(array($this->COUPON_ID => $coupon_id))->sales_count;
             if (!is_numeric($v))
                 return 0;
             else
