@@ -65,6 +65,8 @@ $route['edit-profile'] = 'home/edit_profile';
 $route['settings'] = 'home/settings';
 $route['coupon-not-found'] = 'home/coupon_not_found';
 $route['my-coupons'] = 'home/my_coupons';
+$route['my-coupons/(:any)'] = 'home/my_coupons/$1';
+$route['my-coupons/(:any)/(:num)'] = 'home/my_coupons/$1/$2';
 $route['grab_coupon/(:any)'] = 'home/grab_coupon/$1';
 
 
@@ -77,6 +79,7 @@ $route['merchant/signup'] = 'merchant/create';
 $route['merchant/add-coupon'] = "merchant/add_coupon";
 $route['merchant/my-coupons'] = 'merchant/my_coupons';
 $route['merchant/my-coupons/(:any)'] = 'merchant/my_coupons/$1';
+$route['merchant/my-coupons/(:any)/(:num)'] = 'merchant/my_coupons/$1/$2';
 $route['merchant/verify-coupon'] = 'coupon/verify_coupon';
 
 $route['search'] = 'home/search/0/all/';

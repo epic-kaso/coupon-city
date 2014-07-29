@@ -10,7 +10,10 @@
                         <p><?= $featured_item->summary ?></p>
                         <a class="btn btn-primary btn-large btn-block <?= $featured_item->inactive ? 'disabled' : '' ?>"
                            href="<?= $featured_item->grab_link ?>">
-                               <?php if ($featured_item->inactive) { ?>
+                               <?php if ($featured_item->user_owns_coupon) { ?>
+                                You Own This Coupon. Click to See
+                            <?php } elseif ($featured_item->inactive) {
+                                ?>
                                 Out of Stock
                             <?php } else {
                                 ?>

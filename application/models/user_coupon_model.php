@@ -29,11 +29,11 @@ class User_coupon_model extends MY_Model {
 
         foreach ($coupon_ids as $value) {
             if ($cat == 'all') {
-                $coupon = $ci->coupon->get($value->key);
+                $coupon = $ci->coupon->get($value->coupon_id);
             } else {
-                $coupon = $ci->coupon->get_by(array('id' => $value->key, 'category_id' => $cat));
+                $coupon = $ci->coupon->get_by(array('id' => $value->coupon_id, 'category_id' => $cat));
             }
-            $coupon->user_coupon_code = $coupon_ids->user_coupon_code;
+            $coupon->user_coupon_code = $value->user_coupon_code;
             $coupons[] = $coupon;
         }
 
@@ -43,12 +43,23 @@ class User_coupon_model extends MY_Model {
     public function get_coupon($user_id, $coupon_id) {
         $ci = & get_instance();
         $ci->load->model('coupon_model', 'coupon');
+        if ($this->user_owns_coupon($user_id, $coupon_id)) {
+            $coupon = $ci->coupon->get($coupon_id->coupon_id);
+            return $coupon;
+        } else {
+            return FALSE;
+        }
+    }
+
+    public function user_owns_coupon($user_id, $coupon_id) {
+        $ci = & get_instance();
+        $ci->load->model('coupon_model', 'coupon');
         $coupon_id = $this->get_by(array('user_id' => $user_id, 'coupon_id' => $coupon_id));
         if (!$coupon_id) {
             return FALSE;
+        } else {
+            return TRUE;
         }
-        $coupon = $ci->coupon->get($coupon_id->coupon_id);
-        return $coupon;
     }
 
 }
