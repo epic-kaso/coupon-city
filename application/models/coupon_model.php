@@ -18,8 +18,9 @@ class Coupon_model extends MY_Model {
     private $key = "CouponCity1234,.+@#";
     private $JOIN_CHAR = "_";
     public $protected_attributes = array('id');
-    public $before_create = array('ensure_unique_slug', 'created_at', 'updated_at', 'calculate_discount', 'calculate_commision', 'transform_start_end_date');
-    public $after_get = array('format_numbers', 'get_coupon_cover_image');
+    public $before_create = array('ensure_unique_slug', 'created_at', 'updated_at',
+        'calculate_discount', 'calculate_commision', 'transform_start_end_date', 'advanced_pricing_to_json');
+    public $after_get = array('advanced_pricing_to_object', 'update_status', 'format_numbers', 'get_coupon_cover_image');
     public $has_many = array('coupon_medias' => array('model' => 'coupon_media_model', 'primary_key' => 'coupon_id'));
     public $belongs_to = array('merchant' => array('model' => 'merchant_model'));
     public $validate = array(
@@ -97,6 +98,26 @@ class Coupon_model extends MY_Model {
         return $row;
     }
 
+    public function update_status($row) {
+        if (is_object($row)) {
+            $start_date = $row->start_date;
+            $end_date = $row->end_date;
+        } else {
+            $start_date = $row['start_date'];
+            $end_date = $row['end_date'];
+        }
+        $e_unix = human_to_unix($end_date);
+        $status = date('U') >= $e_unix ? 0 : 1;
+        if (is_object($row) && !is_null($status)) {
+            $row->deal_status = $status;
+            $this->update($row->id, get_object_vars($row));
+        } else if (!is_null($status)) {
+            $row['deal_status'] = $status;
+            $this->update($row['id'], $row);
+        }
+        return $row;
+    }
+
     public function is_valid_new_price($new_price, $old_price) {
         $n_price = (int) $new_price;
         $o_price = (int) $old_price;
@@ -125,10 +146,48 @@ class Coupon_model extends MY_Model {
         return increment_string($slug, '_');
     }
 
+    public function advanced_pricing_to_json($row) {
+        if (is_object($row)) {
+            $advanced_pricing = $row->advanced_pricing;
+        } else {
+            $advanced_pricing = $row['advanced_pricing'];
+        }
+        if (is_array($advanced_pricing)) {
+            $jsn = json_encode($advanced_pricing);
+            if (is_object($row)) {
+                $row->is_advanced_pricing = 1;
+                $row->advanced_pricing = $jsn;
+            } else {
+                $row['is_advanced_pricing'] = 1;
+                $row['advanced_pricing'] = $jsn;
+            }
+        } else {
+            if (is_object($row)) {
+                $row->is_advanced_pricing = 0;
+            } else {
+                $row['is_advanced_pricing'] = 0;
+            }
+        }
+        return $row;
+    }
+
     //--COUPON READ RELATED METHODS---------------
 
     public function get_by_slug($slug) {
         return $this->with('coupon_medias')->get_by(array('slug' => $slug));
+    }
+
+    public function advanced_pricing_to_object($row) {
+        if ($row->is_advanced_pricing === 1) {
+            if (is_object($row)) {
+                $obj = json_decode($row->advanced_pricing, true);
+                $row->advanced_pricing = $obj;
+            } else {
+                $obj = json_decode($row['advanced_pricing'], true);
+                $row['advanced_pricing'] = $obj;
+            }
+        }
+        return $row;
     }
 
     public function format_numbers($row) {
@@ -289,6 +348,40 @@ class Coupon_model extends MY_Model {
     private function _calculate_coupon_price($coupon) {
 
         return $coupon->new_price;
+    }
+
+    public function is_deal_open($coupon_id) {
+        $coupon = $this->get($coupon_id);
+        if (!$coupon) {
+            return FALSE;
+        } else {
+            return $coupon->deal_status === 1;
+        }
+    }
+
+    public function is_advanced_price($coupon_id) {
+        $coupon = $this->get($coupon_id);
+        if (!$coupon) {
+            return FALSE;
+        } else {
+            return $coupon->is_advanced_pricing === 1;
+        }
+    }
+
+    public function coupon_quantity($coupon) {
+        if (is_object($coupon)) {
+            $q = $coupon->quantity;
+            return empty($q) ? 0 : $q;
+        } else if (is_numeric($coupon)) {
+            $c = $this->get($coupon);
+            if (!$c) {
+                return FALSE;
+            } else {
+                $q = $c->quantity;
+                return empty($q) ? 0 : $q;
+            }
+        }
+        return FALSE;
     }
 
     public function test_encrpt() {

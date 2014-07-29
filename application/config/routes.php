@@ -63,6 +63,7 @@ $route['help-faq'] = 'home/help_faq';
 $route['profile'] = 'home/profile';
 $route['edit-profile'] = 'home/edit_profile';
 $route['settings'] = 'home/settings';
+$route['coupon-not-found'] = 'home/coupon_not_found';
 $route['my-coupons'] = 'home/my_coupons';
 $route['grab_coupon/(:any)'] = 'home/grab_coupon/$1';
 

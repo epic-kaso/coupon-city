@@ -254,11 +254,11 @@ class User_model extends MY_Model {
 
     public function format_wallet_balance($row) {
         if (is_object($row)) {
-            $balance = $row->balance;
-            $row->balance = number_format($balance, 2);
+            $balance = $row->wallet_balance;
+            $row->wallet_balance = number_format($balance, 2);
         } else {
-            $balance = $row['balance'];
-            $row['balance'] = number_format($balance, 2);
+            $balance = $row['wallet_balance'];
+            $row['wallet_balance'] = number_format($balance, 2);
         }
         return $row;
     }

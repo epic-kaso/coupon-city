@@ -49,7 +49,7 @@ if (!isset($active)) {
                     <ul class="nav nav-pills flexnav">
                         <li><a href="<?= base_url('profile'); ?>"><?= $current_user['email']; ?></a>
                         </li>
-                        <li><a class="popup-text" href="#wallet-dialog" data-effect="mfp-move-from-top"><span class="active icon-credit-card"></span> ₦ <?= $current_user['wallet']; ?></a>
+                        <li><a class="popup-text" href="#wallet-dialog" data-effect="mfp-move-from-top"><span class="active icon-credit-card"></span> ₦ <?= current_user_wallet(); ?></a>
                         </li>
                         <li><a href="<?= base_url('settings') ?>"><span class="active icon-gears"></span> Settings</a>
                         </li>

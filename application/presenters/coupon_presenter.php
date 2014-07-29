@@ -24,12 +24,20 @@ class Coupon_presenter extends Presenter {
             return array($row);
         } else {
             if (is_array($this->data)) {
-                foreach ($this->data as $row) {
-                    $this->process($row);
+                foreach ($this->data as $key => $row) {
+                    if ($row->deal_status == 0) {
+                        unset($this->data[$key]);
+                    } else {
+                        $this->process($row);
+                    }
                 }
                 return $this->data;
             } else {
-                return $this->process($this->data);
+                if ($this->data->deal_status == 0) {
+                    redirect(base_url('coupon-not-found'));
+                } else {
+                    return $this->process($this->data);
+                }
             }
         }
     }

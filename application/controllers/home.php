@@ -124,10 +124,12 @@ class Home extends MY_Controller {
     }
 
     public function coupon($slug) {
+        $this->load->model('Coupon_view_model', 'coupon_view');
         $coupon = $this->coupons->get_by_slug($slug);
         if (empty($coupon) || !is_object($coupon)) {
             show_404('home/error_page');
         } else {
+            $this->coupon_view->increase_view($coupon->id);
             $coupon_presenter = new Coupon_presenter($coupon);
             $this->data['featured_item'] = $coupon_presenter->items();
             $this->data['breadcrumbs'] = $this->_get_crumbs();
@@ -167,8 +169,15 @@ class Home extends MY_Controller {
         $this->data['breadcrumbs'] = $this->_get_crumbs();
     }
 
+    public function coupon_not_found() {
+        $this->view = 'home/error_page';
+        $this->data['code'] = 'Coupon Not Found';
+        $this->data['breadcrumbs'] = $this->_get_crumbs();
+    }
+
     public function error_page($code = 404) {
         $this->data['code'] = $code;
+        $this->data['breadcrumbs'] = $this->_get_crumbs();
     }
 
     private function _coupons($limit, $page, $category = 'all') {
