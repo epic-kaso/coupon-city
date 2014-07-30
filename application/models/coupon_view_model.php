@@ -29,28 +29,23 @@ class Coupon_view_model extends MY_Model {
     }
 
     public function get_total_count($coupon_id) {
+        $total = 0;
         if (!is_null($coupon_id)) {
-            $v = $this->get_by(array($this->COUPON_ID => $coupon_id));
-            if (!$v) {
-                return 0;
-            }
-            if (is_object($v)) {
-                $v = $v->view_count;
-            } else {
-                $v = $v['view_count'];
-            }
-
-            if (!is_numeric($v))
-                return 0;
-            else
-                return $v;
+            $v = $this->get_many_by(array($this->COUPON_ID => $coupon_id));
         } else {
             $v = $this->count_all();
-            if (!is_numeric($v))
-                return 0;
-            else
-                return $v;
         }
+        if (!$v) {
+            return 0;
+        }
+        foreach ($v as $key => $value) {
+            if (is_object($value)) {
+                $total += $value->view_count;
+            } else {
+                $total += $value['view_count'];
+            }
+        }
+        return $total;
     }
 
     public function get_views_by_date($date, $coupon_id = NULL) {
@@ -74,7 +69,7 @@ class Coupon_view_model extends MY_Model {
             $to = Date('yyyy-mm-dd');
         }
         if (is_null($from)) {
-            return FALSE;
+            $from = $to;
         }
 
         $s_unix = human_to_unix($from);

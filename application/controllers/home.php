@@ -154,14 +154,14 @@ class Home extends MY_Controller {
 
         if (!$response || (is_array($response) && array_key_exists('error', $response))) {
             // echo 'Couldn\'t grab coupon!.Check that you have money in your wallet ';
-            $this->session->set_flashdata('error_msg', 'Couldn\'t grab coupon!.Check that you have money in your wallet ');
-            redirect(base_url(), 'refresh');
-            return;
+            $this->session->set_flashdata('error_msg', 'Couldn\'t grab coupon!.' . $response['error']);
+            redirect(base_url('coupon/' . $slug), 'refresh');
+            // return;
         } else {
             //echo 'success : ' . $response;
             $this->session->set_flashdata('success_msg', 'Grabbed successfully. Coupon Code: ' . $response);
-            redirect(base_url(), 'refresh');
-            return;
+            redirect(base_url('coupon/' . $slug), 'refresh');
+            // return;
         }
     }
 

@@ -13,46 +13,51 @@ class Coupon_sale_model extends MY_Model {
     private $DATE = "sales_date";
     private $USER_IDS = "json_user_ids";
     private $COUPON_ID = "coupon_id";
+    private $COMMISSION = "sales_commission";
+
+    const COMMISION_PERCENT = 20.0;
 
     public function increase_sale($coupon_id, $user_id) {
         $date = date('Y-m-d');
         $data = array('coupon_id' => $coupon_id, $this->DATE => $date);
-        $coupon = $this->as_array()->get_by($data);
-        if (!$coupon) {
-            $data[$this->USER_IDS] = json_encode(array($user_id));
+        $coupon_sale = $this->as_array()->get_by($data);
+
+        $ci = & get_instance();
+        $ci->load->model('coupon_model', 'coupon');
+        $coupon = $ci->coupon->get($coupon_id);
+        if (!$coupon_sale) {
+            $data[$this->USER_IDS] = json_encode(array(array('user_id' => $user_id, 'purchase_price' => $coupon->unformated_new_price)));
             $data[$this->COUNT] = 1;
+            $data[$this->COMMISSION] = $this->calculate_commision($coupon);
             return $this->create_new_view($data);
         } else {
-            $temp = json_decode($coupon[$this->USER_IDS], TRUE);
-            $temp[] = $user_id;
-            $coupon[$this->USER_IDS] = json_encode($temp);
-            $coupon[$this->COUNT] = $coupon[$this->COUNT] + 1;
-            return $this->update($coupon['id'], $coupon);
+            $temp = json_decode($coupon_sale[$this->USER_IDS], TRUE);
+            $temp[] = array('user_id' => $user_id, 'purchase_price' => $coupon->unformated_new_price);
+            $coupon_sale[$this->USER_IDS] = json_encode($temp);
+            $coupon_sale[$this->COUNT] = $coupon_sale[$this->COUNT] + 1;
+            $coupon_sale[$this->COMMISSION] = $coupon_sale[$this->COMMISSION] + $this->calculate_commision($coupon);
+            return $this->update($coupon_sale['id'], $coupon_sale);
         }
     }
 
     public function get_total_count($coupon_id) {
+        $total = 0;
         if (!is_null($coupon_id)) {
-            $v = $this->get_by(array($this->COUPON_ID => $coupon_id));
-            if (!$v) {
-                return 0;
-            }
-            if (is_object($v)) {
-                $v = $v->sales_count;
-            } else {
-                $v = $v['sales_count'];
-            }
-            if (!is_numeric($v))
-                return 0;
-            else
-                return $v;
+            $v = $this->get_many_by(array($this->COUPON_ID => $coupon_id));
         } else {
             $v = $this->count_all();
-            if (!is_numeric($v))
-                return 0;
-            else
-                return $v;
         }
+        if (!$v) {
+            return 0;
+        }
+        foreach ($v as $key => $value) {
+            if (is_object($value)) {
+                $total += $value->sales_count;
+            } else {
+                $total += $value['sales_count'];
+            }
+        }
+        return $total;
     }
 
     private function create_new_view($data) {
@@ -80,7 +85,7 @@ class Coupon_sale_model extends MY_Model {
             $to = Date('yyyy-mm-dd');
         }
         if (is_null($from)) {
-            return FALSE;
+            $from = $to;
         }
 
         $s_unix = human_to_unix($from);
@@ -101,6 +106,19 @@ class Coupon_sale_model extends MY_Model {
 
         $response = $this->db->query($sql, $query_d);
         return $response->result();
+    }
+
+    public function calculate_commision($row) {
+        if (is_object($row)) {
+            $old_price = $row->unformated_old_price;
+            $new_price = $row->unformated_new_price;
+            $commision = ceil(($old_price - $new_price) / 100 * self::COMMISION_PERCENT);
+        } else {
+            $old_price = $row['unformated_old_price'];
+            $new_price = $row['unformated_new_price'];
+            $commision = ceil(($old_price - $new_price) / 100 * self::COMMISION_PERCENT);
+        }
+        return $commision;
     }
 
 }

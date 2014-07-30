@@ -10,6 +10,7 @@ class Coupon extends CI_Controller {
         parent::__construct();
         $this->load->model('coupon_model', 'coupons');
         $this->load->model('coupon_media_model', 'coupon_media');
+        $this->load->model('merchant_model', 'merchant');
     }
 
     public function index() {
@@ -75,16 +76,17 @@ class Coupon extends CI_Controller {
     }
 
     public function verify_coupon() {
+
         if (!$this->_is_logged_in()) {
             header('content-type: application/json');
             echo json_encode(array('error' => 'merchant not logged in'));
             //redirect('merchant/index');
             exit();
         }
-
+        $merchant = $this->merchant->get_current();
         $code = $this->input->post('coupon_code');
         if ($code !== FALSE) {
-            $response = @$this->coupons->validate_user_coupon($code);
+            $response = @$this->coupons->validate_user_coupon($code, $merchant->id);
             if ($response) {
                 $result = array('is_valid' => $response, 'message' => 'Successfully Validated.');
             } else {
@@ -99,7 +101,7 @@ class Coupon extends CI_Controller {
     }
 
     private function _is_logged_in() {
-        $data = $this->session->userdata('merchant');
+        $data = $this->session->userdata("merchant");
         if (!empty($data) && is_array($data) && is_numeric($data['id'])) {
             return TRUE;
         } else {

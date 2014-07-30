@@ -13,6 +13,8 @@
  */
 class Merchant_model extends MY_Model {
 
+    const USER_SESSION_VARIABLE = "merchant";
+
     public $protected_attributes = array('id');
     public $before_create = array('created_at', 'updated_at', 'encrypt_password');
     public $after_get = array('add_status_field');
@@ -95,14 +97,14 @@ class Merchant_model extends MY_Model {
     }
 
     private function _create_session($user) {
-        $data = array(Merchant::USER_SESSION_VARIABLE =>
+        $data = array(self::USER_SESSION_VARIABLE =>
             array('id' => $user->id,
                 'email' => $user->email));
         $this->session->set_userdata($data);
     }
 
     public function get_current() {
-        $d = $this->session->userdata(Merchant::USER_SESSION_VARIABLE);
+        $d = $this->session->userdata(self::USER_SESSION_VARIABLE);
         return $this->get($d['id']);
     }
 

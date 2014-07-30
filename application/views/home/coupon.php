@@ -6,13 +6,6 @@
 </div>
 <div class="gap"></div>
 <div class="container">
-    <?php if (!empty($success_msg)) { ?>
-        <div class='alert alert-success'><p><?= $success_msg ?></p></div>
-    <?php } ?>
-    <?php if (!empty($error_msg)) { ?>
-        <div class='alert alert-error'><p><?= $error_msg ?></p></div>
-    <?php } ?>
-
     <div class="row row-reverce coupon">
         <?= partial('partials/_featured_item', array('featured_item' => $item)); ?>
     </div>

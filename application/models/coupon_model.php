@@ -13,13 +13,11 @@
  */
 class Coupon_model extends MY_Model {
 
-    const COMMISION_PERCENT = 20.0;
-
     private $key = "CouponCity1234,.+@#";
     private $JOIN_CHAR = "_";
     public $protected_attributes = array('id');
     public $before_create = array('ensure_unique_slug', 'generate_merchant_coupon_code', 'created_at', 'updated_at',
-        'calculate_discount', 'calculate_commision', 'transform_start_end_date', 'advanced_pricing_to_json');
+        'calculate_discount', 'transform_start_end_date', 'advanced_pricing_to_json');
     public $after_get = array('update_status', 'get_coupon_cover_image', 'advanced_pricing_to_object', 'format_numbers',);
     public $has_many = array('coupon_medias' => array('model' => 'coupon_media_model', 'primary_key' => 'coupon_id'));
     public $belongs_to = array('merchant' => array('model' => 'merchant_model'));
@@ -59,19 +57,6 @@ class Coupon_model extends MY_Model {
             $old_price = $row['old_price'];
             $new_price = $row['new_price'];
             $row['discount'] = ($old_price - $new_price) / $old_price * 100.0;
-        }
-        return $row;
-    }
-
-    public function calculate_commision($row) {
-        if (is_object($row)) {
-            $old_price = $row->old_price;
-            $new_price = $row->new_price;
-            $row->commision = ceil(($old_price - $new_price) / 100 * Coupon_model::COMMISION_PERCENT);
-        } else {
-            $old_price = $row['old_price'];
-            $new_price = $row['new_price'];
-            $row['commision'] = ceil(($old_price - $new_price) / 100 * Coupon_model::COMMISION_PERCENT);
         }
         return $row;
     }
@@ -266,17 +251,36 @@ class Coupon_model extends MY_Model {
     }
 
     public function format_numbers($row) {
-        if (@property_exists($row, 'discount')) {
-            $balance = $row->discount;
-            $row->discount = number_format($balance, 2);
-        }
-        if (@property_exists($row, 'old_price')) {
-            $old_price = $row->old_price;
-            $row->old_price = number_format($old_price, 2);
-        }
-        if (@property_exists($row, 'old_price')) {
-            $new_price = $this->_calculate_coupon_price($row); // $row->new_price;
-            $row->new_price = number_format($new_price, 2);
+        if (is_object($row)) {
+            if (@property_exists($row, 'discount')) {
+                $balance = $row->discount;
+                $row->discount = number_format($balance, 2);
+            }
+            if (@property_exists($row, 'old_price')) {
+                $old_price = $row->old_price;
+                $row->unformated_old_price = $old_price;
+                $row->old_price = number_format($old_price, 2);
+            }
+            if (@property_exists($row, 'old_price')) {
+                $new_price = $this->_calculate_coupon_price($row); // $row->new_price;
+                $row->unformated_new_price = $new_price;
+                $row->new_price = number_format($new_price, 2);
+            }
+        } else {
+            if (@array_key_exists('discount', $row)) {
+                $balance = $row['discount'];
+                $row['discount'] = number_format($balance, 2);
+            }
+            if (@array_key_exists('old_price', $row)) {
+                $old_price = $row['old_price'];
+                $row['unformated_old_price'] = $old_price;
+                $row['old_price'] = number_format($old_price, 2);
+            }
+            if (@array_key_exists('old_price', $row)) {
+                $new_price = $this->_calculate_coupon_price($row); // $row->new_price;
+                $row['unformated_new_price'] = $new_price;
+                $row['new_price'] = number_format($new_price, 2);
+            }
         }
         return $row;
     }
@@ -363,16 +367,25 @@ class Coupon_model extends MY_Model {
         if ($wallet_balance >= $amt) {
             $CI->user->debit_wallet($user_id, $amt);
             $user_coupon = $this->generate_user_coupon($coupon->coupon_code, $user->email);
-            $CI->user_coupon->insert(
+            $response = $CI->user_coupon->insert(
                     array(
                 'coupon_id' => $coupon_id,
                 'user_id' => $user_id,
                 'user_coupon_code' => $user_coupon
                     ), TRUE);
 
-            $CI->coupon_sale->increase_sale($coupon_id, $user_id);
+            if (!$response) {
+                return array('error' => 'You Already Own this Coupon');
+            } else {
+                $CI->coupon_sale->increase_sale($coupon_id, $user_id);
 
-            return $user_coupon;
+                /*
+                 * return first_seven chars plus inser_id
+                 *
+                 */
+                $vv = substr($user_coupon, 0, 7);
+                return $vv . $response;
+            }
         } else {
             return array('error' => 'Insufficient Account balance');
         }
@@ -392,17 +405,38 @@ class Coupon_model extends MY_Model {
         return $ci->encrypt->encode($coupon_code . $this->JOIN_CHAR . $user_email, $this->key);
     }
 
-    public function validate_user_coupon($code) {
-        $info = $this->retrieve_coupon_code($code);
+    public function validate_user_coupon($code, $merchant_id = NULL) {
         $ci = & get_instance();
+        $ci->load->model('user_model', 'user');
+        $ci->load->model('merchant_model', 'merchant');
+        $ci->load->model('user_coupon_model', 'user_coupon');
+
+        /*
+         * return first_seven chars plus inser_id
+         *
+         */
+        $code_id = substr($code, -1, 1);
+        $fragment = substr($code, 0, 7);
+
+        $value = $ci->user_coupon->get($code_id);
+        if (!$value) {
+            return FALSE;
+        }
+        if (strcmp(substr($value->user_coupon_code, 0, 7), $fragment) == 0) {
+            $main_code = $value->user_coupon_code;
+        } else {
+            return FALSE;
+        }
+        $info = $this->retrieve_coupon_code($main_code);
         if (!$info) {
             return FALSE;
         }
         $email = $info['email'];
         $coupon_code = $info['coupon_code'];
-
         $coupon = $this->get_by(array('coupon_code' => $coupon_code));
-        $ci->load->model('user_model', 'user');
+        if ($coupon->merchant_id != $merchant_id) {
+            return FALSE;
+        }
         $user = $ci->user->get_by(array('email' => $email));
         if (!$coupon || !$user) {
             return FALSE;
@@ -439,7 +473,7 @@ class Coupon_model extends MY_Model {
      *
      */
 
-    private function _calculate_coupon_price($coupon) {
+    public function _calculate_coupon_price($coupon) {
         if ($coupon->is_advanced_pricing == 1) {
             $ci = & get_instance();
             $ci->load->model('coupon_sale_model', 'coupon_sale');
