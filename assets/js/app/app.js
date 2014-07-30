@@ -124,7 +124,7 @@ app.controller('CouponUploadController', ['$scope', '$http', '$filter', '$window
             }
             //$scope.$apply();
         };
-        $scope.calculate_advanced_discount = function(position,price_model,discount_model) {
+        $scope.calculate_advanced_discount = function(position, price_model, discount_model) {
             //console.log(price_model);
             //console.log(discount_model);
             var $old_p = $scope.coupon.old_price;
@@ -146,7 +146,7 @@ app.controller('CouponUploadController', ['$scope', '$http', '$filter', '$window
             //console.log(discount_model);
         };
 
-        $scope.calculate_advanced_price = function(position,price_model, discount_model) {
+        $scope.calculate_advanced_price = function(position, price_model, discount_model) {
             //console.log(price_model);
             //console.log(discount_model);
             var $old_p = $scope.coupon.old_price;
@@ -163,7 +163,7 @@ app.controller('CouponUploadController', ['$scope', '$http', '$filter', '$window
                 price_model = 0;
 
             }
-             $scope.coupon.advanced_pricing[position]["price"] = price_model;
+            $scope.coupon.advanced_pricing[position]["price"] = price_model;
             //console.log(price_model);
             //console.log(discount_model);
 
@@ -188,14 +188,14 @@ app.controller('CouponUploadController', ['$scope', '$http', '$filter', '$window
             e.preventDefault();
         };
     }]);
-app.controller('VerifyCouponController',['$scope','$http',function($scope,$http){
+app.controller('VerifyCouponController', ['$scope', '$http', '$timeout', function($scope, $http, $timeout) {
         $scope.is_success = false;
         $scope.is_failure = false;
         $scope.is_working = false;
         $scope.message = "";
-        
-        
-        $scope.verify_coupon = function(coupon,e){
+
+
+        $scope.verify_coupon = function(coupon, e) {
             $scope.is_working = true;
             var formdata = $.param(coupon);
             $http.post(my_globals.base_url + 'merchant/verify-coupon', formdata, {
@@ -205,19 +205,30 @@ app.controller('VerifyCouponController',['$scope','$http',function($scope,$http)
             }).
                     success(function(data, status, headers, config) {
                         $scope.is_working = false;
-                        if(data.is_valid){
+                        if (data.is_valid) {
                             $scope.is_success = true;
-                        }else{
+                        } else {
                             $scope.is_failure = true;
                         }
                         $scope.message = data.message;
+                        $scope.coupon.coupon_code = "";
+                        $timeout($scope.reset_params, 5000);
                         // console.log(data);
                     }).
                     error(function(data, status, headers, config) {
-                       $scope.is_working = false;
-                       $scope.is_failure = true;
-                       $scope.message = status;
+                        $scope.is_working = false;
+                        $scope.is_failure = true;
+                        $scope.message = status;
+                        $scope.coupon.coupon_code = "";
+                        $timeout($scope.reset_params, 5000);
                     });
             e.preventDefault();
         };
-}]);
+
+        $scope.reset_params = function() {
+            $scope.is_success = false;
+            $scope.is_failure = false;
+            $scope.is_working = false;
+            $scope.message = "";
+        };
+    }]);

@@ -4,8 +4,14 @@
     <h3>Redeem Coupon</h3>
     <div class="row-fluid">
         <div class='text-center'>
-            <p class='alert alert-success' ng-show="is_success" ng-bind="message"></p>
-            <p class='alert alert-error' ng-show="is_failure" ng-bind="message"></p>
+            <span ng-show="is_success">
+                <p class='alert alert-success'  ng-bind="message"></p>
+                <button class="btn btn-success pull-right">Click For Details</button>
+            </span>
+            <span ng-show="is_failure">
+                <p class='alert alert-error'  ng-bind="message"></p>
+                <button class="btn btn-success pull-right" ng-click="reset_params();">Dismiss</button>
+            </span>
             <p class="alert alert-info" ng-show='is_working'>Working....</p>
         </div>
         <form method='post' action="#">
