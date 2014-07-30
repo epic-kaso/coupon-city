@@ -1,22 +1,4 @@
-<!--
-id	int(10)
-email	varchar(100)
-password	varchar(100)
-business_name	text
-contact_name	text
-address_one	text
-address_two	text
-area	text
-business_category	text
-mobile_number	varchar(20)
-short_description	text
-website	text
-logo	text
-opening_hours	text
-is_profile_complete	int(1)
-
--->
-<?= partial('partials/merchant/_header_nav', array('logged_in' => $logged_in, 'merchant' => @$merchant)); ?>
+<?= partial('partials/merchant/_header_nav', array('merchant' => @$merchant)); ?>
 <div class="container">
     <?= $breadcrumbs ?>
 </div>

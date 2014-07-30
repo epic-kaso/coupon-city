@@ -1,6 +1,5 @@
 <?php
-$current_user = @$this->session->userdata(Home::USER_SESSION_VARIABLE);
-if (empty($current_user) || !$current_user) {
+if (!$user) {
 
 } else {
     ?>
@@ -19,7 +18,7 @@ if (empty($current_user) || !$current_user) {
                 <input type="hidden" name="itemDesc" value="Coupon Wallet, easy way to grab coupons on the go"/>
                 <input type="hidden" name="itemImageURL" value="<?= base_url('assets/img/logo_200.png'); ?>"/>
                 <input type="hidden" ng-model="wallet.redirect" name="successURL" ng-init="wallet.redirect = '<?= base_url('wallet/success/'); ?>'"/>
-                <input type="hidden" name="failURL" value="<?= base_url('wallet/failure/' . $current_user['id']); ?>"/>
+                <input type="hidden" name="failURL" value="<?= base_url('wallet/failure/' . $user->id); ?>"/>
                 <label>Select Amount:
                     <select id="select-amount"
                             name="itemPrice"

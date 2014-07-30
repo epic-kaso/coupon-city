@@ -26,23 +26,26 @@ class Home extends MY_Controller {
         $limit = 20;
         $total = $this->_count_coupons($category);
         $base_url = base_url('categories/' . $category);
-
         $coupons = $this->_coupons($limit, $page, $this->category->fetch_id_by_slug($category));
-
         $coupon_presenter = new Coupon_presenter($coupons);
+
         $this->data['title'] = 'All Projects';
         $this->data['categories'] = new Category_presenter($this->category->get_all(), base_url('categories'));
         $this->data['coupons'] = $coupon_presenter;
         $this->data['featured_item'] = $coupon_presenter->featured_item();
+
         $config = $this->_use_pagination($total, $limit, $base_url, 3);
         $config['cur_page'] = $page;
+
         $this->pagination->initialize($config);
         $this->data['links'] = $this->pagination->create_links();
         $this->data['breadcrumbs'] = $this->_get_crumbs();
+        $this->data['user'] = $this->user->get_current();
     }
 
     public function login() {
         $this->view = FALSE;
+
         $email = $this->input->post('email');
         $password = $this->input->post('password');
         $redirect_url = $this->input->post('redirect');
@@ -52,19 +55,21 @@ class Home extends MY_Controller {
         } else {
             $user = $this->user->login_email($email, $password);
             if (!$user) {
-                $this->session->set_flashdata('login_error', 'Username/password combination doesnt belong to any accoutn');
+                $this->session->set_flashdata('login_error', 'Username/Password combination doesn\'t belong to any account.');
             }
         }
         redirect($redirect_url);
     }
 
     public function logout() {
-        $this->session->unset_userdata(array(Home::USER_SESSION_VARIABLE => '', 'user_logged_in' => FALSE));
+        //$this->session->unset_userdata(array(Home::USER_SESSION_VARIABLE => ''));
+        $this->session->sess_destroy();
         redirect(base_url());
     }
 
     public function signup() {
         $this->view = FALSE;
+
         $password = $this->input->post('password');
         $re_password = $this->input->post('re_password');
         $redirect_url = $this->input->post('redirect');
@@ -73,6 +78,7 @@ class Home extends MY_Controller {
             $data = $this->input->post();
             unset($data['re_password']);
             unset($data['redirect']);
+
             $response = $this->user->insert($data);
             if (!$response) {
                 $this->session->set_flashdata('login_error', 'Error Occured. ' . print_r($response, true));
@@ -80,7 +86,7 @@ class Home extends MY_Controller {
                 $this->user->login_email($data['email'], $password);
             }
         } else {
-            $this->session->set_flashdata('login_error', 'Password Mismatch');
+            $this->session->set_flashdata('login_error', 'Password mis-match');
         }
         redirect($redirect_url);
     }
@@ -117,69 +123,190 @@ class Home extends MY_Controller {
         $this->data['search_result'] = $search_result;
         $this->data['search_query'] = $search_query;
         $this->data['coupons'] = $coupon_presenter;
-
-
+        $this->data['user'] = $this->user->get_current();
         $this->data['links'] = $this->qpagination->create_links();
         $this->data['breadcrumbs'] = $this->_get_crumbs();
     }
 
     public function coupon($slug) {
-        $this->load->model('Coupon_view_model', 'coupon_view');
+        $this->load->model('coupon_view_model', 'coupon_view');
+
         $coupon = $this->coupons->get_by_slug($slug);
-        if (empty($coupon) || !is_object($coupon)) {
+        $this->data['user'] = $this->user->get_current();
+        $this->data['breadcrumbs'] = $this->_get_crumbs();
+        if (!$coupon) {
             show_404('home/error_page');
         } else {
             $this->coupon_view->increase_view($coupon->id);
-            $coupon_presenter = new Coupon_presenter($coupon);
-            $this->data['featured_item'] = $coupon_presenter->items();
-            $this->data['breadcrumbs'] = $this->_get_crumbs();
+            $coupon_presenter = new Coupon_presenter($coupon, FALSE);
+            $this->data['item'] = $coupon_presenter->item();
         }
     }
 
     public function grab_coupon($slug) {
         $this->view = FALSE;
+
         $this->_is_logged_in();
+
         $user = $this->user->get_current();
         $coupon = $this->coupons->get_by_slug($slug);
-
         $response = $this->coupons->grab_coupon($coupon->id, $user->id);
 
         if (!$response || (is_array($response) && array_key_exists('error', $response))) {
             // echo 'Couldn\'t grab coupon!.Check that you have money in your wallet ';
             $this->session->set_flashdata('error_msg', 'Couldn\'t grab coupon!.Check that you have money in your wallet ');
-            redirect(base_url('coupons/' . $slug), 'refresh');
+            redirect(base_url(), 'refresh');
+            return;
         } else {
             //echo 'success : ' . $response;
             $this->session->set_flashdata('success_msg', 'Grabbed successfully. Coupon Code: ' . $response);
-            redirect(base_url('coupons/' . $slug), 'refresh');
+            redirect(base_url(), 'refresh');
+            return;
         }
     }
 
     public function contact() {
         $this->data['breadcrumbs'] = $this->_get_crumbs();
+        $this->data['user'] = $this->user->get_current();
     }
 
     public function about_us() {
         $this->data['breadcrumbs'] = $this->_get_crumbs();
+        $this->data['user'] = $this->user->get_current();
     }
 
     public function how_it_works() {
         $this->data['breadcrumbs'] = $this->_get_crumbs();
+        $this->data['user'] = $this->user->get_current();
     }
 
     public function help_faq() {
         $this->data['breadcrumbs'] = $this->_get_crumbs();
+        $this->data['user'] = $this->user->get_current();
     }
 
     public function coupon_not_found() {
         $this->view = 'home/error_page';
         $this->data['code'] = 'Coupon Not Found';
         $this->data['breadcrumbs'] = $this->_get_crumbs();
+        $this->data['user'] = $this->user->get_current();
     }
 
     public function error_page($code = 404) {
         $this->data['code'] = $code;
         $this->data['breadcrumbs'] = $this->_get_crumbs();
+        $this->data['user'] = $this->user->get_current();
+    }
+
+    public function settings() {
+        $this->_is_logged_in();
+        $this->data['breadcrumbs'] = $this->_get_crumbs();
+        $user = $this->user->get_current();
+        $this->data['profile'] = new User_presenter($user);
+        $this->data['user'] = $user;
+        $this->data['logged_in'] = $this->session->userdata('logged_in');
+    }
+
+    public function my_coupons($category = 'all', $page = 0) {
+        $this->_is_logged_in();
+        $user = $this->user->get_current();
+        $error = !$this->session->flashdata('error_msg') ? 'Please Login or Create an Account' :
+                $this->session->flashdata('error_msg');
+        $this->session->flashdata('error_msg', $error);
+        $this->data['breadcrumbs'] = $this->_get_crumbs();
+        $this->data['user'] = $user;
+
+        $limit = 20;
+        $total = $this->_count_my_coupons($category);
+        $base_url = base_url('my-coupons/');
+
+        $coupons = $this->_my_coupons($limit, $page, $category);
+        $coupon_presenter = new Coupon_presenter($coupons);
+        $this->data['categories'] = new Category_presenter($this->category->get_all(), base_url('my-coupons/'));
+        $this->data['coupons'] = $coupon_presenter;
+        $config = $this->_use_pagination($total, $limit, $base_url);
+        $config['cur_page'] = $page;
+        $this->pagination->initialize($config);
+        $this->data['links'] = $this->pagination->create_links();
+    }
+
+    public function fb_login() {
+        $this->view = FALSE;
+
+        $fb_user = $this->input->post('fb_user');
+        if ($fb_user === FALSE) {
+            header('content-type: application/json');
+            echo json_encode(array('error' => 'invalid fb user supplied'));
+            exit();
+        } else {
+            $data = array();
+            $data['first_name'] = $fb_user['first_name'];
+            $data['last_name'] = $fb_user['last_name'];
+            $data['email'] = $fb_user['email'];
+            $data['oauth_enabled'] = 1;
+            $data['fb_oauth_id'] = $fb_user['id'];
+            $redirect_url = $fb_user['redirect_url'];
+            //print_r($fb_user);
+            //print_r($data);
+
+            $state = $this->_process_fb_login($data);
+            header('content-type: application/json');
+            if (!$state) {
+                echo json_encode(array('error' => 'Error Occured while loggining through facebook'));
+            } else {
+                echo json_encode(array('success' => true, 'redirect' => $redirect_url));
+            }
+            exit();
+        }
+    }
+
+    public function profile() {
+        $this->_is_logged_in();
+        $user = $this->user->get_current();
+        $this->data['profile'] = new User_presenter($user);
+        $this->data['user'] = $user;
+        $this->data['logged_in'] = $this->session->userdata('logged_in');
+        $this->data['breadcrumbs'] = $this->_get_crumbs();
+    }
+
+    public function edit_profile() {
+        $this->_is_logged_in();
+        $user = $this->user->get_current();
+        $this->data['profile'] = $this->user->profile_info($user);
+        $this->data['user'] = $user;
+        $this->data['breadcrumbs'] = $this->_get_crumbs();
+        $this->data['logged_in'] = $this->session->userdata('logged_in');
+        $this->load->helper('url');
+
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('first_name', 'First Name', 'trim|required');
+        $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required');
+        $this->form_validation->set_rules('phone', 'Phone Number', 'required');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->view = TRUE;
+        } else {
+            $this->view = FALSE;
+            $this->user->update($user->id, $this->input->post(), TRUE);
+            $this->session->set_flashdata('success_msg', 'Profile Saved!');
+            redirect(base_url('profile'));
+        }
+    }
+
+    public function change_password() {
+        $this->view = FALSE;
+        $user = $this->user->get_current();
+        $password = trim($this->input->post('password'));
+        $repassword = trim($this->input->post('re_password'));
+        $redirect_url = $this->input->post('redirect');
+
+        if ($password !== FALSE && $repassword !== FALSE) {
+            $this->_process_change_password($password, $repassword, $user, $redirect_url);
+        } else {
+            $this->session->set_flashdata('error_msg', 'Password Fields cant be empty');
+            redirect($redirect_url);
+        }
     }
 
     private function _coupons($limit, $page, $category_id = 'all') {
@@ -285,35 +412,6 @@ class Home extends MY_Controller {
         return $config;
     }
 
-    public function fb_login() {
-        $this->view = FALSE;
-        $fb_user = $this->input->post('fb_user');
-        if ($fb_user === FALSE) {
-            header('content-type: application/json');
-            echo json_encode(array('error' => 'invalid fb user supplied'));
-            exit();
-        } else {
-            $data = array();
-            $data['first_name'] = $fb_user['first_name'];
-            $data['last_name'] = $fb_user['last_name'];
-            $data['email'] = $fb_user['email'];
-            $data['oauth_enabled'] = 1;
-            $data['fb_oauth_id'] = $fb_user['id'];
-            $redirect_url = $fb_user['redirect_url'];
-            //print_r($fb_user);
-            //print_r($data);
-
-            $state = $this->_process_fb_login($data);
-            header('content-type: application/json');
-            if (!$state) {
-                echo json_encode(array('error' => 'Error Occured while loggining through facebook'));
-            } else {
-                echo json_encode(array('success' => true, 'redirect' => $redirect_url));
-            }
-            exit();
-        }
-    }
-
     private function _process_fb_login($data) {
         $is_new_user = $this->user->is_unique_email($data['email']);
         if ($is_new_user) {
@@ -341,6 +439,7 @@ class Home extends MY_Controller {
             $status = FALSE;
         }
         if (!$status) {
+            $this->session->set_flashdata('login_error', 'Oww, Please you need to login/signup to do that');
             if (is_null($redirect)) {
                 $redirect = base_url();
             }
@@ -365,55 +464,6 @@ class Home extends MY_Controller {
         return $this->breadcrumbs->show();
     }
 
-    public function profile() {
-        $this->_is_logged_in();
-        $user = $this->user->get_current();
-        $this->data['profile'] = new User_presenter($user);
-        $this->data['user'] = $user;
-        $this->data['logged_in'] = $this->session->userdata('logged_in');
-        $this->data['breadcrumbs'] = $this->_get_crumbs();
-    }
-
-    public function edit_profile() {
-        $this->_is_logged_in();
-        $user = $this->user->get_current();
-        $this->data['profile'] = $this->user->profile_info($user);
-        $this->data['user'] = $user;
-        $this->data['breadcrumbs'] = $this->_get_crumbs();
-        $this->data['logged_in'] = $this->session->userdata('logged_in');
-        $this->load->helper('url');
-
-        $this->load->library('form_validation');
-
-        $this->form_validation->set_rules('first_name', 'First Name', 'trim|required');
-        $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required');
-        $this->form_validation->set_rules('phone', 'Phone Number', 'required');
-
-        if ($this->form_validation->run() == FALSE) {
-            $this->view = TRUE;
-        } else {
-            $this->view = FALSE;
-            $this->user->update($user->id, $this->input->post(), TRUE);
-            $this->session->set_flashdata('success_msg', 'Profile Saved!');
-            redirect(base_url('profile'));
-        }
-    }
-
-    public function change_password() {
-        $this->view = FALSE;
-        $user = $this->user->get_current();
-        $password = trim($this->input->post('password'));
-        $repassword = trim($this->input->post('re_password'));
-        $redirect_url = $this->input->post('redirect');
-
-        if ($password !== FALSE && $repassword !== FALSE) {
-            $this->_process_change_password($password, $repassword, $user, $redirect_url);
-        } else {
-            $this->session->set_flashdata('error_msg', 'Password Fields cant be empty');
-            redirect($redirect_url);
-        }
-    }
-
     private function _process_change_password($password, $repassword, $user, $redirect_url) {
         if (strcmp($password, $repassword) == 0) {
             if (sha1($password) === $user->password) {
@@ -428,40 +478,6 @@ class Home extends MY_Controller {
             $this->session->set_flashdata('error_msg', 'Password Fields Must Match');
             redirect($redirect_url);
         }
-    }
-
-    public function settings() {
-        $this->_is_logged_in();
-        $this->data['breadcrumbs'] = $this->_get_crumbs();
-        $user = $this->user->get_current();
-        $this->data['profile'] = new User_presenter($user);
-        $this->data['user'] = $user;
-        $this->data['logged_in'] = $this->session->userdata('logged_in');
-    }
-
-    public function my_coupons($category = 'all', $page = 0) {
-        $this->_is_logged_in();
-        $user = $this->user->get_current();
-        $error = !$this->session->flashdata('error_msg') ? 'Please Login or Create an Account' :
-                $this->session->flashdata('error_msg');
-        $this->session->flashdata('error_msg', $error);
-        $this->data['breadcrumbs'] = $this->_get_crumbs();
-
-        $this->data['logged_in'] = $this->session->userdata('logged_in');
-        $this->data['user'] = $user;
-
-        $limit = 20;
-        $total = $this->_count_my_coupons($category);
-        $base_url = base_url('my-coupons/');
-
-        $coupons = $this->_my_coupons($limit, $page, $category);
-        $coupon_presenter = new Coupon_presenter($coupons);
-        $this->data['categories'] = new Category_presenter($this->category->get_all(), base_url('my-coupons/'));
-        $this->data['coupons'] = $coupon_presenter;
-        $config = $this->_use_pagination($total, $limit, $base_url);
-        $config['cur_page'] = $page;
-        $this->pagination->initialize($config);
-        $this->data['links'] = $this->pagination->create_links();
     }
 
 }

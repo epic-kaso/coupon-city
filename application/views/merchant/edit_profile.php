@@ -1,4 +1,4 @@
-<?= partial('partials/merchant/_header_nav', array('logged_in' => $logged_in, 'merchant' => @$merchant)); ?>
+<?= partial('partials/merchant/_header_nav', array('merchant' => @$merchant)); ?>
 <div class="container">
     <?= $breadcrumbs ?>
 </div>

@@ -34,10 +34,7 @@ class Merchant extends MY_Controller {
         $error = !$this->session->flashdata('error_msg') ? 'Please Login or Create an Account' :
                 $this->session->flashdata('error_msg');
         $this->session->flashdata('error_msg', $error);
-
-        $merchant = $this->session->userdata('merchant');
-        $this->data['logged_in'] = $this->session->userdata('logged_in');
-        $this->data['merchant'] = $this->merchant->get($merchant['id']);
+        $this->data['merchant'] = $this->merchant->get_current();
         $this->data['breadcrumbs'] = $this->_get_crumbs();
     }
 
@@ -114,7 +111,7 @@ class Merchant extends MY_Controller {
         $coupons = $this->_coupons($limit, $page, $this->category->fetch_id_by_slug($category));
         //print_r($coupons);
 
-        $coupon_presenter = new Coupon_presenter($coupons);
+        $coupon_presenter = new Coupon_presenter($coupons, TRUE);
         $this->data['categories'] = new Category_presenter($this->category->get_all(), base_url(Merchant::MERCHANT_URL . '/my-coupons/'));
         $this->data['coupons'] = $coupon_presenter;
         $config = $this->_use_pagination($total, $limit, $base_url);
@@ -251,14 +248,16 @@ class Merchant extends MY_Controller {
     }
 
     public function _is_logged_in() {
-        $data = $this->session->userdata('merchant');
+        $data = $this->session->userdata(Merchant::USER_SESSION_VARIABLE);
         if (!empty($data) && is_array($data) && is_numeric($data['id'])) {
             $status = TRUE;
         } else {
             $status = FALSE;
         }
-        if (!$status || !$this->session->userdata('logged_in')) {
+        if (!$status) {
             redirect(base_url(Merchant::MERCHANT_URL . '/login'));
+        } else {
+            return TRUE;
         }
     }
 

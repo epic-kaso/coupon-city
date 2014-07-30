@@ -42,7 +42,6 @@ class Merchant_model extends MY_Model {
 
     public function login_email($email, $password) {
         $user = $this
-                ->with('coupons')
                 ->get_by(array('email' => $email, 'password' => sha1($password)));
         if (!empty($user) && is_object($user)) {
             $this->_create_session($user);
@@ -96,17 +95,9 @@ class Merchant_model extends MY_Model {
     }
 
     private function _create_session($user) {
-        if (@property_exists($user, 'coupons')) {
-            $coups = $user->coupons;
-        } else {
-            $coups = array();
-        }
-        $data = array(Merchant::USER_SESSION_VARIABLE => array('id' => $user->id,
-                'timestamp' => time(),
-                'email' => $user->email,
-                'images' => array(),
-                'coupons' => $coups),
-            'logged_in' => true);
+        $data = array(Merchant::USER_SESSION_VARIABLE =>
+            array('id' => $user->id,
+                'email' => $user->email));
         $this->session->set_userdata($data);
     }
 

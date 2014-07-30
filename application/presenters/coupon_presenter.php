@@ -10,7 +10,7 @@ require_once APPPATH . 'presenters/presenter.php';
 
 class Coupon_presenter extends Presenter {
 
-    protected $is_merchant;
+    protected $is_merchant = FALSE;
 
     public function __construct($object, $merchant = FALSE) {
         parent::__construct($object);
@@ -45,9 +45,23 @@ class Coupon_presenter extends Presenter {
         }
     }
 
+    public function item() {
+        if (empty($this->data)) {
+            $row = new stdClass();
+            $row->empty = true;
+            $row->name = 'No Coupon Available';
+            return array($row);
+        }
+        if ($this->data->deal_status == 0) {
+            redirect(base_url('coupon-not-found'));
+        } else {
+            return $this->process($this->data);
+        }
+    }
+
     private function process($row) {
         $row->remaining = $this->_calculate_remaining_time($row->start_date, $row->end_date);
-        $row->link = base_url('coupons/' . $row->slug);
+        $row->link = base_url('coupon/' . $row->slug);
         if (!is_null($row->quantity) && $row->quantity <= 0) {
             $row->inactive = TRUE;
             $row->grab_link = "";
@@ -56,7 +70,7 @@ class Coupon_presenter extends Presenter {
             $row->grab_link = base_url('grab_coupon/' . $row->slug);
         }
         $this->create_summary($row);
-        if (!$this->is_merchant) {
+        if ($this->is_merchant) {
             $this->add_merchant_params($row);
         } else {
             $row = $this->check_current_user_coupons($row);
@@ -75,14 +89,15 @@ class Coupon_presenter extends Presenter {
 
     private function check_current_user_coupons($row) {
         $ci = & get_instance();
-        $ci->load->model(array('user_coupon_model', 'user_model'));
+        $ci->load->model('user_coupon_model', 'user_coupons');
+        $ci->load->model('user_model', 'user');
 
-        $user = $ci->user_model->get_current();
+        $user = $ci->user->get_current();
         if (!$user) {
             $row->user_owns_coupon = FALSE;
             return $row;
         } else {
-            $status = $ci->user_coupon_model->user_owns_coupon($user->id, $row->id);
+            $status = $ci->user_coupons->user_owns_coupon($user->id, $row->id);
             if ($status) {
                 $row->inactive = TRUE;
                 $row->grab_link = "";
@@ -111,7 +126,7 @@ class Coupon_presenter extends Presenter {
                 $row->grab_link = base_url('grab_coupon/' . $row->slug);
             }
             $this->create_summary($row);
-            if (!$this->is_merchant) {
+            if ($this->is_merchant) {
                 $this->add_merchant_params($row);
             } else {
                 $row = $this->check_current_user_coupons($row);

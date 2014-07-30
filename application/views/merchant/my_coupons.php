@@ -1,11 +1,11 @@
 <!-- END LOGIN REGISTER LINKS CONTENT -->
 <!-- SEARCH AREA -->
-<?= partial('partials/merchant/_header_nav', array('logged_in' => $logged_in, 'merchant' => @$merchant)); ?>
+<?= partial('partials/merchant/_header_nav', array('merchant' => @$merchant)); ?>
 <!-- LOGIN REGISTER LINKS CONTENT -->
 
-<?= partial('partials/merchant/_login', array('logged_in' => $logged_in, 'merchant' => @$merchant)); ?>
+<?= partial('partials/merchant/_login', array('merchant' => @$merchant)); ?>
 
-<?= partial('partials/merchant/_register', array('logged_in' => $logged_in, 'merchant' => @$merchant)); ?>
+<?= partial('partials/merchant/_register', array('merchant' => @$merchant)); ?>
 
 
 <div id="password-recover-dialog" class="mfp-with-anim mfp-hide mfp-dialog clearfix">
@@ -26,7 +26,7 @@
     <?= $breadcrumbs ?>
 </div>
 <div class="gap"></div>
-<?php if ($logged_in) { ?>
+<?php if ($merchant !== FALSE) { ?>
     <div class="container">
         <div class="row">
             <div class="span3">

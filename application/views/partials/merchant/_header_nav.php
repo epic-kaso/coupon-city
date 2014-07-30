@@ -10,7 +10,7 @@
             </div>
             <div class="spa6">
                 <!-- LOGIN REGISTER LINKS -->
-                <?php if (!$logged_in) { ?>
+                <?php if (!$merchant) { ?>
                     <ul class="login-register">
                         <li><a href="<?= base_url(Merchant::MERCHANT_URL . '/login'); ?>" ><i class="icon-signin"></i>Sign in</a>
                         </li>

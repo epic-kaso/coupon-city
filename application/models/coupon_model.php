@@ -147,10 +147,6 @@ class Coupon_model extends MY_Model {
         }
     }
 
-    public function generate_slug($row) {
-
-    }
-
     public function ensure_unique_slug($row) {
         if (is_object($row)) {
             if (!property_exists($row, 'slug')) {
@@ -369,10 +365,10 @@ class Coupon_model extends MY_Model {
             $user_coupon = $this->generate_user_coupon($coupon->coupon_code, $user->email);
             $CI->user_coupon->insert(
                     array(
-                        'coupon_id' => $coupon_id,
-                        'user_id' => $user_id,
-                        'user_coupon_code' => $user_coupon
-            ));
+                'coupon_id' => $coupon_id,
+                'user_id' => $user_id,
+                'user_coupon_code' => $user_coupon
+                    ), TRUE);
 
             $CI->coupon_sale->increase_sale($coupon_id, $user_id);
 

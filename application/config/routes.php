@@ -69,6 +69,19 @@ $route['my-coupons/(:any)'] = 'home/my_coupons/$1';
 $route['my-coupons/(:any)/(:num)'] = 'home/my_coupons/$1/$2';
 $route['grab_coupon/(:any)'] = 'home/grab_coupon/$1';
 
+$route['coupon'] = "home/index/all";
+$route['coupon/(:any)'] = 'home/coupon/$1';
+
+$route['search'] = 'home/search/0/all/';
+$route['search/(:num)'] = 'home/search/$1/all/';
+$route['search/(:any)'] = 'home/search/0/all/$1';
+$route['search/(:num)/(:any)'] = 'home/search/$1/$2/';
+$route['search/(:num)/(:any)/(:any)'] = 'home/search/$1/$2/$3';
+
+$route['error'] = 'home/error_page';
+$route['error/(:num)'] = 'home/error_page/$1';
+
+//-----------MERCHANT ROUTES----------------------------------
 
 $route['merchant'] = 'merchant/index';
 $route['merchant/dashboard'] = 'merchant/dashboard';
@@ -82,17 +95,7 @@ $route['merchant/my-coupons/(:any)'] = 'merchant/my_coupons/$1';
 $route['merchant/my-coupons/(:any)/(:num)'] = 'merchant/my_coupons/$1/$2';
 $route['merchant/verify-coupon'] = 'coupon/verify_coupon';
 
-$route['search'] = 'home/search/0/all/';
-$route['search/(:num)'] = 'home/search/$1/all/';
-$route['search/(:any)'] = 'home/search/0/all/$1';
-$route['search/(:num)/(:any)'] = 'home/search/$1/$2/';
-$route['search/(:num)/(:any)/(:any)'] = 'home/search/$1/$2/$3';
 
-$route['coupons'] = "home/index/all";
-$route['coupons/(:any)'] = 'home/coupon/$1';
-
-$route['error'] = 'home/error_page';
-$route['error/(:num)'] = 'home/error_page/$1';
 //$route['api/user'] = 'api/user/index';
 //$route['api/user/(:num)'] = 'api/user/index/$1';
 //$route['api/user/(:any)'] = 'api/user';

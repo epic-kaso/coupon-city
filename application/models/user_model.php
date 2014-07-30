@@ -45,20 +45,29 @@ class User_model extends MY_Model {
     }
 
     public function add_status_field($row) {
-        $is_complete = $row->is_profile_complete;
-        if ($is_complete === 1) {
-            $row->status = 'Complete';
+        if (!$row)
+            return $row;
+        if (is_object($row)) {
+            $is_complete = $row->is_profile_complete;
+            if ($is_complete === 1) {
+                $row->status = 'Complete';
+            } else {
+                $row->status = 'Incomplete';
+            }
         } else {
-            $row->status = 'Incomplete';
+            $is_complete = $row['is_profile_complete'];
+            if ($is_complete === 1) {
+                $row['status'] = 'Complete';
+            } else {
+                $row['status'] = 'Incomplete';
+            }
         }
         return $row;
     }
 
     public function login_email($email, $password) {
 
-        $user = $this
-                ->with('coupons')
-                ->get_by(array('email' => $email, 'password' => sha1($password)));
+        $user = $this->get_by(array('email' => $email, 'password' => sha1($password)));
 
         if (!empty($user) && is_object($user)) {
             $user->wallet = $this->get_wallet($user->id);
@@ -130,7 +139,7 @@ class User_model extends MY_Model {
     }
 
     public function set_profile_complete($user_id, $value = 1) {
-        return $this->update($user_id, array('is_profile_complete', $value));
+        return $this->update($user_id, array('is_profile_complete', $value), TRUE);
     }
 
     public function add_coupon($user_id, $coupon_id) {
@@ -172,11 +181,6 @@ class User_model extends MY_Model {
     }
 
     private function _create_session($user) {
-        if (@property_exists($user, 'coupons')) {
-            $coups = $user->coupons;
-        } else {
-            $coups = array();
-        }
         $data = array(Home::USER_SESSION_VARIABLE =>
             array('id' => $user->id,
                 'email' => $user->email
@@ -196,7 +200,7 @@ class User_model extends MY_Model {
     }
 
     public function get_current() {
-        $d = $this->session->userdata(self::USER_SESSION_VARIABLE);
+        $d = $this->session->userdata(Home::USER_SESSION_VARIABLE);
         return $this->get($d['id']);
     }
 

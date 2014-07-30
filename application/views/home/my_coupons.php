@@ -1,5 +1,5 @@
 <div class="gap"></div>
-<?php if ($logged_in) { ?>
+<?php if ($user !== FALSE) { ?>
     <div class="container">
         <div class="row">
             <div class="span3">

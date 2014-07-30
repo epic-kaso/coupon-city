@@ -37,8 +37,7 @@ if (!isset($active)) {
             <div class="span5">
                 <!-- LOGIN REGISTER LINKS -->
                 <?php
-                $current_user = @$this->session->userdata(Home::USER_SESSION_VARIABLE);
-                if (empty($current_user) || !$current_user) {
+                if (!$user) {
                     ?>
                     <ul class="login-register">
                         <li><a class="popup-text" href="#login-dialog" data-effect="mfp-move-from-top"><i class="icon-signin"></i>Sign in</a>
@@ -48,9 +47,9 @@ if (!isset($active)) {
                     </ul>
                 <?php } else { ?>
                     <ul class="nav nav-pills flexnav">
-                        <li><a href="<?= base_url('profile'); ?>"><?= $current_user['email']; ?></a>
+                        <li><a href="<?= base_url('profile'); ?>"><?= $user->email; ?></a>
                         </li>
-                        <li><a class="popup-text" href="#wallet-dialog" data-effect="mfp-move-from-top"><span class="active icon-credit-card"></span> ₦ <?= current_user_wallet(); ?></a>
+                        <li><a class="popup-text" href="#wallet-dialog" data-effect="mfp-move-from-top"><span class="active icon-credit-card"></span> ₦ <?= $user->wallet_balance; ?></a>
                         </li>
                         <li><a href="<?= base_url('settings') ?>"><span class="active icon-gears"></span> Settings</a>
                         </li>
