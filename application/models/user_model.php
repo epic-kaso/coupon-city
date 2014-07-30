@@ -103,17 +103,13 @@ class User_model extends MY_Model {
     }
 
     public function enable_fb_oauth($email, $data) {
-        $user = $this->get_by(array('email' => $email));
+        $user = $this->get_by(array('email' => $email, 'oauth_enabled' => 0));
         if (!$user) {
             return FALSE;
         } else {
-            $this->update($user->id, $data);
+            $this->update($user->id, $data, TRUE);
             $user = $this->get_by(array('email' => $email));
-            if (!$user) {
-                return $user;
-            } else {
-                return $user;
-            }
+            return $user;
         }
     }
 
