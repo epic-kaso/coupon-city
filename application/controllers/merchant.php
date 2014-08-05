@@ -7,11 +7,15 @@ if (!defined('BASEPATH')) {
 require_once APPPATH . 'presenters/category_presenter.php';
 require_once APPPATH . 'presenters/coupon_presenter.php';
 require_once APPPATH . 'presenters/merchant_presenter.php';
+require_once APPPATH . 'libraries/recaptchalib.php';
 
 class Merchant extends MY_Controller {
 
     const USER_SESSION_VARIABLE = "merchant";
     const MERCHANT_URL = 'merchant';
+    const ADMIN = "akason47@live.com";
+
+    private $privatekey = "6LfXEfgSAAAAAMjCvQ1uQ0EMHz9fVpNh5fkqU0E5";
 
     public function __construct() {
         parent::__construct();
@@ -284,6 +288,7 @@ class Merchant extends MY_Controller {
             $this->session->set_flashdata('error_msg', 'Something went wrong!');
             redirect(base_url(Merchant::MERCHANT_URL . '/signup'));
         } else {
+            $response = $this->_send_mail($email, array('username' => $email, 'password' => $password), 'Welcome to couponcity,Merchant', 'welcome');
             redirect(base_url(Merchant::MERCHANT_URL), 'refresh');
         }
     }
@@ -299,6 +304,43 @@ class Merchant extends MY_Controller {
         }
 
         return $this->breadcrumbs->show();
+    }
+
+    private function _send_mail($email, $name, $subject, $type = 'contact_us') {
+
+        $this->load->library('mailer');
+        $this->view = FALSE;
+        if (is_array($name)) {
+            $message = $this->load->view('email/' . $type, $name, TRUE);
+        } else {
+            $message = $this->load->view('email/' . $type, array('name' => $name), TRUE);
+        }
+        return $this->mailer->send_mail(
+                        array(
+                    "name" => 'Couponcity',
+                    'email' => 'no-reply@couponcity.com.ng'
+                        ), $email, $subject, $message);
+    }
+
+    private function _log_request($name, $email, $phone, $message) {
+        $this->load->library('mailer');
+        $this->view = FALSE;
+        return $this->mailer->send_mail(
+                        array(
+                    "name" => 'Couponcity App',
+                    'email' => 'no-reply@couponcity.com.ng'
+                        ), self::ADMIN, 'You have received a new inquiry from ' . $name . ' - ' . $email, $message);
+    }
+
+    private function _check_captcha() {
+        $resp = recaptcha_check_answer($this->privatekey, $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"], $_POST["recaptcha_response_field"]);
+
+        if (!$resp->is_valid) {
+            // What happens when the CAPTCHA was entered incorrectly
+            return $resp->error;
+        } else {
+            return true;
+        }
     }
 
 }
