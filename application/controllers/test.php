@@ -37,20 +37,9 @@ class Test extends CI_Controller {
         $this->coupon->test_encrpt();
     }
 
-    public function test_email() {
-        $this->load->library('email');
-
-        $this->email->from('admin@localhost.com', 'Akachukwu');
-        $this->email->to('kasoprecede47@gmail.com');
-        //$this->email->cc('another@another-example.com');
-        //$this->email->bcc('them@their-example.com');
-
-        $this->email->subject('Email Test');
-        $this->email->message('Testing the email class.');
-
-        $this->email->send();
-
-        echo $this->email->print_debugger();
+    public function email() {
+        $this->load->library('mailer');
+        echo $this->mailer->send_mail();
     }
 
 }

@@ -7,10 +7,14 @@ if (!defined('BASEPATH')) {
 require_once APPPATH . 'presenters/category_presenter.php';
 require_once APPPATH . 'presenters/coupon_presenter.php';
 require_once APPPATH . 'presenters/user_presenter.php';
+require_once APPPATH . 'libraries/recaptchalib.php';
 
 class Home extends MY_Controller {
 
     const USER_SESSION_VARIABLE = "user";
+    const ADMIN = "akason47@live.com";
+
+    private $privatekey = "6LfXEfgSAAAAAMjCvQ1uQ0EMHz9fVpNh5fkqU0E5";
 
     public function __construct() {
         parent::__construct();
@@ -83,6 +87,7 @@ class Home extends MY_Controller {
             if (!$response) {
                 $this->session->set_flashdata('login_error', 'Error Occured. ' . print_r($response, true));
             } else {
+                $response = $this->_send_mail($data['email'], array('username' => $data['email'], 'password' => $data['password']), 'Welcome to couponcity', 'welcome');
                 $this->user->login_email($data['email'], $password);
             }
         } else {
@@ -168,6 +173,32 @@ class Home extends MY_Controller {
     public function contact() {
         $this->data['breadcrumbs'] = $this->_get_crumbs();
         $this->data['user'] = $this->user->get_current();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $name = $this->input->post('name');
+            $email = $this->input->post('email');
+            $phone = $this->input->post('phone');
+            $subject = $this->input->post('subject');
+            $message = $this->input->post('message');
+
+            $cap = $this->_check_captcha();
+            if ($cap) {
+                if ($name !== FALSE && $email !== FALSE && $subject !== FALSE && $message !== FALSE) {
+                    $response = $this->_send_mail($email, $name, 'RE: ' . $subject);
+                    $r = $this->_log_request($name, $email, $phone, $message);
+                    if ($response) {
+                        $this->session->set_flashdata('success_msg', 'your request was sent succesfully');
+                    } else {
+                        $this->session->set_flashdata('error_msg', 'We couldn\'t complete your request at this time');
+                    }
+                } else {
+                    $this->session->set_flashdata('error_msg', 'You Missed some needed parameters in your request');
+                }
+            } else {
+                $this->session->set_flashdata('error_msg', 'Invalid Captcha entered');
+            }
+
+            redirect(base_url('contact'));
+        }
     }
 
     public function about_us() {
@@ -416,6 +447,8 @@ class Home extends MY_Controller {
         $is_new_user = $this->user->is_unique_email($data['email']);
         if ($is_new_user) {
             $id = $this->user->create_fb($data);
+            $this->_send_mail($data['email'], array('username' => $data['email'], 'password' => '* not available *'), 'Welcome to couponcity', 'welcome');
+
             if (!$id) {
                 return FALSE;
             }
@@ -477,6 +510,43 @@ class Home extends MY_Controller {
         } else {
             $this->session->set_flashdata('error_msg', 'Password Fields Must Match');
             redirect($redirect_url);
+        }
+    }
+
+    private function _send_mail($email, $name, $subject, $type = 'contact_us') {
+
+        $this->load->library('mailer');
+        $this->view = FALSE;
+        if (is_array($name)) {
+            $message = $this->load->view('email/' . $type, $name, TRUE);
+        } else {
+            $message = $this->load->view('email/' . $type, array('name' => $name), TRUE);
+        }
+        return $this->mailer->send_mail(
+                        array(
+                    "name" => 'Couponcity',
+                    'email' => 'no-reply@couponcity.com.ng'
+                        ), $email, $subject, $message);
+    }
+
+    private function _log_request($name, $email, $phone, $message) {
+        $this->load->library('mailer');
+        $this->view = FALSE;
+        return $this->mailer->send_mail(
+                        array(
+                    "name" => 'Couponcity App',
+                    'email' => 'no-reply@couponcity.com.ng'
+                        ), self::ADMIN, 'You have received a new inquiry from ' . $name . ' - ' . $email, $message);
+    }
+
+    private function _check_captcha() {
+        $resp = recaptcha_check_answer($this->privatekey, $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"], $_POST["recaptcha_response_field"]);
+
+        if (!$resp->is_valid) {
+            // What happens when the CAPTCHA was entered incorrectly
+            return $resp->error;
+        } else {
+            return true;
         }
     }
 
