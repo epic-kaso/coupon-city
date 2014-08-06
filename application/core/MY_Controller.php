@@ -38,8 +38,8 @@ class MY_Controller extends CI_Controller {
             $this->data['success_msg'] = $this->session->flashdata('success_msg');
             $this->data['yield'] = $this->load->view($view, $this->data, TRUE);
 
-            $layout_ext = $this->mobile_detect->isMobile() ? '.mobile.php' : '.php';
-            $layout_end = $this->mobile_detect->isMobile() ? '.mobile' : '';
+            $layout_ext = $this->mobile_detect->isMobile() ? '-mobile.php' : '.php';
+            $layout_end = $this->mobile_detect->isMobile() ? '-mobile' : '';
 
             if (is_string($this->layout) && !empty($this->layout)) {
                 $layout = $this->layout;
