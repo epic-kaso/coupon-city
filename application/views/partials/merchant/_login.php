@@ -19,12 +19,12 @@
             <input type="submit" value="Sign in" class="btn btn-primary">
         </form>
     </div>
-    <?php if (!isset($echo_)) { ?>
-        <ul class="dialog-alt-links">
-            <li><a class="popup-text" href="#register-dialog" data-effect="mfp-zoom-out">Not member yet</a>
-            </li>
-            <li><a class="popup-text" href="#password-recover-dialog" data-effect="mfp-zoom-out">Forgot password</a>
-            </li>
-        </ul>
-    <?php } ?>
+    <ul class="dialog-alt-links">
+        <li><a href="<?= base_url(Merchant::MERCHANT_URL . '/signup'); ?>">Not member yet</a>
+        </li>
+        <li><a class="popup-text" href="#password-recover-dialog" data-effect="mfp-zoom-out">Forgot password</a>
+        </li>
+    </ul>
 </div>
+
+<?= partial('partials/account/_forgot_password', array('user' => 'merchant')) ?>

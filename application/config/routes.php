@@ -61,6 +61,8 @@ $route['about'] = 'home/about_us';
 $route['how-it-works'] = 'home/how_it_works';
 $route['help-faq'] = 'home/help_faq';
 $route['profile'] = 'home/profile';
+$route['user/forgot-password'] = 'home/forgot_password';
+$route['reset_password'] = 'home/reset_password';
 $route['edit-profile'] = 'home/edit_profile';
 $route['settings'] = 'home/settings';
 $route['coupon-not-found'] = 'home/coupon_not_found';
@@ -94,6 +96,8 @@ $route['merchant/my-coupons'] = 'merchant/my_coupons';
 $route['merchant/my-coupons/(:any)'] = 'merchant/my_coupons/$1';
 $route['merchant/my-coupons/(:any)/(:num)'] = 'merchant/my_coupons/$1/$2';
 $route['merchant/verify-coupon'] = 'coupon/verify_coupon';
+$route['merchant/forgot-password'] = 'merchant/forgot_password';
+$route['merchant/reset_password'] = 'merchant/reset_password';
 
 
 //$route['api/user'] = 'api/user/index';

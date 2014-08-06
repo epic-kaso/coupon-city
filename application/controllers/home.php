@@ -238,12 +238,65 @@ class Home extends MY_Controller {
         $this->data['logged_in'] = $this->session->userdata('logged_in');
     }
 
+    public function forgot_password() {
+        $this->view = FALSE;
+        $email = $this->input->post('email');
+        if ($email != FALSE) {
+            $user = $this->user->get_by(array('email' => $email));
+            if (!$user) {
+                $this->session->set_flashdata('error_msg', 'Invalid Email');
+            } else {
+                $code = $this->_generate_activation_code($email);
+                $this->user->update($user->id, array('activation_code' => $code), TRUE);
+                $url = base_url('reset_password?code=' . base64_encode($code) . "&email=$email");
+
+                $this->_send_mail($email, array('url' => $url), 'Couponcity: Password Reset', 'forgot_password');
+                $this->session->set_flashdata('success_msg', "Email sent to $email Please check your inbox, follow the message to proceed");
+            }
+        }
+        redirect(base_url());
+    }
+
+    public function reset_password() {
+        $this->data['user'] = null;
+        $this->data['breadcrumbs'] = $this->_get_crumbs();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $password = $this->input->post('password');
+            $password_conf = $this->input->post('re_password');
+
+            if ($password !== FALSE && $password_conf !== FALSE && strcmp($password, $password_conf) === 0) {
+                $this->user->update($this->session->userdata('f_user_id'), array('password' => sha1($password)), TRUE);
+                $this->session->set_flashdata('success_msg', "Password Changed Successfully");
+                $this->data['message'] = "Password Changed Successfully, proceed to login";
+                $this->session->unset_userdata('f_user_id');
+            } else {
+                $this->session->set_flashdata('error_msg', "Invalid Password/ Confirmation Password");
+            }
+        } else {
+            $this->data = array('url' => base_url('reset_password'));
+            $email = $this->input->get('email');
+            $code = $this->input->get('code');
+            if ($email != FALSE && $code != FALSE) {
+                $user = $this->user->get_by(array('email' => $email, 'activation_code' => base64_decode($code)));
+                if (!$user) {
+                    $this->session->set_flashdata('error_msg', "Invalid Email/Code combination");
+                    redirect(base_url());
+                } else {
+                    $this->session->set_userdata('f_user_id', $user->id);
+                }
+            } else {
+                $this->session->set_flashdata('error_msg', "Invalid Email/Code combination");
+                redirect(base_url());
+            }
+        }
+    }
+
     public function my_coupons($category = 'all', $page = 0) {
         $this->_is_logged_in();
         $user = $this->user->get_current();
-        $error = !$this->session->flashdata('error_msg') ? 'Please Login or Create an Account' :
-                $this->session->flashdata('error_msg');
-        $this->session->flashdata('error_msg', $error);
+        $error = !$this->session->set_flashdata('error_msg') ? 'Please Login or Create an Account' :
+                $this->session->set_flashdata('error_msg');
+        $this->session->set_flashdata('error_msg', $error);
         $this->data['breadcrumbs'] = $this->_get_crumbs();
         $this->data['user'] = $user;
 
@@ -548,6 +601,11 @@ class Home extends MY_Controller {
         } else {
             return true;
         }
+    }
+
+    private function _generate_activation_code($email) {
+        $salt = 'kasoprecede_couponcity';
+        return crypt($salt . $email . time());
     }
 
 }
