@@ -273,7 +273,7 @@ class Home extends MY_Controller {
                 $this->session->set_flashdata('error_msg', "Invalid Password/ Confirmation Password");
             }
         } else {
-            $this->data = array('url' => base_url('reset_password'));
+
             $email = $this->input->get('email');
             $code = $this->input->get('code');
             if ($email != FALSE && $code != FALSE) {
@@ -282,7 +282,13 @@ class Home extends MY_Controller {
                     $this->session->set_flashdata('error_msg', "Invalid Email/Code combination");
                     redirect(base_url());
                 } else {
-                    $this->session->set_userdata('f_user_id', $user->id);
+                    if (!$this->_is_token_valid($user)) {
+                        $this->session->set_flashdata('error_msg', "Expired Token");
+                        redirect(base_url());
+                    } else {
+                        $this->session->set_userdata('f_user_id', $user->id);
+                        $this->data = array('url' => base_url('reset_password'), 'email' => $email);
+                    }
                 }
             } else {
                 $this->session->set_flashdata('error_msg', "Invalid Email/Code combination");
@@ -606,6 +612,18 @@ class Home extends MY_Controller {
     private function _generate_activation_code($email) {
         $salt = 'kasoprecede_couponcity';
         return crypt($salt . $email . time());
+    }
+
+    private function _is_token_valid($user) {
+        $updated = $user->updated_at;
+        $date = human_to_unix($updated);
+        $expire = (15 * 60) + $date;
+
+        if (date('U') > $expire) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
     }
 
 }
