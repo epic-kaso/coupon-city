@@ -85,7 +85,7 @@ app.controller('CouponUploadController', ['$scope', '$http', '$filter', '$window
         };
         
         
-        $scope.couponform.src = my_globals.base_url + 'assets/img/dummy.jpg';
+        $scope.couponform.src = my_globals.base_url + 'assets/images/no_image.png';
         $scope.$watch('coupon.start_date', function(newv, oldv) {
             if (newv !== oldv) {
                 console.log('has ran');
