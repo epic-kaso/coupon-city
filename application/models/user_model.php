@@ -207,6 +207,7 @@ class User_model extends MY_Model {
             'created_at',
             'updated_at',
             'id',
+            'wallet_balance',
             'status',
             'password',
             'active',
