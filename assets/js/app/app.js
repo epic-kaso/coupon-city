@@ -62,6 +62,29 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 app.controller('CouponUploadController', ['$scope', '$http', '$filter', '$window', function($scope, $http, $filter, $window) {
         $scope.submitting = false;
         $scope.couponform = {};
+        $scope.adv_price_form = {
+            first: {visible: true},
+            second: {visible: false},
+            third: {visible: false}
+        };
+        
+        $scope.add_next_adv_price_form = function(){
+            if($scope.adv_price_form.second.visible){
+                $scope.adv_price_form.third.visible = true;
+            }else{
+                $scope.adv_price_form.second.visible = true;
+            }
+        };
+        
+        $scope.remove_next_adv_price_form = function(){
+            if(!$scope.adv_price_form.third.visible){
+                $scope.adv_price_form.second.visible = false;
+            }else{
+                $scope.adv_price_form.third.visible = false;
+            }
+        };
+        
+        
         $scope.couponform.src = my_globals.base_url + 'assets/img/dummy.jpg';
         $scope.$watch('coupon.start_date', function(newv, oldv) {
             if (newv !== oldv) {
@@ -188,6 +211,8 @@ app.controller('CouponUploadController', ['$scope', '$http', '$filter', '$window
             e.preventDefault();
         };
     }]);
+
+
 app.controller('VerifyCouponController', ['$scope', '$http', '$timeout', function($scope, $http, $timeout) {
         $scope.is_success = false;
         $scope.is_failure = false;

@@ -49,7 +49,7 @@
                     <td><label>% Discount</label></td>
                 </tr>
             </thead>
-            <tr>
+            <tr ng-show="adv_price_form.first.visible">
                 <td>
                     <input name="advanced_pricing[first][price]" 
                            ng-change="calculate_advanced_discount('first',coupon.advanced_pricing.first.price,coupon.advanced_pricing.first.discount)" 
@@ -69,7 +69,7 @@
                            required ng-model="coupon.advanced_pricing.first.discount" type="number" placeholder="Percentage Discount" class="span1">
                 </td>
             </tr>
-            <tr>
+            <tr ng-show="adv_price_form.second.visible">
                 <td>
                     <input name="advanced_pricing[second][price]" ng-change="calculate_advanced_discount('second',coupon.advanced_pricing.second.price,coupon.advanced_pricing.second.discount)" 
                            required ng-model="coupon.advanced_pricing.second.price" type="number" placeholder="New Price" class="span1">
@@ -87,7 +87,7 @@
                            required ng-model="coupon.advanced_pricing.second.discount" type="number" placeholder="Percentage Discount" class="span1">
                 </td>
             </tr>
-            <tr>
+            <tr ng-show="adv_price_form.third.visible">
                 <td>
                     <input name="advanced_pricing[third][price]" 
                            ng-change="calculate_advanced_discount('third',coupon.advanced_pricing.third.price,coupon.advanced_pricing.third.discount)" 
@@ -105,6 +105,14 @@
                            ng-change="calculate_advanced_price('third',coupon.advanced_pricing.third.price,coupon.advanced_pricing.third.discount)" 
                            required ng-model="coupon.advanced_pricing.third.discount" type="number" placeholder="Percentage Discount" class="span1">
                 </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span ng-click="add_next_adv_price_form()" class="btn btn-mini inline">Add</span>
+                    <span ng-click="remove_next_adv_price_form()" class="btn btn-mini inline">Remove</span>
+                </td>
+                <td></td>
+                <td></td>
             </tr>
         </table>
     </div>
