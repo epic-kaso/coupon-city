@@ -34,7 +34,7 @@ class Home extends MY_Controller {
         $this->pagination->initialize($config);
         $this->data['links'] = $this->pagination->create_links();
         $this->data['breadcrumbs'] = $this->_get_crumbs();
-        $this->data['user'] = $this->get_current();
+        $this->data['user'] = $this->home->get_current();
     }
 
     public function login() {
