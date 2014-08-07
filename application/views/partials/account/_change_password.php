@@ -1,25 +1,20 @@
-<h1><?php echo lang('change_password_heading');?></h1>
+<div class="mfp-dialog clearfix">
+    <i class="icon-edit dialog-icon"></i>
+    <h3>Change Password</h3>
+    <div class="row-fluid">
+        <form class="dialog-form" action="<?= $change_password_url ?>" method="post">
+            <label>Email: <strong><?= @$email ?></strong></label>
+            <input type="hidden" name="change_password" value="true" />
+            <label>Password</label>
+            <input type="password" placeholder="My secret password" name="password" class="span12">
+            <label>Repeat Password</label>
+            <input type="password" placeholder="Type your password again" name="re_password" class="span12">
+            <label class="checkbox">
+                <input type="checkbox">Accept terms and Condition
+            </label>
+            <input type="submit" value="Sign up" class="btn btn-primary">
+        </form>
+    </div>
+</div>
 
-<div id="infoMessage"><?php echo $message;?></div>
 
-<?php echo form_open("auth/change_password");?>
-
-      <p>
-            <?php echo lang('change_password_old_password_label', 'old_password');?> <br />
-            <?php echo form_input($old_password);?>
-      </p>
-
-      <p>
-            <label for="new_password"><?php echo sprintf(lang('change_password_new_password_label'), $min_password_length);?></label> <br />
-            <?php echo form_input($new_password);?>
-      </p>
-
-      <p>
-            <?php echo lang('change_password_new_password_confirm_label', 'new_password_confirm');?> <br />
-            <?php echo form_input($new_password_confirm);?>
-      </p>
-
-      <?php echo form_input($user_id);?>
-      <p><?php echo form_submit('submit', lang('change_password_submit_btn'));?></p>
-
-<?php echo form_close();?>
