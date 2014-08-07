@@ -1,13 +1,9 @@
-
 <?php
 if (strcmp(site_url(), current_url()) === 0) {
     echo partial('partials/_featured_item', $featured_item);
 }
 ?>
 <!-- END TOP AREA -->
-
-
-
 <div class="gap"></div>
 <!-- END SEARCH AREA -->
 

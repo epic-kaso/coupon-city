@@ -112,7 +112,9 @@ class Coupon_presenter extends Presenter {
 
     public function featured_item($id = 1) {
         $this->load->model('coupon_model');
-        $row = null; //$this->coupon_model->with('coupon_medias')->get($id);
+        $couponz = $this->coupon_model->with('coupon_medias')->get_all();
+        shuffle($couponz);
+        $row = $couponz[rand(0, count($couponz))]; //$this->coupon_model->with('coupon_medias')->get($id);
         if (empty($row) || $row == FALSE) {
             return FALSE;
         } else {
