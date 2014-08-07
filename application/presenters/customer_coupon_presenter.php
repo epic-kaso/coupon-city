@@ -76,7 +76,7 @@ class Coupon_presenter extends Presenter {
         $ci->load->model(array('coupon_sale_model', 'coupon_view_model', 'coupon_redemption_model'));
         $ci->load->model('user_coupon_model', 'user_coupons');
         $ci->load->model('user_model', 'user');
-        $user = $ci->user->get_current();
+        $user = $ci->home->get_current();
         if (!$user) {
             $row->user_owns_coupon = FALSE;
             return $row;

@@ -359,13 +359,13 @@ class Coupon_model extends MY_Model {
         $CI->load->model('coupon_sale_model', 'coupon_sale');
 
         $coupon = $this->get($coupon_id);
-        $user = $CI->user->get($user_id);
+        $user = $CI->home->get($user_id);
 
         $wallet_balance = $user->wallet_balance;
 
         $amt = $this->_calculate_coupon_price($coupon);
         if ($wallet_balance >= $amt) {
-            $CI->user->debit_wallet($user_id, $amt);
+            $CI->home->debit_wallet($user_id, $amt);
             $user_coupon = $this->generate_user_coupon($coupon->coupon_code, $user->email);
             $response = $CI->user_coupon->insert(
                     array(
@@ -437,7 +437,7 @@ class Coupon_model extends MY_Model {
         if ($coupon->merchant_id != $merchant_id) {
             return FALSE;
         }
-        $user = $ci->user->get_by(array('email' => $email));
+        $user = $ci->home->get_by(array('email' => $email));
         if (!$coupon || !$user) {
             return FALSE;
         } else {

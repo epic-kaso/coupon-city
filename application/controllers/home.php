@@ -4,26 +4,16 @@ if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 
-require_once APPPATH . 'presenters/category_presenter.php';
-require_once APPPATH . 'presenters/coupon_presenter.php';
-require_once APPPATH . 'presenters/user_presenter.php';
-require_once APPPATH . 'libraries/recaptchalib.php';
-
 class Home extends MY_Controller {
 
     const USER_SESSION_VARIABLE = "user";
-    const ADMIN = "akason47@live.com";
 
-    private $privatekey = "6LfXEfgSAAAAAMjCvQ1uQ0EMHz9fVpNh5fkqU0E5";
+    public $salt = 'kasoprecede_couponcity';
+    public $user_session_variable = "user";
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('category_model', 'category');
-        $this->load->model('coupon_model', 'coupons');
-        $this->load->model('user_model', 'user');
-        $this->load->library('pagination');
-        $this->load->library('breadcrumbs');
-        $this->load->library('qpagination');
+        $this->load->model('user_model', 'home');
     }
 
     public function index($category = 'all', $page = 0) {
@@ -44,7 +34,7 @@ class Home extends MY_Controller {
         $this->pagination->initialize($config);
         $this->data['links'] = $this->pagination->create_links();
         $this->data['breadcrumbs'] = $this->_get_crumbs();
-        $this->data['user'] = $this->user->get_current();
+        $this->data['user'] = $this->get_current();
     }
 
     public function login() {
@@ -57,7 +47,7 @@ class Home extends MY_Controller {
         if ($email === FALSE || $password === FALSE) {
             $this->session->set_flashdata('login_error', 'Username or password is invalid');
         } else {
-            $user = $this->user->login_email($email, $password);
+            $user = $this->home->login_email($email, $password);
             if (!$user) {
                 $this->session->set_flashdata('login_error', 'Username/Password combination doesn\'t belong to any account.');
             }
@@ -66,9 +56,7 @@ class Home extends MY_Controller {
     }
 
     public function logout() {
-        //$this->session->unset_userdata(array(Home::USER_SESSION_VARIABLE => ''));
-        $this->session->sess_destroy();
-        redirect(base_url());
+        parent::logout();
     }
 
     public function signup() {
@@ -83,12 +71,12 @@ class Home extends MY_Controller {
             unset($data['re_password']);
             unset($data['redirect']);
 
-            $response = $this->user->insert($data);
+            $response = $this->home->insert($data);
             if (!$response) {
                 $this->session->set_flashdata('login_error', 'Error Occured. ' . print_r($response, true));
             } else {
                 $response = $this->_send_mail($data['email'], array('username' => $data['email'], 'password' => $data['password']), 'Welcome to couponcity', 'welcome');
-                $this->user->login_email($data['email'], $password);
+                $this->home->login_email($data['email'], $password);
             }
         } else {
             $this->session->set_flashdata('login_error', 'Password mis-match');
@@ -128,7 +116,7 @@ class Home extends MY_Controller {
         $this->data['search_result'] = $search_result;
         $this->data['search_query'] = $search_query;
         $this->data['coupons'] = $coupon_presenter;
-        $this->data['user'] = $this->user->get_current();
+        $this->data['user'] = $this->home->get_current();
         $this->data['links'] = $this->qpagination->create_links();
         $this->data['breadcrumbs'] = $this->_get_crumbs();
     }
@@ -137,7 +125,7 @@ class Home extends MY_Controller {
         $this->load->model('coupon_view_model', 'coupon_view');
 
         $coupon = $this->coupons->get_by_slug($slug);
-        $this->data['user'] = $this->user->get_current();
+        $this->data['user'] = $this->home->get_current();
         $this->data['breadcrumbs'] = $this->_get_crumbs();
         if (!$coupon) {
             show_404('home/error_page');
@@ -153,7 +141,7 @@ class Home extends MY_Controller {
 
         $this->_is_logged_in();
 
-        $user = $this->user->get_current();
+        $user = $this->home->get_current();
         $coupon = $this->coupons->get_by_slug($slug);
         $response = $this->coupons->grab_coupon($coupon->id, $user->id);
 
@@ -172,7 +160,7 @@ class Home extends MY_Controller {
 
     public function contact() {
         $this->data['breadcrumbs'] = $this->_get_crumbs();
-        $this->data['user'] = $this->user->get_current();
+        $this->data['user'] = $this->home->get_current();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $name = $this->input->post('name');
             $email = $this->input->post('email');
@@ -203,36 +191,36 @@ class Home extends MY_Controller {
 
     public function about_us() {
         $this->data['breadcrumbs'] = $this->_get_crumbs();
-        $this->data['user'] = $this->user->get_current();
+        $this->data['user'] = $this->home->get_current();
     }
 
     public function how_it_works() {
         $this->data['breadcrumbs'] = $this->_get_crumbs();
-        $this->data['user'] = $this->user->get_current();
+        $this->data['user'] = $this->home->get_current();
     }
 
     public function help_faq() {
         $this->data['breadcrumbs'] = $this->_get_crumbs();
-        $this->data['user'] = $this->user->get_current();
+        $this->data['user'] = $this->home->get_current();
     }
 
     public function coupon_not_found() {
         $this->view = 'home/error_page';
         $this->data['code'] = 'Coupon Not Found';
         $this->data['breadcrumbs'] = $this->_get_crumbs();
-        $this->data['user'] = $this->user->get_current();
+        $this->data['user'] = $this->home->get_current();
     }
 
     public function error_page($code = 404) {
         $this->data['code'] = $code;
         $this->data['breadcrumbs'] = $this->_get_crumbs();
-        $this->data['user'] = $this->user->get_current();
+        $this->data['user'] = $this->home->get_current();
     }
 
     public function settings() {
         $this->_is_logged_in();
         $this->data['breadcrumbs'] = $this->_get_crumbs();
-        $user = $this->user->get_current();
+        $user = $this->home->get_current();
         $this->data['profile'] = new User_presenter($user);
         $this->data['user'] = $user;
         $this->data['logged_in'] = $this->session->userdata('logged_in');
@@ -242,12 +230,12 @@ class Home extends MY_Controller {
         $this->view = FALSE;
         $email = $this->input->post('email');
         if ($email != FALSE) {
-            $user = $this->user->get_by(array('email' => $email));
+            $user = $this->home->get_by(array('email' => $email));
             if (!$user) {
                 $this->session->set_flashdata('error_msg', 'Invalid Email');
             } else {
                 $code = $this->_generate_activation_code($email);
-                $this->user->update($user->id, array('activation_code' => $code), TRUE);
+                $this->home->update($user->id, array('activation_code' => $code), TRUE);
                 $url = base_url('reset_password?code=' . base64_encode($code) . "&email=$email");
 
                 $this->_send_mail($email, array('url' => $url), 'Couponcity: Password Reset', 'forgot_password');
@@ -265,7 +253,7 @@ class Home extends MY_Controller {
             $password_conf = $this->input->post('re_password');
 
             if ($password !== FALSE && $password_conf !== FALSE && strcmp($password, $password_conf) === 0) {
-                $this->user->update($this->session->userdata('f_user_id'), array('password' => sha1($password)), TRUE);
+                $this->home->update($this->session->userdata('f_user_id'), array('password' => sha1($password)), TRUE);
                 $this->session->set_flashdata('success_msg', "Password Changed Successfully");
                 $this->data['message'] = "Password Changed Successfully, proceed to login";
                 $this->session->unset_userdata('f_user_id');
@@ -277,7 +265,7 @@ class Home extends MY_Controller {
             $email = $this->input->get('email');
             $code = $this->input->get('code');
             if ($email != FALSE && $code != FALSE) {
-                $user = $this->user->get_by(array('email' => $email, 'activation_code' => base64_decode($code)));
+                $user = $this->home->get_by(array('email' => $email, 'activation_code' => base64_decode($code)));
                 if (!$user) {
                     $this->session->set_flashdata('error_msg', "Invalid Email/Code combination");
                     redirect(base_url());
@@ -299,7 +287,7 @@ class Home extends MY_Controller {
 
     public function my_coupons($category = 'all', $page = 0) {
         $this->_is_logged_in();
-        $user = $this->user->get_current();
+        $user = $this->home->get_current();
         $error = !$this->session->set_flashdata('error_msg') ? 'Please Login or Create an Account' :
                 $this->session->set_flashdata('error_msg');
         $this->session->set_flashdata('error_msg', $error);
@@ -352,7 +340,7 @@ class Home extends MY_Controller {
 
     public function profile() {
         $this->_is_logged_in();
-        $user = $this->user->get_current();
+        $user = $this->home->get_current();
         $this->data['profile'] = new User_presenter($user);
         $this->data['user'] = $user;
         $this->data['logged_in'] = $this->session->userdata('logged_in');
@@ -361,8 +349,8 @@ class Home extends MY_Controller {
 
     public function edit_profile() {
         $this->_is_logged_in();
-        $user = $this->user->get_current();
-        $this->data['profile'] = $this->user->profile_info($user);
+        $user = $this->home->get_current();
+        $this->data['profile'] = $this->home->profile_info($user);
         $this->data['user'] = $user;
         $this->data['breadcrumbs'] = $this->_get_crumbs();
         $this->data['logged_in'] = $this->session->userdata('logged_in');
@@ -378,7 +366,7 @@ class Home extends MY_Controller {
             $this->view = TRUE;
         } else {
             $this->view = FALSE;
-            $this->user->update($user->id, $this->input->post(), TRUE);
+            $this->home->update($user->id, $this->input->post(), TRUE);
             $this->session->set_flashdata('success_msg', 'Profile Saved!');
             redirect(base_url('profile'));
         }
@@ -386,7 +374,7 @@ class Home extends MY_Controller {
 
     public function change_password() {
         $this->view = FALSE;
-        $user = $this->user->get_current();
+        $user = $this->home->get_current();
         $password = trim($this->input->post('password'));
         $repassword = trim($this->input->post('re_password'));
         $redirect_url = $this->input->post('redirect');
@@ -416,7 +404,7 @@ class Home extends MY_Controller {
     }
 
     private function _my_coupons($limit, $page, $category = 'all') {
-        $user = $this->user->get_current();
+        $user = $this->home->get_current();
         $this->load->model('user_coupon_model', 'user_coupons');
 
         if (strcmp('all', $category) === 0) {
@@ -454,7 +442,7 @@ class Home extends MY_Controller {
     }
 
     private function _count_my_coupons($category = 'all') {
-        $user = $this->user->get_current();
+        $user = $this->home->get_current();
         $this->load->model('user_coupon_model', 'user_coupons');
 
         if (strcmp('all', $category) === 0) {
@@ -480,80 +468,29 @@ class Home extends MY_Controller {
         return $count;
     }
 
-    private function _use_pagination($total, $per_page, $base_url, $segment = 3) {
-        $config['base_url'] = $base_url;
-        $config['total_rows'] = $total;
-        $config['uri_segment'] = $segment;
-        $config['per_page'] = $per_page;
-        $config['use_page_numbers'] = TRUE;
-        $config['full_tag_open'] = '<ul>';
-        $config['full_tag_close'] = '</ul>';
-        $config['next_link'] = '&gt;';
-        $config['next_tag_open'] = '<li class="next">';
-        $config['next_tag_close'] = '</li>';
-        $config['prev_link'] = '&lt;';
-        $config['prev_tag_open'] = '<li class="prev">';
-        $config['prev_tag_close'] = '</li>';
-        $config['cur_tag_open'] = '<li class="active"><a href="#">';
-        $config['cur_tag_close'] = '</a></li>';
-        $config['num_tag_open'] = '<li>';
-        $config['num_tag_close'] = '</li>';
-
-        return $config;
-    }
-
     private function _process_fb_login($data) {
-        $is_new_user = $this->user->is_unique_email($data['email']);
+        $is_new_user = $this->home->is_unique_email($data['email']);
         if ($is_new_user) {
-            $id = $this->user->create_fb($data);
+            $id = $this->home->create_fb($data);
             $this->_send_mail($data['email'], array('username' => $data['email'], 'password' => '* not available *'), 'Welcome to couponcity', 'welcome');
 
             if (!$id) {
                 return FALSE;
             }
-            $user = $this->user->login_fb($data['email'], $data['fb_oauth_id']);
+            $user = $this->home->login_fb($data['email'], $data['fb_oauth_id']);
         } else {
-            $user = $this->user->is_fb_oauth_enabled($data['email']);
+            $user = $this->home->is_fb_oauth_enabled($data['email']);
             if (!$user) {
-                $user = $this->user->enable_fb_oauth($data['email'], $data);
+                $user = $this->home->enable_fb_oauth($data['email'], $data);
             }
-            $this->user->login_fb($data['email'], $data['fb_oauth_id']);
+            $this->home->login_fb($data['email'], $data['fb_oauth_id']);
         }
         $this->session->set_userdata('fb_login', true);
         return TRUE;
     }
 
-    private function _is_logged_in($redirect = null) {
-        $data = $this->session->userdata(Home::USER_SESSION_VARIABLE);
-        if (!empty($data) && is_array($data) && is_numeric($data['id'])) {
-            $status = TRUE;
-        } else {
-            $status = FALSE;
-        }
-        if (!$status) {
-            $this->session->set_flashdata('login_error', 'Oww, Please you need to login/signup to do that');
-            if (is_null($redirect)) {
-                $redirect = base_url();
-            }
-            redirect($redirect);
-        } else {
-            return $status;
-        }
-    }
-
-    private function _get_crumbs() {
-        $uri = uri_string();
-        $uris = explode('/', $uri);
-
-        $v = "";
-        foreach ($uris as $value) {
-            $v .= '/' . $value;
-            $this->breadcrumbs->push($value, base_url($v));
-        }
-
-        $this->breadcrumbs->unshift('Home', base_url());
-
-        return $this->breadcrumbs->show();
+    protected function _is_logged_in($redirect = null) {
+        parent::_is_logged_in($redirect);
     }
 
     private function _process_change_password($password, $repassword, $user, $redirect_url) {
@@ -569,60 +506,6 @@ class Home extends MY_Controller {
         } else {
             $this->session->set_flashdata('error_msg', 'Password Fields Must Match');
             redirect($redirect_url);
-        }
-    }
-
-    private function _send_mail($email, $name, $subject, $type = 'contact_us') {
-
-        $this->load->library('mailer');
-        $this->view = FALSE;
-        if (is_array($name)) {
-            $message = $this->load->view('email/' . $type, $name, TRUE);
-        } else {
-            $message = $this->load->view('email/' . $type, array('name' => $name), TRUE);
-        }
-        return $this->mailer->send_mail(
-                        array(
-                    "name" => 'Couponcity',
-                    'email' => 'no-reply@couponcity.com.ng'
-                        ), $email, $subject, $message);
-    }
-
-    private function _log_request($name, $email, $phone, $message) {
-        $this->load->library('mailer');
-        $this->view = FALSE;
-        return $this->mailer->send_mail(
-                        array(
-                    "name" => 'Couponcity App',
-                    'email' => 'no-reply@couponcity.com.ng'
-                        ), self::ADMIN, 'You have received a new inquiry from ' . $name . ' - ' . $email, $message);
-    }
-
-    private function _check_captcha() {
-        $resp = recaptcha_check_answer($this->privatekey, $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"], $_POST["recaptcha_response_field"]);
-
-        if (!$resp->is_valid) {
-            // What happens when the CAPTCHA was entered incorrectly
-            return $resp->error;
-        } else {
-            return true;
-        }
-    }
-
-    private function _generate_activation_code($email) {
-        $salt = 'kasoprecede_couponcity';
-        return crypt($salt . $email . time());
-    }
-
-    private function _is_token_valid($user) {
-        $updated = $user->updated_at;
-        $date = human_to_unix($updated);
-        $expire = (15 * 60) + $date;
-
-        if (date('U') > $expire) {
-            return FALSE;
-        } else {
-            return TRUE;
         }
     }
 
