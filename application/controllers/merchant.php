@@ -109,7 +109,8 @@ class Merchant extends MY_Controller {
         $this->data['merchant'] = $this->merchant->get($merchant['id']);
         $this->data['breadcrumbs'] = $this->_get_crumbs();
         if (!is_null($id)) {
-            $this->data['coupon'] = $this->_fetch_a_coupon($id);
+            $coupon_presenter = new Coupon_presenter($this->_fetch_a_coupon($id), TRUE);
+            $this->data['coupon'] = $coupon_presenter->item();
         } else {
             redirect(base_url(Merchant::MERCHANT_URL . '/my-coupons'));
         }

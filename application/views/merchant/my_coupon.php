@@ -17,7 +17,36 @@ if (property_exists($coupon, 'empty')) {
 
     <div class="container">
         <div class = "span6">
-            <img src="<?= base_url($coupon->cover_image_url) ?>" alt="Image Alternative text" title="The Violin" />
+            <div id="my-carousel" class="carousel slide">
+                <div class="carousel-inner">
+                    <?php
+                    $index = 0;
+                    if (property_exists($coupon, 'coupon_medias') && !empty($coupon->coupon_medias)) {
+                        foreach ($coupon->coupon_medias as $media) {
+                            ?>
+                            <div class = "<?= ($index === 0 ? 'active ' : '') ?>item">
+                                <img src = "<?= base_url($media->media_url) ?>" alt = "Image Alternative text" title = "cascada" />
+                            </div>
+                            <?php
+                            $index++;
+                        }
+                    } else {
+                        ?>
+                        <div class = "active item">
+                            <img src = "<?= base_url('assets/images/no_image.png') ?>" alt = "Image Alternative text" title = "cascada" />
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+                <?php
+                if ($index > 1) {
+                    ?>
+                    <a class="carousel-control left" href="#my-carousel" data-slide="prev"></a>
+                    <a class="carousel-control right" href="#my-carousel" data-slide="next"></a>
+                <?php } ?>
+            </div>
+
             <div class="coupon-inner">
                 <h5 class="coupon-title"><?= $coupon->name ?></h5>
                 <p class="coupon-desciption"><?= $coupon->summary ?></p>
@@ -51,38 +80,6 @@ if (property_exists($coupon, 'empty')) {
                         <span class="coupon-new-price">₦<?= $coupon->new_price ?></span>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="span6">
-            <!-- START BOOTSTRAP CAROUSEL -->
-            <div id="my-carousel" class="carousel slide">
-                <div class="carousel-inner">
-                    <?php
-                    $index = 0;
-                    if (property_exists($coupon, 'coupon_medias') && !empty($coupon->coupon_medias)) {
-                        foreach ($coupon->coupon_medias as $media) {
-                            ?>
-                            <div class = "<?= ($index === 0 ? 'active ' : '') ?>item">
-                                <img src = "<?= base_url($media->media_url) ?>" alt = "Image Alternative text" title = "cascada" />
-                            </div>
-                            <?php
-                            $index++;
-                        }
-                    } else {
-                        ?>
-                        <div class = "active item">
-                            <img src = "<?= base_url('assets/images/no_image.png') ?>" alt = "Image Alternative text" title = "cascada" />
-                        </div>
-                        <?php
-                    }
-                    ?>
-                </div>
-                <?php
-                if ($index > 1) {
-                    ?>
-                    <a class="carousel-control left" href="#my-carousel" data-slide="prev"></a>
-                    <a class="carousel-control right" href="#my-carousel" data-slide="next"></a>
-                <?php } ?>
             </div>
         </div>
         <div>
