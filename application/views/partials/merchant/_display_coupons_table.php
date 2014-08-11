@@ -1,4 +1,4 @@
-<table class="table table-striped">
+<table>
     <thead>
         <tr>
             <td>Name</td>
@@ -6,7 +6,7 @@
             <td>Active</td>
             <td>Start Date</td>
             <td>End Date</td>
-            <td>Details</td>
+            <td>&nbsp;</td>
         </tr>
     </thead>
 
@@ -26,7 +26,7 @@
                     <td><?= $coupon->deal_status == 1 ? 'Active' : 'Inactive'; ?></td>
                     <td><?= $coupon->start_date ?></td>
                     <td><?= $coupon->end_date ?></td>
-                    <td><button>Details..</button></td>
+                    <td><a href='<?= base_url(Merchant::MERCHANT_URL . '/my-coupon/' . $coupon->slug) ?>'>Details..</a></td>
                 </tr>
                 <?php
             }

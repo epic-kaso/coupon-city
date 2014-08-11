@@ -103,6 +103,18 @@ class Merchant extends MY_Controller {
         $this->data['categories'] = new Category_presenter($this->category->get_all(), base_url(Merchant::MERCHANT_URL));
     }
 
+    public function my_coupon($id = NULL) {
+        $this->_is_logged_in();
+        $merchant = $this->session->userdata('merchant');
+        $this->data['merchant'] = $this->merchant->get($merchant['id']);
+        $this->data['breadcrumbs'] = $this->_get_crumbs();
+        if (!is_null($id)) {
+            $this->data['coupon'] = $this->_fetch_a_coupon($id);
+        } else {
+            redirect(base_url(Merchant::MERCHANT_URL . '/my-coupons'));
+        }
+    }
+
     public function my_coupons($category = 'all', $page = 0) {
         $this->_is_logged_in();
         $merchant = $this->session->userdata('merchant');
@@ -278,6 +290,20 @@ class Merchant extends MY_Controller {
         }
 
         return $coupons;
+    }
+
+    private function _fetch_a_coupon($data) {
+        $merchant = $this->session->userdata('merchant');
+        if (is_numeric($data)) {
+            $coupon = $this->coupons
+                    ->with('coupon_medias')
+                    ->get_by(array('merchant_id' => $merchant['id'], 'id' => $data));
+        } else {
+            $coupon = $this->coupons
+                    ->with('coupon_medias')
+                    ->get_by(array('merchant_id' => $merchant['id'], 'slug' => $data));
+        }
+        return $coupon;
     }
 
     private function _count_coupons($category = 'all') {
