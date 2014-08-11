@@ -18,8 +18,12 @@ class Merchant extends MY_Controller {
     }
 
     public function index() {
-        $this->_is_logged_in();
-        redirect(base_url(Merchant::MERCHANT_URL . '/dashboard'));
+        if ($this->_is_logged_in_bool()) {
+            redirect(base_url(Merchant::MERCHANT_URL . '/dashboard'));
+        } else {
+            $this->layout = 'layouts/merchant-landing-page';
+            $this->view = 'merchant/landing-page';
+        }
     }
 
     public function dashboard() {

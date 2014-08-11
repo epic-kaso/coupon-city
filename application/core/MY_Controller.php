@@ -46,6 +46,17 @@ class MY_Controller extends CI_Controller {
         }
     }
 
+    protected function _is_logged_in_bool() {
+        $data = $this->session->userdata($this->user_session_variable);
+        if (!empty($data) && is_array($data) && is_numeric($data['id'])) {
+            $status = TRUE;
+        } else {
+            $status = FALSE;
+        }
+
+        return $status;
+    }
+
     protected function _is_logged_in($redirect = null) {
         $data = $this->session->userdata($this->user_session_variable);
         if (!empty($data) && is_array($data) && is_numeric($data['id'])) {
