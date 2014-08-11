@@ -2518,7 +2518,7 @@ h2.current-price {
     width: 49%;
 }
 
-.split-input.left input[type="text"], .split-input.left input[type="password"], .split-input.left input[type="email"], {
+.split-input.left input[type="text"], .split-input.left input[type="password"], .split-input.left input[type="email"] {
     width: 48%;
 }
 
@@ -3044,7 +3044,7 @@ p.view-price label {
     WIDE: Main
    ============ */
 
-    .
+    
 }
 
 @media only screen and (min-width: 1140px) {
