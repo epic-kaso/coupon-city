@@ -208,4 +208,8 @@ class MY_Controller extends CI_Controller {
         }
     }
 
+    protected function getServerRequestMethod() {
+        return $_SERVER['REQUEST_METHOD'];
+    }
+
 }

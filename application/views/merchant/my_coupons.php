@@ -1,12 +1,6 @@
 <!-- END LOGIN REGISTER LINKS CONTENT -->
 <!-- SEARCH AREA -->
 <?= partial('partials/merchant/_header_nav', array('merchant' => @$merchant)); ?>
-<!-- LOGIN REGISTER LINKS CONTENT -->
-
-<?= partial('partials/merchant/_login', array('merchant' => @$merchant)); ?>
-
-<?= partial('partials/merchant/_register', array('merchant' => @$merchant)); ?>
-
 
 <div id="password-recover-dialog" class="mfp-with-anim mfp-hide mfp-dialog clearfix">
     <i class="icon-retweet dialog-icon"></i>
