@@ -1,72 +1,69 @@
+<?php
+    if (!isset($active)) {
+        $u = uri_string();
+        $active = empty($u) ? 'home' : $u;
+    }
+?>
 
-<footer class="main">
-    <div class="gap gap-small"></div>
-    <div class="container">
-        <div class="row row-wrap">
-            <div class="span3">
-                <h5>About couponcity.com.ng</h5>
-                <p>Couponcity is the platform for grabbing quick coupons to give you access to the best deals ever</p>
-            </div>
-            <div class="span2">
-                <h5>Company</h5>
-                <ul class="list">
-                    <li><a href="#">Home</a>
+<div class="footer">
+    <div class="center clearfix">
+        <div class="footer-nav left">
+
+            <div class="clearfix">
+                <ul class="left">
+                    <li><h3>HOME</h3></li>
+                    <li <?= ($active === 'home') ? 'class="active"' : ''; ?>><a href="<?= base_url(); ?>">Home</a>
                     </li>
-                    <li><a href="#">About</a>
+                    <li  <?= ($active === 'how-it-works') ? 'class="active"' : ''; ?>><a href="<?= base_url('how-it-works'); ?>">How it works</a>
                     </li>
-                </ul>
-            </div>
-            <div class="span2">
-                <h5>For Business</h5>
-                <ul class="list">
-                    <li><a href="#">Advertising</a>
+                    <li <?= ($active === 'about') ? 'class="active"' : ''; ?>><a href="<?= base_url('about'); ?>">About us</a>
                     </li>
-                    <li><a href="#">Runnig a Deal</a>
+                    <li  <?= ($active === 'contact') ? 'class="active"' : ''; ?>><a href="<?= base_url('contact'); ?>">Contact</a>
                     </li>
-                    <li><a href="#">Accept Payments</a>
-                    </li>
-                    <li><a href="#">Referral Program</a>
-                    </li>
-                    <li><a href="#">Merchant Terms</a>
+                    <li  <?= ($active === 'help-faq') ? 'class="active"' : ''; ?>><a href="<?= base_url('help-faq'); ?>">Help & FAQ</a>
                     </li>
                 </ul>
-            </div>
-            <div class="span2">
-                <h5>Get Help</h5>
-                <ul class="list">
-                    <li><a href="#">FAQ</a>
-                    </li>
-                    <li><a href="#">Customer Support</a>
-                    </li>
-                    <li><a href="#">Return Policy</a>
-                    </li>
-                    <li><a href="#">Terms Of Use</a>
-                    </li>
-                    <li><a href="#">Privacy Statement</a>
-                    </li>
+
+                <ul class="left">
+                    <li><h3>EXPLORE</h3></li>
+                    <li><a href="">About Us</a></li>
+                    <li><a href="">Jobs</a></li>
+                    <li><a href="">Help</a></li>
+                    <li><a href="">How it works</a></li>
+                    <li><a href="">Contact Us</a></li>
+                </ul>
+
+                <ul class="left">
+                    <li><h3>INFORMATION</h3></li>
+                    <li><a href="">Terms of use</a></li>
+                    <li><a href="">Discounts</a></li>
+                    <li><a href="">How it works</a></li>
+                    <li><a href="">Help</a></li>
+                    <li><a href="">Privacy</a></li>
                 </ul>
             </div>
-            <div class="span3">
-                <h5>Keep in touch</h5>
-                <p>couponcity social platforms</p>
-                <ul class="list list-social">
-                    <li>
-                        <a href="#" class="icon-facebook box-icon" data-toggle="tooltip" title="Facebook"></a>
-                    </li>
-                    <li>
-                        <a href="#" class="icon-twitter box-icon" data-toggle="tooltip" title="Twitter"></a>
-                    </li>
-                    <li>
-                        <a href="#" class="icon-flickr box-icon" data-toggle="tooltip" title="Flickr"></a>
-                    </li>
-                    <li>
-                        <a href="#" class="icon-linkedin box-icon" data-toggle="tooltip" title="Linkedin"></a>
-                    </li>
-                    <li>
-                        <a href="#" class="icon-tumblr box-icon" data-toggle="tooltip" title="Tumblr"></a>
-                    </li>
-                </ul>
-            </div>
+
+            <div class="payment-buttons"></div>
+
+            <p class="footer-pitch">Get the best deals, heavy discounts and discover more fun stuff in your city. Our coupons cover your everyday purchases from gadgets to food, beauty treatments and others at unbelieveable prices.</p>
+
+            <p class="copy">&copy; 2014 CouponCity, NG. All Rights Reserved.</p> 
         </div>
+
+        <div class="footer-social right">
+            <div class="mobile-redeem">
+                <div class="phone"></div>
+                <h2>Redeem on your mobile</h2>
+                <p>Buy and redeem your deals from your mobile. No need to print anything.</p>
+            </div>
+
+            <ol class="clearfix">
+                <li class="gplus"><a href=""></a></li>
+                <li class="twitr"><a href=""></a></li>
+                <li class="facebk"><a href=""></a></li>
+            </ol>
+
+        </div>                      
+
     </div>
-</footer>
+</div><!--Footer close-->

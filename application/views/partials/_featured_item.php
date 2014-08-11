@@ -1,4 +1,35 @@
+
 <?php if ($featured_item !== FALSE) { ?>
+
+<!--structure 3 featured coupons at any given time-->
+<div class="featured-deal clearfix mb">
+    <div class="left slide-list-vert">
+        <ul>
+            <li>
+                <div class="list-img"><!--Coupon image-->
+                    <img src="offers/four.jpg">
+                </div>
+                
+                <div class="right">
+                    <h3>Mexican Tacos and Frog</h3><!--Coupon Name-->
+                    <p>Enjoy our special delicacy cooked by our special chef, Salisu.</p><!--Coupon Description-->
+                    <a href="">See Deal</a><!--link to coupon page-->
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="right actual-slider">
+        <ul class="bjqs">
+            <!--These same coupons appear here in a list-->
+          <li>
+            <a href="" title="Mexican Tacos"><img src="offers/four.jpg" ></a>
+          </li>
+        </ul>
+    </div>
+</div>
+
+<!--end-->
 
     <div class = "top-area">
         <div class = "container">

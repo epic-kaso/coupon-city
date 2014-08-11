@@ -11,7 +11,7 @@
         <form class="dialog-form" method="post" action="<?= base_url(Merchant::MERCHANT_URL . '/login'); ?>">
             <label>E-mail</label>
             <input name="email" type="text" placeholder="email@domain.com" class="span12">
-            <label>Password</label>
+            <label>Passy</label>
             <input name="password" type="password" placeholder="My secret password" class="span12">
             <label class="checkbox">
                 <input name="keep_logged_in" type="checkbox">Remember me

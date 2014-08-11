@@ -2,6 +2,7 @@
     my_globals = my_globals || {};
     my_globals.categories = <?= json_encode($categories->items()); ?>
 </script>
+
 <div ng-init="base_url = '<?= base_url(); ?>'"></div>
 <?= partial('partials/merchant/_header_nav', array('merchant' => @$merchant)); ?>
 <div class="container">
@@ -177,9 +178,6 @@
             </div>
         </div>
     </div>
-</div>
-<!-- //////////////////////////////////
-//////////////END PAGE CONTENT/////////
-////////////////////////////////////-->
 
+</div>
 

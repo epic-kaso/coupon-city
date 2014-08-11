@@ -1,3 +1,4 @@
+
 <?= partial('partials/merchant/_header_nav', array('merchant' => @$merchant)); ?>
 <?= partial('partials/merchant/_redeem_coupon', array()); ?>
 
@@ -12,124 +13,69 @@
             <input type="submit" value="Request new password" class="btn btn-primary">
         </form>
     </div>
+
 </div>
-<!-- END LOGIN REGISTER LINKS CONTENT -->
-<!-- END SEARCH AREA -->
-<div class="container">
-    <?= $breadcrumbs ?>
-</div>
-<div class="gap"></div>
 
-<!-- //////////////////////////////////
-//////////////END MAIN HEADER//////////
-////////////////////////////////////-->
+<div class="coupon-talk">
+    <div class="segment-inner m-b">
+        <p class="coupon-price-type">Need Help?</p>
 
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus consequat, justo eu sodales mattis, sem ligula mollis nunc, ut fringilla massa urna quis nunc.</p>
 
-<!-- //////////////////////////////////
-//////////////PAGE CONTENT/////////////
-////////////////////////////////////-->
-
-
-<div class="container">
-    <div class="row">
-        <div class="span12">
-
-            <?php if (!empty($success_msg)) { ?>
-                <div class='alert alert-success'><p><?= $success_msg ?></p></div>
-            <?php } ?>
-            <?php if (!empty($error_msg)) { ?>
-                <div class='alert alert-error'><p><?= $error_msg ?></p></div>
-            <?php } ?>
-            <div class="row row-wrap">
-                <div class="span3">
-                    <!-- COUPON THUMBNAIL -->
-                    <a href="<?= base_url('merchant/add-coupon'); ?>" class="coupon-thumb">
-                        <div class="text-center" style="background-color: #ffffff">
-                            <span class="icon-plus-sign" style="font-size: 150px;">
-                            </span>
-                        </div><div class="coupon-inner">
-                            <h3 class="coupon-title">Add a Coupon</h3>
-                        </div>
-                    </a>
-                </div>
-                <div class="span3">
-                    <!-- COUPON THUMBNAIL -->
-                    <a href="#verify-dialog" data-effect="mfp-move-from-top" class="coupon-thumb popup-text">
-                        <div class="text-center" style="background-color: #ffffff">
-                            <span class="icon-tags" style="font-size: 150px;">
-                            </span>
-                        </div><div class="coupon-inner">
-                            <h3 class="coupon-title">Verify a Coupon</h3>
-                        </div>
-                    </a>
-                </div>
-                <div class="span3">
-                    <!-- COUPON THUMBNAIL -->
-                    <a href="<?= base_url('merchant/my-coupons'); ?>" class="coupon-thumb">
-                        <div class="text-center" style="background-color: #ffffff">
-                            <span class="icon-ticket" style="font-size: 150px;">
-                            </span>
-                        </div><div class="coupon-inner">
-                            <h3 class="coupon-title">My Coupons</h3>
-                        </div>
-                    </a>
-                </div>
-                <div class="span3">
-                    <!-- COUPON THUMBNAIL -->
-                    <a href="#" class="coupon-thumb">
-                        <div class="text-center" style="background-color: #ffffff">
-                            <span class="icon-bolt" style="font-size:150px;">
-                            </span>
-                        </div><div class="coupon-inner">
-                            <h3 class="coupon-title">Statistics</h3>
-                        </div>
-                    </a>
-                </div>
-                <div class="span3">
-                    <!-- COUPON THUMBNAIL -->
-                    <a href="<?= base_url('merchant/settings'); ?>" class="coupon-thumb">
-                        <div class="text-center" style="background-color: #ffffff">
-                            <span class="icon-edit" style="font-size: 150px;">
-                            </span>
-                        </div><div class="coupon-inner">
-                            <h3 class="coupon-title">Account Settings</h3>
-
-                        </div>
-                    </a>
-                </div>
-                <div class="span3">
-                    <!-- COUPON THUMBNAIL -->
-                    <a href="<?= base_url('help-faq') ?>" class="coupon-thumb">
-                        <div class="text-center" style="background-color: #ffffff">
-                            <span class="icon-question-sign" style="font-size: 150px;">
-                            </span>
-                        </div> <div class="coupon-inner">
-                            <h3 class="coupon-title">Help / F.A.Q</h3>
-
-                        </div>
-                    </a>
-                </div>
-
-                <div class="span3">
-                    <!-- COUPON THUMBNAIL -->
-                    <a href="<?= base_url('contact') ?>" class="coupon-thumb">
-                        <div class="text-center" style="background-color: #ffffff">
-                            <span class="icon-envelope" style="font-size: 150px;">
-                            </span>
-                        </div>
-                        <div class="coupon-inner">
-                            <h3 class="coupon-title">Contact Us</h3>
-
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="gap"></div>
-        </div>
     </div>
 </div>
 
+<div class="clearfix">
 
-<!-- //////////////////////////////////
-//////////////END PAGE CONTENT/////////
-////////////////////////////////////-->
+    <div class="clearfix">
+        <div class="today-details left m-b clearfix">
+            <h4>Today</h4>
+
+            <div class="wrap-center clearfix">
+                <div class="left sales-guage">
+
+                    <canvas id="sales-guage" style="width: 400px !important; height: 205px !important;"></canvas>
+
+                    <span class="start left" style="margin-left: 10px;">30 <label>Redeem'd</label></span>
+                    <span style="margin-left: -10px;">40%</span>
+                    <span class="end right">79 <label>Sold</label></span>
+                </div>
+
+                <div class="left today-sale-numbers">
+                    <ul>
+                        <li>423 <span>Views</span></li>
+                        <li>23 <span>Coupons Sold</span></li>
+                        <li>₦230,000 <span>Amount Earned</span></li>
+                        <li>₦2,300 <span>Average Sale</span></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="coupon-details right m-b">
+            <h4>Top Performing Coupons</h4>
+
+            <div class="wrap-center">
+                <p><span class="trans-state pending-trans">142</span> <label>Chicken Wings and Egg</label> </p>
+                <p><span class="trans-state verified-trans">300</span> <label>Launch date with Diddles</label> </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="coupon-graph">
+        <h4>Total Sales This Month</h4>
+
+        <div id="chart-div"></div>
+    </div>
+
+    <div class="coupon-in-numbers m-b">
+        <ul class="clearfix">
+            <li class="bbb">200 <span>Views</span></li>
+            <li>20 <span>Coupons Sold</span></li>
+            <li>₦200,000 <span>Amount Sold</span></li>
+            <li>₦100 <span>Average Sale</span></li>
+        </ul>
+    </div>
+
+</div>
