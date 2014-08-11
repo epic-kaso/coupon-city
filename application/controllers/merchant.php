@@ -36,6 +36,16 @@ class Merchant extends MY_Controller {
         $this->data['breadcrumbs'] = $this->_get_crumbs();
     }
 
+    public function redeem_coupon() {
+        $this->_is_logged_in();
+        $this->data['logged_in'] = FALSE;
+        $error = !$this->session->flashdata('error_msg') ? 'Please Login or Create an Account' :
+                $this->session->flashdata('error_msg');
+        $this->session->flashdata('error_msg', $error);
+        $this->data['merchant'] = $this->merchant->get_current();
+        $this->data['breadcrumbs'] = $this->_get_crumbs();
+    }
+
     public function create() {
         $this->load->helper('url');
 

@@ -2,7 +2,9 @@
 echo partial('partials/_header', array('title' => 'Couponcity'));
 ?>
 
-<?= partial('partials/merchant/_header_nav', array('merchant' => @$merchant)); ?>
+<?php if (isset($merchant)) {
+    echo partial('partials/merchant/_header_nav', array('merchant' => @$merchant));
+} ?>
 
 <script>
     var my_globals = {};
@@ -12,14 +14,14 @@ echo partial('partials/_header', array('title' => 'Couponcity'));
 
 
 <div class="merchant-body clearfix">
-	<div class="hold _dash">
-		<div ng-app="myMerchantApp">
-		    <?= $yield ?>
-		</div>
-	</div>
+    <div class="hold _dash">
+        <div ng-app="myMerchantApp">
+<?= $yield ?>
+        </div>
+    </div>
 
-	<?php
-	echo partial('partials/_merchant_footer', array('year' => time('y')));
-	?>
+    <?php
+    echo partial('partials/_merchant_footer', array('year' => time('y')));
+    ?>
 </div>
 

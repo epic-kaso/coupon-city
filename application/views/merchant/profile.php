@@ -1,4 +1,3 @@
-<?= partial('partials/merchant/_header_nav', array('merchant' => @$merchant)); ?>
 <div class="container">
     <?= $breadcrumbs ?>
 </div>

@@ -96,6 +96,7 @@ $route['merchant/my-coupons'] = 'merchant/my_coupons';
 $route['merchant/my-coupons/(:any)'] = 'merchant/my_coupons/$1';
 $route['merchant/my-coupons/(:any)/(:num)'] = 'merchant/my_coupons/$1/$2';
 $route['merchant/verify-coupon'] = 'coupon/verify_coupon';
+$route['merchant/redeem-coupon'] = 'merchant/redeem_coupon';
 $route['merchant/forgot-password'] = 'merchant/forgot_password';
 $route['merchant/reset_password'] = 'merchant/reset_password';
 

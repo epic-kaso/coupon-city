@@ -1,32 +1,11 @@
-
-<?= partial('partials/merchant/_header_nav', array('merchant' => @$merchant)); ?>
-<?= partial('partials/merchant/_redeem_coupon', array()); ?>
-
-<div id="password-recover-dialog" class="mfp-with-anim mfp-hide mfp-dialog clearfix">
-    <i class="icon-retweet dialog-icon"></i>
-    <h3>Password Recovery</h3>
-    <h5>Fortgot your password? Don't worry we can deal with it</h5>
-    <div class="row-fluid">
-        <form class="dialog-form">
-            <label>E-mail</label>
-            <input type="text" placeholder="email@domain.com" class="span12">
-            <input type="submit" value="Request new password" class="btn btn-primary">
-        </form>
-    </div>
-
-</div>
-
 <div class="coupon-talk">
     <div class="segment-inner m-b">
         <p class="coupon-price-type">Need Help?</p>
-
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus consequat, justo eu sodales mattis, sem ligula mollis nunc, ut fringilla massa urna quis nunc.</p>
-
     </div>
 </div>
 
 <div class="clearfix">
-
     <div class="clearfix">
         <div class="today-details left m-b clearfix">
             <h4>Today</h4>
@@ -62,7 +41,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="coupon-graph">
         <h4>Total Sales This Month</h4>
 
