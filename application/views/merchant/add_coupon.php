@@ -2,103 +2,11 @@
     my_globals = my_globals || {};
     my_globals.categories = <?= json_encode($categories->items()); ?>
 </script>
-<style>
-    .invalid{
-        color: red;
-    }
-    .add-coupon{
-        -webkit-transition: all 2s linear;
-        transition: all 2s linear;
-    }
 
-    .add-coupon.ng-enter{
-        opacity: 0;
-    }
-    .add-coupon.ng-enter-active{
-        opacity: 1;
-    }
-
-    .add-coupon.ng-leave{
-        opacity: 1;
-    }
-
-    .add-coupon.ng-leave-active{
-        opacity: 0;
-    }
-    .card{
-        background-color: #ffffff;
-        border-radius: 4px;
-        box-shadow: 2px 2px #f2f2f2;
-        margin-left: 10px;
-        margin-right: 10px;
-        margin-top: 15px;
-        margin-bottom: 15px;
-    }
-
-    div.multi-create-coupon{
-        width: 150px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    div.multi-create-coupon > ul > li{
-        display: inline-block;
-        list-style: none;
-    }
-
-    div.multi-create-coupon > ul > li > a{
-        width: 40px;
-        height: 40px;
-        padding: 10px;
-        border: thin solid #006dcc;
-        border-radius: 50%;
-        text-align: center;
-    }
-
-    div.multi-create-coupon > ul > li > a:hover,div.multi-create-coupon > ul > li > a:active,a.active{
-        -webkit-transition: all 0.2s linear;
-        transition: all 0.5s linear;
-        background-color: #006dcc;
-        color: #ffffff;
-    }
-</style>
 
 <div ng-init="base_url = '<?= base_url(); ?>'"></div>
-<!-- END LOGIN REGISTER LINKS CONTENT -->
-<!-- SEARCH AREA -->
-<?= partial('partials/merchant/_header_nav', array('merchant' => @$merchant)); ?>
-
-<?= partial('partials/merchant/_login', array('merchant' => @$merchant)); ?>
-
-<?= partial('partials/merchant/_register', array('merchant' => @$merchant)); ?>
-
-<div id="password-recover-dialog" class="mfp-with-anim mfp-hide mfp-dialog clearfix">
-    <i class="icon-retweet dialog-icon"></i>
-    <h3>Password Recovery</h3>
-    <h5>Forgot your password? Don't worry we can deal with it</h5>
-    <div class="row-fluid">
-        <form class="dialog-form">
-            <label>E-mail</label>
-            <input type="text" placeholder="email@domain.com" class="span12">
-            <input type="submit" value="Request new password" class="btn btn-primary">
-        </form>
-    </div>
-</div>
-<!-- END LOGIN REGISTER LINKS CONTENT -->
-<!-- END SEARCH AREA -->
-<div class="container">
-    <?= $breadcrumbs ?>
-</div>
-<div class="gap"></div>
-
-<!-- //////////////////////////////////
-//////////////END MAIN HEADER//////////
-////////////////////////////////////-->
 
 
-<!-- //////////////////////////////////
-//////////////PAGE CONTENT/////////////
-////////////////////////////////////-->
 <?php if ($merchant !== FALSE) { ?>
 
     <div class="container" ng-controller="CouponUploadController">
@@ -153,6 +61,7 @@
 
 <?php } else { ?>
 
+    <!--This shouldnt be here. Merchants dont see this page in the first place unless signed in. If they hit this url manually, they are redirected to login page-->
     <div class="container" ng-controller="CouponUploadController">
         <div class="row">
             <div class="span9">
@@ -163,8 +72,4 @@
     <?php
 }
 ?>
-<!-- //////////////////////////////////
-//////////////END PAGE CONTENT/////////
-////////////////////////////////////-->
-
 

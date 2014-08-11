@@ -1,4 +1,34 @@
+
 <?php if ($featured_item !== FALSE) { ?>
+
+<!--structure-->
+<div class="featured-deal clearfix mb">
+    <div class="left slide-list-vert">
+        <ul>
+            <li>
+                <div class="list-img">
+                    <img src="offers/four.jpg">
+                </div>
+                
+                <div class="right">
+                    <h3>Mexican Tacos and Frog</h3>
+                    <p>Enjoy our special delicacy cooked by our special chef, Salisu.</p>
+                    <a href="">See Deal</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="right actual-slider">
+        <ul class="bjqs">
+          <li>
+            <a href="" title="Mexican Tacos"><img src="offers/four.jpg" ></a>
+          </li>
+        </ul>
+    </div>
+</div>
+
+<!--end-->
 
     <div class = "top-area">
         <div class = "container">

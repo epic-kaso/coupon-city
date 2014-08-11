@@ -1,86 +1,75 @@
-<div class="top-title-area">
-    <div class="container">
-        <h1 class="title-page">Contact Us</h1>
-    </div>
-</div>
 
-<!-- END PAGE TITLE -->
+<div class="inner-pad">
 
-<div class="gap"></div>
+    <div class="static-wrapper">
 
-<!-- //////////////////////////////////
-//////////////END MAIN HEADER//////////
-////////////////////////////////////-->
+        <h1 class="static-header">Contact Us</h1>
 
+        <div class="contact-form clearfix">
+            <p>Use our contact form or details and we'll get back to you as soon as possible.</p>
 
-<!-- //////////////////////////////////
-//////////////PAGE CONTENT/////////////
-////////////////////////////////////-->
+            <div class="alert alert-success form-alert" id="form-success">Your message has been sent successfully!</div>
+            <div class="alert alert-error form-alert" id="form-fail">Sorry, error occured this time sending your message</div>
 
+            <form class="left">             
+                <li>
+                    <label>Name *</label>
+                    <input name="name" id="name" type="text" required />
+                    <div class="alert form-alert" id="form-alert-name">Please enter your name</div>
+                </li>
 
-<div class="container">
-    <div class="row row-wrap">
-        <div class="span9">
-            <form method="post" action="contact">
-                <fieldset>
-                    <div class="row-fluid">
-                        <label>Full Name <i style="font-size: smaller">*</i></label>
-                        <div class="alert form-alert" id="form-alert-name">Please enter your name</div>
-                        <input name="name" class="span12" id="name" type="text" required placeholder="Enter Your name here" />
-                    </div>
-                    <div class="row-fluid">
-                        <label>Email <i style="font-size: smaller">*</i></label>
-                        <div class="alert form-alert" id="form-alert-email">Please enter your valid E-mail</div>
-                        <input class="span12" name="email" id="email" type="email" required placeholder="You E-mail Address" />
-                    </div>
-                    <div class="row-fluid">
-                        <label>Mobile Number</label>
-                        <div class="alert form-alert" id="form-alert-email">Please enter your valid E-mail</div>
-                        <input class="span12" name="phone" id="phone" type="text" placeholder="You E-mail Address" />
-                    </div>
-                    <div class="row-fluid">
-                        <label>Subject <i style="font-size: smaller">*</i></label>
-                        <div class="alert form-alert" id="form-alert-email">Please enter your valid E-mail</div>
-                        <input class="span12" name="subject" id="subject" type="text" required placeholder="You E-mail Address" />
-                    </div>
-                    <div class="row-fluid">
-                        <label>Message <i style="font-size: smaller">*</i></label>
-                        <div class="alert form-alert" id="form-alert-message">Please enter message</div>
-                        <textarea class="span12" name="message" id="message" required placeholder="Your message" style="height: 300px;"></textarea>
-                    </div>
-                    <div class="alert alert-success form-alert" id="form-success">Your message has been sent successfully!</div>
-                    <div class="alert alert-error form-alert" id="form-fail">Sorry, error occured this time sending your message</div>
+                <li>
+                    <label>Email *</label>
+                    <input name="email" id="email" type="email" required />
+                    <div class="alert form-alert" id="form-alert-email">Please enter your valid E-mail</div>
+                </li>
+
+                <li>
+                    <label>Mobile No:</label>
+                    <input name="phone" id="phone" type="text" />
+                </li>
+
+                <li>
+                    <label>Message:</label>
+                    <textarea name="message" id="message" required ></textarea>
+                    <div class="alert form-alert" id="form-alert-message">Please enter message</div>
+                </li>
+
+                <li>  
                     <?php
                     $publickey = "6LfXEfgSAAAAAJwej_jO_C2mLzfAiHLXlhq7GwwL"; // you got this from the signup page
                     echo recaptcha_get_html($publickey);
                     ?>
-                    <input type="submit" class="btn btn-primary" value="Send Message" />
-                </fieldset>
-            </form>
-        </div>
-        <div class="span3">
-            <h5>Contact Info</h5>
-            <p>Be rest assured you can always reach us using our contact info here:</p>
-            <ul class="list">
-                <li><i class="icon-map-marker"></i> Location:1 Victoria Arobieke Street Lekki Phase 1, Lagos</li>
-                <li><i class="icon-phone"></i> Phone: 08060518576</li>
-                <li><i class="icon-envelope"></i> E-mail: <a href="mailto:support@couponcity.com.ng">support@couponcity.com.ng</a>
                 </li>
-            </ul>
+
+                <li><input type="submit" value="Submit" class="text-button"></li>
+            </form>
+
+            <div class="contact-details right">
+                <h3>Contact Details</h3>
+
+                <ul>
+                    <li class="address">1, Victoria Arobieke Str, Lekki 1</li>
+                    <li class="phone-no">070312345678</li>
+                    <li class="phone-no">070312345678</li>
+                    <li class="phone-no">070312345678</li>
+                    <li class="email-add">hello@couponcity.ng</li>
+                </ul>
+
+                <h3>Be Social</h3>
+                <ul class="clearfix social">
+                    <li class="gplus"><a href=""></a></li>
+                    <li class="twitr"><a href=""></a></li>
+                    <li class="facebk"><a href=""></a></li>
+                </ul>
+            </div>
+
         </div>
+
     </div>
-    <div class="gap gap-small"></div>
+
 </div>
 
 
-<!-- //////////////////////////////////
-//////////////END PAGE CONTENT/////////
-////////////////////////////////////-->
 
-<!-- //////////////////////////////////
-//////////////MAIN FOOTER//////////////
-////////////////////////////////////-->
-<?= partial('partials/_footer_nav', array()); ?>
-<!-- //////////////////////////////////
-//////////////END MAIN  FOOTER/////////
-////////////////////////////////////-->
+

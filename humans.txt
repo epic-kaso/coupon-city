@@ -1,0 +1,24 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Design and front-end development: Larry Oti
+    URL: http://nextspeel.com
+    Twitter: @larryhomie
+
+    Backend Development: Larry Oti & Akachukwu Okafor
+    URL: http://couponcity.ng
+
+
+# THANKS
+
+    Made possible by the amazing TechAdvance team.
+    URL: http://nextspeel.com/
+
+
+# TECHNOLOGY COLOPHON
+
+    Language: English
+    Doctype: HTML5
+    Software: CSS3, Sublime, jQuery, Modernizr, Ruby, Rails, PHP, CodeIgniter, MySql
