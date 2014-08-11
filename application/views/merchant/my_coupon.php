@@ -17,26 +17,41 @@ if (property_exists($coupon, 'empty')) {
 
     <div class="container">
         <div class = "span6">
-            <h4><?= $coupon->name ?></h4>
-            <p><?= $coupon->summary ?></p>
-            <ul class="list coupon-meta">
-                <li>
-                    <ul class="list coupon-list-prices">
-                        <li><span class="coupon-meta-title">Old Price</span><span class="coupon-price">₦<?= $coupon->old_price ?></span>
-                        </li>
-                        <li><span class="coupon-meta-title">Discount</span><span class="coupon-price"><?= $coupon->discount ?></span>
-                        </li>
-                        <li><span class="coupon-meta-title">Savings</span><span class="coupon-price">₦<?= ($coupon->old_price - $coupon->new_price) ?></span>
-                        </li>
-                    </ul>
-                </li>
-                <li><span class="coupon-meta-title">Time Left to Buy</span>
-                    <!-- COUNTDOWN -->
-                    <div data-countdown="<?= $coupon->end_date ?>" class="countdown countdown-inline"></div>
-                </li>
-                <li>
-                </li>
-            </ul>
+            <img src="<?= base_url($coupon->cover_image_url) ?>" alt="Image Alternative text" title="The Violin" />
+            <div class="coupon-inner">
+                <h5 class="coupon-title"><?= $coupon->name ?></h5>
+                <p class="coupon-desciption"><?= $coupon->summary ?></p>
+                <div class="coupon-meta">
+                    <table>
+                        <tr>
+                            <td><p>Coupon Code:</p></td>
+                            <td><h5><?= $coupon->coupon_code; ?></h5></td>
+                        </tr>
+                        <tr>
+                            <td><p>Deal Status:</p></td>
+                            <td><h5><?= $coupon->deal_status == 1 ? 'Active' : 'Inactive'; ?></h5></td>
+                        </tr>
+                        <tr>
+                            <td><p>Sales Count:</p></td>
+                            <td><h5><?= $coupon->sales_count ?></h5></td>
+                        </tr>
+                        <tr>
+                            <td><p>View Count:</p></td>
+                            <td><h5><?= $coupon->view_count ?></h5></td>
+                        </tr>
+                        <tr>
+                            <td><p>Redemption Count:</p></td>
+                            <td><h5><?= $coupon->redemption_count ?></h5></td>
+                        </tr>
+                    </table>
+                    <span class="coupon-time"><?= $coupon->remaining ?></span>
+                    <span class="coupon-save">Save <?= $coupon->discount ?>%</span>
+                    <div class="coupon-price">
+                        <span class="coupon-old-price">₦<?= $coupon->old_price ?></span>
+                        <span class="coupon-new-price">₦<?= $coupon->new_price ?></span>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="span6">
             <!-- START BOOTSTRAP CAROUSEL -->
