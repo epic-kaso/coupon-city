@@ -18,8 +18,12 @@ class Merchant extends MY_Controller {
     }
 
     public function index() {
-        $this->_is_logged_in();
-        redirect(base_url(Merchant::MERCHANT_URL . '/dashboard'));
+        if ($this->_is_logged_in_bool()) {
+            redirect(base_url(Merchant::MERCHANT_URL . '/dashboard'));
+        } else {
+            $this->layout = 'layouts/merchant-landing-page';
+            $this->view = 'merchant/landing-page';
+        }
     }
 
     public function dashboard() {
@@ -80,6 +84,7 @@ class Merchant extends MY_Controller {
     }
 
     public function add_coupon() {
+        $this->_is_logged_in();
         $this->data['logged_in'] = FALSE;
         $this->data['breadcrumbs'] = $this->_get_crumbs();
         $merchant = $this->session->userdata('merchant');
@@ -89,6 +94,7 @@ class Merchant extends MY_Controller {
     }
 
     public function my_coupons($category = 'all', $page = 0) {
+        $this->_is_logged_in();
         $merchant = $this->session->userdata('merchant');
         $error = !$this->session->flashdata('error_msg') ? 'Please Login or Create an Account' :
                 $this->session->flashdata('error_msg');
@@ -149,6 +155,7 @@ class Merchant extends MY_Controller {
     }
 
     public function change_password() {
+        $this->_is_logged_in();
         $this->view = FALSE;
         $merchant = $this->merchant->get_current();
         $password = trim($this->input->post('password'));
@@ -180,20 +187,25 @@ class Merchant extends MY_Controller {
     }
 
     public function forgot_password() {
-        $this->view = FALSE;
-        $email = $this->input->post('email');
-        $user = $this->merchant->get_by(array('email' => $email));
-        if (!$user) {
-            $this->session->set_flashdata('error_msg', 'Invalid Email');
-        } else {
-            $code = $this->_generate_activation_code($email);
-            $this->merchant->update($user->id, array('activation_code' => $code), TRUE);
-            $url = base_url('merchant/reset_password?code=' . base64_encode($code) . "&email=$email");
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $this->view = FALSE;
+            $email = $this->input->post('email');
+            $user = $this->merchant->get_by(array('email' => $email));
+            if (!$user) {
+                $this->session->set_flashdata('error_msg', 'Invalid Email');
+                redirect(base_url(Merchant::MERCHANT_URL . '/forgot-password'));
+            } else {
+                $code = $this->_generate_activation_code($email);
+                $this->merchant->update($user->id, array('activation_code' => $code), TRUE);
+                $url = base_url('merchant/reset_password?code=' . base64_encode($code) . "&email=$email");
 
-            $this->_send_mail($email, array('url' => $url), 'Couponcity-Merchant: Password Reset', 'forgot_password');
-            $this->session->set_flashdata('success_msg', "Email sent to $email Please check your inbox, follow the message to proceed");
+                $this->_send_mail($email, array('url' => $url), 'Couponcity-Merchant: Password Reset', 'forgot_password');
+                $this->session->set_flashdata('success_msg', "Email sent to $email Please check your inbox, follow the message to proceed");
+                redirect(base_url(Merchant::MERCHANT_URL . '/login'));
+            }
+        } else {
+            $this->view = TRUE;
         }
-        redirect(base_url());
     }
 
     public function reset_password() {

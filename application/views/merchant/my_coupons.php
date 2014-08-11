@@ -1,22 +1,24 @@
 
-<a href="<?= base_url('merchant/add-coupon'); ?>" class="coupon-thumb">Add Coupons</a>
+<?= partial('partials/merchant/_header_nav', array('merchant' => @$merchant)); ?>
+<div class="container">
+    <?= $breadcrumbs ?>
+</div>
+<div class="gap"></div>
+<div class="container">
+    <div class="row">
+        <div class="span3">
+            <?= partial('partials/_category_nav', $categories); ?>
+        </div>
+        <div class="span9">
+            <div class="row row-wrap">
+                <?= partial('partials/merchant/_display_coupons', $coupons); ?>
+            </div>
+            <div class="pagination">
+                <?= $links ?>
+                <?php //echo partial('partials/_pagination', $pagination); ?>
+            </div>
+            <div class="gap"></div>
+        </div>
+    </div>
+</div>
 
-
-<?php if ($merchant !== FALSE) { ?>
-
-<?= partial('partials/_category_nav', $categories); ?>
-<?= partial('partials/merchant/_display_coupons', $coupons); ?>
-
-<?php } else { ?>
-
-    <div class="if-no-deal">
-        <p>You currently have no Coupons</p>
-
-        <div class="no-deal"></div>
-
-        <p>Give discounts and drive customers to your business. We are here to help you. <a href="">Start here</a></p>
-    </div> 
-
-    <?php
-}
-?>
