@@ -10,7 +10,7 @@
         </div>
         <div class="span9">
             <div class="row row-wrap">
-                <?= partial('partials/merchant/_display_coupons', $coupons); ?>
+                <?= partial('partials/merchant/_display_coupons_table', $coupons); ?>
             </div>
             <div class="pagination">
                 <?= $links ?>
