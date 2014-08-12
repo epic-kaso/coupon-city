@@ -1,35 +1,4 @@
-
 <?php if ($featured_item !== FALSE) { ?>
-
-<!--structure 3 featured coupons at any given time-->
-<div class="featured-deal clearfix mb">
-    <div class="left slide-list-vert">
-        <ul>
-            <li>
-                <div class="list-img"><!--Coupon image-->
-                    <img src="offers/four.jpg">
-                </div>
-                
-                <div class="right">
-                    <h3>Mexican Tacos and Frog</h3><!--Coupon Name-->
-                    <p>Enjoy our special delicacy cooked by our special chef, Salisu.</p><!--Coupon Description-->
-                    <a href="">See Deal</a><!--link to coupon page-->
-                </div>
-            </li>
-        </ul>
-    </div>
-
-    <div class="right actual-slider">
-        <ul class="bjqs">
-            <!--These same coupons appear here in a list-->
-          <li>
-            <a href="" title="Mexican Tacos"><img src="offers/four.jpg" ></a>
-          </li>
-        </ul>
-    </div>
-</div>
-
-<!--end-->
 
     <div class = "top-area">
         <div class = "container">
@@ -38,20 +7,7 @@
                 <div class = "span3">
                     <div class = "box">
                         <h4><?= $featured_item->name ?></h4>
-                        <p><?= $featured_item->summary ?></p>
-                        <a class="btn btn-primary btn-large btn-block <?= $featured_item->inactive ? 'disabled' : '' ?>"
-                           href="<?= $featured_item->grab_link ?>">
-                               <?php if (property_exists($featured_item, 'user_owns_coupon') && $featured_item->user_owns_coupon) { ?>
-                                You Own this Coupon
-                            <?php } elseif ($featured_item->inactive) {
-                                ?>
-                                Out of Stock
-                            <?php } else {
-                                ?>
-
-                                ₦<?= $featured_item->new_price ?> Grab Now
-                            <?php } ?>
-                        </a>
+                        <p><?= $featured_item->summary ?></p><a class="btn btn-primary btn-large btn-block" href="<?= $featured_item->grab_link ?>">₦<?= $featured_item->new_price ?> Grab Now</a>
                         <ul class="list coupon-meta">
                             <li>
                                 <ul class="list coupon-list-prices">

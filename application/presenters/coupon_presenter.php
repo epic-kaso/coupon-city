@@ -52,11 +52,11 @@ class Coupon_presenter extends Presenter {
             $row->name = 'No Coupon Available';
             return array($row);
         }
-        if ($this->data->deal_status == 0) {
-            redirect(base_url('coupon-not-found'));
-        } else {
-            return $this->process($this->data);
-        }
+        //if ($this->data->deal_status == 0) {
+        //    redirect(base_url('coupon-not-found'));
+        //} else {
+        return $this->process($this->data);
+        // }
     }
 
     private function process($row) {
@@ -110,9 +110,47 @@ class Coupon_presenter extends Presenter {
         return $row;
     }
 
+    public function featured_items() {
+        $this->load->model('featured_coupon_model');
+        $featured = $this->featured_coupon_model
+                ->with('coupon')
+                ->with('coupon_medias')
+                ->limit(3, 0)
+                ->get_all();
+
+        if (empty($featured) || $featured == FALSE) {
+            return FALSE;
+        } else {
+            $response = array();
+            foreach ($featured as $value) {
+                $row = $value->coupon;
+                $row->remaining = $this->_calculate_remaining_time($row->start_date, $row->end_date);
+                $row->grab_link = base_url('grab_coupon/' . $row->slug);
+                if (!is_null($row->quantity) && $row->quantity <= 0) {
+                    $row->inactive = TRUE;
+                    $row->grab_link = "";
+                } else {
+                    $row->inactive = FALSE;
+                    $row->grab_link = base_url('grab_coupon/' . $row->slug);
+                }
+                $this->create_summary($row);
+                if ($this->is_merchant) {
+                    $this->add_merchant_params($row);
+                } else {
+                    $row = $this->check_current_user_coupons($row);
+                }
+
+                $response[] = $this->process($row);
+            }
+            return $response;
+        }
+    }
+
     public function featured_item($id = 1) {
-        $this->load->model('coupon_model');
-        $couponz = $this->coupon_model->with('coupon_medias')->get_all();
+        $this->load->model(array('coupon_model', 'featured_coupon_model'));
+        $couponz = $this->coupon_model
+                ->with('coupon_medias')
+                ->get_all();
         shuffle($couponz);
         $row = $couponz[rand(0, count($couponz))]; //$this->coupon_model->with('coupon_medias')->get($id);
         if (empty($row) || $row == FALSE) {

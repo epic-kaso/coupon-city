@@ -23,7 +23,7 @@ class Merchant_presenter extends Presenter {
         if (property_exists($this->data, $attr) && !empty($this->data->$attr)) {
             return $this->data->$attr;
         } else {
-            return 'N/A';
+            return ' ';
         }
     }
 

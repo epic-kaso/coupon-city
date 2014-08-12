@@ -5,14 +5,14 @@
         <li><a href="">Free shipping on deliveries</a></li>
         <li><a href="">Why we use Wallets</a></li>
         <li><a href="">Why you'll love us</a></li>
-    </ul>   
+    </ul>
 
     <div class="how-works mb"></div>
 
 
     <?php
     if (strcmp(site_url(), current_url()) === 0) {
-        echo partial('partials/_featured_item', $featured_item);
+        echo partial('partials/_featured_items', $featured_items);
     }
     ?>
 
@@ -25,9 +25,9 @@
 
 
 
-        
-            
-            
-           
-        
+
+
+
+
+
 

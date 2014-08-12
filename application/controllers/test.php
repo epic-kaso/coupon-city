@@ -42,6 +42,21 @@ class Test extends CI_Controller {
         echo $this->mailer->send_mail();
     }
 
+    public function featured_coupons() {
+        $this->load->model('featured_coupon_model');
+        $featured = $this->featured_coupon_model
+                ->with('coupon')
+                ->with('coupon_medias')
+                ->limit(3, 0)
+                ->get_all();
+        print_r($featured);
+
+        foreach ($featured as $row) {
+            echo '<br/> <br/>';
+            print_r($row->coupon);
+        }
+    }
+
 }
 
 /* End of file welcome.php */
