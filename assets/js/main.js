@@ -42,6 +42,23 @@ $(function() {
 	  	$(this).toggleClass('sticky');
 	});
 
+	//Datepicker
+	$( ".from-dati" ).datepicker({
+		minDate: 0,
+      	dateFormat: 'dd MM, yy',
+      	onClose: function( selectedDate ) {
+        	$( ".to-dati" ).datepicker( "option", "minDate", selectedDate );
+      	}
+    });
+
+    $( ".to-dati" ).datepicker({
+    	minDate: 1,
+      	dateFormat: 'dd MM, yy',
+      	onClose: function( selectedDate ) {
+        	$( ".from-dati" ).datepicker( "option", "maxDate", selectedDate );
+      	}
+    });
+
 
 	//Navigation width Setting
 	var navWidth = $('nav').width();

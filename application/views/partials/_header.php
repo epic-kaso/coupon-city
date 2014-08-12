@@ -14,6 +14,7 @@
 
         <link rel="stylesheet" href="<?= base_url('assets/css/normalize.min.css'); ?>">
         <link rel="stylesheet" href="<?= base_url('assets/css/main.css'); ?>">
+        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
 
         <script src="<?= base_url('assets/js/modernizr.js'); ?>"></script>
 

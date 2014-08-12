@@ -8,7 +8,9 @@ if (!isset($active)) {
 
 <div class="header clearfix">
 
-    <a href="" class="logo" title="logo" alt="CouponCity"></a>
+    <a href="" class="logo" title="logo" alt="CouponCity">
+        <img src="<?= base_url('assets/images/logo.png'); ?>" />
+    </a>
 
     <div class="inner-pad">
 
