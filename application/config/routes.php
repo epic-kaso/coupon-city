@@ -92,10 +92,12 @@ $route['merchant/logout'] = "merchant/logout";
 $route['merchant/edit-profile'] = "merchant/edit_profile";
 $route['merchant/signup'] = 'merchant/create';
 $route['merchant/add-coupon'] = "merchant/add_coupon";
+$route['merchant/my-coupon/(:any)'] = "merchant/my_coupon/$1";
 $route['merchant/my-coupons'] = 'merchant/my_coupons';
 $route['merchant/my-coupons/(:any)'] = 'merchant/my_coupons/$1';
 $route['merchant/my-coupons/(:any)/(:num)'] = 'merchant/my_coupons/$1/$2';
 $route['merchant/verify-coupon'] = 'coupon/verify_coupon';
+$route['merchant/redeem-coupon'] = 'merchant/redeem_coupon';
 $route['merchant/forgot-password'] = 'merchant/forgot_password';
 $route['merchant/reset_password'] = 'merchant/reset_password';
 

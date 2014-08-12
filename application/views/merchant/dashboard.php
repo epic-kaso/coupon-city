@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="merchant-body clearfix">
     <div class="hold _dash">
 
@@ -69,6 +70,14 @@
                     <li>₦100 <span>Average Sale</span></li>
                 </ul>
             </div>
+<<<<<<< HEAD
+=======
+        </div>
+    </div>
+
+    <div class="coupon-graph">
+        <h4>Total Sales This Month</h4>
+>>>>>>> b10b6cc9a4b679c0c03b8296dc54820be651ca7f
 
         </div>
 

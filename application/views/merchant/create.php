@@ -10,6 +10,7 @@
 
     <div class="alert-error form-alert">
         <?php echo validation_errors(); ?>
+
     </div>
     <?php if (!empty($success_msg)) { ?>
         <div class='alert form-alert alert-success'><p><?= $success_msg ?></p></div>

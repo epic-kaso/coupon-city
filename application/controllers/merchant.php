@@ -36,6 +36,16 @@ class Merchant extends MY_Controller {
         $this->data['breadcrumbs'] = $this->_get_crumbs();
     }
 
+    public function redeem_coupon() {
+        $this->_is_logged_in();
+        $this->data['logged_in'] = FALSE;
+        $error = !$this->session->flashdata('error_msg') ? 'Please Login or Create an Account' :
+                $this->session->flashdata('error_msg');
+        $this->session->flashdata('error_msg', $error);
+        $this->data['merchant'] = $this->merchant->get_current();
+        $this->data['breadcrumbs'] = $this->_get_crumbs();
+    }
+
     public function create() {
         $this->load->helper('url');
 
@@ -96,6 +106,19 @@ class Merchant extends MY_Controller {
         $this->data['logged_in'] = $this->session->userdata('logged_in');
         $this->data['merchant'] = $this->merchant->get($merchant['id']);
         $this->data['categories'] = new Category_presenter($this->category->get_all(), base_url(Merchant::MERCHANT_URL));
+    }
+
+    public function my_coupon($id = NULL) {
+        $this->_is_logged_in();
+        $merchant = $this->session->userdata('merchant');
+        $this->data['merchant'] = $this->merchant->get($merchant['id']);
+        $this->data['breadcrumbs'] = $this->_get_crumbs();
+        if (!is_null($id)) {
+            $coupon_presenter = new Coupon_presenter($this->_fetch_a_coupon($id), TRUE);
+            $this->data['coupon'] = $coupon_presenter->item();
+        } else {
+            redirect(base_url(Merchant::MERCHANT_URL . '/my-coupons'));
+        }
     }
 
     public function my_coupons($category = 'all', $page = 0) {
@@ -275,6 +298,20 @@ class Merchant extends MY_Controller {
         }
 
         return $coupons;
+    }
+
+    private function _fetch_a_coupon($data) {
+        $merchant = $this->session->userdata('merchant');
+        if (is_numeric($data)) {
+            $coupon = $this->coupons
+                    ->with('coupon_medias')
+                    ->get_by(array('merchant_id' => $merchant['id'], 'id' => $data));
+        } else {
+            $coupon = $this->coupons
+                    ->with('coupon_medias')
+                    ->get_by(array('merchant_id' => $merchant['id'], 'slug' => $data));
+        }
+        return $coupon;
     }
 
     private function _count_coupons($category = 'all') {

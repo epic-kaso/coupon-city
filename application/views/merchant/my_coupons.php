@@ -1,17 +1,15 @@
-
-<?= partial('partials/merchant/_header_nav', array('merchant' => @$merchant)); ?>
 <div class="container">
     <?= $breadcrumbs ?>
 </div>
 <div class="gap"></div>
 <div class="container">
-    <div class="row">
-        <div class="span3">
+    <div>
+        <div style="width: 150px; float: left">
             <?= partial('partials/_category_nav', $categories); ?>
         </div>
-        <div class="span9">
+        <div>
             <div class="row row-wrap">
-                <?= partial('partials/merchant/_display_coupons', $coupons); ?>
+                <?= partial('partials/merchant/_display_coupons_table', $coupons); ?>
             </div>
             <div class="pagination">
                 <?= $links ?>
