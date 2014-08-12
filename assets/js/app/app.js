@@ -1,27 +1,31 @@
+/* 
+ * Developed by Akachukwu Okafor
+ * @copyright 2014 kaso.co
+ */
+
+
 'use strict';
 
 
 // Declare app level module which depends on filters, and services
-var app = angular.module('myMerchantApp', [
-    'ui.bootstrap',
-    'ui.router',
-    'myUserApp.filters',
-    'myUserApp.services',
-    'myUserApp.directives',
-    'myUserApp.controllers'
-]);
+var app = angular.module('myMerchantApp',[]);
 
-app.directive('imgPreview', function ($rootScope) {
-    return {
-        scope: {dynamic_src: '='},
-        link: function (scope, element, attr) {
-            $rootScope.$on('dynamic_src', function (e, arg) {
-                console.log('directive called' + arg.file_path);
-                element.attr('src', arg.file_path);
-            });
-        }
-    };
-});
+
+app.directive('loader', ['$rootScope', function($rootScope) {
+        return {
+            link: function(scope, element, attrs) {
+                element.addClass('hide');
+                $rootScope.$on('$stateChangeStart', function() {
+                    element.removeClass('animated fadeOutUp');
+
+                });
+
+                $rootScope.$on('$stateChangeSuccess', function() {
+                    element.addClass('animated fadeInDown');
+                });
+            }
+        };
+    }]);
 
 app.controller('CouponUploadController', ['$scope', '$http', '$filter', '$window', function ($scope, $http, $filter, $window) {
         new Dropzone("div#my-awesome-dropzone",
