@@ -33,11 +33,20 @@ class Merchant_model extends MY_Model {
     );
 
     public function add_status_field($row) {
-        $is_complete = $row->is_profile_complete;
-        if ($is_complete === 1) {
-            $row->status = '<span style="margin-top:32px;" class="left trans-state verified-trans">Complete</span>';
-        } else {
-            $row->status = '<span style="margin-top:32px;" class="left trans-state pending-trans">Incomplete</span>';
+        if (is_object($row)) {
+            $is_complete = $row->is_profile_complete;
+            if ($is_complete === 1) {
+                $row->status = '<span style="margin-top:32px;" class="left trans-state verified-trans">Complete</span>';
+            } else {
+                $row->status = '<span style="margin-top:32px;" class="left trans-state pending-trans">Incomplete</span>';
+            }
+        } elseif (is_array($row)) {
+            $is_complete = $row['is_profile_complete'];
+            if ($is_complete === 1) {
+                $row['status'] = '<span style="margin-top:32px;" class="left trans-state verified-trans">Complete</span>';
+            } else {
+                $row['status'] = '<span style="margin-top:32px;" class="left trans-state pending-trans">Incomplete</span>';
+            }
         }
         return $row;
     }
