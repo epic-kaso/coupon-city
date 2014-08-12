@@ -110,7 +110,7 @@ class Merchant_model extends MY_Model {
 
     public function profile_info($merchant) {
         $merchant = get_object_vars($merchant);
-        $keys = array('email', 'is_profile_complete', 'created_at', 'updated_at', 'id', 'status', 'password');
+        $keys = array('email', 'is_profile_complete', 'created_at', 'updated_at', 'id', 'status', 'password', 'activation_code');
         foreach ($keys as $v) {
             if (array_key_exists($v, $merchant)) {
                 unset($merchant[$v]);

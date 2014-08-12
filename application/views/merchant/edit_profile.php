@@ -1,4 +1,3 @@
-<?= partial('partials/merchant/_header_nav', array('merchant' => @$merchant)); ?>
 <div class="container">
     <?= $breadcrumbs ?>
 </div>
@@ -23,12 +22,30 @@
                 <form action="<?= base_url(Merchant::MERCHANT_URL . '/edit-profile') ?>" method="post">
                     <?php
                     $values = $profile;
+                    /*
+                      $keys = array();
+                      $values = array();
+                      array_keys($keys);
+                      array_values($values);
 
+                     *
+                     */
+                    ?>
+                    <?php
                     foreach ($values as $key => $value) {
-                        ?>
-                        <label><?= $key ?></label>
-                        <input type="text" name="<?= strtolower(str_ireplace(' ', '_', $key)); ?>" placeholder="<?= $key ?>" value="<?= $value ?>" class="span12">
-                        <?php
+                        if ($key == 'Short Description' || $key == 'Opening Hours') {
+                            ?>
+                            <label><?= $key ?></label>
+                            <textarea name="<?= strtolower(str_ireplace(' ', '_', $key)); ?>" placeholder="<?= $key ?>" class="span12" cols="6">
+                                <?= $value ?>
+                            </textarea>
+                            <?php
+                        } else {
+                            ?>
+                            <label><?= $key ?></label>
+                            <input type="text" name="<?= strtolower(str_ireplace(' ', '_', $key)); ?>" placeholder="<?= $key ?>" value="<?= $value ?>" class="span12">
+                            <?php
+                        }
                     }
                     ?>
                     <input type="submit" value="Save" class="btn btn-primary">
