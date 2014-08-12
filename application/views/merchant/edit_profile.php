@@ -76,9 +76,15 @@
             <fieldset class="segment clearfix">
                 <legend>Bank Details</legend>
                 <ul class="clearfix">
-                    <li class="left split-input"><label>Bank Name:</label> Diamond Bank</li>
-                    <li class="left split-input"><label>Account No:</label> 1234567890</li>
-                    <li class="left split-input"><label>Account Type:</label> Savings</li>
+                    <li class="left split-input"><label>Bank Name:</label>
+                        <input type="text" value="<?= $profile->bank_name; ?>" name="bank_name" />
+                    </li>
+                    <li class="left split-input"><label>Account No:</label>
+                        <input type="text" value="<?= $profile->account_number; ?>" name="account_number" />
+                    </li>
+                    <li class="left split-input"><label>Account Type:</label>
+                        <input type="text" value="<?= $profile->account_type; ?>" name="account_number" />
+                    </li>
 
                 </ul>
             </fieldset>
