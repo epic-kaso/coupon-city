@@ -1,28 +1,29 @@
-<div class="container" style="margin-top: 100px;">
-    <div class="row">
-        <div class="offset3 span6">
-            <?php if (!empty($success_msg)) { ?>
-                <div class='alert alert-success'><p><?= $success_msg ?></p></div>
-            <?php } ?>
-            <?php if (!empty($error_msg)) { ?>
-                <div class='alert alert-error'><p><?= $error_msg ?></p></div>
-            <?php } ?>
-        </div>
-    </div>
-    <div class="row">
-        <div class="offset4 span4" style="margin-top: 10px;">
-            <div>
-                <i class="icon-retweet dialog-icon"></i>
-                <h3>Password Recovery</h3>
-                <h5>Forgot your password? Don't worry we can deal with it</h5>
-                <div class="row-fluid">
-                    <form class="dialog-form" action="<?= base_url('merchant/forgot-password') ?>" method="post">
-                        <label>E-mail</label>
-                        <input type="text" name="email" placeholder="email@domain.com" class="span12">
-                        <input type="submit" value="Request new password" class="btn btn-primary">
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+
+<div class="auth-closure">
+    <h1>Reset Password</h1>
+    <p class="auth-tagline">Enter your email address and check your inbox for reset instructions.</p>
+</div>
+
+<?php if (!empty($success_msg)) { ?>
+    <div class='alert form-alert alert-success'><p><?= $success_msg ?></p></div>
+<?php } ?>
+<?php if (!empty($error_msg)) { ?>
+    <div class='alert form-alert alert-error'><p><?= $error_msg ?></p></div>
+<?php } ?>
+
+<div class="auth-form hold">
+
+    <form class="dialog-form" action="<?= base_url('merchant/forgot-password') ?>" method="post">
+        <label>E-mail</label>
+        <input type="email" name="email" placeholder="you@example.com" class="span12">
+        <input type="submit" value="Reset Password" class="btn btn-submit">
+    </form>
+
+    <ul class="clearfix reset-pass-register">
+        <li class="right"><a href="<?= base_url(Merchant::MERCHANT_URL . '/signup'); ?>">Not member yet? Register</a>
+        </li>
+        <li class="left"><a href="<?= base_url(Merchant::MERCHANT_URL . '/login'); ?>">Login</a>
+        </li>
+    </ul>
+
 </div>

@@ -9,17 +9,11 @@ echo partial('partials/_header', array('title' => 'Couponcity'));
     my_globals.base_url = '<?= base_url(); ?>'
 </script>
 
-
-
-<div class="merchant-body clearfix">
-	<div class="hold _dash">
-		<div ng-app="myMerchantApp">
-		    <?= $yield ?>
-		</div>
+	
+	<div ng-app="myMerchantApp">
+	    <?= $yield ?>
 	</div>
+	
 
-	<?php
-	echo partial('partials/_merchant_footer', array('year' => time('y')));
-	?>
-</div>
+
 
