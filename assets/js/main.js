@@ -1,13 +1,27 @@
 /*
  * CouponCity internal website script
- * http://pricedis.com/
+ * http://couponcity.ng/
  * Copyright (c) 2014 Larry Oti
  * Date: Thu, Jan 9 2014 12:40:09 0000
  */
 
 $(function() {
 
-	$('body div:first').adClass('hidden').hide();
+	//$('body div:first').addClass('hidden').hide();
+
+	//Smooth Scroll
+	$('a[href*=#]:not([href=#])').click(function() {
+	    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+	      var target = $(this.hash);
+	      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+	      if (target.length) {
+	        $('html,body').animate({
+	          scrollTop: target.offset().top
+	        }, 1000);
+	        return false;
+	      }
+	    }
+	});
 
 	$('.login-register').contents().hide();
 

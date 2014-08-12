@@ -1,8 +1,9 @@
-<div ng-controller="VerifyCouponController"
-     id="verify-dialog" class="mfp-with-anim mfp-hide mfp-dialog clearfix">
-    <i class="icon-tag dialog-icon"></i>
-    <h3>Redeem Coupon</h3>
-    <div class="row-fluid">
+
+<div class="merchant-body left clearfix" ng-controller="VerifyCouponController">
+
+    <div class="hold right">
+        <h1>Redeem Coupon</h1>
+
         <div class='text-center'>
             <span ng-show="is_success">
                 <p class='alert alert-success'  ng-bind="message"></p>
@@ -15,10 +16,20 @@
             <p class="alert alert-info" ng-show='is_working'>Working....</p>
         </div>
         <form method='post' action="#">
-            <label>User Coupon Code</label>
-            <input required name="coupon_code" type="text" placeholder="coupon code" class="span12" ng-model='coupon.coupon_code'>
+            <input required name="coupon_code" type="text" placeholder="Coupon Code ex. 1234567" ng-model='coupon.coupon_code'>
             <input type="submit" ng-click="verify_coupon(coupon, $event)" ng-value="is_working ? 'Working....':'Verify'" class="btn btn-primary">
         </form>
+
     </div>
+    <?php
+    echo partial('partials/_merchant_footer', array('year' => time('y')));
+    ?>
 </div>
 
+
+<div class="merchant-body right">
+    <div class="hold">
+        <h2>Redeem Coupons</h2>
+        <p>Verify and redeem coupons for customers who show up at your business. This feature is available on mobile so you can redeem on the go if you run a service business.</p>
+    </div>
+</div>

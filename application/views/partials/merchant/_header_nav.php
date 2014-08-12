@@ -2,11 +2,12 @@
     <div class="center clearfix">
         <span class="_logo left"></span>
         <div class="merchant-nav left">
-            <a href="<?= base_url(Merchant::MERCHANT_URL); ?>">Dashboard</a>
+            <a href="<?= base_url('merchant/dashboard'); ?>">Dashboard</a>
+
             <a href="<?= base_url('merchant/my-coupons'); ?>">Coupons</a>
-            <a href="<?= base_url('merchant/redeem-coupon'); ?>" id="redeem">Redeem</a>
+            <a href="<?= base_url('merchant/redeem-coupon'); ?>">Redeem</a>
             <a href="<?= base_url(Merchant::MERCHANT_URL . '/profile'); ?>">Business</a>
-            <a href="<?= base_url('merchant/settings'); ?>">Deposit</a>
+            <a href="">Deposit</a>
         </div>
         <ul class="right clearfix">
             <?php if (!$merchant) { ?>
@@ -16,7 +17,9 @@
                 </li>
             <?php } else { ?>
                 <li class="left">
-                    <?= $merchant->business_name ?>
+                    <a href="<?= base_url('merchant/settings'); ?>">
+                        <?= $merchant->business_name ?>
+                    </a>
                 </li>
                 <li class="left _logout">
                     <a href="<?= base_url(Merchant::MERCHANT_URL . '/logout'); ?>">&raquo; &nbsp;Logout</a>
@@ -26,3 +29,4 @@
 
     </div>
 </div>
+

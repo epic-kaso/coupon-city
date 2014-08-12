@@ -49,6 +49,8 @@ class Merchant extends MY_Controller {
     public function create() {
         $this->load->helper('url');
 
+        $this->layout = 'layouts/auth';
+
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('password', 'Password', 'required|matches[re_password]');
@@ -69,6 +71,8 @@ class Merchant extends MY_Controller {
     public function login() {
         $this->load->helper('url');
 
+        $this->layout = 'layouts/auth';
+
         $this->load->library('form_validation');
         $this->form_validation->set_rules('password', 'Password', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
@@ -82,6 +86,7 @@ class Merchant extends MY_Controller {
             $email = $this->input->post('email');
             $this->_process_login($email, $password);
         }
+
     }
 
     public function logout() {
@@ -210,6 +215,8 @@ class Merchant extends MY_Controller {
     }
 
     public function forgot_password() {
+        $this->layout = 'layouts/auth';
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $this->view = FALSE;
             $email = $this->input->post('email');

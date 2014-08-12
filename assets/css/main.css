@@ -145,7 +145,6 @@ body {
 .form-alert {
     font-size: 12px;
     color: red;
-    display: none;
 }
 
 .form-alert.alert-success {
@@ -1488,18 +1487,18 @@ li.share-mail a {
     list-style: inside square;
 }
 
-.how-to-redeem li {
+.how-to-redeem li, .intro li {
     list-style: decimal;
     margin-bottom: 15px;
     font-size: 15px;
     color: #777;
 }
 
-.how-to-redeem ol {
+.how-to-redeem ol, .intro ol {
     counter-reset: li;
 }
 
-.how-to-redeem li:before {
+.how-to-redeem li:before, .intro li:before {
     background-color: rgb(233,229,220);
     border-radius: 50px;
     color: #aaa;
@@ -2357,6 +2356,254 @@ h2.current-price {
 
 /** Merchant UI #0f75bc **/ 
 
+/** Merchant Landing **/
+.merchant-landing-page {
+    font-size: 14px;
+    text-align: center;
+}
+
+.merchant-landing-page a, .merchant-landing-page h1, .merchant-landing-page h2, .auth-closure h1 {
+    font-weight: normal;
+}
+
+._header {
+    height: 50px;
+    padding: 20px 0;
+}
+
+._header a {
+    color: #fff;
+    margin-left: 10px;
+}
+
+._header .left a {
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+._header .right a.btn {
+    display: inline;
+    background: transparent;
+    border-color: #fff;
+    margin: 0;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-width: 1px;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+
+._header .right a.btn.login__ {
+    background: #fff;
+    color: #555;
+}
+
+._header .right a.btn.login__:hover {
+    color: #333;
+}
+
+._header .right a.btn:hover {
+    color: rgba(255,255,255,0.8);
+}
+
+a.landing-logo {
+    height: 30px;
+    width: 100px;
+    display: inline-block;
+    margin-bottom: -8px;
+}
+
+.hero-banner {
+    height: 450px;
+    background: url(https://www.paypalobjects.com/webstatic/mktg/wright/send/send_hero_bg_1x.jpg) no-repeat center;
+    background-size: cover;
+    position: relative;
+    text-align: center;
+    color: #fff;
+}
+
+.hero-banner h1 {
+    margin-top: 100px;
+    font-weight: 400;
+    font-size: 35px;
+}
+
+.landing-us h1 {
+    font-size: 28px;
+}
+
+.hero-banner p {
+    width: 80%;
+    margin: 10px auto 40px;
+    font-size: 15px;
+    line-height: 25px;
+}
+
+.hero-touch, .hero-touch2 {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background: url(http://usa.visa.com/vendor/bower_components/visa-bootstrap/assets/images/hero/hero-bg-fade.png) repeat-x bottom left;
+}
+
+.hero-touch2 {
+    background: rgba(0,0,0,0.15);
+}
+
+.top-header.top-banner-landing {
+    position: static;
+    height: 6px;
+}
+
+a.btn-trans {
+    padding: 14px 30px;
+    text-transform: uppercase;
+    color: #fff;
+    background: #0f75bc;
+    display: inline-block;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.btn-trans:hover {
+    color: rgba(255,255,255,0.8);
+}
+
+.intro {
+    padding: 50px 0;
+}
+
+.intro li {
+    width: 33%;
+    line-height: 23px;
+    padding: 100px 25px 0;
+    position: relative;
+    list-style: none;
+    font-size: 13px;
+}
+
+.intro li:before {
+    background-color: #fff;
+    color: #0f75bc;
+    height: 45px;
+    width: 45px;
+    line-height: 45px;
+    top: 40px;
+    left: 50%;
+    font-size: 20px;
+    border: 2px solid #0f75bc;
+    margin-left: -22.5px;
+    font-weight: normal;
+}
+
+.landing-pricing, .landing-us {
+    padding: 50px;
+    padding-top: 30px;
+    font-size: 16px;
+}
+
+.landing-pricing p, .value-prop {
+    width: 60%;
+    margin: 0 auto;
+    line-height: 26px;
+}
+
+.landing-pricing .free-price {
+    font-size: 20px;
+    color: #777;
+}
+
+.price-block {
+    background: #fff;
+    width: 50%;
+    margin: 20px auto;
+    color: #0f75bc;
+    padding: 30px 0;
+}
+
+.landing-pricing h2 {
+    font-size: 100px;
+    line-height: 100px;
+    margin-bottom: -30px;
+}
+
+.landing-pricing h2 span {
+    font-size: 30px;
+}
+
+.intro h2 {
+    font-size: 20px;
+    color: #0f75bc;
+    margin-bottom: 10px;
+}
+
+.landing-us p, .auth-tagline {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 6px;
+}
+
+.landing-us a {
+    margin: 20px;
+}
+
+.auth-closure h1 {
+    margin-bottom: 6px;
+}
+
+/** Merchant Landing end **/
+
+.merchant-auth {
+    height: 70px;
+    background: #0f75bc;
+    overflow: hidden;
+}
+
+.merchant-auth span {
+    display: block;
+    height: 45px;
+    width: 100px;
+    margin: 13px auto 0;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.auth.center {
+    width: 60%;
+}
+
+.auth-closure {
+    padding: 50px 0 30px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+
+.auth-form {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.reset-pass-register a {
+    border-bottom: 1px dotted #ddd;
+    color: #999;
+    font-size: 13px;
+    padding-bottom: 1px;
+}
+
+.auth-form .btn {
+    margin: 10px 0 5px;
+}
+
+.tcs {
+    font-size: 12px;
+    color: #999;
+}
+
+input[type="text"], input[type="email"], input[type="password"], textarea {
+    font-weight: 100;
+}
+
 .merchant-header {
     height: 50px;
     background: #0f75bc;
@@ -2395,7 +2642,11 @@ h2.current-price {
     margin-top: 17px;
 }
 
-
+.merchant-header ul.right a {
+    color: rgba(255,255,255,0.8);
+    padding-right: 0;
+}
+ 
 .merchant-image img {
     display: block;
     width: 100%;
@@ -2403,11 +2654,6 @@ h2.current-price {
 
 ._logout {
     margin-left: 10px;
-}
-
-._logout a {
-    color: rgba(255,255,255,0.8);
-    padding-right: 0;
 }
 
 .merchant-body {
@@ -2514,6 +2760,61 @@ h2.current-price {
     font-weight: bold;
 }
 
+.profile-top {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.profile-top p {
+    margin-bottom: 0;
+}
+
+.profile-top div {
+    border: 5px solid #e8e8e8;
+    width: 110px;
+    height: 110px;
+    border-radius: 5px;
+    margin: 0 auto;
+    position: relative;
+    overflow: auto;
+}
+
+.profile-top h3 {
+    margin: 10px 0 5px;
+}
+
+.profile-top div img {
+    width: 100%;
+    display: block;
+}
+
+.empty-label {
+    height: 10px;
+    width: 65px;
+    display: inline-block;
+}
+
+.segment legend {
+    font-size: 12px;
+    border: 1px solid #eee;
+    color: #777;
+    padding: 5px 10px 4px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.segment li {
+    color: #777;
+    margin-bottom: 10px;
+    font-size: 14px;
+    padding-left: 10px;
+}
+
+.segment li label {
+    font-weight: bold;
+}
+
 .split-input input[type="text"], .split-input input[type="password"], .split-input input[type="email"], .split-input .select-input, .split-input.left {
     width: 49%;
 }
@@ -2608,13 +2909,13 @@ h2.current-price {
     margin: 0 0 50px;
     border: 2px solid #eee;
     background: #fff;
-    border-radius: 5px;
-    font-size: 14px;
+    border-radius: 4px;
+    font-size: 13px;
     text-align: center;
-    padding: 12px;
+    padding: 13px 0 12px;
     display: block;
     width: 100%;
-    font-weight: bold;
+    text-transform: uppercase;
     color: #555;
 }
 
@@ -2651,7 +2952,7 @@ h2.current-price {
     margin-top: 20px;
 }
 
-.merchant-footer {
+.merchant-footer, .landing-footer {
     clear: both;
     border-top: 2px solid #eee;
     color: #ccc;
@@ -2659,7 +2960,7 @@ h2.current-price {
     font-size: 13px;
 }
 
-.merchant-footer a {
+.merchant-footer a, .landing-footer a {
     display: inline-block;
     padding: 20px 5px;
     color: #bbb;

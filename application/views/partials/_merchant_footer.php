@@ -2,7 +2,7 @@
 
 	<div class="merchant-footer">
         <div class="center">
-            &copy; 2014 Couponcity. 
+            &copy; 2014 Couponcity, NG. 
             <a href="">Terms</a>
             <a href="">Privacy</a>
             <a href="<?= base_url('help-faq') ?>">Help</a>
@@ -10,7 +10,7 @@
         </div>
     </div>
 
-</div><!--Merchant Body clode-->
+</div><!--Merchant Body close-->
 
 	<!-- Scripts queries -->
 	<?php

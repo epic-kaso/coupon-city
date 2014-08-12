@@ -5,7 +5,7 @@
         <title><?= $title ?></title>
         <!-- meta info -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="keywords" content="Koupon HTML5 Template" />
+        <meta name="keywords" content="Coupons, Deals, Nigeria, Get deals online, discounts, buy cheap things, dealdey, Jumia, Kongs, ecommerce, online store" />
         <meta name="description" content="CouponCity - Get the best deals, heavy discounts and discover more fun stuff in your city. Our coupons cover your everyday purchases from gadgets to food, beauty treatments and others at unbelieveable prices.">
         <meta name="author" content="humans.text">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
