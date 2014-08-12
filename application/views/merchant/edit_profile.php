@@ -3,10 +3,8 @@
 </div>
 <div class="gap"></div>
 <div class="merchant-body left clearfix">
-
     <div class="hold right">
         <h1>Edit your Profile</h1>
-
         <div class="alert-error form-alert">
             <?php echo validation_errors(); ?>
         </div>
@@ -16,7 +14,6 @@
         <?php if (!empty($error_msg)) { ?>
             <div class='alert form-alert alert-error'><p><?= $error_msg ?></p></div>
         <?php } ?>
-
         <form action="<?= base_url(Merchant::MERCHANT_URL . '/edit-profile') ?>" method="post">
             <?php
             $values = $profile;
@@ -48,14 +45,11 @@
             ?>
             <input type="submit" value="Save" class="btn btn-primary">
         </form>
-
     </div>
     <?php
     echo partial('partials/_merchant_footer', array('year' => time('y')));
     ?>
 </div>
-
-
 <div class="merchant-body right">
     <div class="hold">
         <h2>Create your Profile</h2>
