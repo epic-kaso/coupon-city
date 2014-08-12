@@ -5,7 +5,7 @@
             <a href="<?= base_url('merchant/dashboard'); ?>">Dashboard</a>
 
             <a href="<?= base_url('merchant/my-coupons'); ?>">Coupons</a>
-            <a href="<?= base_url('merchant/redeem-coupon'); ?>" id="redeem">Redeem</a>
+            <a href="<?= base_url('merchant/redeem-coupon'); ?>">Redeem</a>
             <a href="<?= base_url(Merchant::MERCHANT_URL . '/profile'); ?>">Business</a>
             <a href="">Deposit</a>
         </div>

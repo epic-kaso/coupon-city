@@ -14,7 +14,6 @@
 <div class="auth-form hold">
 
     <form class="dialog-form" action="<?= base_url('merchant/forgot-password') ?>" method="post">
-        <label>E-mail</label>
         <input type="email" name="email" placeholder="you@example.com" class="span12">
         <input type="submit" value="Reset Password" class="btn btn-submit">
     </form>

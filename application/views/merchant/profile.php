@@ -22,10 +22,9 @@
             </div>
 
             <h3><?= $profile->business_name; ?></h3>
-            <p><?= $profile->address_one; ?></p>
-            <p><?= $profile->address_two; ?></p>
-            <p><?= $profile->city; ?></p>
-            <p><?= $profile->state; ?></p>
+            <p><?= $profile->address_one; ?>,</p>
+            <p><?= $profile->address_two; ?>, <?= $profile->city; ?>,</p>
+            <p><?= $profile->state; ?>.</p>
         </div>
 
         <fieldset class="segment clearfix">
@@ -44,13 +43,13 @@
             <ul class="clearfix">
                 <li class="left split-input"><label>Business Name:</label> <?= $profile->business_name; ?></li>
                 <li class="left split-input"><label>Category:</label> Food, Entertainment</li>
-                <li class="left split-input"><label>Website:</label> <?= $profile->website; ?></li>
+                <li class="left split-input"><label>Website:</label> <a href="http://<?= $profile->website; ?>"><?= $profile->website; ?></a></li>
                 <li class="left split-input">
                     <label>Address:</label> 
-                    <?= $profile->address_one; ?><br/>
-                    <?= $profile->address_two; ?><br/>
-                    <?= $profile->city; ?><br/>
-                    <?= $profile->state; ?>
+                    <?= $profile->address_one; ?>,<br/>
+                    <label class="empty-label"></label><?= $profile->address_two; ?>,<br/>
+                    <label class="empty-label"></label><?= $profile->city; ?>,<br/>
+                    <label class="empty-label"></label><?= $profile->state; ?>.
                 </li>
                 <li class=""><label>Description:</label> <?= $profile->short_description; ?></li>
                 <li class=""><label>Operating Hours:</label> <?= $profile->opening_hours; ?></li>

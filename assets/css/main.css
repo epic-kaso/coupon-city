@@ -2765,6 +2765,10 @@ input[type="text"], input[type="email"], input[type="password"], textarea {
     margin: 20px 0;
 }
 
+.profile-top p {
+    margin-bottom: 0;
+}
+
 .profile-top div {
     border: 5px solid #e8e8e8;
     width: 110px;
@@ -2782,6 +2786,12 @@ input[type="text"], input[type="email"], input[type="password"], textarea {
 .profile-top div img {
     width: 100%;
     display: block;
+}
+
+.empty-label {
+    height: 10px;
+    width: 65px;
+    display: inline-block;
 }
 
 .segment legend {
