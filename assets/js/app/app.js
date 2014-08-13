@@ -28,23 +28,6 @@ app.directive('loader', ['$rootScope', function($rootScope) {
     }]);
 
 app.controller('CouponUploadController', ['$scope', '$http', '$filter', '$window', function ($scope, $http, $filter, $window) {
-        new Dropzone("div#my-awesome-dropzone",
-                {
-                    init: function () {
-                        this.on("success", function (file, response) {
-                            console.log(response);
-                            var obj = JSON.parse(response);
-                            console.log(obj);
-                            $scope.couponform.src = obj.file_path;
-                            $scope.$emit('dynamic_src', obj);
-                            $scope.coupon.images = obj.images;
-                            console.log($scope.coupon);
-                        });
-                    },
-                    paramName: 'userfile',
-                    url: my_globals.base_url + 'index.php/coupon/upload_image'
-                });
-
         $scope.submitting = false;
         $scope.couponform = {};
         $scope.adv_price_form = {
@@ -54,6 +37,7 @@ app.controller('CouponUploadController', ['$scope', '$http', '$filter', '$window
         };
 
         $scope.add_next_adv_price_form = function () {
+            console.log('called');
             if ($scope.adv_price_form.second.visible) {
                 $scope.adv_price_form.third.visible = true;
             } else {
@@ -86,6 +70,19 @@ app.controller('CouponUploadController', ['$scope', '$http', '$filter', '$window
                 $scope.coupon.end_date = $value;
             }
         });
+        
+        $scope.$watch('coupon.old_price', function (newv, oldv) {
+            if (newv !== oldv) {
+                $scope.calculateNewPrice();
+            }
+        });
+        
+         $scope.$watch('coupon.new_price', function (newv, oldv) {
+            if (newv !== oldv) {
+                $scope.calculatePercentDiscount();
+            }
+        });
+        
         $scope.categories = my_globals.categories;
 
         $scope.coupon = {
@@ -93,6 +90,7 @@ app.controller('CouponUploadController', ['$scope', '$http', '$filter', '$window
             'old_price': 0,
             'new_price': 0,
             'discount': 0,
+            'actual_discount': 0,
             'advanced_pricing': {
                 'first': {'price': 0, 'discount': 0},
                 'second': {'price': 0, 'discount': 0},
@@ -110,8 +108,9 @@ app.controller('CouponUploadController', ['$scope', '$http', '$filter', '$window
                 return;
             }
 
-            var $discount = ($old_p - $new_p) / $old_p * 100.0;
-            $scope.coupon.discount = Math.ceil($discount);
+            var $discount = Math.ceil(($old_p - $new_p) / $old_p * 100.0);
+            $scope.coupon.discount = $discount;
+            $scope.coupon.actual_discount = $discount - ($discount * 0.2);
             //$scope.$apply();
         };
 

@@ -5,7 +5,7 @@
 
 <div ng-init="base_url = '<?= base_url(); ?>'"></div>
 
-<div class="merchant-body left clearfix">
+<div class="merchant-body left clearfix" ng-controller="CouponUploadController">
 
     <div class="hold right">
 
@@ -14,8 +14,7 @@
 
             <a href="<?= base_url('/merchant/my-coupons'); ?>" class="btn right export">&laquo; See all Coupons</a>
         </div>
-
-        <form ng-submit="submitCoupon(coupon)" class="dialog-form" name="coupon_form">
+        <form class="dialog-form" name="coupon_form">
             <div class="segment">
 
                 <!--Holds form errors-->
@@ -27,24 +26,25 @@
                 <?php } ?>
 
                 <h2>Coupon Information</h2>
-                <div ng-show="coupon_form.coupon_name.$dirty && !coupon_form.coupon_name.$pristine" class="invalid">Invalid.
+                <div ng-show="coupon_form.coupon_name.$dirty && !coupon_form.coupon_name.$pristine" class="invalid">
                     <span ng-show="coupon_form.coupon_name.$error.required">You need to Specify coupon name.</span>
                 </div>
-                <input name="coupon_name" required ng-model="coupon.name" type="text" placeholder="Coupon Name">
-                
+                <input name="coupon[name]" required ng-model="coupon.name" type="text" placeholder="Coupon Name">
+
                 <div class="clearfix split-input">
-                    <input type="text" placeholder="Tagline" class="left">
+                    <input type="text" placeholder="Tagline" class="left" name="coupon[tag_line]">
                     <div class="select-input right">
-                        <select>
+                        <select name="coupon[category]">
                             <option>Select Category</option>
-                            <option>Advertising</option>
-                            <option>Food &amp; Catering</option>
+                            <?php foreach ($categories->items() as $category) { ?>
+                                <option value="<?= $category->id ?>"><?= $category->name ?></option>
+                            <?php } ?>
                         </select>
                     </div>
                 </div>
 
                 <p>You might know this as a fine print but essentially its any information related to the coupon and its use. You might know this as a fine print but essentially its any information related to the coupon and its use. <a href="">Learn more &raquo;</a></p>
-                <textarea placeholder="What customers need to know" name="coupon_description" ng-model="coupon.description" class="span5" style="height: 200px;"></textarea>
+                <textarea placeholder="What customers need to know" name="coupon[description]" ng-model="coupon.description" class="span5" style="height: 200px;"></textarea>
 
             </div>
 
@@ -55,11 +55,11 @@
                 <div ng-show="coupon_form.coupon_summary.$dirty && !coupon_form.coupon_summary.$pristine" class="invalid">
                     <span ng-show="coupon_form.coupon_summary.$error.required">Give a little detail about the Coupon.</span>
                 </div>
-                <textarea name="coupon_summary" required ng-model="coupon.summary" placeholder="The details"></textarea>
+                <textarea name="coupon[summary]" required ng-model="coupon.summary" placeholder="The details"></textarea>
 
                 <div class="clearfix split-input">
-                    <input type="text" placeholder="Start Date" class="from-dati left">
-                    <input type="text" placeholder="End Date" class="to-dati right">
+                    <input type="text" placeholder="Start Date" class="from-dati left" name="coupon[start_date]">
+                    <input type="text" placeholder="End Date" class="to-dati right" name="coupon[end_date]">
                 </div>
 
                 <div class="clearfix split-input">
@@ -68,10 +68,10 @@
                     </div>
 
                     <div class="clearfix split-input left">
-                        <input type="text" placeholder="Price" class="old_price left">
-                        <input type="text" placeholder="Max. Coupons" class="max_coupons right">
+                        <input type="text" placeholder="Price" ng-model="coupon.old_price" class="old_price left" name="coupon[old_price]">
+                        <input type="text" placeholder="Max. Coupons" class="max_coupons right" name="coupon[quantity]">
                     </div>
-                    
+
                     <input type="text" placeholder="Market" class="right">
                 </div>
 
@@ -79,39 +79,46 @@
                     <p>You can enter up to 5 images. Make sure they are hi-res, clear with a minimum resolution of 700px by 500px</p>
 
                     <div class="file-upload left">
-                        <input type="file" class="upload" title="Upload Logo">
+                        <input type="file" class="upload" title="Upload Logo" name="coupon[media][0]">
                         <img alt="" class="target" src="">
                     </div>
 
                     <div class="file-upload left">
-                        <input type="file" class="upload" title="Upload Logo">
+                        <input type="file" class="upload" title="Upload Logo" name="coupon[media][1]">
                         <img alt="" class="target" src="">
                     </div>
 
                     <div class="file-upload left">
-                        <input type="file" class="upload" title="Upload Logo">
+                        <input type="file" class="upload" title="Upload Logo" name="coupon[media][2]">
                         <img alt="" class="target" src="">
                     </div>
 
                     <div class="file-upload left">
-                        <input type="file" class="upload" title="Upload Logo">
+                        <input type="file" class="upload" title="Upload Logo" name="coupon[media][3]">
                         <img alt="" class="target" src="">
                     </div>
 
                     <div class="file-upload right">
-                        <input type="file" class="upload" title="Upload Logo">
+                        <input type="file" class="upload" title="Upload Logo" name="coupon[media][4]">
                         <img alt="" class="target" src="">
                     </div>
                 </div>
             </div>
-            
+
             <div class="segment clearfix">
                 <h2>Pricing</h2>
 
                 <div class="basic-type-pricing clearfix three-input">
-                    <input type="text" placeholder="New Price" class="new_price left">
-                    <input type="text" placeholder="% Discount" class="basic_discount left">
-                    <input type="text" placeholder="Actual % Discount" class="actual_discount right">
+                    <input type="text" placeholder="New Price" class="new_price left"
+                           ng-model="coupon.new_price"
+                           name="coupon[pricing_basic][new_price]"
+                           >
+                    <input type="text" placeholder="% Discount" class="basic_discount left"
+                           ng-model="coupon.discount"
+                           name="coupon[pricing_basic][discount]">
+                    <input type="text" placeholder="Actual % Discount" class="actual_discount right"
+                           ng-model="coupon.actual_discount"
+                           name="coupon[pricing_basic][actual_discount]">
                 </div>
 
 
@@ -122,21 +129,26 @@
                     <label for="pricing-type" class="m-b">Turn On Advanced Pricing</label>
 
                     <div class="advanced-type-pricing clearfix three-input">
-                        <a href="">&laquo; Add Price Level</a>
-                        <input type="text" placeholder="New Price" class="left">
-                        <input type="text" placeholder="% Discount" class="left">
-                        <input type="text" placeholder="No of Customers" class="right">
+                        <a href="" ng-click="add_next_adv_price_form()">&laquo; Add Price Level</a>
+                        <input type="text" placeholder="New Price" class="left" name="coupon[pricing_advanced][0][new_price]">
+                        <input type="text" placeholder="% Discount" class="left" name="coupon[pricing_advanced][0][discount]">
+                        <input type="text" placeholder="No of Customers" class="right" name="coupon[pricing_advanced][0][customer_count]">
+                        <div ng-show="adv_price_form.second.visible">
+                            <input type="text" placeholder="New Price" class="left" name="coupon[pricing_advanced][1][new_price]">
+                            <input type="text" placeholder="% Discount" class="left" name="coupon[pricing_advanced][1][discount]">
+                            <input type="text" placeholder="No of Customers" class="right" name="coupon[pricing_advanced][1][customer_count]">
+                        </div>
+
+                        <div ng-show="adv_price_form.third.visible">
+                            <input type="text" placeholder="New Price" class="left" name="coupon[pricing_advanced][2][new_price]">
+                            <input type="text" placeholder="% Discount" class="left" name="coupon[pricing_advanced][2][discount]">
+                            <input type="text" placeholder="No of Customers" class="right" name="coupon[pricing_advanced][2][customer_count]">
+                        </div>
                     </div>
-
                 </div>
-              
-
             </div>
-
-            <input type="submit" class="btn-submit btn" value="Create Coupon"> 
+            <input type="submit" class="btn-submit btn" value="Create Coupon">
         </form>
-
-
     </div>
     <?php
     echo partial('partials/_merchant_footer', array('year' => time('y')));
