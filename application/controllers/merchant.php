@@ -86,7 +86,6 @@ class Merchant extends MY_Controller {
             $email = $this->input->post('email');
             $this->_process_login($email, $password);
         }
-
     }
 
     public function logout() {
@@ -160,7 +159,7 @@ class Merchant extends MY_Controller {
     public function edit_profile() {
         $this->_is_logged_in();
         $merchant = $this->merchant->get_current();
-        $this->data['profile'] = $this->merchant->profile_info($merchant);
+        $this->data['profile'] = new Merchant_presenter($merchant); //$this->merchant->profile_info($merchant);
         $this->data['merchant'] = $merchant;
         $this->data['breadcrumbs'] = $this->_get_crumbs();
         $this->data['logged_in'] = $this->session->userdata('logged_in');
@@ -176,9 +175,27 @@ class Merchant extends MY_Controller {
             $this->view = TRUE;
         } else {
             $this->view = FALSE;
-            $response = $this->merchant->update($merchant->id, $this->input->post(), TRUE);
-            $this->session->set_flashdata('success_msg', 'Profile Saved!');
-            redirect(base_url(Merchant::MERCHANT_URL . '/profile'));
+            $post_data = $this->input->post();
+            $this->load->library('fileupload');
+            $uploaded = $this->fileupload->do_upload("./uploads/merchants_logo/$merchant->id/", FALSE);
+
+            $old_logo = $merchant->logo;
+
+            if (!is_bool($uploaded) && !array_key_exists('error', $uploaded)) {
+                $post_data['logo'] = $uploaded['url'];
+                unlink('.' . $old_logo);
+            } else {
+                $post_data['logo'] = $old_logo;
+            }
+            unset($post_data['userfile']);
+            $response = $this->merchant->update($merchant->id, $post_data);
+            if (!$response) {
+                $this->session->set_flashdata('error_msg', 'Profile Couldn\'t be saved!');
+                redirect(base_url(Merchant::MERCHANT_URL . '/edit-profile'));
+            } else {
+                $this->session->set_flashdata('success_msg', 'Profile Saved!');
+                redirect(base_url(Merchant::MERCHANT_URL . '/profile'));
+            }
         }
     }
 

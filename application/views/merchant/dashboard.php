@@ -1,4 +1,3 @@
-
 <div class="merchant-body clearfix">
     <div class="hold _dash">
 
@@ -55,7 +54,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="coupon-graph">
                 <h4>Total Sales This Month</h4>
 

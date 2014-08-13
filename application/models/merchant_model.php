@@ -110,7 +110,7 @@ class Merchant_model extends MY_Model {
 
     public function profile_info($merchant) {
         $merchant = get_object_vars($merchant);
-        $keys = array('email', 'is_profile_complete', 'created_at', 'updated_at', 'id', 'status', 'password');
+        $keys = array('email', 'is_profile_complete', 'created_at', 'updated_at', 'id', 'status', 'password', 'activation_code');
         foreach ($keys as $v) {
             if (array_key_exists($v, $merchant)) {
                 unset($merchant[$v]);
@@ -124,6 +124,23 @@ class Merchant_model extends MY_Model {
         }
 
         return $merchant;
+    }
+
+    public function update($id, $data) {
+        $merchant = get_object_vars($this->get($id));
+        $keys = array('is_profile_complete', 'created_at', 'updated_at', 'id', 'status', 'password', 'activation_code');
+        foreach ($keys as $v) {
+            if (array_key_exists($v, $merchant)) {
+                unset($merchant[$v]);
+            }
+        }
+        foreach ($merchant as $key => $value) {
+            if (array_key_exists($key, $data)) {
+                $merchant[$key] = $data[$key];
+            }
+        }
+
+        return parent::update($id, $merchant, TRUE);
     }
 
 }
