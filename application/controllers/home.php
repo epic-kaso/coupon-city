@@ -75,7 +75,7 @@ class Home extends MY_Controller {
             if (!$response) {
                 $this->session->set_flashdata('login_error', 'Error Occured. ' . print_r($response, true));
             } else {
-                $response = $this->_send_mail($data['email'], array('username' => $data['email'], 'password' => $data['password']), 'Welcome to couponcity', 'welcome');
+                $response = $this->_send_mail($data['email'], array('username' => $data['email']), 'Welcome to couponcity', 'welcome');
                 $this->home->login_email($data['email'], $password);
             }
         } else {
