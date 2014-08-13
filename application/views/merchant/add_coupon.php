@@ -14,7 +14,7 @@
 
             <a href="<?= base_url('/merchant/my-coupons'); ?>" class="btn right export">&laquo; See all Coupons</a>
         </div>
-        <form class="dialog-form" name="coupon_form">
+        <form action="<?= base_url('/merchant/create-coupon'); ?>" method="post" enctype="multipart/form-data" class="dialog-form" name="coupon_form">
             <div class="segment">
 
                 <!--Holds form errors-->
@@ -37,7 +37,7 @@
                         <select name="coupon[category]">
                             <option>Select Category</option>
                             <?php foreach ($categories->items() as $category) { ?>
-                                <option value="<?= $category->id ?>"><?= $category->name ?></option>
+                                <option value="<?= @$category->id ?>"><?= @$category->name ?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -72,34 +72,34 @@
                         <input type="text" placeholder="Max. Coupons" class="max_coupons right" name="coupon[quantity]">
                     </div>
 
-                    <input type="text" placeholder="Market" class="right">
+                    <input type="text" name="coupon[location]" placeholder="Market" class="right">
                 </div>
 
                 <div class="clearfix coupon-images">
                     <p>You can enter up to 5 images. Make sure they are hi-res, clear with a minimum resolution of 700px by 500px</p>
 
                     <div class="file-upload left">
-                        <input type="file" class="upload" title="Upload Logo" name="coupon[media][0]">
+                        <input type="file" class="upload" title="Upload Logo" name="coupon_media_a">
                         <img alt="" class="target" src="">
                     </div>
 
                     <div class="file-upload left">
-                        <input type="file" class="upload" title="Upload Logo" name="coupon[media][1]">
+                        <input type="file" class="upload" title="Upload Logo" name="coupon_media_b">
                         <img alt="" class="target" src="">
                     </div>
 
                     <div class="file-upload left">
-                        <input type="file" class="upload" title="Upload Logo" name="coupon[media][2]">
+                        <input type="file" class="upload" title="Upload Logo" name="coupon_media_c">
                         <img alt="" class="target" src="">
                     </div>
 
                     <div class="file-upload left">
-                        <input type="file" class="upload" title="Upload Logo" name="coupon[media][3]">
+                        <input type="file" class="upload" title="Upload Logo" name="coupon_media_d">
                         <img alt="" class="target" src="">
                     </div>
 
                     <div class="file-upload right">
-                        <input type="file" class="upload" title="Upload Logo" name="coupon[media][4]">
+                        <input type="file" class="upload" title="Upload Logo" name="coupon_media_e">
                         <img alt="" class="target" src="">
                     </div>
                 </div>
@@ -125,7 +125,7 @@
                 <div class="segment-inner">
                     <p>You can turn on Advanced pricing here. Advanced Pricing lets you inspire more sales by dropping prices as customer number go up. <a href="">Learn more &raquo;</a></p>
 
-                    <input type="checkbox" id="pricing-type" class="pricing-type" name="pricing-type" value="advanced">
+                    <input type="checkbox" id="pricing-type" class="pricing-type" name="coupon[pricing_type]" value="advanced">
                     <label for="pricing-type" class="m-b">Turn On Advanced Pricing</label>
 
                     <div class="advanced-type-pricing clearfix three-input">

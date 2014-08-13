@@ -45,7 +45,7 @@ $(function() {
 	//Datepicker
 	$( ".from-dati" ).datepicker({
 		minDate: 0,
-      	dateFormat: 'dd MM, yy',
+      	dateFormat: 'MM dd, yy',
       	onClose: function( selectedDate ) {
         	$( ".to-dati" ).datepicker( "option", "minDate", selectedDate );
       	}
@@ -53,7 +53,7 @@ $(function() {
 
     $( ".to-dati" ).datepicker({
     	minDate: 1,
-      	dateFormat: 'dd MM, yy',
+      	dateFormat: 'MM dd, yy',
       	onClose: function( selectedDate ) {
         	$( ".from-dati" ).datepicker( "option", "maxDate", selectedDate );
       	}

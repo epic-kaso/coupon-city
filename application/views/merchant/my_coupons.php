@@ -16,7 +16,7 @@
                 <li>₦200,000 <span>Net Sales</span></li>
             </ul>
 
-            <?= partial('partials/merchant/_display_coupons_table', $coupons); ?>
+            <?= partial('partials/merchant/_display_coupons_table', array('coupons' => $coupons)); ?>
         </div>
 
     </div>

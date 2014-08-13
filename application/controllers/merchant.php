@@ -134,9 +134,10 @@ class Merchant extends MY_Controller {
         $limit = 20;
         $total = $this->_count_coupons($category);
         $base_url = base_url(Merchant::MERCHANT_URL . '/my-coupons/');
-
-        $coupons = $this->_coupons($limit, $page, $this->category->fetch_id_by_slug($category));
+        $cat_id = $this->category->fetch_id_by_slug($category);
+        $coupons = $this->_coupons($limit, $page, $cat_id == FALSE ? 'all' : $cat_id );
         //print_r($coupons);
+
 
         $coupon_presenter = new Coupon_presenter($coupons, TRUE);
         $this->data['categories'] = new Category_presenter($this->category->get_all(), base_url(Merchant::MERCHANT_URL . '/my-coupons/'));
@@ -178,6 +179,8 @@ class Merchant extends MY_Controller {
             $post_data = $this->input->post();
             $this->load->library('fileupload');
             $uploaded = $this->fileupload->do_upload("./uploads/merchants_logo/$merchant->id/", FALSE);
+
+            //print_r($uploaded);
 
             $old_logo = $merchant->logo;
 
@@ -302,7 +305,7 @@ class Merchant extends MY_Controller {
 
     private function _coupons($limit, $page, $category_id = 'all') {
         $merchant = $this->session->userdata('merchant');
-        if (strcmp($category_id, 'all') === 0) {
+        if (strcmp($category_id, 'all') === 0 || !is_numeric($category_id)) {
             $coupons = $this->coupons
                     ->limit($limit, $page * $limit)
                     ->with('coupon_medias')
