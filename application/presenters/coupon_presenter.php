@@ -28,7 +28,7 @@ class Coupon_presenter extends Presenter {
         } else {
             if (is_array($this->data)) {
                 foreach ($this->data as $key => $row) {
-                    if ($row->deal_status == 0) {
+                    if (!$this->is_merchant && $row->deal_status == 0) {
                         unset($this->data[$key]);
                     } else {
                         $this->process($row);
@@ -36,7 +36,7 @@ class Coupon_presenter extends Presenter {
                 }
                 return $this->data;
             } else {
-                if ($this->data->deal_status == 0) {
+                if (!$this->is_merchant && $this->data->deal_status == 0) {
                     redirect(base_url('coupon-not-found'));
                 } else {
                     return $this->process($this->data);

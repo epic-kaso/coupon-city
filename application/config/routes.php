@@ -92,6 +92,7 @@ $route['merchant/logout'] = "merchant/logout";
 $route['merchant/edit-profile'] = "merchant/edit_profile";
 $route['merchant/signup'] = 'merchant/create';
 $route['merchant/add-coupon'] = "merchant/add_coupon";
+$route['merchant/create-coupon'] = "coupon/create";
 $route['merchant/my-coupon/(:any)'] = "merchant/my_coupon/$1";
 $route['merchant/my-coupons'] = 'merchant/my_coupons';
 $route['merchant/my-coupons/(:any)'] = 'merchant/my_coupons/$1';

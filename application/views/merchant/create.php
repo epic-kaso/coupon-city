@@ -19,7 +19,7 @@
         <div class='alert form-alert alert-error'><p><?= $error_msg ?></p></div>
     <?php } ?>
 
-    <form class="dialog-form" method="post" action="<?= base_url(Merchant::MERCHANT_URL . '/login'); ?>">
+    <form class="dialog-form" method="post" action="<?= base_url(Merchant::MERCHANT_URL . '/signup'); ?>">
 
         <input name="email" type="email" placeholder="you@example.com" required>
         <input name="password" type="password" placeholder="Password" required>

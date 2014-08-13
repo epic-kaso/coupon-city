@@ -13,27 +13,37 @@
  */
 class Fileupload {
 
-    private $main_upload_path = './uploads/coupons';
+    private $main_upload_path = './uploads/coupons/';
 
     public function __construct() {
         $this->CI = & get_instance();
         $this->CI->load->helper('file');
     }
 
-    public function do_upload($path = null, $output_json = TRUE) {
+    public function upload_batch($merchant_id, $file_name_array) {
+        $response = array();
+        foreach ($file_name_array as $value) {
+            $response[$value] = $this->do_upload("{$this->main_upload_path}/{$merchant_id}/", FALSE, $value);
+        }
+
+        return $response;
+    }
+
+    public function do_upload($path = null, $output_json = TRUE, $file_name = FALSE) {
         if (!is_null($path) && !file_exists($path)) {
             mkdir($path, 0777, TRUE);
         }
         $config['upload_path'] = is_null($path) ? $this->main_upload_path : $path;
-        $config['allowed_types'] = 'gif|jpg|png';
+        $config['allowed_types'] = 'gif|jpg|jpeg|png';
         $config['max_size'] = '30000';
         $config['max_width'] = '1024';
         $config['max_height'] = '768';
         $config['encrypt_name'] = TRUE;
 
         $this->CI->load->library('upload', $config);
+        $do_upload = ($file_name === FALSE) ? $this->CI->upload->do_upload() : $this->CI->upload->do_upload($file_name);
 
-        if (!$this->CI->upload->do_upload()) {
+        if (!$do_upload) {
             $error = array('error' => $this->CI->upload->display_errors());
             if ($output_json) {
                 json_output($error);
@@ -54,7 +64,7 @@ class Fileupload {
             if ($response) {
                 $fullpath = $data['upload_data']['full_path'];
                 $name = $data['upload_data']['file_name'];
-                $base = isset($path) ? str_replace('.', '', $path) : 'uploads/coupons/';
+                $base = isset($path) ? str_replace('.', '', $path) : str_replace('.', '', $this->main_upload_path);
                 $path = "$base$name";
                 return array(
                     'url' => $path,

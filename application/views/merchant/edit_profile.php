@@ -31,7 +31,7 @@
 
                     <div class="clearfix split-input">
                         <input type="text" value="<?= $profile->website; ?>" name="website" placeholder="Website" class="left" />
-                        
+
                         <div class="select-input right">
                             <select>
                                 <option>Select Category</option>
@@ -48,7 +48,7 @@
                         <input type="text" value="<?= $profile->city; ?>" name="city" placeholder="City" class="left" />
                         <input type="text" value="<?= $profile->state; ?>" name="state" placeholder="State" class="right" />
                     </div>
-                    
+
                 </div>
 
                 <div class="file-upload right">
@@ -67,22 +67,26 @@
             <div class="segment">
                 <h2>Bank Details</h2>
                 <input type="text" placeholder="Account Number" value="<?= $profile->account_number; ?>" name="account_number" />
-                
+
                 <div class="split-input clearfix">
 
                     <div class="select-input left">
-                        <select>
+                        <select name="bank_name">
                             <option>Choose Bank</option>
-                            <option>Access Bank</option>
-                            <option>Keystone Bank</option>
+                            <?php $selected = $profile->bank_name == 'Access Bank' ?>
+                            <option <?= $selected ? 'selected' : '' ?>>Access Bank</option>
+                            <?php $selected = $profile->bank_name == 'Keystone Bank' ?>
+                            <option <?= $selected ? 'selected' : '' ?>>Keystone Bank</option>
                         </select>
                     </div>
 
                     <div class="select-input right">
-                        <select>
+                        <select name="account_type">
                             <option>Account Type</option>
-                            <option>Savings</option>
-                            <option>Current</option>
+                            <?php $selected = $profile->account_type == 'Savings' ?>
+                            <option <?= $selected ? 'selected' : '' ?>>Savings</option>
+                            <?php $selected = $profile->account_type == 'Current' ?>
+                            <option <?= $selected ? 'selected' : '' ?>>Current</option>
                         </select>
                     </div>
 
