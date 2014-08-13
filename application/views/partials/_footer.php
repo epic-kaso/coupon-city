@@ -22,7 +22,7 @@ if (!isset($app_type)) {
 <script src="<?= base_url('assets/js/waypoints.js'); ?>"></script>
 <script src="<?= base_url('assets/js/main.js'); ?>"></script>
 
-<!------------------- REALLY IMPORTANT -------- -->
+<!-- REALLY IMPORTANT -->
 <script src="<?= base_url('assets/js/lib/angular.min.js'); ?>"></script>
 <script src="<?= base_url('assets/js/user/angular-facebook.min.js'); ?>"></script>
 <script src="<?= base_url('assets/js/user/app.js'); ?>"></script>

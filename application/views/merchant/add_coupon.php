@@ -27,7 +27,10 @@
                 <?php } ?>
 
                 <h2>Coupon Information</h2>
-                <input type="text" placeholder="Coupon Name">
+                <div ng-show="coupon_form.coupon_name.$dirty && !coupon_form.coupon_name.$pristine" class="invalid">Invalid.
+                    <span ng-show="coupon_form.coupon_name.$error.required">You need to Specify coupon name.</span>
+                </div>
+                <input name="coupon_name" required ng-model="coupon.name" type="text" placeholder="Coupon Name">
                 
                 <div class="clearfix split-input">
                     <input type="text" placeholder="Tagline" class="left">
@@ -41,7 +44,7 @@
                 </div>
 
                 <p>You might know this as a fine print but essentially its any information related to the coupon and its use. You might know this as a fine print but essentially its any information related to the coupon and its use. <a href="">Learn more &raquo;</a></p>
-                <textarea placeholder="What customers need to know"></textarea>
+                <textarea placeholder="What customers need to know" name="coupon_description" ng-model="coupon.description" class="span5" style="height: 200px;"></textarea>
 
             </div>
 
@@ -49,14 +52,21 @@
                 <h2>Coupon Details</h2>
 
                 <p>Enter details of the good or service you are offering through this coupon. Customers need all details of what they are buying. You might know this as a fine print but essentially its any information related to the coupon and its use.<a href="">Learn more &raquo;</a></p>
-                <textarea placeholder="The details"></textarea>
+                <div ng-show="coupon_form.coupon_summary.$dirty && !coupon_form.coupon_summary.$pristine" class="invalid">
+                    <span ng-show="coupon_form.coupon_summary.$error.required">Give a little detail about the Coupon.</span>
+                </div>
+                <textarea name="coupon_summary" required ng-model="coupon.summary" placeholder="The details"></textarea>
 
                 <div class="clearfix split-input">
-                    <input type="text" placeholder="Start Date" class="left">
-                    <input type="text" placeholder="End Date" class="right">
+                    <input type="text" placeholder="Start Date" class="from-dati left">
+                    <input type="text" placeholder="End Date" class="to-dati right">
                 </div>
 
                 <div class="clearfix split-input">
+                    <div ng-show="coupon_form.old_price.$dirty && !coupon_form.old_price.$pristine" class="invalid">
+                        <span ng-show="coupon_form.old_price.$error.required">You need to specify old price.</span>
+                    </div>
+
                     <div class="clearfix split-input left">
                         <input type="text" placeholder="Price" class="old_price left">
                         <input type="text" placeholder="Max. Coupons" class="max_coupons right">

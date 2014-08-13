@@ -1,7 +1,4 @@
-<div class="container">
-    <?= $breadcrumbs ?>
-</div>
-<div class="gap"></div>
+
 <div class="merchant-body left clearfix">
     <div class="hold right">
         <div class="clearfix">
@@ -14,75 +11,86 @@
             <div class='alert form-alert alert-error'><p><?= $error_msg ?></p></div>
         <?php } ?>
         <form action="<?= base_url(Merchant::MERCHANT_URL . '/edit-profile') ?>" method="post" enctype="multipart/form-data">
-            <fieldset class="segment clearfix">
-                <legend>Basic Information</legend>
+            <div class="segment clearfix">
+                <h2>Basic Information</h2>
+                <input type="text" value="<?= $profile->contact_name; ?>" name="contact_name" placeholder="Full Name" />
 
-                <ul class="clearfix">
-                    <li class="left split-input">
-                        <label>Full Name:</label>
-                        <input type="text" value="<?= $profile->contact_name; ?>" name="contact_name" />
-                    </li>
-                    <li class="left split-input">
-                        <label>Mobile No:</label>
-                        <input type="text" value="<?= $profile->mobile_number; ?>" name="mobile_number" />
-                    </li>
-                </ul>
-            </fieldset>
+                <div class="split-input clearfix">
+                    <input type="text" value="<?= $profile->email; ?>" name="email" placeholder="you@business.com" class="left" />
+                    <input type="text" value="<?= $profile->mobile_number; ?>" name="mobile_number" class="right" />
+                </div>
+            </div>
 
-            <fieldset class="segment clearfix">
-                <legend>Business Information</legend>
+            <div class="segment clearfix">
+                <h2>Business Information</h2>
 
-                <ul class="clearfix">
-                    <li class="left split-input">
-                        <label>Business Logo:</label>
-                        <input type="file" name="userfile"/>
-                    </li>
-                    <li class="left split-input">
-                        <label>Business Name:</label>
-                        <input type="text" value="<?= $profile->business_name; ?>" name="business_name" />
-                    </li>
-                    <li class="left split-input">
-                        <label>Category:</label>
-                        <input type="text" value="<?= $profile->category; ?>" name="category" />
-                    </li>
-                    <li class="left split-input">
-                        <label>Website:</label>
-                        <input type="text" value="<?= $profile->website; ?>" name="website" />
-                    </li>
-                    <li class="left split-input">
-                        <label>Address:</label>
-                        <input type="text" value="<?= $profile->address_one; ?>" name="address_one" /><br/>
-                        <label>Address 2:</label>
-                        <input type="text" value="<?= $profile->address_two; ?>" name="address_two" /><br/>
-                        <label>City:</label>
-                        <input type="text" value="<?= $profile->city; ?>" name="city" /><br/>
-                        <label>State:</label>
-                        <input type="text" value="<?= $profile->state; ?>" name="state" /><br/>
-                    </li>
-                    <li class="left split-input">
-                        <label>Description:</label>
-                        <textarea name="short_description" placeholder="" cols="4" rows="10">
-                            <?= $profile->short_description; ?>
-                        </textarea>
-                    </li>
-                    <li class="left split-input"><label>Operating Hours:</label>
-                        <textarea name="opening_hours" placeholder="" cols="4">
-                            <?= $profile->opening_hours; ?>
-                        </textarea>
-                    </li>
-                </ul>
-            </fieldset>
+                <input type="text" value="<?= $profile->business_name; ?>" name="business_name" placeholder="Business Name" />
 
-            <fieldset class="segment clearfix">
-                <legend>Bank Details</legend>
-                <ul class="clearfix">
-                    <li class="left split-input"><label>Bank Name:</label> Diamond Bank</li>
-                    <li class="left split-input"><label>Account No:</label> 1234567890</li>
-                    <li class="left split-input"><label>Account Type:</label> Savings</li>
+                <div class="left b-details">
 
-                </ul>
-            </fieldset>
-            <input type="submit" value="Save" class="btn btn-primary">
+                    <div class="clearfix split-input">
+                        <input type="text" value="<?= $profile->website; ?>" name="website" placeholder="Website" class="left" />
+                        
+                        <div class="select-input right">
+                            <select>
+                                <option>Select Category</option>
+                                <option>Advertising</option>
+                                <option>Food &amp; Catering</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <input type="text" value="<?= $profile->address_one; ?>" name="address_one" placeholder="Address 1" />
+                    <input type="text" value="<?= $profile->address_two; ?>" name="address_two" placeholder="Address 2" />
+
+                    <div class="clearfix split-input">
+                        <input type="text" value="<?= $profile->city; ?>" name="city" placeholder="City" class="left" />
+                        <input type="text" value="<?= $profile->state; ?>" name="state" placeholder="State" class="right" />
+                    </div>
+                    
+                </div>
+
+                <div class="file-upload right">
+                    <input type="file" name="userfile" class="upload business-logo" title="Upload Logo" />
+                    <img alt="" class="target" src="">
+                </div>
+
+                <div class="clearfix split-input">
+                    <textarea name="short_description" placeholder="Business Description" cols="4" rows="10" class="left"><?= $profile->short_description; ?></textarea>
+
+                    <textarea name="opening_hours" placeholder="Operating Hours" cols="4" rows="10" class="right"><?= $profile->opening_hours; ?></textarea>
+                </div>
+
+            </div>
+
+            <div class="segment">
+                <h2>Bank Details</h2>
+                <input type="text" placeholder="Account Number">
+                
+                <div class="split-input clearfix">
+
+                    <div class="select-input left">
+                        <select>
+                            <option>Choose Bank</option>
+                            <option>Access Bank</option>
+                            <option>Keystone Bank</option>
+                        </select>
+                    </div>
+
+                    <div class="select-input right">
+                        <select>
+                            <option>Account Type</option>
+                            <option>Savings</option>
+                            <option>Current</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="bank-logo"></div>
+            </div>
+
+            <input type="submit" value="Update Business Profile" class="btn btn-submit">
         </form>
     </div>
     <?php

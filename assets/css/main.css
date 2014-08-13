@@ -7,7 +7,7 @@ button,
 input,
 select,
 textarea {
-    color: #222;
+    color: #777;
 }
 
 html, body, div, span, applet, object, iframe,
@@ -2815,7 +2815,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea {
     font-weight: bold;
 }
 
-.split-input input[type="text"], .split-input input[type="password"], .split-input input[type="email"], .split-input .select-input, .split-input.left {
+.split-input input[type="text"], .split-input input[type="password"], .split-input input[type="email"], .split-input .select-input, .split-input.left, .split-input textarea {
     width: 49%;
 }
 
@@ -2917,6 +2917,11 @@ input[type="text"], input[type="email"], input[type="password"], textarea {
     width: 100%;
     text-transform: uppercase;
     color: #555;
+}
+
+.btn-small {
+    width: auto;
+    padding: 13px 20px 12px;
 }
 
 .btn:hover {
@@ -3306,6 +3311,43 @@ p.view-price label {
 
 ._dash table .export {
     margin: 0 0 0 10px;
+}
+
+/** Override Jquery UI #ui-datepicker-div **/ 
+
+.ui-datepicker {
+    width: 16em !important;
+    font: 14px 'Open Sans', Arial !important;
+}
+
+.ui-widget-content {
+    border: 1px solid #ddd !important;
+}
+
+.ui-widget-header {
+    background: #ddd !important;
+    font-weight: normal !important;
+    border: 1px solid #ccc !important;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    background: #ddd !important;
+    color: #777 !important;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+    color: #428bca !important;
+    border: 1px solid #428bca !important;
+    background: #fff !important;
+}
+
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+    border-color: #428bca !important;
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+    border-color: #3683be !important;
+    background: #fff !important;
 }
 
 

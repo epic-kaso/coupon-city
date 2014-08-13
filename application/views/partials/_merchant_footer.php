@@ -12,12 +12,13 @@
 
 </div><!--Merchant Body close-->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
 <script src="<?= base_url('assets/js/modal.js'); ?>"></script>
 <script src="<?= base_url('assets/js/waypoints.js'); ?>"></script>
 <script src="<?= base_url('assets/js/main.js'); ?>"></script>
 <script src="<?= base_url('assets/js/main.js'); ?>"></script>
 
-<!------------------- REALLY IMPORTANT -------- -->
+<!-- REALLY IMPORTANT -->
 <script src="<?= base_url('assets/js/lib/angular.min.js'); ?>"></script>
 <script src="<?= base_url('assets/js/app/app.js'); ?>"></script>
 
