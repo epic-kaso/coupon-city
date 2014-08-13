@@ -21,6 +21,18 @@
         <div class="feature-two right"></div>
     </div>
 
+    <div class="featured-merchants clearfix mb">
+        <h2 class="majors">Featured Merchants</h2>
+        <br/>
+        <ul>
+            <li><img src="<?= base_url('assets/images/merchant-dummy.png'); ?>" /></li>
+            <li><img src="<?= base_url('assets/images/dummy-merchant.png'); ?>" /></li>
+            <li><img src="<?= base_url('assets/images/merchant-dummy.png'); ?>" /></li>
+            <li><img src="<?= base_url('assets/images/dummy-merchant.png'); ?>" /></li>
+            <li><img src="<?= base_url('assets/images/merchant-dummy.png'); ?>" /></li>
+        </ul>
+    </div>
+
 </div><!--inner pad end-->
 
 
