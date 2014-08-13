@@ -11,6 +11,7 @@
             <div class='alert form-alert alert-error'><p><?= $error_msg ?></p></div>
         <?php } ?>
         <form action="<?= base_url(Merchant::MERCHANT_URL . '/edit-profile') ?>" method="post" enctype="multipart/form-data">
+
             <div class="segment clearfix">
                 <h2>Basic Information</h2>
                 <input type="text" value="<?= $profile->contact_name; ?>" name="contact_name" placeholder="Full Name" />
@@ -65,7 +66,7 @@
 
             <div class="segment">
                 <h2>Bank Details</h2>
-                <input type="text" placeholder="Account Number">
+                <input type="text" placeholder="Account Number" value="<?= $profile->account_number; ?>" name="account_number" />
                 
                 <div class="split-input clearfix">
 
@@ -91,6 +92,7 @@
             </div>
 
             <input type="submit" value="Update Business Profile" class="btn btn-submit">
+
         </form>
     </div>
     <?php

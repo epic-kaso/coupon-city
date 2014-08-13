@@ -45,7 +45,7 @@
                 <li class="left split-input"><label>Category:</label> Food, Entertainment</li>
                 <li class="left split-input"><label>Website:</label> <a href="http://<?= $profile->website; ?>"><?= $profile->website; ?></a></li>
                 <li class="left split-input">
-                    <label>Address:</label> 
+                    <label>Address:</label>
                     <?= $profile->address_one; ?>,<br/>
                     <label class="empty-label"></label><?= $profile->address_two; ?>,<br/>
                     <label class="empty-label"></label><?= $profile->city; ?>,<br/>
@@ -60,9 +60,9 @@
             <legend>Bank Details</legend>
 
             <ul class="clearfix">
-                <li class="left split-input"><label>Bank Name:</label> Diamond Bank</li>
-                <li class="left split-input"><label>Account No:</label> 1234567890</li>
-                <li class="left split-input"><label>Account Type:</label> Savings</li>
+                <li class="left split-input"><label>Bank Name:</label><?= $profile->bank_name; ?></li>
+                <li class="left split-input"><label>Account No:</label> <?= $profile->account_number; ?></li>
+                <li class="left split-input"><label>Account Type:</label><?= $profile->account_type; ?></li>
 
             </ul>
         </fieldset>
@@ -70,7 +70,7 @@
     </div>
     <div class="merchant-footer">
         <div class="center">
-            &copy; 2014 Couponcity. 
+            &copy; 2014 Couponcity.
             <a href="">Terms</a>
             <a href="">Privacy</a>
             <a href="">Legal</a>

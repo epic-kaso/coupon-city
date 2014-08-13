@@ -26,7 +26,7 @@ class Home extends MY_Controller {
         $this->data['title'] = 'All Projects';
         $this->data['categories'] = new Category_presenter($this->category->get_all(), base_url('categories'));
         $this->data['coupons'] = $coupon_presenter;
-        $this->data['featured_item'] = $coupon_presenter->featured_item();
+        $this->data['featured_items'] = $coupon_presenter->featured_items();
 
         $config = $this->_use_pagination($total, $limit, $base_url, 3);
         $config['cur_page'] = $page;
@@ -123,11 +123,12 @@ class Home extends MY_Controller {
 
     public function coupon($slug) {
         $this->load->model('coupon_view_model', 'coupon_view');
-
+        $this->load->model('coupon_model', 'coupons');
         $coupon = $this->coupons->get_by_slug($slug);
+        //print_r($coupon);
         $this->data['user'] = $this->home->get_current();
         $this->data['breadcrumbs'] = $this->_get_crumbs();
-        if (!$coupon) {
+        if ($coupon == FALSE) {
             show_404('home/error_page');
         } else {
             $this->coupon_view->increase_view($coupon->id);

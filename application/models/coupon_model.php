@@ -19,7 +19,9 @@ class Coupon_model extends MY_Model {
     public $before_create = array('ensure_unique_slug', 'generate_merchant_coupon_code', 'created_at', 'updated_at',
         'calculate_discount', 'transform_start_end_date', 'advanced_pricing_to_json');
     public $after_get = array('update_status', 'get_coupon_cover_image', 'advanced_pricing_to_object', 'format_numbers',);
-    public $has_many = array('coupon_medias' => array('model' => 'coupon_media_model', 'primary_key' => 'coupon_id'));
+    public $has_many = array(
+        'coupon_medias' => array('model' => 'coupon_media_model', 'primary_key' => 'coupon_id')
+    );
     public $belongs_to = array('merchant' => array('model' => 'merchant_model'));
     public $validate = array(
         array('field' => 'name',
@@ -288,6 +290,7 @@ class Coupon_model extends MY_Model {
     public function get_coupon_cover_image($row) {
         $ci = & get_instance();
         $ci->load->model('coupon_media_model', 'media');
+        $row->coupon_medias = $ci->media->get_many_by(array('coupon_id' => $row->id));
         $image_url = $ci->media->get_cover_media($row->id);
         if (!$image_url) {
             $row->cover_image_url = Coupon_media_model::DEFAULT_MEDIA_URL;
