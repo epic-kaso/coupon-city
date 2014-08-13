@@ -33,17 +33,17 @@ class Coupon extends CI_Controller {
 
         $res = $this->do_upload($coupon_medias);
 
-        //print_r($response);
+        //print_r($res);
 
         if (is_bool($id) && $id == FALSE) {
             $this->session->set_flashdata('error_msg', 'Failed to Add Coupon');
-            $response = array('error_msg' => 'Failed to Add Coupon');
+            // $response = array('error_msg' => 'Failed to Add Coupon');
         } else {
-            $this->session->set_flashdata('success_msg', 'Successfully Added Coupon');
             $this->add_image_to_coupon($res, $id);
-            $response = array('success_msg' => 'Successfully Added Coupon');
+            $this->session->set_flashdata('success_msg', 'Successfully Added Coupon');
+            //$tsuccess_msg' => 'Successfully Added Coupon');
         }
-
+        //print_r($response);
         redirect(base_url('merchant/my-coupons'));
     }
 
@@ -84,14 +84,14 @@ class Coupon extends CI_Controller {
     private function add_image_to_coupon($response, $coupon_id) {
         $report = array();
         foreach ($response as $value) {
-            if (!$value && !array_key_exists('error', $value)) {
+            if (is_array($response) && !array_key_exists('error', $value)) {
                 $r = array('coupon_id' => $coupon_id,
                     'file_path' => $value['full_path'],
                     'media_url' => $value['url']);
                 $report[] = $this->coupon_media->insert($r);
+                //print_r($r);
             }
         }
-
         return $report;
     }
 

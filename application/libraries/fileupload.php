@@ -13,7 +13,7 @@
  */
 class Fileupload {
 
-    private $main_upload_path = './uploads/coupons';
+    private $main_upload_path = './uploads/coupons/';
 
     public function __construct() {
         $this->CI = & get_instance();
@@ -23,7 +23,7 @@ class Fileupload {
     public function upload_batch($merchant_id, $file_name_array) {
         $response = array();
         foreach ($file_name_array as $value) {
-            $response[$value] = $this->do_upload("{$this->main_upload_path}/{$merchant_id}", FALSE, $value);
+            $response[$value] = $this->do_upload("{$this->main_upload_path}/{$merchant_id}/", FALSE, $value);
         }
 
         return $response;
