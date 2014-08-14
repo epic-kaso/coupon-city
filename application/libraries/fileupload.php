@@ -66,6 +66,8 @@ class Fileupload {
                 $name = $data['upload_data']['file_name'];
                 $base = isset($path) ? str_replace('.', '', $path) : str_replace('.', '', $this->main_upload_path);
                 $path = "$base$name";
+                //$thumb_path = $data['upload_data']['file_path'] . "thumbnails/";
+                //$this->create_thumbnail($fullpath, $thumb_path, $name);
                 return array(
                     'url' => $path,
                     'full_path' => $fullpath,
@@ -92,6 +94,7 @@ class Fileupload {
             echo $this->CI->image_lib->display_errors();
             return FALSE;
         } else {
+            //$this->create_thumbnail($path);
             return TRUE;
         }
     }
@@ -100,10 +103,33 @@ class Fileupload {
         $config = array();
         $config['image_library'] = 'gd2';
         $config['source_image'] = $path;
-        $config['maintain_ratio'] = FALSE;
-        $config['width'] = 200;
-        $config['height'] = 200;
+        $config['maintain_ratio'] = TRUE;
+        $config['width'] = 700;
+        $config['height'] = 500;
         $config['quality'] = 70;
+
+        $this->CI->load->library('image_lib', $config);
+
+        if (!$this->CI->image_lib->resize()) {
+            echo $this->CI->image_lib->display_errors();
+            return FALSE;
+        } else {
+            //$this->create_thumbnail($path);
+            return TRUE;
+        }
+    }
+
+    public function create_thumbnail($original_path, $thumb_path) {
+        if (!is_null($thumb_path) && !file_exists($thumb_path)) {
+            mkdir($thumb_path, 0777, TRUE);
+        }
+        $config = array();
+        $config['image_library'] = 'gd2';
+        $config['source_image'] = $original_path;
+        $config['new_image'] = $thumb_path;
+        $config['maintain_ratio'] = TRUE;
+        $config['width'] = 75;
+        $config['height'] = 50;
 
         $this->CI->load->library('image_lib', $config);
 

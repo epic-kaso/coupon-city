@@ -129,7 +129,7 @@ class Home extends MY_Controller {
         $this->data['user'] = $this->home->get_current();
         $this->data['breadcrumbs'] = $this->_get_crumbs();
         if ($coupon == FALSE) {
-            show_404('home/error_page');
+            redirect(base_url('coupon-not-found'));
         } else {
             $this->coupon_view->increase_view($coupon->id);
             $coupon_presenter = new Coupon_presenter($coupon, FALSE);
@@ -206,6 +206,7 @@ class Home extends MY_Controller {
     }
 
     public function coupon_not_found() {
+        $this->layout = FALSE;
         $this->view = 'home/error_page';
         $this->data['code'] = 'Coupon Not Found';
         $this->data['breadcrumbs'] = $this->_get_crumbs();
@@ -213,6 +214,7 @@ class Home extends MY_Controller {
     }
 
     public function error_page($code = 404) {
+        $this->layout = FALSE;
         $this->data['code'] = $code;
         $this->data['breadcrumbs'] = $this->_get_crumbs();
         $this->data['user'] = $this->home->get_current();

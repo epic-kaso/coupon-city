@@ -48,6 +48,26 @@ class Coupon_view_model extends MY_Model {
         return $total;
     }
 
+    public function get_views_by_month($date, $coupon_id = NULL) {
+        if (is_null($date)) {
+            $date = Carbon::createFromDate(NULL, NULL, 1);
+        }
+
+        $start = $date;
+        $end = Carbon::createFromDate();
+
+        $response = $this->get_by_date_range($start, $end, $coupon_id);
+        if (!$response) {
+            return 0;
+        } else {
+            $total = 0;
+            foreach ($response as $value) {
+                $total += $value->view_count;
+            }
+            return $total;
+        }
+    }
+
     public function get_views_by_date($date, $coupon_id = NULL) {
         if (!is_null($date)) {
             $s_unix = human_to_unix($date);
@@ -57,10 +77,24 @@ class Coupon_view_model extends MY_Model {
         }
         if (is_null($coupon_id)) {
             $query = array('view_date' => $date);
-            return $this->get_many_by($query);
+            $response = $this->get_many_by($query);
+            if (!$response) {
+                return 0;
+            } else {
+                $total = 0;
+                foreach ($response as $value) {
+                    $total += $value->view_count;
+                }
+                return $total;
+            }
         } else {
             $query = array('view_date' => $date, 'coupon_id' => $coupon_id);
-            return $this->get_by($query);
+            $response = $this->get_by($query);
+            if (!$response) {
+                return 0;
+            } else {
+                return $response->view_count;
+            }
         }
     }
 

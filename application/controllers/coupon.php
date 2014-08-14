@@ -102,12 +102,13 @@ class Coupon extends CI_Controller {
             'name' => $data['name'],
             'summary' => $data['summary'],
             'description' => $data['description'],
+            'tag_line' => $data['tag_line'],
             'location' => $data['location'],
             'category_id' => $data['category'],
             'merchant_id' => $this->merchant->get_current()->id,
             'quantity' => $data['quantity'],
-            'start_date' => date('yy-mm-dd', strtotime($data['start_date'])),
-            'end_date' => date('yy-mm-dd', strtotime($data['end_date'])),
+            'start_date' => Carbon::parse($data['start_date']),
+            'end_date' => Carbon::parse($data['end_date']),
             'old_price' => $data['old_price']
         );
 
@@ -116,13 +117,16 @@ class Coupon extends CI_Controller {
          * array=>'advanced_pricing'
          *  array=>'first'
          *          array=>'count','value'
-         *          array=>'price','value'
+         *                  'price','value'
+         *                  'discount',value
          * array=>'second'
          *          array=>'count','value'
-         *          array=>'price','value'
+         *                 'price','value'
+         *                 'discount',value
          * array=>'third'
          *          array=>'count','value'
-         *          array=>'price','value'
+         *                 'price','value'
+         *                 'discount',value
          *
          */
         if ($is_advanced_pricing) {

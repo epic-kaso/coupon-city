@@ -7,6 +7,7 @@
  */
 
 require_once APPPATH . 'presenters/presenter.php';
+require_once APPPATH . 'presenters/merchant_presenter.php';
 
 class Coupon_presenter extends Presenter {
 
@@ -52,16 +53,23 @@ class Coupon_presenter extends Presenter {
             $row->name = 'No Coupon Available';
             return array($row);
         }
-        //if ($this->data->deal_status == 0) {
-        //    redirect(base_url('coupon-not-found'));
-        //} else {
-        return $this->process($this->data);
-        // }
+
+        if (!$this->is_merchant &&
+                is_object($this->data) &&
+                property_exists($this->data, 'deal_status') &&
+                $this->data->deal_status == 0) {
+            print_r($this->data->deal_status);
+            //redirect(base_url('coupon-not-found'));
+        } else {
+            return $this->process($this->data);
+        }
     }
 
     private function process($row) {
         $row->remaining = $this->_calculate_remaining_time($row->start_date, $row->end_date);
         $row->link = base_url('coupon/' . $row->slug);
+        $row->savings = $row->old_price - $row->new_price;
+        $row->sales = $this->_get_sales_count($row->id);
         if (!is_null($row->quantity) && $row->quantity <= 0) {
             $row->inactive = TRUE;
             $row->grab_link = "";
@@ -75,12 +83,48 @@ class Coupon_presenter extends Presenter {
         } else {
             $row = $this->check_current_user_coupons($row);
         }
+
+        if (property_exists($row, 'merchant')) {
+            $row->merchant = new Merchant_presenter($row->merchant);
+        }
         return $row;
     }
+
+    /*
+     * advanced pricing spec
+     * array=>'advanced_pricing'
+     *  array=>'first'
+     *          array=>'count','value'
+     *          `      'price','value'
+     *                 'discount',value
+     *
+     * array=>'second'
+     *          array=>'count','value'
+     *                 'price','value'
+     *                  'discount',value
+     * array=>'third'
+     *          array=>'count','value'
+     *                 'price','value'
+     *                  'discount',value
+     *
+     */
 
     private function add_merchant_params($row) {
         $ci = & get_instance();
         $ci->load->model(array('coupon_sale_model', 'coupon_view_model', 'coupon_redemption_model'));
+
+        $row->today_views = $ci->coupon_view_model->get_views_by_date(null, $row->id);
+        $row->today_sales = $ci->coupon_sale_model->get_views_by_date(null, $row->id);
+        $row->today_earnings = $ci->coupon_sale_model->get_earnings_by_date(null, $row->id);
+        $row->today_redeemed = $ci->coupon_redemption_model->get_views_by_date(null, $row->id);
+        $row->today_average = $row->today_sales == 0 ? 0 : $row->today_earnings / $row->today_sales;
+
+        $row->month_views = $ci->coupon_view_model->get_views_by_month(null, $row->id);
+        $row->month_sales = $ci->coupon_sale_model->get_views_by_month(null, $row->id);
+        $row->month_earnings = $ci->coupon_sale_model->get_earnings_by_month(null, $row->id);
+        $row->month_redeemed = $ci->coupon_redemption_model->get_views_by_month(null, $row->id);
+        $row->month_average = $row->month_sales == 0 ? 0 : $row->month_earnings / $row->month_sales;
+
         $row->view_count = $ci->coupon_view_model->get_total_count($row->id);
         $row->sales_count = $ci->coupon_sale_model->get_total_count($row->id);
         $row->redemption_count = $ci->coupon_redemption_model->get_total_count($row->id);
@@ -184,6 +228,10 @@ class Coupon_presenter extends Presenter {
 
     public function create_summary($row) {
         $row->summary = ellipsize($row->description, 30, 1);
+    }
+
+    public function _get_sales_count($param) {
+        return 1000;
     }
 
 }

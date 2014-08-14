@@ -16,6 +16,7 @@ require_once APPPATH . 'presenters/presenter.php';
 class Merchant_presenter extends Presenter {
 
     public function __construct($object) {
+        $object->address = $this->create_address($object);
         parent::__construct($object);
     }
 
@@ -25,6 +26,11 @@ class Merchant_presenter extends Presenter {
         } else {
             return '';
         }
+    }
+
+    private function create_address($row) {
+        $address = "$row->address_one $row->city,$row->state";
+        return $address;
     }
 
 }

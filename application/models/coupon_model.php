@@ -18,11 +18,12 @@ class Coupon_model extends MY_Model {
     public $protected_attributes = array('id');
     public $before_create = array('ensure_unique_slug', 'generate_merchant_coupon_code', 'created_at', 'updated_at',
         'calculate_discount', 'transform_start_end_date', 'advanced_pricing_to_json');
-    public $after_get = array('update_status', 'get_coupon_cover_image', 'advanced_pricing_to_object', 'format_numbers',);
+    //removed 'update_status'
+    public $after_get = array('get_coupon_cover_image', 'advanced_pricing_to_object', 'format_numbers',);
     public $has_many = array(
         'coupon_medias' => array('model' => 'coupon_media_model', 'primary_key' => 'coupon_id')
     );
-    public $belongs_to = array('merchant' => array('model' => 'merchant_model'));
+    public $belongs_to = array('merchant' => array('model' => 'merchant_model', 'primary_key' => 'merchant_id'));
     public $validate = array(
         array('field' => 'name',
             'label' => 'name',
@@ -104,12 +105,14 @@ class Coupon_model extends MY_Model {
     }
 
     public function update_status($row) {
-        if (is_object($row)) {
+        if (is_object($row) && property_exists($row, 'start_date') && property_exists($row, 'end_date')) {
             $start_date = $row->start_date;
             $end_date = $row->end_date;
-        } else {
+        } elseif (is_array($row) && array_key_exists('start_date', $row) && array_key_exists('end_date', $row)) {
             $start_date = $row['start_date'];
             $end_date = $row['end_date'];
+        } else {
+            return $row;
         }
         $e_unix = human_to_unix($end_date);
         $status = date('U') >= $e_unix ? 0 : 1;
@@ -137,7 +140,7 @@ class Coupon_model extends MY_Model {
     public function ensure_unique_slug($row) {
         if (is_object($row)) {
             if (!property_exists($row, 'slug')) {
-                $row->slug = url_title($row->name);
+                $row->slug = strtolower(url_title($row->name));
             }
 
             $db = DB('default');
@@ -149,7 +152,7 @@ class Coupon_model extends MY_Model {
             }
         } else {
             if (!array_key_exists('slug', $row)) {
-                $row['slug'] = url_title($row['name']);
+                $row['slug'] = strtolower(url_title($row['name']));
             }
 
             $db = DB('default');
@@ -173,13 +176,17 @@ class Coupon_model extends MY_Model {
      * array=>'advanced_pricing'
      *  array=>'first'
      *          array=>'count','value'
-     *          array=>'price','value'
+     *          `      'price','value'
+     *                 'discount',value
+     *
      * array=>'second'
      *          array=>'count','value'
-     *          array=>'price','value'
+     *                 'price','value'
+     *                  'discount',value
      * array=>'third'
      *          array=>'count','value'
-     *          array=>'price','value'
+     *                 'price','value'
+     *                  'discount',value
      *
      */
 
@@ -227,7 +234,10 @@ class Coupon_model extends MY_Model {
     //--COUPON READ RELATED METHODS---------------
 
     public function get_by_slug($slug) {
-        return $this->with('coupon_medias')->get_by(array('slug' => $slug));
+        return $this
+                        ->with('coupon_medias')
+                        ->with('merchant')
+                        ->get_by(array('slug' => $slug));
     }
 
     /*
@@ -235,25 +245,27 @@ class Coupon_model extends MY_Model {
      * array=>'advanced_pricing'
      *  array=>'first'
      *          array=>'count','value'
-     *          array=>'price','value'
+     *          `      'price','value'
+     *                 'discount',value
+     *
      * array=>'second'
      *          array=>'count','value'
-     *          array=>'price','value'
+     *                 'price','value'
+     *                  'discount',value
      * array=>'third'
      *          array=>'count','value'
-     *          array=>'price','value'
+     *                 'price','value'
+     *                  'discount',value
      *
      */
 
     public function advanced_pricing_to_object($row) {
-        if ($row->is_advanced_pricing == 1) {
-            if (is_object($row)) {
-                $obj = json_decode($row->advanced_pricing, true);
-                $row->advanced_pricing = $obj;
-            } else {
-                $obj = json_decode($row['advanced_pricing'], true);
-                $row['advanced_pricing'] = $obj;
-            }
+        if (is_object($row) && property_exists($row, 'is_advanced_pricing') && $row->is_advanced_pricing == 1) {
+            $obj = json_decode($row->advanced_pricing, true);
+            $row->advanced_pricing = $obj;
+        } elseif (is_array($row) && array_key_exists('is_advanced_pricing', $row) && $row['is_advanced_pricing'] == 1) {
+            $obj = json_decode($row['advanced_pricing'], true);
+            $row['advanced_pricing'] = $obj;
         }
         return $row;
     }
@@ -294,14 +306,16 @@ class Coupon_model extends MY_Model {
     }
 
     public function get_coupon_cover_image($row) {
-        $ci = & get_instance();
-        $ci->load->model('coupon_media_model', 'media');
-        $row->coupon_medias = $ci->media->get_many_by(array('coupon_id' => $row->id));
-        $image_url = $ci->media->get_cover_media($row->id);
-        if (!$image_url) {
-            $row->cover_image_url = Coupon_media_model::DEFAULT_MEDIA_URL;
-        } else {
-            $row->cover_image_url = $image_url;
+        if (is_object($row)) {
+            $ci = & get_instance();
+            $ci->load->model('coupon_media_model', 'media');
+            $row->coupon_medias = $ci->media->get_many_by(array('coupon_id' => $row->id));
+            $image_url = $ci->media->get_cover_media($row->id);
+            if (!$image_url) {
+                $row->cover_image_url = Coupon_media_model::DEFAULT_MEDIA_URL;
+            } else {
+                $row->cover_image_url = $image_url;
+            }
         }
         return $row;
     }

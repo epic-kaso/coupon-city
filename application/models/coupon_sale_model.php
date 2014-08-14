@@ -14,6 +14,8 @@ class Coupon_sale_model extends MY_Model {
     private $USER_IDS = "json_user_ids";
     private $COUPON_ID = "coupon_id";
     private $COMMISSION = "sales_commission";
+    private $PURCHASE_PRICE_COLUMN = 'purchase_price';
+    private $USER_ID_COLUMN = 'user_id';
 
     const COMMISION_PERCENT = 20.0;
 
@@ -37,6 +39,26 @@ class Coupon_sale_model extends MY_Model {
             $coupon_sale[$this->COUNT] = $coupon_sale[$this->COUNT] + 1;
             $coupon_sale[$this->COMMISSION] = $coupon_sale[$this->COMMISSION] + $this->calculate_commision($coupon);
             return $this->update($coupon_sale['id'], $coupon_sale);
+        }
+    }
+
+    public function get_views_by_month($date, $coupon_id = NULL) {
+        if (is_null($date)) {
+            $date = Carbon::createFromDate(NULL, NULL, 1);
+        }
+
+        $start = $date;
+        $end = Carbon::createFromDate();
+
+        $response = $this->get_by_date_range($start, $end, $coupon_id);
+        if (!$response) {
+            return 0;
+        } else {
+            $total = 0;
+            foreach ($response as $value) {
+                $total += $value->sales_count;
+            }
+            return $total;
         }
     }
 
@@ -73,10 +95,24 @@ class Coupon_sale_model extends MY_Model {
         }
         if (is_null($coupon_id)) {
             $query = array($this->DATE => $date);
-            return $this->get_many_by($query);
+            $response = $this->get_many_by($query);
+            if (!$response) {
+                return 0;
+            } else {
+                $total = 0;
+                foreach ($response as $value) {
+                    $total += $value->sales_count;
+                }
+                return $total;
+            }
         } else {
             $query = array($this->DATE => $date, $this->COUPON_ID => $coupon_id);
-            return $this->get_by($query);
+            $response = $this->get_by($query);
+            if (!$response) {
+                return 0;
+            } else {
+                return $response->sales_count;
+            }
         }
     }
 
@@ -119,6 +155,66 @@ class Coupon_sale_model extends MY_Model {
             $commision = ceil(($old_price - $new_price) / 100 * self::COMMISION_PERCENT);
         }
         return $commision;
+    }
+
+    public function get_earnings_by_month($date, $coupon_id) {
+        if (is_null($date)) {
+            $date = Carbon::createFromDate(NULL, NULL, 1);
+        }
+
+        $start = $date;
+        $end = Carbon::createFromDate();
+
+        $response = $this->get_by_date_range($start, $end, $coupon_id);
+        if (!$response) {
+            return 0;
+        } else {
+            $total = 0;
+            foreach ($response as $value) {
+                $total += $this->fetch_user_price_sum($value->json_user_ids);
+            }
+            return $total;
+        }
+    }
+
+    public function get_earnings_by_date($date, $coupon_id) {
+        if (!is_null($date)) {
+            $s_unix = human_to_unix($date);
+            $date = date('Y-m-d', $s_unix);
+        } else {
+            $date = date('Y-m-d');
+        }
+        if (is_null($coupon_id)) {
+            $query = array($this->DATE => $date);
+            $response = $this->get_many_by($query);
+            if (!$response) {
+                return 0;
+            } else {
+                $total = 0;
+                foreach ($response as $value) {
+                    $total += $this->fetch_user_price_sum($value->json_user_ids);
+                }
+                return $total;
+            }
+        } else {
+            $query = array($this->DATE => $date, $this->COUPON_ID => $coupon_id);
+            $response = $this->get_by($query);
+            if (!$response) {
+                return 0;
+            } else {
+                return $this->fetch_user_price_sum($response->json_user_ids);
+            }
+        }
+    }
+
+    public function fetch_user_price_sum($json) {
+        $array = json_decode($json, TRUE);
+        $total = 0;
+        foreach ($array as $value) {
+            $total += (int) $value[$this->PURCHASE_PRICE_COLUMN];
+        }
+
+        return $total;
     }
 
 }
