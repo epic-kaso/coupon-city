@@ -15,6 +15,9 @@ class Merchant extends MY_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('merchant_model', 'merchant');
+        $this->load->model('coupon_sale_model', 'coupon_sales');
+        $this->load->model('coupon_redemption_model', 'coupon_redemptions');
+        $this->load->model('coupon_view_model', 'coupon_views');
     }
 
     public function index() {
@@ -34,6 +37,13 @@ class Merchant extends MY_Controller {
         $this->session->flashdata('error_msg', $error);
         $this->data['merchant'] = $this->merchant->get_current();
         $this->data['breadcrumbs'] = $this->_get_crumbs();
+        $this->data['coupon_stats'] = array(
+            'sales' => $this->coupon_sales->get_views_by_date(NULL),
+            'month_sales' => $this->coupon_sales->get_earnings_by_month(),
+            'month_views' => $this->coupon_views->get_views_by_month(),
+            'redemptions' => $this->coupon_redemptions->get_views_by_date(NULL),
+            'views' => $this->coupon_views->get_views_by_date(NULL)
+        );
     }
 
     public function redeem_coupon() {
