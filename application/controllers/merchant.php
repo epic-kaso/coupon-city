@@ -372,7 +372,7 @@ class Merchant extends MY_Controller {
             $this->session->set_flashdata('error_msg', 'Something went wrong!');
             redirect(base_url(Merchant::MERCHANT_URL . '/signup'));
         } else {
-            $response = $this->_send_mail($email, array('username' => $email, 'password' => $password), 'Welcome to couponcity,Merchant', 'welcome');
+            $response = $this->_send_mail($email, array('username' => $email), 'Welcome to couponcity,Merchant', 'welcome');
             redirect(base_url(Merchant::MERCHANT_URL), 'refresh');
         }
     }
