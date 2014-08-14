@@ -20,7 +20,7 @@
                             <canvas id="sales-guage"></canvas>
 
                             <span class="start left"><?= $coupon->redemption_count ?> <label>Redeem'd</label></span>
-                            <span style="margin-left: -21px;">40%</span>
+                            <span style="margin-left: -21px;"><?= $coupon->percentage_redemption ?>%</span>
                             <span class="end right"><?= $coupon->sales_count ?> <label>Sold</label></span>
                         </div>
 

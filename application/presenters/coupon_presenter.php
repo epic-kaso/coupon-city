@@ -118,6 +118,7 @@ class Coupon_presenter extends Presenter {
         $row->today_earnings = $ci->coupon_sale_model->get_earnings_by_date(null, $row->id);
         $row->today_redeemed = $ci->coupon_redemption_model->get_views_by_date(null, $row->id);
         $row->today_average = $row->today_sales == 0 ? 0 : $row->today_earnings / $row->today_sales;
+        $row->percentage_redemption = 100 * ($row->today_redeemed / $row->quantity);
 
         $row->month_views = $ci->coupon_view_model->get_views_by_month(null, $row->id);
         $row->month_sales = $ci->coupon_sale_model->get_views_by_month(null, $row->id);
