@@ -213,7 +213,6 @@ $(function() {
 
         //Call function to recalc after removing cart item
         totalz();
-
         return false;
     });
 
@@ -221,20 +220,16 @@ $(function() {
 	//Suggest movie swap
 	function swap() {
 		var $this = $(this);
-			
 		var thumb = $this.html();
 		var deal = 
 
 		$('.deal-pictures').html(thumb);
 
 		var current = $('.deal-pictures').html();
-
-
 		if (thumb == current) {
 			$('.thumbnails li').removeClass('currently');
 			$this.parent('li').addClass('currently');
 		}
-
 		return false;
 	}
 
@@ -295,11 +290,9 @@ $(function() {
 	});*/
 
 	$('.mobile-nav').click(function() {
-
 		//get height of main-contain
 		//make it minimum height of header
 		//no defined height from css for header so it can flow
-
 		var fw = $('.footer').height();
 
 		jQuery.fn.appendMinHeight = function(txt){
@@ -310,11 +303,8 @@ $(function() {
 		};
 
 		$('.header').appendMinHeight();
-
 		$(".header").toggleClass("navActive");
-
 		return false;
-
 	});
 
 
@@ -339,7 +329,6 @@ $(function() {
 
 	//Coupon Images
 	$('.coupon-images .file-upload').each(function() {
-
 		var pic = $(this).find('.upload');
 		var _target = $(this).find('.target');
 
@@ -376,7 +365,7 @@ $(function() {
 	}
 
 	$('.pricing-type').click(function() {
-		_type();
+		//_type();
 	});
 
 
@@ -421,35 +410,7 @@ $(function() {
 		}); 
 	}
 
-	pricing(); //Call function
-
-
-/*
-	var opts = {
-		lines: 12, // The number of lines to draw
-		angle: 0.15, // The length of each line
-		lineWidth: 0.44, // The line thickness
-		pointer: {
-			length: 0.9, // The radius of the inner circle
-			strokeWidth: 0.035, // The rotation offset
-			color: '#000000' // Fill color
-		},
-		limitMax: true,
-		colorStart: '#6FADCF',   // Colors
-		colorStop: '#0f75bc',    // just experiment with them
-		strokeColor: '#E0E0E0',   // to see which ones work best for you
-		generateGradient: true
-	};
-
-	var target = document.getElementById('sales-guage'); // your canvas element
-	var gauge = new Gauge(target);
-	var reach = 1000;
-	gauge.setOptions(opts); // create sexy gauge!
-	gauge.maxValue = 3000; // set max gauge value
-	gauge.animationSpeed = 40; // set animation speed (32 is default value)
-	gauge.set(reach);
-*/
-
+	//pricing(); //Call function
 
 
 });

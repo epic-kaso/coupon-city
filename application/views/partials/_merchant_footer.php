@@ -15,7 +15,8 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
 <script src="<?= base_url('assets/js/modal.js'); ?>"></script>
 <script src="<?= base_url('assets/js/waypoints.js'); ?>"></script>
-<script src="<?= base_url('assets/js/main.js'); ?>"></script>
+<script src="<?= base_url('assets/js/gauge.js'); ?>"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script src="<?= base_url('assets/js/main.js'); ?>"></script>
 
 <!-- REALLY IMPORTANT -->

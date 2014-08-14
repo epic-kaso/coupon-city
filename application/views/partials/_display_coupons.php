@@ -1,3 +1,6 @@
+
+
+
 <?php
 foreach ($coupons->items() as $coupon) {
     if (property_exists($coupon, 'empty')) {

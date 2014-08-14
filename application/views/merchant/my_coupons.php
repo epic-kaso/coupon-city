@@ -11,7 +11,7 @@
         <div class="cart-order tableau segment">
 
             <ul class="stats-summ clearfix">
-                <li>100 <span>Total Coupons Sold</span></li>
+                <li>100 <span>Coupons In all</span></li>
                 <li>₦210,000 <span>In Total Sales</span></li>
                 <li>₦200,000 <span>Net Sales</span></li>
             </ul>
