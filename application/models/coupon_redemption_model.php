@@ -84,7 +84,7 @@ class Coupon_redemption_model extends MY_Model {
         }
         if (is_null($coupon_id)) {
             $query = array($this->REDEMPTION_DATE => $date);
-            $response = $this->get_many_by($query);
+            $response = $this->order_by('redemption_count', 'DESC')->get_many_by($query);
             if (!$response) {
                 return 0;
             } else {
@@ -92,10 +92,33 @@ class Coupon_redemption_model extends MY_Model {
                 foreach ($response as $value) {
                     $total += $value->redemption_count;
                 }
-                return $total;
+                return array('total' => $total, 'top_performing' => array_slice($response, 0, 5));
             }
         } else {
             $query = array($this->REDEMPTION_DATE => $date, $this->COUPON_ID => $coupon_id);
+            $response = $this->get_by($query);
+            if (!$response) {
+                return 0;
+            } else {
+                return $response->redemption_count;
+            }
+        }
+    }
+
+    public function get_all_time_redemption($coupon_id = NULL) {
+        if (is_null($coupon_id)) {
+            $response = $this->order_by('redemption_count', 'DESC')->get_all();
+            if (!$response) {
+                return 0;
+            } else {
+                $total = 0;
+                foreach ($response as $value) {
+                    $total += $value->redemption_count;
+                }
+                return array('total' => $total, 'top_performing' => array_slice($response, 0, 5));
+            }
+        } else {
+            $query = array($this->COUPON_ID => $coupon_id);
             $response = $this->get_by($query);
             if (!$response) {
                 return 0;

@@ -48,7 +48,7 @@ class Coupon_view_model extends MY_Model {
         return $total;
     }
 
-    public function get_views_by_month($date, $coupon_id = NULL) {
+    public function get_views_by_month($date = NULL, $coupon_id = NULL) {
         if (is_null($date)) {
             $date = Carbon::createFromDate(NULL, NULL, 1);
         }
@@ -77,7 +77,7 @@ class Coupon_view_model extends MY_Model {
         }
         if (is_null($coupon_id)) {
             $query = array('view_date' => $date);
-            $response = $this->get_many_by($query);
+            $response = $this->order_by('view_count', 'DESC')->get_many_by($query);
             if (!$response) {
                 return 0;
             } else {
@@ -85,10 +85,33 @@ class Coupon_view_model extends MY_Model {
                 foreach ($response as $value) {
                     $total += $value->view_count;
                 }
-                return $total;
+                return array('total' => $total, 'top_performing' => array_slice($response, 0, 5));
             }
         } else {
             $query = array('view_date' => $date, 'coupon_id' => $coupon_id);
+            $response = $this->get_by($query);
+            if (!$response) {
+                return 0;
+            } else {
+                return $response->view_count;
+            }
+        }
+    }
+
+    public function get_all_time_views($coupon_id = NULL) {
+        if (is_null($coupon_id)) {
+            $response = $this->order_by('view_count', 'DESC')->get_all();
+            if (!$response) {
+                return 0;
+            } else {
+                $total = 0;
+                foreach ($response as $value) {
+                    $total += $value->view_count;
+                }
+                return array('total' => $total, 'top_performing' => array_slice($response, 0, 5));
+            }
+        } else {
+            $query = array('coupon_id' => $coupon_id);
             $response = $this->get_by($query);
             if (!$response) {
                 return 0;
