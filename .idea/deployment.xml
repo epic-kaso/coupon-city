@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="couponcity" />
+  <component name="PublishConfigData" serverName="couponcity" uploadOnCheckin="7669841a-6d83-40b9-8915-4d01106d50d1">
+    <option name="myUploadOnCheckinName" value="couponcity" />
+  </component>
 </project>
 
