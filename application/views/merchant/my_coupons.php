@@ -11,9 +11,14 @@
         <div class="cart-order tableau segment">
 
             <ul class="stats-summ clearfix">
-                <li>100 <span>Coupons In all</span></li>
-                <li>₦210,000 <span>In Total Sales</span></li>
-                <li>₦200,000 <span>Net Sales</span></li>
+                <li><?php
+                    $items = $coupons->items();
+                    if(count($items) == 1 && property_exists($items[0], 'empty') ){ echo 0; }
+                    else{ echo count($items); }
+                    ?> <span>Coupons In all</span>
+                </li>
+                <li>₦-- <span>In Total Sales</span></li>
+                <li>₦-- <span>Net Sales</span></li>
             </ul>
 
             <?= partial('partials/merchant/_display_coupons_table', array('coupons' => $coupons)); ?>
