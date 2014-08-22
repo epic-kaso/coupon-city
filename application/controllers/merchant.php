@@ -289,13 +289,13 @@ class Merchant extends MY_Controller {
                     $this->session->set_flashdata('error_msg', "Invalid Email/Code combination");
                     redirect(base_url());
                 } else {
-                    if (!$this->_is_token_valid($user)) {
-                        $this->session->set_flashdata('error_msg', "Expired Token");
-                        redirect(base_url());
-                    } else {
+                    //if (!$this->_is_token_valid($user)) {
+                    //    $this->session->set_flashdata('error_msg', "Expired Token");
+                    //    redirect(base_url(Merchant::MERCHANT_URL));
+                    //} else {
                         $this->session->set_userdata('m_user_id', $user->id);
                         $this->data = array('url' => base_url('reset_password'), 'email' => $email);
-                    }
+                    //}
                 }
             } else {
                 $this->session->set_flashdata('error_msg', "Invalid Email/Code combination");
