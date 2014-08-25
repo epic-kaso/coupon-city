@@ -8,8 +8,7 @@
 
     namespace Couponcity\Events;
 
-
-    use User;
+    use Couponcity\User\User;
 
     class UserSignedUp
     {

@@ -84,18 +84,6 @@
                     <?= Form::text('phone') ?>
                 </li>
 
-                <div class="split-form clearfix">
-                    <li class="left">
-                        <label>Password: <span>(*needed to confirm changes)</span></label>
-                        <input type="password" name="password">
-                    </li>
-
-                    <li class="right">
-                        <label>Confirm Password:</label>
-                        <input type="password" name="password_confirmation">
-                    </li>
-                </div>
-
                 <li>
                     <input type="submit" class="text-button" value="Submit Changes">
                 </li>

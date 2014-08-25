@@ -9,11 +9,14 @@
     namespace Couponcity\Events;
 
 
+
+    use Couponcity\Merchant\Merchant;
+
     class MerchantSignedUp
     {
         public $merchant;
 
-        public function __construct(\Merchant $merchant)
+        public function __construct(Merchant $merchant)
         {
             $this->merchant = $merchant;
         }

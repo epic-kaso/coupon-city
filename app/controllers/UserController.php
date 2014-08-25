@@ -44,18 +44,23 @@
         }
 
         public function postUpdate(){
-            $data = Input::only(['first_name','last_name','password','password_confirmation']);
+            $data = Input::only(['first_name','last_name','phone']);
 
             $user = User::findOrFail(Auth::id())->first();
 
-            $user->first_name = $data['first_name'];
-            $user->last_name = $data['last_name'];
-            if(isset($data['password']) && strcmp($data['password'],$data['password_confirmation']) == 0 ){
-                $user->password = $data['password'];
+            if(!$user){
+                return Redirect::back()->withStatus('Could not save!');
             }
 
-            $user->save();
-            return Redirect::action('HomeController@getAccount')->withStatus('Saved Successfully!');
+            $user->first_name = $data['first_name'];
+            $user->last_name = $data['last_name'];
+            $user->phone = $data['phone'];
+
+            if($user->save()){
+                return Redirect::action('HomeController@getAccount')->withStatus('Saved Successfully!');
+            }else{
+                return Redirect::back()->withStatus('Could not save!');
+            }
 
         }
 

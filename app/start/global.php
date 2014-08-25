@@ -12,6 +12,7 @@
     */
 
     use Couponcity\User\CreateUserException;
+    use Illuminate\Database\Eloquent\ModelNotFoundException;
     use Laracasts\Validation\FormValidationException;
     use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -52,6 +53,10 @@
 
     App::error(function (Exception $exception, $code) {
         Log::error($exception);
+    });
+
+    App::error(function(ModelNotFoundException $ex){
+        return Redirect::to('/');
     });
 
     App::error(function (NotFoundHttpException $ex){
