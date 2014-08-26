@@ -57,7 +57,7 @@
 
                         <div class="inner-nav">
                             <ul>
-                                <li><a href="">My Coupons</a></li>
+                                <li><a href="<?= action('HomeController@getAccount') ?>">My Coupons</a></li>
                                 <li><a href="<?= action('HomeController@getAccount') ?>">Account</a></li>
                                 <li class="nav-help" target="_blank"><a href="">Help</em></a></li>
                                 <li><a href="<?= action('UserController@getLogout'); ?>">Logout</a></li>

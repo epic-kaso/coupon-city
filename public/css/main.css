@@ -149,6 +149,18 @@ body {
     color: green;
 }
 
+.alert{ padding:15px; margin-bottom:20px; border:1px solid transparent; border-radius:4px }
+
+.alert-info {
+    background-color: #7cd1ef;
+    border: #4fc1e9;
+}
+.flash{
+    z-index: 100;
+}
+.hide{
+    display: none;
+}
 input[type="text"], input[type="password"], input[type="email"], input[type="search"], textarea {
     border: 1px solid #e5e5e5;
     font-size: 13px;

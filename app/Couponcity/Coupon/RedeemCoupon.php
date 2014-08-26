@@ -9,7 +9,19 @@
     namespace Couponcity\Coupon;
 
 
+    use Laracasts\Commander\Events\DispatchableTrait;
+
     class RedeemCoupon
     {
 
+        use DispatchableTrait;
+
+        public function redeem($code){
+
+            $response =  CouponUser::redeemCoupon($code);
+
+            $this->dispatchEventsFor($response);
+
+            return $response;
+        }
     }

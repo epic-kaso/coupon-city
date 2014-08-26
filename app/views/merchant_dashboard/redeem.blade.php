@@ -1,17 +1,21 @@
 @extends('layouts.merchant_dashboard')
 @section('content')
+
+
 <div class="merchant-body left clearfix" ng-controller="VerifyCouponController">
 
     <div class="hold right">
         <h1>Redeem Coupon</h1>
 
-        <form ng-submit="verify_coupon(coupon, $event)">
-            <input name="coupon_code" type="text" placeholder="Coupon Code ex. 1234567" ng-model='coupon.coupon_code'
-                   required/>
-            <input type="submit" ng-click="verify_coupon(coupon, $event)" ng-value="is_working ? 'Working....':'Verify'"
-                   class="btn btn-submit btn-small"/>
-        </form>
+        <?= Form::open(['url'=>action('MerchantDashboardController@postRedeemCoupon'),'data-remote','data-remote-success-message'=>'Coupon Successfully Redeemed!']) ?>
+            <input name="coupon_code" type="text" placeholder="Coupon Code ex. 1234567"  required/>
+            <input type="submit" class="btn btn-submit btn-small" data-success-message='Coupon Redeemed Successfully!'/>
+        <?= Form::close() ?>
+
+        @include('partials._infos')
     </div>
+
+
 </div>
 
 

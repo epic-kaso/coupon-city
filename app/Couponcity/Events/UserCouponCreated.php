@@ -9,11 +9,13 @@
 namespace Couponcity\Events;
 
 
+use Couponcity\Coupon\CouponUser;
+
 class UserCouponCreated {
 
     public $user_coupon;
 
-    public function __construct(\CouponUser $couponUser){
+    public function __construct(CouponUser $couponUser){
         $this->user_coupon = $couponUser;
     }
 } 

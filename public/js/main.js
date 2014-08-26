@@ -417,3 +417,51 @@ $(function () {
 
 
 });
+
+
+(function(){
+    $('form[data-remote]').on('submit',function(e){
+        form = $(this);
+
+
+        var submit = form.find('input[type="submit"]')
+        var method = form.find('input[name="_method"]').val() || 'POST';
+        var url = form.prop('action');
+
+        var old_value = submit.prop('value');
+        submit.prop('value','please wait...').addClass('disabled');
+        $.ajax({
+            type: method,
+            url: url,
+            data: form.serialize(),
+            success: function(){
+                submit.prop('value',submit.data('success-message'));
+                var message = form.data('remote-success-message');
+
+                if(message){
+                    $('.flash').html(message).fadeIn(300).delay(3500).fadeOut(300);
+                }
+            },
+            error: function($response,$xhr,$data){
+                //console.log($response);
+                submit.prop('value',old_value).removeClass('disabled');
+                $('.flash').html($response.responseText).fadeIn(300).delay(3500).fadeOut(300);
+            }
+        });
+        e.preventDefault();
+    });
+
+    $('input[data-confirm], button[data-confirm]').on('click',function(e){
+        var input = $(this);
+
+        input.prop('disabled','disabled');
+
+        if(!confirm(input.data('confirm'))){
+            e.preventDefault();
+        }
+
+            input.removeAttr('disabled')
+    });
+
+
+})();

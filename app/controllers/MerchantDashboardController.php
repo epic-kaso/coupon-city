@@ -2,6 +2,8 @@
 
     use Couponcity\Coupon\Coupon;
     use Couponcity\Coupon\CouponSale;
+    use Couponcity\Coupon\InvalidCouponCodeException;
+    use Couponcity\Coupon\RedeemCoupon;
     use Couponcity\Merchant\Merchant;
 
     class MerchantDashboardController extends \BaseController
@@ -16,8 +18,9 @@
          * @return Response
          */
 
-        public function __construct()
+        public function __construct(RedeemCoupon $redeemCoupon)
         {
+            $this->$redeemCoupon = $redeemCoupon;
 
             $this->beforeFilter("auth_merchant");
             $this->beforeFilter("check_merchant_profile", ['except' => ['getBusiness', 'getEditProfile']]);
@@ -95,6 +98,39 @@
         public function getDeposit()
         {
             return View::make('merchant_dashboard.deposit', $this->data);
+        }
+
+        public function postRedeemCoupon(){
+            $data = ['coupon_code'=>'required'];
+            $coupon_code = Input::only(['coupon_code']);
+
+            $validation = Validator::make($coupon_code,$data);
+
+            if($validation->fails()){
+                if(Request::ajax()){
+                    return Response::json(['error'],403);
+                }else{
+                    return Redirect::back(403)->withError('Coupon Code Required or Invalid');
+                }
+            }else{
+                $code = $coupon_code['coupon_code'];
+
+                try{
+                    $response = $this->$redeemCoupon->redeem($code);
+                }catch (InvalidCouponCodeException $ex){
+                    if(Request::ajax()){
+                        return Response::json(['error'],403);
+                    }else{
+                        return Redirect::back(403)->withError('Coupon Code Required or Invalid');
+                    }
+                }
+
+                if(Request::ajax()){
+                    return Response::json(['success'=>$response]);
+                }else{
+                    return Redirect::back()->withStatus('Coupon Code redeemed Successfully!!');
+                }
+            }
         }
 
     }

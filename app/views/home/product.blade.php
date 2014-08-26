@@ -40,14 +40,17 @@
     </div>
 
     <div class="right buy">
-        @if($coupon->is_available())
+        @if(isset($user_owns_coupon) && $user_owns_coupon)
             <a href="" class="deal-button clearfix">
-                <span>Buy</span>
-                @if($coupon->is_advanced_pricing)
-                <span>~</span>
-                @endif
-                ₦{{ $coupon->present()->current_price }}
+                <span>You Own this Coupon</span>
             </a>
+        @elseif($coupon->is_available())
+
+            <?= Form::open(['url'=>action('CouponController@postGrabCoupon',
+                ['id'=>$coupon->id]),'data-remote','data-remote-success-message'=>'Successfully added coupon']) ?>
+                <?= Form::submit("Buy ₦{$coupon->present()->current_price}",
+                    ['class'=>'deal-button clearfix','data-success-message'=>'You Own this Coupon'])?>
+            <?= Form::close()?>
         @else
             <a href="" class="deal-button clearfix">
                 <span>Out of Stock</span>
@@ -159,7 +162,7 @@
     <ul class="clearfix">
         @foreach($related_deals as $deal)
         <li>
-            <a href="">
+            <a href="{{ URL::action('CouponController@getShow',['slug'=>$deal->slug]) }}">
                 <div class="deal-img"><img src="{{ $deal->image_one->url('thumb') }}"></div>
 
                 <div class="deal-details">
@@ -173,7 +176,7 @@
                         <li class="normal-price">N{{ $deal->present()->oldPrice }}</li>
                         <li class="discount-price clearfix">
                             <span class="tag">DEAL <em></em></span>
-                            <span>₦{{ $deal->present()->basicPrice }}</span>
+                            <span>₦{{ $deal->present()->current_price }}</span>
                         </li>
                     </ul>
                 </div>

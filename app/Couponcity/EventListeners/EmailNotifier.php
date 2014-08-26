@@ -20,23 +20,33 @@
         public function whenUserSignedUp(UserSignedUp $event)
         {
             $user = $event->user;
+            try{
             Mail::queue('emails.welcome-user',['email'=>$user->email],function($message) use($user){
                 $message
                     ->to($user->email)
                     ->from(\Config::get('couponcity.admin_email'))
                     ->subject('Welcome to COuponcity');
             });
+            }catch (\Exception $e){
+                \Session::flash('error','Could not send email');
+            }
         }
 
         public function whenMerchantSignedUp(MerchantSignedUp $event)
         {
+
             $user = $event->merchant;
+
+            try{
             Mail::queue('emails.welcome-user',['email'=>$user->email],function($message) use($user){
                 $message
                     ->to($user->email)
                     ->from(\Config::get('couponcity.admin_email'))
                     ->subject('Welcome to Couponcity');
             });
+            }catch (\Exception $e){
+                \Session::flash('error','Could not send email');
+            }
         }
 
 

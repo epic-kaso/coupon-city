@@ -20,3 +20,7 @@
     @endif
     @endforeach
 </div>
+
+<div class="alert alert-info flash hide">
+Testing out
+</div>

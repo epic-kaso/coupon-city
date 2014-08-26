@@ -55,4 +55,26 @@
             return $this->hasMany('WalletTransaction');
         }
 
+        public function debitWallet($amount)
+        {
+            if (!is_numeric($amount)) {
+                return false;
+            }
+            $balance = $this->attributes['wallet_balance'];
+            if ($balance < $amount)
+                return false;
+            $remaining = $balance - $amount;
+            $this->attributes['wallet_balance'] = $remaining;
+            return $this->save();
+        }
+
+        public function creditWallet($amount)
+        {
+            if (!is_numeric($amount)) {
+                return false;
+            }
+            $this->attributes['wallet_balance'] += $amount;
+            return $this->save();
+        }
+
     }

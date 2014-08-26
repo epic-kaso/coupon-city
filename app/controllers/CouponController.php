@@ -1,9 +1,13 @@
 <?php
 
+    use Couponcity\Coupon\BuyCouponCommand;
     use Couponcity\Coupon\Coupon;
     use Couponcity\Coupon\CouponFormValidator;
     use Couponcity\Coupon\LogCouponViewCommand;
+    use Couponcity\Coupon\NotEnoughMoneyException;
     use Couponcity\Coupon\PublishCouponCommand;
+    use Couponcity\Coupon\UserOwnsCouponException;
+    use Couponcity\User\User;
 
     class CouponController extends \BaseController {
 
@@ -13,6 +17,7 @@
     {
         $this->couponFormValidator = $couponFormValidator;
         parent::__construct();
+        $this->beforeFilter('auth',['only'=>['postGrabCoupon']]);
     }
 
 
@@ -44,6 +49,8 @@
 
         public function getShow($slug = NULL)
         {
+
+
             if (is_null($slug)) {
                 return App::abort(404, 'Not Found');
             }
@@ -55,6 +62,14 @@
             }
 
             $this->data['coupon'] = $coupon;
+
+            if(Auth::check()){
+                $coupons = User::findOrFail(Auth::id())->coupons;
+                $this->data['user_owns_coupon']  = $coupons->contains($coupon) ? true : null;
+                //dd( $this->data['user_owns_coupon']);
+            }
+
+
 
             $this->execute(LogCouponViewCommand::class, ['coupon_id' => $coupon->id]);
 
@@ -96,5 +111,42 @@
 	{
 		//
 	}
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function postGrabCoupon($id)
+    {
+        $coupon = Coupon::findOrFail($id);
+
+        $user_id = Auth::id();
+
+        try{
+            $response = $this->execute(BuyCouponCommand::class,['coupon_id'=>$coupon->id,'user_id'=>$user_id]);
+
+        }catch (NotEnoughMoneyException $ex){
+            $response = $ex->getMessage();
+            if(Request::ajax()){
+                return Response::json($response,403);
+            }else{
+                return Redirect::back()->withError($response);
+            }
+        }catch(UserOwnsCouponException $ex){
+            $response = $ex->getMessage();
+            if(Request::ajax()){
+                return Response::json($response,403);
+            }else{
+                return Redirect::back()->withError($response);
+            }
+        }
+
+        if(Request::ajax()){
+            return Response::json($response);
+        }else{
+            return Redirect::back()->withStatus('Coupon Bought Successfully!');
+        }
+
+    }
 
 }
