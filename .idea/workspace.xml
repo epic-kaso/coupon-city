@@ -483,15 +483,6 @@
       <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\uploads\coupons\5\fb725737ce6e57c10d61cfaa365bdf16.png" afterPath="" />
     </list>
     <list default="true" id="ad1c1feb-a81e-48a2-a9e3-1acba1df3fda" name="Main" comment="Main">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Couponcity/EventListeners/CouponActivityLogger.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/jquery-ujs.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/CouponController.php" afterPath="$PROJECT_DIR$/app/controllers/CouponController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Couponcity/Coupon/CouponUser.php" afterPath="$PROJECT_DIR$/app/Couponcity/Coupon/CouponUser.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Couponcity/Coupon/LogCouponRedemptionCommand.php" afterPath="$PROJECT_DIR$/app/Couponcity/Coupon/LogCouponRedemptionCommand.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Couponcity/Coupon/LogCouponSaleCommand.php" afterPath="$PROJECT_DIR$/app/Couponcity/Coupon/LogCouponSaleCommand.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Couponcity/Coupon/LogCouponSaleCommandHandler.php" afterPath="$PROJECT_DIR$/app/Couponcity/Coupon/LogCouponSaleCommandHandler.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/MerchantDashboardController.php" afterPath="$PROJECT_DIR$/app/controllers/MerchantDashboardController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Couponcity/Coupon/RedeemCoupon.php" afterPath="$PROJECT_DIR$/app/Couponcity/Coupon/RedeemCoupon.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Couponcity.iws" />
@@ -551,10 +542,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CouponController.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="CouponController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/CouponController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="87" column="5" selection-start="2123" selection-end="2123" vertical-scroll-proportion="2.7338262" vertical-offset="0" max-vertical-offset="2720">
+            <state line="14" column="35" selection-start="498" selection-end="498" vertical-scroll-proportion="-9.153846" vertical-offset="0" max-vertical-offset="2720">
               <folding>
                 <element signature="e#11#50#0" expanded="true" />
               </folding>
@@ -571,10 +562,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="main.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="28" selection-start="417" selection-end="417" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8024">
+            <state line="241" column="0" selection-start="6003" selection-end="6003" vertical-scroll-proportion="7.2257495" vertical-offset="0" max-vertical-offset="8024">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -860,28 +851,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Couponcity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="coupon-city" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Couponcity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Coupon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -949,7 +918,11 @@
       <created>1409083394454</created>
       <updated>1409083394454</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Main">
+      <created>1409085263843</created>
+      <updated>1409085263843</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1345,15 +1318,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="28" selection-start="417" selection-end="417" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8024">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Couponcity/Coupon/LogCouponSaleCommand.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="32" selection-start="268" selection-end="268" vertical-scroll-proportion="0.5027726" vertical-offset="0" max-vertical-offset="541">
@@ -1372,9 +1336,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/CouponController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="87" column="5" selection-start="2123" selection-end="2123" vertical-scroll-proportion="2.7338262" vertical-offset="0" max-vertical-offset="2720">
+        <state line="14" column="35" selection-start="498" selection-end="498" vertical-scroll-proportion="-9.153846" vertical-offset="0" max-vertical-offset="2720">
           <folding>
             <element signature="e#11#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="241" column="0" selection-start="6003" selection-end="6003" vertical-scroll-proportion="7.2257495" vertical-offset="0" max-vertical-offset="8024">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
