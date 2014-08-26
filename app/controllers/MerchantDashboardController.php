@@ -3,6 +3,7 @@
     use Couponcity\Coupon\Coupon;
     use Couponcity\Coupon\CouponSale;
     use Couponcity\Coupon\InvalidCouponCodeException;
+    use Couponcity\Coupon\LogCouponRedemptionCommand;
     use Couponcity\Coupon\RedeemCoupon;
     use Couponcity\Merchant\Merchant;
 
@@ -10,6 +11,8 @@
     {
 
         protected $data = [];
+
+        protected $redeemCoupon;
 
         /**
          * Display a listing of the resource.
@@ -20,7 +23,7 @@
 
         public function __construct(RedeemCoupon $redeemCoupon)
         {
-            $this->$redeemCoupon = $redeemCoupon;
+            $this->redeemCoupon = $redeemCoupon;
 
             $this->beforeFilter("auth_merchant");
             $this->beforeFilter("check_merchant_profile", ['except' => ['getBusiness', 'getEditProfile']]);
@@ -116,17 +119,19 @@
                 $code = $coupon_code['coupon_code'];
 
                 try{
-                    $response = $this->$redeemCoupon->redeem($code);
+                    $response = $this->redeemCoupon->redeem($code);
                 }catch (InvalidCouponCodeException $ex){
                     if(Request::ajax()){
-                        return Response::json(['error'],403);
+                        return Response::json($ex->getMessage(),403);
                     }else{
                         return Redirect::back(403)->withError('Coupon Code Required or Invalid');
                     }
                 }
 
+                $this->execute(LogCouponRedemptionCommand::class,['coupon_id'=>$response->coupon_id,'user_id'=>$response->user_id]);
+
                 if(Request::ajax()){
-                    return Response::json(['success'=>$response]);
+                    return Response::json($response);
                 }else{
                     return Redirect::back()->withStatus('Coupon Code redeemed Successfully!!');
                 }

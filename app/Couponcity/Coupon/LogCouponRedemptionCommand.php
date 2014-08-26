@@ -11,7 +11,7 @@ class LogCouponRedemptionCommand
     public $redemption_discount;
     public $redemption_date;
 
-    public function __construct($coupon, $user_id = 'guest')
+    public function __construct($coupon, $user_id)
     {
         $this->user_id = $user_id;
         $this->coupon_id = $coupon->id;

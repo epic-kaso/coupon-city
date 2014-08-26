@@ -1,6 +1,7 @@
 <?php namespace Couponcity\Coupon;
 
     use Couponcity\Events\CouponRedeemed;
+    use Couponcity\Events\CouponSold;
     use Couponcity\Events\UserCouponCreated;
     use Laracasts\Commander\Events\EventGenerator;
 
@@ -44,6 +45,7 @@
             $coupon_user = CouponUser::create(['coupon_id'=>$coupon_id,'user_id'=>$user_id]);
 
             $coupon_user->raise(new UserCouponCreated($coupon_user));
+            $coupon_user->raise(new CouponSold($coupon_user));
 
             return $coupon_user;
         }else{

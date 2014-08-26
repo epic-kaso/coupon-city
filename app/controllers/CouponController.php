@@ -3,6 +3,7 @@
     use Couponcity\Coupon\BuyCouponCommand;
     use Couponcity\Coupon\Coupon;
     use Couponcity\Coupon\CouponFormValidator;
+    use Couponcity\Coupon\LogCouponSaleCommand;
     use Couponcity\Coupon\LogCouponViewCommand;
     use Couponcity\Coupon\NotEnoughMoneyException;
     use Couponcity\Coupon\PublishCouponCommand;
@@ -140,6 +141,8 @@
                 return Redirect::back()->withError($response);
             }
         }
+
+        $this->execute(LogCouponSaleCommand::class,['coupon'=>$coupon]);
 
         if(Request::ajax()){
             return Response::json($response);

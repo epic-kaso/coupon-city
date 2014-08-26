@@ -17,7 +17,7 @@ class LogCouponSaleCommandHandler implements CommandHandler
      */
     public function handle($command)
     {
-        $coupon = \CouponSale::logSale($command);
+        $coupon = CouponSale::logSale($command);
 
         $this->dispatchEventsFor($coupon);
 
