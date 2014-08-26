@@ -20,6 +20,7 @@
 
     <link rel="stylesheet" href="<?= URL::asset('css/normalize.min.css') ?>">
     <link rel="stylesheet" href="<?= URL::asset('css/main.css') ?>">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
 
     <script src="<?= URL::asset('js/vendor/modernizr-2.6.2-respond-1.1.0.min.js') ?>"></script>
 </head>
