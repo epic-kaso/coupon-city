@@ -16,7 +16,7 @@ class LogCouponRedemptionCommandHandler implements CommandHandler
      */
     public function handle($command)
     {
-        $coupon = \CouponRedeem::logRedemption($command);
+        $coupon = CouponRedeem::logRedemption($command);
 
         $this->dispatchEventsFor($coupon);
 

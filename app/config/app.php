@@ -125,7 +125,8 @@
             'Laracasts\Validation\ValidationServiceProvider',
             'Codesleeve\LaravelStapler\LaravelStaplerServiceProvider',
             'Aws\Laravel\AwsServiceProvider',
-            'Laracasts\Commander\CommanderServiceProvider'
+            'Laracasts\Commander\CommanderServiceProvider',
+            'Couponcity\EventListeners\EventListenersServiceProvider'
 
         ),
 

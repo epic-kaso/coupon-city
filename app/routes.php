@@ -11,8 +11,6 @@
     |
     */
 
-    Event::listen('Couponcity.*', 'Couponcity\EventListeners\EmailNotifier');
-
     Route::any('user/fb-login',
         array('as' => 'user-fb-login', 'uses' => 'UserController@fbLogin')
     );
