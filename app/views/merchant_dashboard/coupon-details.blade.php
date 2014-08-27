@@ -4,7 +4,7 @@
     <div class="hold right">
         <div class="clearfix export-header tagline-header">
             <h1 class="left">{{ $coupon->name }}</h1>
-            <a href="" class="export right btn">View Deal</a>
+            <a href="{{ URL::action('CouponController@getShow',['slug'=>$coupon->slug]) }}" class="export right btn">View Deal</a>
 
             <p>{{ $coupon->tag_line }}</p>
 

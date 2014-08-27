@@ -42,10 +42,12 @@
                 $query->where('merchant_id', $merchant_id);
             })->get();
 
+            $count = $sales->count();
+            $revenue = $sales->sum('sales_price');
             return [
-                'count' => $sales->count(),
-                'sales' => $sales->sum('sales_price'),
-                'average'=>$sales->avg('sales_price')
+                'count' => $count,
+                'sales' => $revenue,
+                'average'=>number_format($revenue/$count,2)
             ];
         }
     }
