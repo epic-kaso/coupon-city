@@ -3,488 +3,10 @@
   <component name="ChangeListManager">
     <list id="017275cb-a1d7-457a-9444-ce130e3b7cff" name="Default" comment="" />
     <list default="true" id="ad1c1feb-a81e-48a2-a9e3-1acba1df3fda" name="Main" comment="Main">
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\.htaccess" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\CONTRIBUTING.md" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\.htaccess" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\config\autoload.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\config\breadcrumbs.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\config\config.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\config\constants.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\config\database.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\config\doctypes.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\config\email.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\config\foreign_chars.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\config\hooks.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\config\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\config\migration.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\config\mimes.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\config\production\database.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\config\profiler.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\config\rest.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\config\routes.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\config\smileys.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\config\user_agents.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\controllers\api\coupons.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\controllers\api\merchant.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\controllers\api\transactions.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\controllers\api\user.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\controllers\api\v1.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\controllers\coupon.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\controllers\home.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\controllers\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\controllers\merchant.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\controllers\test.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\controllers\wallet.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\core\MY_Controller.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\core\MY_Model.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\core\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\errors\error_404.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\errors\error_db.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\errors\error_general.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\errors\error_php.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\errors\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\helpers\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\helpers\partial_helper.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\arabic\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\arabic\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\bulgarian\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\bulgarian\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\catalan\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\catalan\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\croatian\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\croatian\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\czech\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\czech\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\danish\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\danish\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\dutch\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\dutch\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\english\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\english\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\english\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\estonian\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\estonian\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\finnish\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\finnish\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\french\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\french\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\german\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\german\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\greek\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\greek\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\indonesian\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\indonesian\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\italian\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\italian\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\japanese\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\japanese\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\korean\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\korean\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\lithuanian\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\lithuanian\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\norwegian\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\norwegian\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\persian\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\persian\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\pirate\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\pirate\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\polish\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\polish\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\portuguese\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\portuguese\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\romanian\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\romanian\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\russian\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\russian\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\slovak\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\slovak\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\slovenian\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\slovenian\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\spanish\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\spanish\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\swedish\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\swedish\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\turkish\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\turkish\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\ukrainian\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\ukrainian\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\zh_cn\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\zh_cn\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\zh_tw\auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\language\zh_tw\ion_auth_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\libraries\Breadcrumbs.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\libraries\Carbon.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\libraries\Curl.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\libraries\Format.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\libraries\Mobile_Detect.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\libraries\fileupload.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\libraries\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\libraries\mailer.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\libraries\qpagination.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\libraries\recaptchalib.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\models\category_model.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\models\coupon_media_model.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\models\coupon_model.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\models\coupon_redemption_model.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\models\coupon_sale_model.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\models\coupon_view_model.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\models\featured_coupon_model.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\models\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\models\merchant_model.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\models\user_coupon_model.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\models\user_model.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\models\wallet_transaction_model.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\presenters\category_presenter.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\presenters\coupon_presenter.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\presenters\customer_coupon_presenter.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\presenters\merchant_presenter.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\presenters\presenter.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\presenters\user_presenter.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\email\contact_us.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\email\forgot_password.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\email\index.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\email\welcome.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\home\about_us.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\home\contact.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\home\coupon.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\home\edit_profile.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\home\error_page.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\home\help_faq.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\home\how_it_works.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\home\index.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\home\mobile\about_us.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\home\mobile\contact.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\home\mobile\coupon.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\home\mobile\edit_profile.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\home\mobile\error_page.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\home\mobile\help_faq.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\home\mobile\how_it_works.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\home\mobile\index.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\home\mobile\my_coupons.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\home\mobile\profile.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\home\mobile\reset_password.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\home\mobile\search.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\home\mobile\settings.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\home\my_coupons.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\home\profile.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\home\reset_password.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\home\search.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\home\settings.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\layouts\application-mobile.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\layouts\application.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\layouts\auth.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\layouts\email\activate.tpl.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\layouts\email\application.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\layouts\email\forgot_password.tpl.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\layouts\email\new_password.tpl.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\layouts\home-mobile.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\layouts\home.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\layouts\merchant-landing-page.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\layouts\merchant-mobile.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\layouts\merchant.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\merchant\add_coupon.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\merchant\create.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\merchant\dashboard.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\merchant\edit_profile.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\merchant\forgot_password.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\merchant\landing-page.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\merchant\login.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\merchant\mobile\add_coupon.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\merchant\mobile\create.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\merchant\mobile\dashboard.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\merchant\mobile\edit_profile.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\merchant\mobile\login.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\merchant\mobile\my_coupons.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\merchant\mobile\profile.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\merchant\mobile\settings.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\merchant\mobile\statistics.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\merchant\my_coupon.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\merchant\my_coupons.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\merchant\profile.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\merchant\redeem_coupon.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\merchant\settings.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\merchant\statistics.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\_category_nav.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\_coupon_item.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\_display_coupons.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\_featured_items.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\_footer.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\_footer_nav.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\_header.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\_header_nav.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\_merchant_footer.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\_pagination.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\_search.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\_similar_items.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\_wallet.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\account\_change_password.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\account\_create_user.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\account\_forgot_password.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\account\_login.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\merchant\_display_coupons.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\merchant\_display_coupons_table.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\merchant\_header_nav.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\merchant\_login.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\merchant\_redeem_coupon.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\merchant\_register.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\mobile\_category_nav.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\mobile\_footer.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\mobile\_footer_nav.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\mobile\_header.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\mobile\_header_nav.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\mobile\_wallet.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\mobile\account\_change_password.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\mobile\account\_create_user.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\mobile\account\_forgot_password.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\mobile\account\_login.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\mobile\merchant\_display_coupons.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\mobile\merchant\_header_nav.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\mobile\merchant\_login.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\mobile\merchant\_redeem_coupon.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\application\views\partials\mobile\merchant\_register.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\css\basic.css" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\css\boostrap.css" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\css\boostrap_responsive.css" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\css\dropzone.css" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\css\images\loader.gif" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\css\images\loading.gif" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\css\images\print_rabbit.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\css\images\smaller_loader.gif" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\css\main.css" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\css\mystyles.css" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\css\normalize.min.css" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\css\schemes\teal.css" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\css\styles.css" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\css\stylus\basic.styl" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\css\stylus\dropzone.styl" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\css\switcher.css" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\images\background.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\images\background.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\images\blur.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\images\canal.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\images\chevron.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\images\coke.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\images\divide.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\images\dotted-border.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\images\dummy-code.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\images\dummy-fb.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\images\dummy-merchant.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\images\dummy-plus.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\images\favicon.ico" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\images\logo.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\images\logo_.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\images\maps.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\images\merchant-dummy.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\images\no_image.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\images\on-off.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\images\picture.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\images\picture2.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\images\sprite.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\images\tag.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\images\user.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\img\add_icon-min.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\img\afro_800x600.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\img\glyphicons-halflings-white.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\img\glyphicons-halflings.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\img\logo_200.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\app\angular.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\app\angular.min.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\app\app.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\boostrap.min.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\countdown.min.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\custom.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\fitvids.min.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\flexnav.min.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\gauge.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\gmap3.min.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\jquery.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\lib\angular-facebook.min.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\lib\angular-ui-router.min.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\lib\angular.min.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\lib\dropzone.min.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\lib\jquery.min.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\lib\modernizr.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\magnific.min.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\mail.min.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\main.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\mediaelement.min.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\modal.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\modernizr.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\nivo_slider.min.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\switcher.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\tweet.min.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\user\angular-facebook.min.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\user\app.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\waypoints.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\js\wilto_slider.min.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\views\AddCouponStep1.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\views\AddCouponStep2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\assets\views\AddCouponStep3.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\index.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\nbproject\customs.json" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\nbproject\private\private.properties" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\nbproject\private\private.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\nbproject\project.properties" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\nbproject\project.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\readme.md" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\.htaccess" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\core\Benchmark.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\core\CodeIgniter.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\core\Common.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\core\Config.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\core\Controller.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\core\Exceptions.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\core\Hooks.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\core\Input.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\core\Lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\core\Loader.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\core\Model.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\core\Output.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\core\Router.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\core\Security.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\core\URI.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\core\Utf8.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\core\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\DB.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\DB_active_rec.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\DB_cache.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\DB_driver.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\DB_forge.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\DB_result.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\DB_utility.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\cubrid\cubrid_driver.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\cubrid\cubrid_forge.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\cubrid\cubrid_result.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\cubrid\cubrid_utility.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\cubrid\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\mssql\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\mssql\mssql_driver.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\mssql\mssql_forge.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\mssql\mssql_result.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\mssql\mssql_utility.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\mysql\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\mysql\mysql_driver.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\mysql\mysql_forge.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\mysql\mysql_result.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\mysql\mysql_utility.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\mysqli\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\mysqli\mysqli_driver.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\mysqli\mysqli_forge.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\mysqli\mysqli_result.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\mysqli\mysqli_utility.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\oci8\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\oci8\oci8_driver.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\oci8\oci8_forge.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\oci8\oci8_result.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\oci8\oci8_utility.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\odbc\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\odbc\odbc_driver.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\odbc\odbc_forge.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\odbc\odbc_result.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\odbc\odbc_utility.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\pdo\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\pdo\pdo_driver.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\pdo\pdo_forge.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\pdo\pdo_result.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\pdo\pdo_utility.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\postgre\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\postgre\postgre_driver.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\postgre\postgre_forge.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\postgre\postgre_result.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\postgre\postgre_utility.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\sqlite\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\sqlite\sqlite_driver.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\sqlite\sqlite_forge.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\sqlite\sqlite_result.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\sqlite\sqlite_utility.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\sqlsrv\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\sqlsrv\sqlsrv_driver.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\sqlsrv\sqlsrv_forge.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\sqlsrv\sqlsrv_result.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\drivers\sqlsrv\sqlsrv_utility.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\database\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\fonts\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\fonts\texb.ttf" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\helpers\array_helper.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\helpers\captcha_helper.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\helpers\cookie_helper.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\helpers\date_helper.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\helpers\directory_helper.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\helpers\download_helper.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\helpers\email_helper.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\helpers\file_helper.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\helpers\form_helper.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\helpers\html_helper.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\helpers\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\helpers\inflector_helper.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\helpers\language_helper.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\helpers\number_helper.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\helpers\path_helper.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\helpers\security_helper.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\helpers\smiley_helper.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\helpers\string_helper.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\helpers\text_helper.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\helpers\typography_helper.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\helpers\url_helper.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\helpers\xml_helper.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\language\english\calendar_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\language\english\date_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\language\english\db_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\language\english\email_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\language\english\form_validation_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\language\english\ftp_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\language\english\imglib_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\language\english\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\language\english\migration_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\language\english\number_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\language\english\profiler_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\language\english\unit_test_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\language\english\upload_lang.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\language\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Cache\Cache.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Cache\drivers\Cache_apc.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Cache\drivers\Cache_dummy.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Cache\drivers\Cache_file.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Cache\drivers\Cache_memcached.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Calendar.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Cart.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Driver.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Email.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Encrypt.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Form_validation.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Ftp.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Image_lib.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Javascript.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Log.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Migration.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Pagination.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Parser.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Profiler.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Session.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Sha1.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Table.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Trackback.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Typography.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Unit_test.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Upload.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\User_agent.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Xmlrpc.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Xmlrpcs.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\Zip.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\system\libraries\javascript\Jquery.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\uploads\coupons\5\48a657a0d5df89dfa98b8586bb1f215a.jpeg" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\uploads\coupons\5\4dacefc2beb6906df09c2e6b23f355c8.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\uploads\coupons\5\7ff222ec492b15b65c41fd887ff763d7.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\uploads\coupons\5\e56933e1e600695b045d29ae40e28b45.jpeg" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\uploads\coupons\5\fb725737ce6e57c10d61cfaa365bdf16.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/HomeController.php" afterPath="$PROJECT_DIR$/app/controllers/HomeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/MerchantDashboardController.php" afterPath="$PROJECT_DIR$/app/controllers/MerchantDashboardController.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/dotted-border.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/CouponController.php" afterPath="$PROJECT_DIR$/app/controllers/CouponController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Couponcity/Coupon/PublishCouponCommand.php" afterPath="$PROJECT_DIR$/app/Couponcity/Coupon/PublishCouponCommand.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/home/partials/_footer.blade.php" afterPath="$PROJECT_DIR$/app/views/home/partials/_footer.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Couponcity.iws" />
@@ -506,6 +28,19 @@
   <component name="FavoritesManager">
     <favorites_list name="Couponcity" />
   </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="_footer.blade.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/home/partials/_footer.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="201" column="0" selection-start="7133" selection-end="7133" vertical-scroll-proportion="0.74925375" vertical-offset="4322" max-vertical-offset="4992">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
   <component name="FindManager">
     <FindUsagesManager>
       <setting name="OPEN_NEW_TAB" value="false" />
@@ -522,8 +57,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/views/home/index.blade.php" />
-        <option value="$PROJECT_DIR$/app/views/home/about_us.blade.php" />
         <option value="$PROJECT_DIR$/app/views/home/category_list.blade.php" />
         <option value="$PROJECT_DIR$/app/views/home/contact.blade.php" />
         <option value="$PROJECT_DIR$/app/views/home/help_faq.blade.php" />
@@ -556,7 +89,6 @@
         <option value="$PROJECT_DIR$/app/views/home/partials/_header.blade.php" />
         <option value="$PROJECT_DIR$/app/Couponcity/Coupon/InvalidCouponCodeException.php" />
         <option value="$PROJECT_DIR$/public/js/main.js" />
-        <option value="$PROJECT_DIR$/app/views/home/product.blade.php" />
         <option value="$PROJECT_DIR$/app/views/merchant_dashboard/redeem.blade.php" />
         <option value="$PROJECT_DIR$/app/views/partials/_infos.blade.php" />
         <option value="$PROJECT_DIR$/app/Couponcity/Coupon/RedeemCoupon.php" />
@@ -565,7 +97,6 @@
         <option value="$PROJECT_DIR$/app/Couponcity/Coupon/LogCouponSaleCommandHandler.php" />
         <option value="$PROJECT_DIR$/app/Couponcity/Coupon/LogCouponRedemptionCommand.php" />
         <option value="$PROJECT_DIR$/app/Couponcity/Coupon/LogCouponSaleCommand.php" />
-        <option value="$PROJECT_DIR$/app/controllers/CouponController.php" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/app/views/merchant_dashboard/partials/_header.blade.php" />
         <option value="$PROJECT_DIR$/app/views/merchant_dashboard/partials/_footer.blade.php" />
@@ -573,6 +104,10 @@
         <option value="$PROJECT_DIR$/app/controllers/HomeController.php" />
         <option value="$PROJECT_DIR$/app/models/Post.php" />
         <option value="$PROJECT_DIR$/assets/js/main.js" />
+        <option value="$PROJECT_DIR$/app/Couponcity/Coupon/PublishCouponCommand.php" />
+        <option value="$PROJECT_DIR$/app/controllers/CouponController.php" />
+        <option value="$PROJECT_DIR$/app/views/home/product.blade.php" />
+        <option value="$PROJECT_DIR$/app/views/home/partials/_footer.blade.php" />
       </list>
     </option>
   </component>
@@ -627,6 +162,56 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Couponcity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="coupon-city" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Couponcity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="coupon-city" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="img" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Couponcity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="coupon-city" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="images" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -645,6 +230,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\coupon-city\public\images" />
       <recent name="C:\xampp\htdocs\coupon-city\public\js" />
     </key>
   </component>
@@ -742,7 +328,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25622255" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25622255" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25622255" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
@@ -780,16 +366,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/config/couponcity.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="2" selection-start="226" selection-end="226" vertical-scroll-proportion="0.39184397" vertical-offset="0" max-vertical-offset="564" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/helpers.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="196" column="13" selection-start="4268" selection-end="4268" vertical-scroll-proportion="1.7943262" vertical-offset="2235" max-vertical-offset="6069" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/laracasts/commander/src/Laracasts/Commander/CommandHandler.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="10" selection-start="48" selection-end="48" vertical-scroll-proportion="0.09418283" vertical-offset="0" max-vertical-offset="361" />
@@ -915,11 +491,6 @@
         <state line="64" column="30" selection-start="2505" selection-end="2505" vertical-scroll-proportion="0.51704544" vertical-offset="815" max-vertical-offset="1955" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/home/product.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="98" selection-start="2112" selection-end="2157" vertical-scroll-proportion="-11.769231" vertical-offset="561" max-vertical-offset="3383" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/merchant_dashboard/redeem.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="35" selection-start="658" selection-end="658" vertical-scroll-proportion="-9.153846" vertical-offset="0" max-vertical-offset="595" />
@@ -980,11 +551,6 @@
         <state line="16" column="32" selection-start="268" selection-end="268" vertical-scroll-proportion="0.5027726" vertical-offset="0" max-vertical-offset="541" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/merchant_dashboard/partials/_footer.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="30" selection-start="641" selection-end="641" vertical-scroll-proportion="0.35897437" vertical-offset="0" max-vertical-offset="2884" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/merchant_dashboard/partials/_header.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="25" selection-start="256" selection-end="256" vertical-scroll-proportion="0.35897437" vertical-offset="0" max-vertical-offset="1736" />
@@ -1002,12 +568,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Couponcity/Coupon/LogCouponViewCommand.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="22" selection-start="62" selection-end="82" vertical-scroll-proportion="0.12087912" vertical-offset="35" max-vertical-offset="672" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/CouponController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="35" selection-start="498" selection-end="498" vertical-scroll-proportion="0.23404256" vertical-offset="14" max-vertical-offset="4256" />
+        <state line="4" column="22" selection-start="62" selection-end="82" vertical-scroll-proportion="0.12087912" vertical-offset="35" max-vertical-offset="672">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/partials/_infos.blade.php">
@@ -1030,9 +593,44 @@
         <state line="9" column="29" selection-start="161" selection-end="161" vertical-scroll-proportion="0.31625184" vertical-offset="0" max-vertical-offset="1560" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/js/main.js">
+    <entry file="file://$PROJECT_DIR$/app/Couponcity/Coupon/PublishCouponCommand.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="7" selection-start="1282" selection-end="1282" vertical-scroll-proportion="1.6477612" vertical-offset="120" max-vertical-offset="10128">
+        <state line="72" column="1" selection-start="2933" selection-end="2933" vertical-scroll-proportion="0.78916544" vertical-offset="1189" max-vertical-offset="1872">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/CouponController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="23" selection-start="970" selection-end="970" vertical-scroll-proportion="0.23134328" vertical-offset="589" max-vertical-offset="3672">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/home/product.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="17" selection-start="1018" selection-end="1018" vertical-scroll-proportion="0.53731346" vertical-offset="360" max-vertical-offset="4776">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/home/product-tm.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="599" column="34" selection-start="19524" selection-end="19524" vertical-scroll-proportion="0.57014924" vertical-offset="13994" max-vertical-offset="14664">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/merchant_dashboard/partials/_footer.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="0" selection-start="218" selection-end="311" vertical-scroll-proportion="0.07164179" vertical-offset="0" max-vertical-offset="2472">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/home/partials/_footer.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="201" column="0" selection-start="7133" selection-end="7133" vertical-scroll-proportion="0.74925375" vertical-offset="4322" max-vertical-offset="4992">
           <folding />
         </state>
       </provider>

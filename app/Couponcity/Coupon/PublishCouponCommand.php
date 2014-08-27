@@ -1,5 +1,7 @@
 <?php namespace Couponcity\Coupon;
 
+use Carbon\Carbon;
+
 class PublishCouponCommand
 {
 
@@ -48,8 +50,8 @@ class PublishCouponCommand
         $this->discount = $coupon['discount'];
         $this->location = $coupon['location'];
         $this->category_id = $coupon['category_id'];
-        $this->start_date = $coupon['start_date'];
-        $this->end_date = $coupon['end_date'];
+        $this->start_date = Carbon::parse($coupon['start_date']);
+        $this->end_date = Carbon::parse($coupon['end_date']);
         $this->quantity = $coupon['quantity'];
         $this->is_advanced_pricing = isset($coupon['is_advanced_pricing']) ? TRUE : FALSE;
         $this->advanced_price_one_price = $coupon['advanced_price_one_price'];

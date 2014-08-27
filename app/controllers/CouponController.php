@@ -44,7 +44,8 @@
         $this->couponFormValidator->validate(Input::get('coupon'));
 
         $coupon = $this->execute(PublishCouponCommand::class);
-		dd($coupon);
+
+        return Redirect::action('MerchantDashboardController@getCoupons')->withStatus('Coupon Added Successfully');
 	}
 
 
