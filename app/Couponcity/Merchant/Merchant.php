@@ -108,6 +108,19 @@ class Merchant extends \Eloquent implements StaplerableInterface
         return $this->hasMany('Couponcity\Coupon\Coupon');
     }
 
+    public function getFullAddressAttribute(){
+        return $this->build_address();
+    }
+
+    private function build_address(){
+        $addr = "";
+
+        $addr .= $this->address_one;
+        $addr .= ",".$this->city;
+        $addr .= ".".$this->state ." State";
+
+        return $addr;
+    }
     public static function totalCouponSales($id)
     {
         $response = static::where('id',$id)->with(['coupons' => function ($query) {
@@ -282,4 +295,6 @@ class Merchant extends \Eloquent implements StaplerableInterface
 
         return $sum;
     }
+
+
 }

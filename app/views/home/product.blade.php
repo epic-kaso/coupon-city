@@ -42,18 +42,13 @@
         </div>
 
         <div class="right buy">
-            @if(isset($user_owns_coupon) && $user_owns_coupon)
-            <a href="" class="deal-button clearfix">
-                <span>You Own this Coupon</span>
-            </a>
-            @elseif($coupon->is_available())
-
+            @if($coupon->is_available())
             <?=
-                Form::open(['url'                                                        => action('CouponController@postGrabCoupon',
+                Form::open(['url'=> action('CouponController@postGrabCoupon',
                     ['id' => $coupon->id]), 'data-remote', 'data-remote-success-message' => 'Successfully added coupon']) ?>
             <?=
                 Form::submit("Buy ₦{$coupon->present()->current_price}",
-                    ['class' => 'deal-button clearfix', 'data-success-message' => 'You Own this Coupon'])?>
+                    ['class' => 'deal-button clearfix', 'data-success-message' => 'Successfully Grabbed!'])?>
             <?= Form::close() ?>
             @else
             <a href="" class="deal-button clearfix">

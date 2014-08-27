@@ -53,7 +53,7 @@
                     @if(isset($user) && !is_null($user))
 
                     <li class="current-user"><!--If user logged in?-->
-                        <span>{{ $user->email }}</span>
+                        <span>{{ $user->present()->display_name }}</span>
 
                         <div class="inner-nav">
                             <ul>

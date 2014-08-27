@@ -12,4 +12,12 @@ use Laracasts\Presenter\Presenter;
 class UserPresenter extends Presenter
 {
 
+    public function display_name(){
+        if(empty($this->first_name)){
+            $username = explode('@',$this->email);
+            return ucfirst($username[0]);
+        }else{
+            return ucfirst($this->first_name);
+        }
+    }
 }

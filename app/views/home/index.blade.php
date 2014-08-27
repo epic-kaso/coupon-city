@@ -39,7 +39,7 @@
                 @foreach($featured as $item)
                 <li>
                     <a href="{{ URL::action('CouponController@getShow',['slug'=>$item->slug]) }}"
-                       title="{{ $item->name }}"><img src="{{ $item->image_one->url() }}"></a>
+                       title="{{ $item->name }}"><img src="{{ $item->image_one->url('medium') }}"></a>
                 </li>
                 @endforeach
                 @endif

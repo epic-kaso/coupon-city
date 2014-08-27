@@ -58,20 +58,13 @@
                 return App::abort(404, 'Not Found');
             }
 
-            $coupon = Coupon::where('slug', $slug)->first();
+            $coupon = Coupon::where('slug', $slug)->with('sales')->first();
 
             if (is_null($coupon)) {
                 return App::abort(404, 'Not Found');
             }
 
             $this->data['coupon'] = $coupon;
-
-            if (Auth::check()) {
-                $user_coupon = CouponUser::where('user_id', Auth::id())->where('coupon_id', $coupon->id)->first();
-
-                $this->data['user_owns_coupon'] = !empty($user_coupon) ? TRUE : NULL;
-            }
-
 
             $this->execute(LogCouponViewCommand::class, ['coupon_id' => $coupon->id]);
 
@@ -128,13 +121,6 @@
                 $response = $this->execute(BuyCouponCommand::class, ['coupon_id' => $coupon->id, 'user_id' => $user_id]);
 
             } catch (NotEnoughMoneyException $ex) {
-                $response = $ex->getMessage();
-                if (Request::ajax()) {
-                    return Response::json($response, 403);
-                } else {
-                    return Redirect::back()->withError($response);
-                }
-            } catch (UserOwnsCouponException $ex) {
                 $response = $ex->getMessage();
                 if (Request::ajax()) {
                     return Response::json($response, 403);

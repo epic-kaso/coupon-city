@@ -37,9 +37,9 @@
         public function current_price()
         {
             if (!$this->is_advanced_pricing) {
-                return $this->new_price;
+                return number_format($this->new_price,0);
             } else {
-                return $this->figure_out_price();
+                return number_format($this->figure_out_price(),0);
             }
         }
 
@@ -55,12 +55,12 @@
 
         public function oldPrice()
         {
-            return number_format($this->old_price, 2);
+            return number_format($this->old_price,0);
         }
 
         public function basicNewPrice()
         {
-            return number_format($this->new_price, 2);
+            return number_format($this->new_price,0);
         }
 
         public function views_today()
@@ -162,7 +162,6 @@
         {
             $today = Carbon::today();
             $tomorrow = $today->tomorrow();
-
             $views = $this->sales->filter(
                 function ($entry) use ($today, $tomorrow) {
                     return $entry->created_at >= $today && $entry->created_at < $tomorrow;

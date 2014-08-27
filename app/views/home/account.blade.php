@@ -4,7 +4,7 @@
 <div class="inner-pad clearfix">
 
     <div class="account-nav">
-        <h2 class="majors">Hey {{$user->last_name}},</h2>
+        <h2 class="majors">Hey {{$user->present()->display_name}},</h2>
 
         <br>
 
@@ -29,7 +29,12 @@
         <div class="all-my-deals left account-deals" id="my-deals">
             <h2 class="majors">My Deals</h2>
             @foreach($my_coupons as $c)
-            <div class="my-deals clearfix">
+            <div class="my-deals clearfix"
+                data-name="{{ $c->coupon->name }}"
+                data-coupon-code="{{ $c->user_coupon_code }}"
+                data-tag-line="{{ $c->coupon->tag_line }}"
+                data-merchant-address="{{ $c->coupon->merchant->full_address }}"
+                >
                 <li class="my-deal-img">
                     <div><img src="{{ $c->coupon->image_one->url('medium') }}"></div>
                 </li>

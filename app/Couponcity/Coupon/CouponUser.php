@@ -47,17 +47,17 @@ class CouponUser extends \Eloquent
 
     public static function grabCoupon($coupon_id, $user_id)
     {
-        $existing = CouponUser::where('coupon_id', $coupon_id)->where('user_id', $user_id)->first();
-        if (empty($existing)) {
+        //$existing = CouponUser::where('coupon_id', $coupon_id)->where('user_id', $user_id)->first();
+        //if (empty($existing)) {
             $coupon_user = CouponUser::create(['coupon_id' => $coupon_id, 'user_id' => $user_id]);
 
             $coupon_user->raise(new UserCouponCreated($coupon_user));
             $coupon_user->raise(new CouponSold($coupon_user));
 
             return $coupon_user;
-        } else {
-            throw new UserOwnsCouponException('you already own this coupon!');
-        }
+        //} else {
+        //    throw new UserOwnsCouponException('you already own this coupon!');
+        //}
     }
 
     public static function redeemCoupon($coupon_code)

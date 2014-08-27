@@ -125,6 +125,10 @@
             return $this->hasMany('Couponcity\Coupon\CouponView');
         }
 
+        public function sales_count(){
+            return $this->sales->count();
+        }
+
         public function sales()
         {
             return $this->hasMany('Couponcity\Coupon\CouponSale');
