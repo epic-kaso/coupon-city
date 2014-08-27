@@ -97,11 +97,12 @@
             return $coupon;
         }
 
-        public function setNameAttribute($name){
+        public function setNameAttribute($name)
+        {
             $this->attributes['name'] = $name;
             $slug = strtolower(url_title($name));
-            $similar = static::where('slug',$slug)->first();
-            if(!is_null($similar)){
+            $similar = static::where('slug', $slug)->first();
+            if (!is_null($similar)) {
                 $slug = increment_string($slug);
             }
             $this->attributes['slug'] = $slug;
@@ -147,20 +148,20 @@
             return $related;
         }
 
-        public function is_available(){
-            $sales_count = CouponSale::where('coupon_id',$this->id)->count();
+        public function is_available()
+        {
+            $sales_count = CouponSale::where('coupon_id', $this->id)->count();
 
-            if($sales_count < $this->attributes['quantity']){
-                return true;
-            }else{
-                return false;
+            if ($sales_count < $this->attributes['quantity']) {
+                return TRUE;
+            } else {
+                return FALSE;
             }
         }
 
-        public function users(){
+        public function users()
+        {
             return $this->belongsToMany('User');
         }
-
-
 
     }

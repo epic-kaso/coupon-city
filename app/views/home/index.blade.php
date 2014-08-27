@@ -2,13 +2,13 @@
 @section('content')
 
 <div class="inner-pad">
-<ul class="coupon-promise clearfix mb">
-    <li><a href="">Free shipping on deliveries</a></li>
-    <li><a href="">Why we use Wallets</a></li>
-    <li><a href="">Why you'll love us</a></li>
-</ul>
+    <ul class="coupon-promise clearfix mb">
+        <li><a href="">Free shipping on deliveries</a></li>
+        <li><a href="">Why we use Wallets</a></li>
+        <li><a href="">Why you'll love us</a></li>
+    </ul>
 
-<div class="how-works mb"></div>
+    <div class="how-works mb"></div>
 
 
     <div class="featured-deal clearfix mb">
@@ -38,7 +38,8 @@
                 @if(!empty($featured))
                 @foreach($featured as $item)
                 <li>
-                    <a href="{{ URL::action('CouponController@getShow',['slug'=>$item->slug]) }}" title="{{ $item->name }}"><img src="{{ $item->image_one->url() }}"></a>
+                    <a href="{{ URL::action('CouponController@getShow',['slug'=>$item->slug]) }}"
+                       title="{{ $item->name }}"><img src="{{ $item->image_one->url() }}"></a>
                 </li>
                 @endforeach
                 @endif
@@ -46,10 +47,10 @@
         </div>
     </div>
 
-<div class="special-feature mb clearfix">
-    <div class="feature-one left"></div>
-    <div class="feature-two right"></div>
-</div>
+    <div class="special-feature mb clearfix">
+        <div class="feature-one left"></div>
+        <div class="feature-two right"></div>
+    </div>
 
     @if(!empty($snippet))
     @foreach($snippet as $section)
@@ -88,16 +89,16 @@
     @endif
 
     <div class="featured-merchants clearfix mb">
-    <h2 class="majors">Featured Merchants</h2>
-    <br/>
-    <ul>
-        <li><img src="img/merchant-dummy.png"></li>
-        <li><img src="img/dummy-merchant.png"></li>
-        <li><img src="img/merchant-dummy.png"></li>
-        <li><img src="img/dummy-merchant.png"></li>
-        <li><img src="img/merchant-dummy.png"></li>
-    </ul>
-</div>
+        <h2 class="majors">Featured Merchants</h2>
+        <br/>
+        <ul>
+            <li><img src="img/merchant-dummy.png"></li>
+            <li><img src="img/dummy-merchant.png"></li>
+            <li><img src="img/merchant-dummy.png"></li>
+            <li><img src="img/dummy-merchant.png"></li>
+            <li><img src="img/merchant-dummy.png"></li>
+        </ul>
+    </div>
 
 </div>
 

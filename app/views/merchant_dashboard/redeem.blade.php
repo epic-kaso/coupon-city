@@ -7,9 +7,9 @@
     <div class="hold right">
         <h1>Redeem Coupon</h1>
 
-        <?= Form::open(['url'=>action('MerchantDashboardController@postRedeemCoupon'),'data-remote','data-remote-success-message'=>'Coupon Successfully Redeemed!']) ?>
-            <input name="coupon_code" type="text" placeholder="Coupon Code ex. 1234567"  required/>
-            <input type="submit" class="btn btn-submit btn-small" data-success-message='Coupon Redeemed Successfully!'/>
+        <?= Form::open(['url' => action('MerchantDashboardController@postRedeemCoupon'), 'data-remote', 'data-remote-success-message' => 'Coupon Successfully Redeemed!']) ?>
+        <input name="coupon_code" type="text" placeholder="Coupon Code ex. 1234567" required/>
+        <input type="submit" class="btn btn-submit btn-small" data-success-message='Coupon Redeemed Successfully!'/>
         <?= Form::close() ?>
 
         @include('partials._infos')

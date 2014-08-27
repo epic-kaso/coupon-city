@@ -36,18 +36,18 @@
 
         public function current_price()
         {
-            if(!$this->is_advanced_pricing){
+            if (!$this->is_advanced_pricing) {
                 return $this->new_price;
-            }else{
+            } else {
                 return $this->figure_out_price();
             }
         }
 
         public function current_discount()
         {
-            if(!$this->is_advanced_pricing){
+            if (!$this->is_advanced_pricing) {
                 return $this->discount;
-            }else{
+            } else {
                 return $this->figure_out_discount();
             }
 
@@ -166,34 +166,38 @@
 
         private function figure_out_price()
         {
-           $sales_count = CouponSale::where('coupon_id',$this->id)->count();
+            $sales_count = CouponSale::where('coupon_id', $this->id)->count();
 
-           if($sales_count <= $this->advanced_price_one_quantity){
-               return $this->advanced_price_one_price;
-           }elseif($sales_count <= $this->advanced_price_two_quantity){
-               return $this->advanced_price_two_price;
-           }elseif($sales_count <= $this->advanced_price_three_quantity){
-               return $this->advanced_price_three_price;
-           }else{
-               return $this->advanced_price_one_price;
-           }
+            if ($sales_count <= $this->advanced_price_one_quantity) {
+                return $this->advanced_price_one_price;
+            } elseif ($sales_count <= $this->advanced_price_two_quantity) {
+                return $this->advanced_price_two_price;
+            } elseif ($sales_count <= $this->advanced_price_three_quantity) {
+                return $this->advanced_price_three_price;
+            } else {
+                return $this->advanced_price_one_price;
+            }
 
         }
 
         private function figure_out_discount()
         {
-            $sales_count = CouponSale::where('coupon_id',$this->id)->count();
+            $sales_count = CouponSale::where('coupon_id', $this->id)->count();
 
-            if($sales_count <= $this->advanced_price_one_quantity){
+            if ($sales_count <= $this->advanced_price_one_quantity) {
                 return $this->advanced_price_one_discount;
-            }elseif($sales_count <= $this->advanced_price_two_quantity){
+            } elseif ($sales_count <= $this->advanced_price_two_quantity) {
                 return $this->advanced_price_two_discount;
-            }elseif($sales_count <= $this->advanced_price_three_quantity){
+            } elseif ($sales_count <= $this->advanced_price_three_quantity) {
                 return $this->advanced_price_three_discount;
-            }else{
+            } else {
                 return $this->advanced_price_one_discount;
             }
         }
 
+        public function get_sales_commission()
+        {
+            return 0.2 * $this->current_price();
+        }
 
     }

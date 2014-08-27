@@ -38,7 +38,7 @@
                     <td>{{ $coupon->coupon_code }}</td>
                     <td class="align-left">
                         <a href="{{ URL::action('MerchantDashboardController@getCoupon',['slug'=>$coupon->slug]) }}">
-                        {{ $coupon->name }}</a>
+                            {{ $coupon->name }}</a>
                     </td>
                     <td>
                         {{ $coupon->present()->status }}

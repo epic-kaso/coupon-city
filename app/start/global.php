@@ -55,19 +55,19 @@
         Log::error($exception);
     });
 
-    App::error(function(ModelNotFoundException $ex){
+    App::error(function (ModelNotFoundException $ex) {
         return Redirect::to('/');
     });
 
-    App::error(function (NotFoundHttpException $ex){
-        return View::make('errors.404',[]);
+    App::error(function (NotFoundHttpException $ex) {
+        return View::make('errors.404', []);
     });
 
-    App::error(function(CreateUserException $e) {
+    App::error(function (CreateUserException $e) {
         return Redirect::back()->withInput()->withErrors($e->getMessage());
     });
 
-    App::error(function(FormValidationException $e) {
+    App::error(function (FormValidationException $e) {
         return Redirect::back()->withInput()->withErrors($e->getErrors());
     });
     /*

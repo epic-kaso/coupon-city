@@ -1,30 +1,31 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kaso
- * Date: 8/26/14
- * Time: 12:50 PM
- */
-
-namespace Couponcity\EventListeners;
-
-
-use Illuminate\Support\ServiceProvider;
-
-class EventListenersServiceProvider extends ServiceProvider {
-
     /**
-     * Register the service provider.
-     *
-     * @return void
+     * Created by PhpStorm.
+     * User: kaso
+     * Date: 8/26/14
+     * Time: 12:50 PM
      */
-    public function register()
+
+    namespace Couponcity\EventListeners;
+
+
+    use Illuminate\Support\ServiceProvider;
+
+    class EventListenersServiceProvider extends ServiceProvider
     {
 
-        $listeners = $this->app['config']->get('couponcity.listeners');
+        /**
+         * Register the service provider.
+         *
+         * @return void
+         */
+        public function register()
+        {
 
-        foreach($listeners as $listener){
-            $this->app['events']->listen('Couponcity.*',$listener);
+            $listeners = $this->app['config']->get('couponcity.listeners');
+
+            foreach ($listeners as $listener) {
+                $this->app['events']->listen('Couponcity.*', $listener);
+            }
         }
     }
-}

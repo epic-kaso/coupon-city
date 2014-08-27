@@ -7,6 +7,7 @@ class PublishCouponCommandHandler implements CommandHandler
 {
 
     use DispatchableTrait;
+
     /**
      * Handle the command.
      *
@@ -15,7 +16,7 @@ class PublishCouponCommandHandler implements CommandHandler
      */
     public function handle($command)
     {
-       $coupon = Coupon::publish($command);
+        $coupon = Coupon::publish($command);
 
         $this->dispatchEventsFor($coupon);
 

@@ -7,160 +7,160 @@
             <a href="<?= URL::action('MerchantDashboardController@getCoupons') ?>" class="btn right export">&laquo; See
                 all Coupons</a>
         </div>
-        <?= Form::open(['url'=>action('CouponController@postStore'),'files'=>true,'class'=>'dialog-form','name'=>'coupon_form']) ?>
+        <?= Form::open(['url' => action('CouponController@postStore'), 'files' => true, 'class' => 'dialog-form', 'name' => 'coupon_form']) ?>
 
-            <div class="segment">
+        <div class="segment">
 
-                @include('partials._infos')
+            @include('partials._infos')
 
-                <h2>Coupon Information</h2>
+            <h2>Coupon Information</h2>
 
 
-                <input name="coupon[name]" required ng-model="coupon.name" type="text" placeholder="Coupon Name">
+            <input name="coupon[name]" required ng-model="coupon.name" type="text" placeholder="Coupon Name">
 
-                <div class="clearfix split-input">
-                    <input type="text" placeholder="Tagline" class="left" name="coupon[tag_line]">
+            <div class="clearfix split-input">
+                <input type="text" placeholder="Tagline" class="left" name="coupon[tag_line]">
 
-                    <div class="select-input right">
-                        <select name="coupon[category_id]">
-                            <option>Select Category</option>
-                            @if(isset($categories))
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}"> {{ $category->name }}</option>
-                                @endforeach
-                            @endif
-                        </select>
-                    </div>
+                <div class="select-input right">
+                    <select name="coupon[category_id]">
+                        <option>Select Category</option>
+                        @if(isset($categories))
+                        @foreach ($categories as $category)
+                        <option value="{{ $category->id }}"> {{ $category->name }}</option>
+                        @endforeach
+                        @endif
+                    </select>
                 </div>
-
-                <p>You might know this as a fine print but essentially its any information related to the coupon and its
-                    use. You might know this as a fine print but essentially its any information related to the coupon
-                    and its use. <a href="">Learn more &raquo;</a></p>
-                <textarea placeholder="What customers need to know" name="coupon[description]"
-                          ng-model="coupon.description" class="span5" style="height: 200px;"></textarea>
-
             </div>
 
-            <div class="segment">
-                <h2>Coupon Details</h2>
+            <p>You might know this as a fine print but essentially its any information related to the coupon and its
+                use. You might know this as a fine print but essentially its any information related to the coupon
+                and its use. <a href="">Learn more &raquo;</a></p>
+            <textarea placeholder="What customers need to know" name="coupon[description]"
+                      ng-model="coupon.description" class="span5" style="height: 200px;"></textarea>
 
-                <p>Enter details of the good or service you are offering through this coupon. Customers need all details
-                    of what they are buying. You might know this as a fine print but essentially its any information
-                    related to the coupon and its use.<a href="">Learn more &raquo;</a></p>
+        </div>
 
-                <div ng-show="coupon_form.coupon_summary.$dirty && !coupon_form.coupon_summary.$pristine"
-                     class="invalid">
+        <div class="segment">
+            <h2>Coupon Details</h2>
+
+            <p>Enter details of the good or service you are offering through this coupon. Customers need all details
+                of what they are buying. You might know this as a fine print but essentially its any information
+                related to the coupon and its use.<a href="">Learn more &raquo;</a></p>
+
+            <div ng-show="coupon_form.coupon_summary.$dirty && !coupon_form.coupon_summary.$pristine"
+                 class="invalid">
                     <span
                         ng-show="coupon_form.coupon_summary.$error.required">Give a little detail about the Coupon.</span>
-                </div>
-                <textarea name="coupon[summary]" required ng-model="coupon.summary"
-                          placeholder="The details"></textarea>
+            </div>
+            <textarea name="coupon[summary]" required ng-model="coupon.summary"
+                      placeholder="The details"></textarea>
 
-                <div class="clearfix split-input">
-                    <input type="text" placeholder="Start Date" class="from-dati left" name="coupon[start_date]">
-                    <input type="text" placeholder="End Date" class="to-dati right" name="coupon[end_date]">
-                </div>
-
-                <div class="clearfix split-input">
-                    <div ng-show="coupon_form.old_price.$dirty && !coupon_form.old_price.$pristine" class="invalid">
-                        <span ng-show="coupon_form.old_price.$error.required">You need to specify old price.</span>
-                    </div>
-
-                    <div class="clearfix split-input left">
-                        <input type="text" placeholder="Price" ng-model="coupon.old_price" class="old_price left"
-                               name="coupon[old_price]">
-                        <input type="text" placeholder="Max. Coupons" class="max_coupons right" name="coupon[quantity]">
-                    </div>
-
-                    <input type="text" name="coupon[location]" placeholder="Market" class="right">
-                </div>
-
-                <div class="clearfix coupon-images">
-                    <p>You can enter up to 5 images. Make sure they are hi-res, clear with a minimum resolution of 700px
-                        by 500px</p>
-
-                    <div class="file-upload left">
-                        <input type="file" class="upload" title="Upload Logo" name="coupon[image_one]">
-                        <img alt="" class="target" src="">
-                    </div>
-
-                    <div class="file-upload left">
-                        <input type="file" class="upload" title="Upload Logo" name="coupon[image_two]">
-                        <img alt="" class="target" src="">
-                    </div>
-
-                    <div class="file-upload left">
-                        <input type="file" class="upload" title="Upload Logo" name="coupon[image_three]">
-                        <img alt="" class="target" src="">
-                    </div>
-
-                    <div class="file-upload left">
-                        <input type="file" class="upload" title="Upload Logo" name="coupon[image_four]">
-                        <img alt="" class="target" src="">
-                    </div>
-
-                    <div class="file-upload right">
-                        <input type="file" class="upload" title="Upload Logo" name="coupon[image_five]">
-                        <img alt="" class="target" src="">
-                    </div>
-                </div>
+            <div class="clearfix split-input">
+                <input type="text" placeholder="Start Date" class="from-dati left" name="coupon[start_date]">
+                <input type="text" placeholder="End Date" class="to-dati right" name="coupon[end_date]">
             </div>
 
-            <div class="segment clearfix">
-                <h2>Pricing</h2>
-
-                <div class="basic-type-pricing clearfix three-input">
-                    <input type="text" placeholder="New Price" class="new_price left"
-                           ng-model="coupon.new_price"
-                           name="coupon[new_price]"
-                        >
-                    <input type="text" placeholder="% Discount" class="basic_discount left"
-                           ng-model="coupon.discount"
-                           name="coupon[virtual_discount]">
-                    <input type="text" placeholder="Actual % Discount" class="actual_discount right"
-                           ng-model="coupon.actual_discount"
-                           name="coupon[discount]">
+            <div class="clearfix split-input">
+                <div ng-show="coupon_form.old_price.$dirty && !coupon_form.old_price.$pristine" class="invalid">
+                    <span ng-show="coupon_form.old_price.$error.required">You need to specify old price.</span>
                 </div>
 
+                <div class="clearfix split-input left">
+                    <input type="text" placeholder="Price" ng-model="coupon.old_price" class="old_price left"
+                           name="coupon[old_price]">
+                    <input type="text" placeholder="Max. Coupons" class="max_coupons right" name="coupon[quantity]">
+                </div>
 
-                <div class="segment-inner">
-                    <p>You can turn on Advanced pricing here. Advanced Pricing lets you inspire more sales by dropping
-                        prices as customer number go up. <a href="">Learn more &raquo;</a></p>
+                <input type="text" name="coupon[location]" placeholder="Market" class="right">
+            </div>
 
-                    <input type="checkbox" id="pricing-type" class="pricing-type" name="coupon[is_advanced_pricing]"
-                           value="1">
-                    <label for="pricing-type" class="m-b">Turn On Advanced Pricing</label>
+            <div class="clearfix coupon-images">
+                <p>You can enter up to 5 images. Make sure they are hi-res, clear with a minimum resolution of 700px
+                    by 500px</p>
 
-                    <div class="advanced-type-pricing clearfix three-input">
-                        <a href="" ng-click="add_next_adv_price_form()">&laquo; Add Price Level</a>
+                <div class="file-upload left">
+                    <input type="file" class="upload" title="Upload Logo" name="coupon[image_one]">
+                    <img alt="" class="target" src="">
+                </div>
+
+                <div class="file-upload left">
+                    <input type="file" class="upload" title="Upload Logo" name="coupon[image_two]">
+                    <img alt="" class="target" src="">
+                </div>
+
+                <div class="file-upload left">
+                    <input type="file" class="upload" title="Upload Logo" name="coupon[image_three]">
+                    <img alt="" class="target" src="">
+                </div>
+
+                <div class="file-upload left">
+                    <input type="file" class="upload" title="Upload Logo" name="coupon[image_four]">
+                    <img alt="" class="target" src="">
+                </div>
+
+                <div class="file-upload right">
+                    <input type="file" class="upload" title="Upload Logo" name="coupon[image_five]">
+                    <img alt="" class="target" src="">
+                </div>
+            </div>
+        </div>
+
+        <div class="segment clearfix">
+            <h2>Pricing</h2>
+
+            <div class="basic-type-pricing clearfix three-input">
+                <input type="text" placeholder="New Price" class="new_price left"
+                       ng-model="coupon.new_price"
+                       name="coupon[new_price]"
+                    >
+                <input type="text" placeholder="% Discount" class="basic_discount left"
+                       ng-model="coupon.discount"
+                       name="coupon[virtual_discount]">
+                <input type="text" placeholder="Actual % Discount" class="actual_discount right"
+                       ng-model="coupon.actual_discount"
+                       name="coupon[discount]">
+            </div>
+
+
+            <div class="segment-inner">
+                <p>You can turn on Advanced pricing here. Advanced Pricing lets you inspire more sales by dropping
+                    prices as customer number go up. <a href="">Learn more &raquo;</a></p>
+
+                <input type="checkbox" id="pricing-type" class="pricing-type" name="coupon[is_advanced_pricing]"
+                       value="1">
+                <label for="pricing-type" class="m-b">Turn On Advanced Pricing</label>
+
+                <div class="advanced-type-pricing clearfix three-input">
+                    <a href="" ng-click="add_next_adv_price_form()">&laquo; Add Price Level</a>
+                    <input type="text" placeholder="New Price" class="left"
+                           name="coupon[advanced_price_one_price]">
+                    <input type="text" placeholder="% Discount" class="left"
+                           name="coupon[advanced_price_one_discount]">
+                    <input type="text" placeholder="No of Customers" class="right"
+                           name="coupon[advanced_price_one_quantity]">
+
+                    <div ng-show="adv_price_form.second.visible">
                         <input type="text" placeholder="New Price" class="left"
-                               name="coupon[advanced_price_one_price]">
+                               name="coupon[advanced_price_two_price]">
                         <input type="text" placeholder="% Discount" class="left"
-                               name="coupon[advanced_price_one_discount]">
+                               name="coupon[advanced_price_two_discount]">
                         <input type="text" placeholder="No of Customers" class="right"
-                               name="coupon[advanced_price_one_quantity]">
+                               name="coupon[advanced_price_two_quantity]">
+                    </div>
 
-                        <div ng-show="adv_price_form.second.visible">
-                            <input type="text" placeholder="New Price" class="left"
-                                   name="coupon[advanced_price_two_price]">
-                            <input type="text" placeholder="% Discount" class="left"
-                                   name="coupon[advanced_price_two_discount]">
-                            <input type="text" placeholder="No of Customers" class="right"
-                                   name="coupon[advanced_price_two_quantity]">
-                        </div>
-
-                        <div ng-show="adv_price_form.third.visible">
-                            <input type="text" placeholder="New Price" class="left"
-                                   name="coupon[advanced_price_three_price]">
-                            <input type="text" placeholder="% Discount" class="left"
-                                   name="coupon[advanced_price_three_discount]">
-                            <input type="text" placeholder="No of Customers" class="right"
-                                   name="coupon[advanced_price_three_quantity]">
-                        </div>
+                    <div ng-show="adv_price_form.third.visible">
+                        <input type="text" placeholder="New Price" class="left"
+                               name="coupon[advanced_price_three_price]">
+                        <input type="text" placeholder="% Discount" class="left"
+                               name="coupon[advanced_price_three_discount]">
+                        <input type="text" placeholder="No of Customers" class="right"
+                               name="coupon[advanced_price_three_quantity]">
                     </div>
                 </div>
             </div>
-            <input type="submit" class="btn-submit btn" value="Create Coupon">
+        </div>
+        <input type="submit" class="btn-submit btn" value="Create Coupon">
         <?= Form::close() ?>
     </div>
 

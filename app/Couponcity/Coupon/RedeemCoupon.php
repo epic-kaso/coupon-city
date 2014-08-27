@@ -16,9 +16,10 @@
 
         use DispatchableTrait;
 
-        public function redeem($code){
+        public function redeem($code)
+        {
 
-            $response =  CouponUser::redeemCoupon($code);
+            $response = CouponUser::redeemCoupon($code);
 
             $this->dispatchEventsFor($response);
 

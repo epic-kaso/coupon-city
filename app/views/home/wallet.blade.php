@@ -7,7 +7,8 @@
         <div class="clearfix mb">
             <h2 class="majors left">Wallet <a href="" class="add-funds">Add Funds &raquo;</a></h2>
 
-            <div class="right balance">{{ number_format($user->wallet_balance,2) }}<span>₦</span> <span class="balance-text">Wallet Balance</span></div>
+            <div class="right balance">{{ number_format($user->wallet_balance,2) }}<span>₦</span> <span
+                    class="balance-text">Wallet Balance</span></div>
         </div>
 
         @if(!isset($wallet_transactions) || $wallet_transactions->count() <= 0)

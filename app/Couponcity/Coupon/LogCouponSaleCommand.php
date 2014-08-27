@@ -20,6 +20,7 @@ class LogCouponSaleCommand
         $this->coupon_id = $coupon->id;
         $this->sales_price = $coupon->present()->current_price;
         $this->sales_discount = $coupon->present()->current_discount;
+        $this->sales_commission = $coupon->present()->get_sales_commission();
         $this->sales_date = Carbon::now();
     }
 

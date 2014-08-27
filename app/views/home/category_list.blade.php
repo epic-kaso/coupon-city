@@ -31,7 +31,8 @@
             @if(isset($featured_deal) && !is_null($featured_deal->coupon))
             <section class="category-deal-big">
                 <div class="deal-img-big left">
-                    <a href="{{ URL::action('CouponController@getShow',['slug'=>$featured_deal->coupon->slug]) }}"><img src="{{ $featured_deal->coupon->image_one->url() }}"></a>
+                    <a href="{{ URL::action('CouponController@getShow',['slug'=>$featured_deal->coupon->slug]) }}"><img
+                            src="{{ $featured_deal->coupon->image_one->url() }}"></a>
                 </div>
 
                 <div class="deal-details-big right">

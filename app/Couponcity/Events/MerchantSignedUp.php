@@ -9,7 +9,6 @@
     namespace Couponcity\Events;
 
 
-
     use Couponcity\Merchant\Merchant;
 
     class MerchantSignedUp

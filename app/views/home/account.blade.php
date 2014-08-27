@@ -28,18 +28,20 @@
         @else
         <div class="all-my-deals left account-deals" id="my-deals">
             <h2 class="majors">My Deals</h2>
-            @foreach($my_coupons as $coupon)
+            @foreach($my_coupons as $c)
             <div class="my-deals clearfix">
                 <li class="my-deal-img">
-                    <div><img src="{{ $coupon->image_one->url('medium') }}"></div>
+                    <div><img src="{{ $c->coupon->image_one->url('medium') }}"></div>
                 </li>
                 <li>
-                    <h3>{{ $coupon->name }}</h3>
+                    <h3>{{ $c->coupon->name }}</h3>
 
-                    <p>Purchased: {{ $coupon->created_at }}</p>
-                    <a href="" data-text="{{ $coupon->toJson() }}">View Voucher</a>
+                    <p>Purchased: {{ $c->coupon->created_at }}</p>
+
+                    <a href="" data-text="{{ $c->coupon->toJson() }}">View Voucher</a>
                 </li>
-                <li><span>Expires:</span> {{ $coupon->end_date }}</li>
+                <li><span>Expires:</span> {{ $c->coupon->end_date }}</li>
+                <li><span>Coupon Code: </span><strong style="color: red">{{ $c->user_coupon_code }}</strong></li>
             </div>
             @endforeach
         </div>
@@ -68,25 +70,25 @@
 
             <br/>
 
-            <?= Form::model($user,['url'=>action('UserController@postUpdate')]) ?>
-                <li>
-                    <label>Firstname:</label>
-                    <?= Form::text('first_name') ?>
-                </li>
+            <?= Form::model($user, ['url' => action('UserController@postUpdate')]) ?>
+            <li>
+                <label>Firstname:</label>
+                <?= Form::text('first_name') ?>
+            </li>
 
-                <li>
-                    <label>Lastname:</label>
-                    <?= Form::text('last_name') ?>
-                </li>
+            <li>
+                <label>Lastname:</label>
+                <?= Form::text('last_name') ?>
+            </li>
 
-                <li>
-                    <label>Mobile Number:</label>
-                    <?= Form::text('phone') ?>
-                </li>
+            <li>
+                <label>Mobile Number:</label>
+                <?= Form::text('phone') ?>
+            </li>
 
-                <li>
-                    <input type="submit" class="text-button" value="Submit Changes">
-                </li>
+            <li>
+                <input type="submit" class="text-button" value="Submit Changes">
+            </li>
             <?= Form::close() ?>
         </div>
 
@@ -95,26 +97,26 @@
             <h2 class="majors">Change Your Password</h2>
             <br>
 
-            <?= Form::open(['url'=>action('UserController@postChangePassword')]) ?>
+            <?= Form::open(['url' => action('UserController@postChangePassword')]) ?>
 
-                <li>
-                    <label>Old Password:</label>
-                    <input type="password" name="old_password">
-                </li>
+            <li>
+                <label>Old Password:</label>
+                <input type="password" name="old_password">
+            </li>
 
-                <li>
-                    <label>New Password:</label>
-                    <input type="password" name="password">
-                </li>
+            <li>
+                <label>New Password:</label>
+                <input type="password" name="password">
+            </li>
 
-                <li>
-                    <label>Confirm Password:</label>
-                    <input type="password" name="password_confirmation">
-                </li>
+            <li>
+                <label>Confirm Password:</label>
+                <input type="password" name="password_confirmation">
+            </li>
 
-                <li>
-                    <input type="submit" class="text-button" value="Change Password">
-                </li>
+            <li>
+                <input type="submit" class="text-button" value="Change Password">
+            </li>
 
             <?= Form::close() ?>
         </div>
@@ -132,7 +134,9 @@
         <div class="v-center">
             <div class="top">
                 <h2 class="majors" id="name">50% off free Amala and Ewedu</h2>
-                <p id="tag_line">Limit is 1 voucher per person. You may buy additional for your friends. EXPIRES February 2014</p>
+
+                <p id="tag_line">Limit is 1 voucher per person. You may buy additional for your friends. EXPIRES
+                    February 2014</p>
 
                             <span class="barcode">
                                 <img id="image_url" src="img/dummy-code.png">
@@ -142,6 +146,7 @@
             <div class="clearfix">
                 <div class="left">
                     <h4>Redeem at:</h4>
+
                     <p>Eya Basira</p>
                     <li>No 6, Oshodi Road,</li>
                     <li>Under mango tree,</li>

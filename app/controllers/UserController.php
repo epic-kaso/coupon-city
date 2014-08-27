@@ -1,7 +1,6 @@
 <?php
 
     use Couponcity\User\CreateUserCommand;
-    use Couponcity\User\CreateUserException;
     use Couponcity\User\CreateUserFormValidator;
     use Couponcity\User\User;
     use Facebook\FacebookRequest;
@@ -22,7 +21,7 @@
             $this->createUserFormValidator = $createUserFormValidator;
             $this->beforeFilter('csrf', array('on' => 'post'));
 
-            $this->beforeFilter('guest',['except'=>['getLogout','postUpdate','postChangePassword']]);
+            $this->beforeFilter('guest', ['except' => ['getLogout', 'postUpdate', 'postChangePassword']]);
         }
 
 
@@ -43,12 +42,13 @@
             return $this->performLogin();
         }
 
-        public function postUpdate(){
-            $data = Input::only(['first_name','last_name','phone']);
+        public function postUpdate()
+        {
+            $data = Input::only(['first_name', 'last_name', 'phone']);
 
             $user = User::findOrFail(Auth::id())->first();
 
-            if(!$user){
+            if (!$user) {
                 return Redirect::back()->withStatus('Could not save!');
             }
 
@@ -56,9 +56,9 @@
             $user->last_name = $data['last_name'];
             $user->phone = $data['phone'];
 
-            if($user->save()){
+            if ($user->save()) {
                 return Redirect::action('HomeController@getAccount')->withStatus('Saved Successfully!');
-            }else{
+            } else {
                 return Redirect::back()->withStatus('Could not save!');
             }
 
@@ -68,21 +68,23 @@
         {
             $user = User::findOrFail(Auth::id())->first();
 
-            $data = Input::only(['password','password_confirmation','old_password']);
-            $rules = ['password'=>'required|confirmed','old_password'=>'required'];
+            $data = Input::only(['password', 'password_confirmation', 'old_password']);
+            $rules = ['password' => 'required|confirmed', 'old_password' => 'required'];
 
-            $validation = Validator::make($data,$rules);
-            if($validation->fails()){
+            $validation = Validator::make($data, $rules);
+            if ($validation->fails()) {
                 return Redirect::back()->withInput()->withErrors($validation);
-            }else{
-                if(Auth::validate(['email'=>$user->email,'password'=>$data['old_password']])){
+            } else {
+                if (Auth::validate(['email' => $user->email, 'password' => $data['old_password']])) {
                     $user->password = $data['password'];
+
                     return Redirect::back()->withStatus('Password Changed Successfully');
-                }else{
+                } else {
                     return Redirect::back()->withStatus('Old Password Incorrect, Failed to Change');
                 }
             }
         }
+
         public function getSignUp()
         {
 

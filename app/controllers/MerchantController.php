@@ -23,7 +23,7 @@
                 [
                     'except' => ['getIndex', 'getLogin', 'getSignUp', 'postSignUp', 'postLogin', 'getForgotPassword', 'postForgotPassword']
                 ]);
-            $this->beforeFilter('merchant_guest',[
+            $this->beforeFilter('merchant_guest', [
                 'only' => ['getLogin', 'getSignUp', 'postSignUp', 'postLogin', 'getForgotPassword', 'postForgotPassword']
             ]);
         }

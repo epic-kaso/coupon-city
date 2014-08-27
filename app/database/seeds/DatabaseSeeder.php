@@ -12,7 +12,7 @@
         {
             Eloquent::unguard();
 
-             $this->call('CouponCategorySeeder');
+            $this->call('CouponCategorySeeder');
         }
 
     }

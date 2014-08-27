@@ -64,7 +64,8 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="cart-icon"><a href="{{ action('HomeController@getWallet') }}">₦ {{ number_format($user->wallet_balance,2) }}</a></li>
+                    <li class="cart-icon"><a href="{{ action('HomeController@getWallet') }}">₦ {{
+                            number_format($user->wallet_balance,2) }}</a></li>
 
                     @else
 
@@ -87,20 +88,21 @@
             <nav class="mb clearfix">
 
                 @if(isset($categories))
-                    @foreach($categories as $cat)
-                        <li>
-                            <a href="{{ URL::action('CouponListingController@getShow',['slug'=>$cat->slug]) }}">{{ $cat->name }}</a>
+                @foreach($categories as $cat)
+                <li>
+                    <a href="{{ URL::action('CouponListingController@getShow',['slug'=>$cat->slug]) }}">{{ $cat->name
+                        }}</a>
 
-                            <div class="sub-nav">
-                                <ul>
-                                    <li><a href="">Men</a></li>
-                                    <li><a href="">Women</a></li>
-                                    <li><a href="">Children</a></li>
-                                    <li><a href="">Accessories</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                    @endforeach
+                    <div class="sub-nav">
+                        <ul>
+                            <li><a href="">Men</a></li>
+                            <li><a href="">Women</a></li>
+                            <li><a href="">Children</a></li>
+                            <li><a href="">Accessories</a></li>
+                        </ul>
+                    </div>
+                </li>
+                @endforeach
                 @endif
 
             </nav>

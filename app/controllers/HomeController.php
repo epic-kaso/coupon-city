@@ -1,6 +1,7 @@
 <?php
 
 
+    use Couponcity\Coupon\CouponUser;
     use Couponcity\FrontEnd\FrontEnd;
     use Couponcity\User\User;
 
@@ -21,6 +22,7 @@
         {
             $this->data['snippet'] = $this->frontEnd->getLandingPageCouponSnippets();
             $this->data['featured'] = $this->frontEnd->getFeaturedDeals();
+
             return View::make('home.index', $this->data);
         }
 
@@ -46,14 +48,17 @@
 
         public function getAccount()
         {
-            $user = User::findOrFail(Auth::id())->with('coupons')->first();
-            $this->data['my_coupons'] = $user->coupons;
+            $coupons = CouponUser::where('user_id', Auth::id())->with('coupon')->get();
+            $this->data['my_coupons'] = $coupons;
+
             return View::make('home.account', $this->data);
         }
 
-        public function getWallet(){
+        public function getWallet()
+        {
             $user = User::findOrFail(Auth::id())->with('wallet_transactions')->first();
             $this->data['wallet_transactions'] = $user->wallet_transactions;
+
             return View::make('home.wallet', $this->data);
         }
     }

@@ -1,21 +1,22 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kaso
- * Date: 8/24/14
- * Time: 7:47 PM
- */
+    /**
+     * Created by PhpStorm.
+     * User: kaso
+     * Date: 8/24/14
+     * Time: 7:47 PM
+     */
 
-namespace Couponcity\Merchant;
+    namespace Couponcity\Merchant;
 
 
-use Laracasts\Validation\FormValidator;
+    use Laracasts\Validation\FormValidator;
 
-class CreateMerchantFormValidator extends FormValidator {
+    class CreateMerchantFormValidator extends FormValidator
+    {
 
-    protected $rules = [
-        'email'    => 'required|email|unique:merchants',
-        'password' => 'required|min:5|confirmed',
-        'area'     => 'required'
-    ];
-} 
+        protected $rules = [
+            'email'    => 'required|email|unique:merchants',
+            'password' => 'required|min:5|confirmed',
+            'area'     => 'required'
+        ];
+    }
