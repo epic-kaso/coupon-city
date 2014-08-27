@@ -15,15 +15,12 @@
         {
             parent::__construct();
             $this->frontEnd = $frontEnd;
-
-
         }
 
         public function getIndex()
         {
             $this->data['snippet'] = $this->frontEnd->getLandingPageCouponSnippets();
             $this->data['featured'] = $this->frontEnd->getFeaturedDeals();
-
             return View::make('home.index', $this->data);
         }
 
@@ -51,14 +48,12 @@
         {
             $user = User::findOrFail(Auth::id())->with('coupons')->first();
             $this->data['my_coupons'] = $user->coupons;
-
             return View::make('home.account', $this->data);
         }
 
         public function getWallet(){
             $user = User::findOrFail(Auth::id())->with('wallet_transactions')->first();
             $this->data['wallet_transactions'] = $user->wallet_transactions;
-
             return View::make('home.wallet', $this->data);
         }
     }

@@ -78,7 +78,7 @@
 
         public function getAddCoupon()
         {
-            $this->data['categories'] = CouponCategory::all(['id','name']);
+            $this->data['categories'] = CouponCategory::all(['id', 'name']);
 
             return View::make('merchant_dashboard.add-coupon', $this->data);
         }
@@ -103,36 +103,37 @@
             return View::make('merchant_dashboard.deposit', $this->data);
         }
 
-        public function postRedeemCoupon(){
-            $data = ['coupon_code'=>'required'];
+        public function postRedeemCoupon()
+        {
+            $data = ['coupon_code' => 'required'];
             $coupon_code = Input::only(['coupon_code']);
 
-            $validation = Validator::make($coupon_code,$data);
+            $validation = Validator::make($coupon_code, $data);
 
-            if($validation->fails()){
-                if(Request::ajax()){
-                    return Response::json(['error'],403);
-                }else{
+            if ($validation->fails()) {
+                if (Request::ajax()) {
+                    return Response::json(['error'], 403);
+                } else {
                     return Redirect::back(403)->withError('Coupon Code Required or Invalid');
                 }
-            }else{
+            } else {
                 $code = $coupon_code['coupon_code'];
 
-                try{
+                try {
                     $response = $this->redeemCoupon->redeem($code);
-                }catch (InvalidCouponCodeException $ex){
-                    if(Request::ajax()){
-                        return Response::json($ex->getMessage(),403);
-                    }else{
+                } catch (InvalidCouponCodeException $ex) {
+                    if (Request::ajax()) {
+                        return Response::json($ex->getMessage(), 403);
+                    } else {
                         return Redirect::back(403)->withError('Coupon Code Required or Invalid');
                     }
                 }
 
-                $this->execute(LogCouponRedemptionCommand::class,['coupon_id'=>$response->coupon_id,'user_id'=>$response->user_id]);
+                $this->execute(LogCouponRedemptionCommand::class, ['coupon_id' => $response->coupon_id, 'user_id' => $response->user_id]);
 
-                if(Request::ajax()){
+                if (Request::ajax()) {
                     return Response::json($response);
-                }else{
+                } else {
                     return Redirect::back()->withStatus('Coupon Code redeemed Successfully!!');
                 }
             }
