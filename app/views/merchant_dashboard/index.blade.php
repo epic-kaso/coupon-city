@@ -27,21 +27,23 @@
 
                     <div class="wrap-center clearfix">
                         <div class="left sales-guage">
-
+                        <!-- 'sales_today','sales_month','sales_all_time' -->
                             <canvas id="sales-guage"
+                                    data-current-value="{{ $sales_today['redemption_count'] }}"
+                                    data-max-value="{{ $sales_today['sales_count'] }}"
                                     style="width: 400px !important; height: 205px !important;"></canvas>
 
-                            <span class="start left" style="margin-left: 10px;">30 <label>Redeem'd</label></span>
-                            <span style="margin-left: -10px;">40%</span>
-                            <span class="end right">79 <label>Sold</label></span>
+                            <span class="start left" style="margin-left: 10px;">{{ $sales_today['redemption_count'] }} <label>Redeem'd</label></span>
+                            <span style="margin-left: -10px;">{{ percentage($sales_today['redemption_count'],$sales_today['sales_count']) }}</span>
+                            <span class="end right">{{ $sales_today['sales_count'] }} <label>Sold</label></span>
                         </div>
 
                         <div class="left today-sale-numbers">
                             <ul>
-                                <li>423 <span>Views</span></li>
-                                <li>23 <span>Coupons Sold</span></li>
-                                <li>₦230,000 <span>Amount Earned</span></li>
-                                <li>₦2,300 <span>Average Sale</span></li>
+                                <li>{{ $sales_today['view_count'] }} <span>Views</span></li>
+                                <li>{{ $sales_today['sales_count'] }} <span>Coupons Sold</span></li>
+                                <li>₦{{ $sales_today['sales_revenue'] }} <span>Amount Earned</span></li>
+                                <li>₦{{ number_format($sales_today['sales_revenue']/$sales_today['sales_count'],2) }} <span>Average Sale</span></li>
                             </ul>
                         </div>
 
@@ -52,20 +54,11 @@
                     <h4>Top Performing Coupons</h4>
 
                     <div class="wrap-center">
-                        <p><span class="trans-state pending-trans">142</span> <label>Chicken Wings and Egg</label></p>
-
-                        <p><span class="trans-state verified-trans">300</span> <label>Launch date with Diddles:</label>
-                        </p>
-
-                        <p><span class="trans-state verified-trans">300</span> <label>Chicken Wings and Egg</label></p>
-
-                        <p><span class="trans-state pending-trans">120</span> <label>Launch date with Diddles:</label>
-                        </p>
-
-                        <p><span class="trans-state verified-trans">300</span> <label>Launch date with Diddles:</label>
-                        </p>
-
-                        <p><span class="trans-state verified-trans">300</span> <label>Chicken Wings and Egg</label></p>
+                        @if(isset($top_performing) && !empty($top_performing))
+                            @foreach($top_performing as $coupon)
+                        <p><span class="trans-state verified-trans">{{ $coupon->sales->count() }}</span> <label>{{ $coupon->name }}</label></p>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
             </div>
@@ -78,10 +71,10 @@
 
             <div class="coupon-in-numbers m-b">
                 <ul class="clearfix">
-                    <li class="bbb">200 <span>Views</span></li>
-                    <li>20 <span>Coupons Sold</span></li>
-                    <li>₦200,000 <span>Amount Sold</span></li>
-                    <li>₦100 <span>Average Sale</span></li>
+                    <li class="bbb">{{ $sales_month['view_count'] }} <span>Views</span></li>
+                    <li>{{ $sales_month['sales_count'] }} <span>Coupons Sold</span></li>
+                    <li>₦{{ $sales_month['sales_revenue'] }} <span>Amount Sold</span></li>
+                    <li>₦{{ number_format($sales_month['sales_revenue']/$sales_month['sales_count'],2) }} <span>Average Sale</span></li>
                 </ul>
             </div>
 

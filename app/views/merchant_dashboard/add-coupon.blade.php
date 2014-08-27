@@ -62,12 +62,9 @@
             </div>
 
             <div class="clearfix split-input">
-                <div ng-show="coupon_form.old_price.$dirty && !coupon_form.old_price.$pristine" class="invalid">
-                    <span ng-show="coupon_form.old_price.$error.required">You need to specify old price.</span>
-                </div>
 
                 <div class="clearfix split-input left">
-                    <input type="text" placeholder="Price" ng-model="coupon.old_price" class="old_price left"
+                    <input type="text" placeholder="Price" class="old_price left"
                            name="coupon[old_price]">
                     <input type="text" placeholder="Max. Coupons" class="max_coupons right" name="coupon[quantity]">
                 </div>
@@ -111,14 +108,11 @@
 
             <div class="basic-type-pricing clearfix three-input">
                 <input type="text" placeholder="New Price" class="new_price left"
-                       ng-model="coupon.new_price"
                        name="coupon[new_price]"
                     >
                 <input type="text" placeholder="% Discount" class="basic_discount left"
-                       ng-model="coupon.discount"
                        name="coupon[virtual_discount]">
                 <input type="text" placeholder="Actual % Discount" class="actual_discount right"
-                       ng-model="coupon.actual_discount"
                        name="coupon[discount]">
             </div>
 

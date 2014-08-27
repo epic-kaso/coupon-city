@@ -42,6 +42,10 @@
                 $query->where('merchant_id', $merchant_id);
             })->get();
 
-            return ['count' => $sales->count(), 'sales' => $sales->sum('sales_price')];
+            return [
+                'count' => $sales->count(),
+                'sales' => $sales->sum('sales_price'),
+                'average'=>$sales->avg('sales_price')
+            ];
         }
     }

@@ -12,6 +12,7 @@
     use Codesleeve\Stapler\ORM\StaplerableInterface;
     use Couponcity\Events\CouponCreated;
     use Couponcity\Merchant\Merchant;
+    use Illuminate\Database\Schema\Builder;
     use Laracasts\Commander\Events\EventGenerator;
     use Laracasts\Presenter\PresentableTrait;
 
@@ -164,4 +165,21 @@
             return $this->belongsToMany('User');
         }
 
+        public function decreaseQuantity()
+        {
+            $quantity = $this->attributes['quantity'];
+            $this->attributes['quantity'] = $quantity - 1;
+            return $this->save();
+        }
+
+        public static function topPerforming($merchant_id, $limit = 5)
+        {
+            $coupons = Coupon::where('merchant_id',$merchant_id)->with(['sales'=>function($query){
+
+                }])->take($limit)->get(['id','name','coupon_code','slug']);
+
+            return $coupons->sortBy(function($coupons){
+                return $coupons->sales->count();
+            },true);
+        }
     }

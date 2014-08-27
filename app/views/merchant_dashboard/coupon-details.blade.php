@@ -19,11 +19,15 @@
                     <div class="wrap-center clearfix">
                         <div class="left sales-guage">
 
-                            <canvas id="sales-guage"></canvas>
+                            <canvas id="sales-guage"
+                                    data-current-value="{{ $coupon->present()->redemption_all_time }}"
+                                    data-max-value="{{ $coupon->present()->sales_all_time }}">
 
-                            <span class="start left"><label>Redeem'd</label></span>
-                            <span style="margin-left: -21px;">40%</span>
-                            <span class="end right">79 <label>Sold</label></span>
+                                    </canvas>
+
+                            <span class="start left">{{ $coupon->present()->redemption_all_time }}<label>Redeem'd</label></span>
+                            <span style="margin-left: -21px;">{{ $coupon->present()->redemption_all_time_percentage }}</span>
+                            <span class="end right">{{ $coupon->present()->sales_all_time }} <label>Sold</label></span>
                         </div>
 
                         <div class="left today-sale-numbers">
@@ -31,7 +35,7 @@
                                 <li>{{ $coupon->present()->views_today }}<span>Views</span></li>
                                 <li>{{ $coupon->present()->sales_today }} <span>Coupons Sold</span></li>
                                 <li>₦{{ $coupon->present()->earnings_today }} <span>Amount Earned</span></li>
-                                <li>₦2,300 <span>Average Sale</span></li>
+                                <li>₦{{ $coupon->present()->average_sales_today }} <span>Average Sale</span></li>
                             </ul>
                         </div>
 
@@ -42,13 +46,13 @@
                     <h4>At a Glance</h4>
 
                     <div class="wrap-center">
-                        <p><label>Deal status:</label>{{ $coupon->present()->status }}</p>
+                        <p><label>Deal status: </label>{{ $coupon->present()->status }}</p>
 
-                        <p><label>Sales cap:</label> {{ $coupon->quantity }}</p>
+                        <p><label>Sales cap: </label> {{ $coupon->quantity }}</p>
 
-                        <p><label>Launch date:</label> Friday 2 July, 2014</p>
+                        <p><label>Launch date:</label> {{ relative_time($coupon->start_date) }}</p>
 
-                        <p><label>End date:</label> Thursday 11 July, 2014</p>
+                        <p><label>End date:</label> {{ relative_time($coupon->end_date) }}</p>
 
                         <p><label>Market:</label> {{ $coupon->location }}</p>
                     </div>
@@ -65,8 +69,8 @@
                 <ul class="clearfix">
                     <li class="bbb">{{ $coupon->present()->views_month }} <span>Views</span></li>
                     <li>{{ $coupon->present()->sales_month }} <span>Coupons Sold</span></li>
-                    <li>₦200,000 <span>Amount Sold</span></li>
-                    <li>₦100 <span>Average Sale</span></li>
+                    <li>₦{{ $coupon->present()->earnings_month }} <span>Amount Sold</span></li>
+                    <li>₦{{ $coupon->present()->average_sales_month }} <span>Average Sale</span></li>
                 </ul>
             </div>
 

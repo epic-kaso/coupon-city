@@ -64,7 +64,7 @@ class CouponUser extends \Eloquent
     {
         $coupon = CouponUser::where('user_coupon_code', $coupon_code)->first();
 
-        if (is_null($coupon)) {
+        if (is_null($coupon) || $coupon->has_redeemed) {
             throw new InvalidCouponCodeException("Couponcode is invalid");
         }
 

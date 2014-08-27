@@ -39,7 +39,17 @@
 
         public function getIndex()
         {
-            return View::make('merchant_dashboard.index', $this->data);
+            $merchant_id = Merchant::getCurrentMerchant()->id;
+            $sales_today = Merchant::totalCouponSalesToday($merchant_id);
+            $sales_month = Merchant::totalCouponSalesMonth($merchant_id);
+            $sales_all_time = Merchant::totalCouponSales($merchant_id);
+
+            $top_performing = Coupon::topPerforming($merchant_id);
+            //dd($top_performing);
+            //dd(compact('sales_today','sales_month','sales_all_time'));
+
+            return View::make('merchant_dashboard.index', $this->data)
+                ->with(compact('sales_today','sales_month','sales_all_time','top_performing'));
         }
 
         public function getCoupons()
@@ -123,13 +133,15 @@
                     $response = $this->redeemCoupon->redeem($code);
                 } catch (InvalidCouponCodeException $ex) {
                     if (Request::ajax()) {
-                        return Response::json($ex->getMessage(), 403);
+                        return Response::json($ex->getMessage(), 401);
                     } else {
                         return Redirect::back(403)->withError('Coupon Code Required or Invalid');
                     }
                 }
 
-                $this->execute(LogCouponRedemptionCommand::class, ['coupon_id' => $response->coupon_id, 'user_id' => $response->user_id]);
+                $this->execute(LogCouponRedemptionCommand::class,
+                    ['coupon' => Coupon::findOrFail($response->coupon_id), 'user_id' => $response->user_id]
+                );
 
                 if (Request::ajax()) {
                     return Response::json($response);

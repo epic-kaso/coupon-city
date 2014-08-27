@@ -371,6 +371,7 @@ $(function () {
         var _max = $('.max_coupons');
         var _newp = $('.new_price');
         var _basic = $('.basic_discount');
+        var _actual = $('.actual_discount');
 
         var old_price = parseInt(_old.val() || 0);
         var max = parseInt(_max.val() || 0);
@@ -391,7 +392,10 @@ $(function () {
 
             var diff = Math.round(((old_price - _input) * 100) / old_price);
 
+            var actual = Math.round(diff - (diff * 0.2));
+
             $(_basic).val(diff);
+            $(_actual).val(actual);
         });
 
         $(_basic).bind("change keyup input", function () {
@@ -400,8 +404,20 @@ $(function () {
 
             var diff = Math.round(old_price - ((_input / 100) * old_price));
 
+            var actual = Math.round(_input - (_input * 0.2));
+
             $(_newp).val(diff);
+            $(_actual).val(actual);
         });
+
+//        $(_actual).bind("change keyup input", function () {
+//            var _input = parseInt($(this).val() || 0);
+//            var old_price = parseInt(_old.val() || 0);
+//
+//            var diff = Math.round(old_price - ((_input / 100) * old_price));
+//
+//            $(_newp).val(diff);
+//        });
     }
 
     pricing(); //Call function
@@ -424,10 +440,11 @@ $(function () {
     };
 
     var target = document.getElementById('sales-guage'); // your canvas element
+
     var gauge = new Gauge(target);
-    var reach = 1000;
+    var reach = $(target).data('current-value') || 10;
     gauge.setOptions(opts); // create sexy gauge!
-    gauge.maxValue = 3000; // set max gauge value
+    gauge.maxValue = $(target).data('max-value') || 100; // set max gauge value
     gauge.animationSpeed = 40; // set animation speed (32 is default value)
     gauge.set(reach);
 
@@ -460,7 +477,11 @@ $(function () {
             },
             error: function($response,$xhr,$data){
                 //console.log($response);
-                submit.prop('value',old_value).removeClass('disabled');
+                if(old_value){
+                    submit.prop('value',old_value).removeClass('disabled');
+                }else{
+                    submit.prop('value',submit.data('action')).removeClass('disabled');
+                }
                 $('.flash').html($response.responseText).fadeIn(300).delay(3500).fadeOut(300);
             }
         });

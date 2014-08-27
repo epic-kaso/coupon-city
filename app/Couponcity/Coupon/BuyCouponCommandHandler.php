@@ -52,6 +52,7 @@ class BuyCouponCommandHandler implements CommandHandler
 
     private function debit_user_account($user, $coupon)
     {
+        $coupon->decreaseQuantity();
         return $user->debitWallet($coupon->present()->current_price);
 
     }

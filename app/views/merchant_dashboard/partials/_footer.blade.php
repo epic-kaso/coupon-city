@@ -8,7 +8,7 @@
 <script src="<?= URL::asset('js/plugin.min.js') ?>"></script>
 <script src="<?= URL::asset('js/countdown.min.js') ?>"></script>
 <script src="<?= URL::asset('js/main.js') ?>"></script>
-<script type="text/javascript" src="https://www.google.com/js/api"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
 <script type="text/javascript">
 

@@ -117,6 +117,10 @@
             return $views->count();
         }
 
+        public function sales_all_time(){
+            return $this->sales->count();
+        }
+
         public function redemption_today()
         {
             $today = Carbon::today();
@@ -144,6 +148,16 @@
             return $views->count();
         }
 
+        public function redemption_all_time(){
+            return  $this->redemptions->count();
+        }
+
+        public function redemption_all_time_percentage(){
+            $value =  number_format(($this->redemption_all_time()/$this->sales_all_time() * 100),2);
+            return "{$value}%";
+
+        }
+
         public function earnings_today()
         {
             $today = Carbon::today();
@@ -162,6 +176,64 @@
 
             return $sum;
 
+        }
+
+        public function earnings_month()
+        {
+            $today = Carbon::today();
+            $monthStart = $today->startOfMonth()->toDateTimeString();
+            $monthEnd = $today->endOfMonth()->toDateTimeString();
+
+            $views = $this->sales->filter(
+                function ($entry) use ($monthStart, $monthEnd) {
+                    return $entry->created_at >= $monthStart && $entry->created_at <= $monthEnd;
+                });
+
+            $params = $views->toArray();
+            $sum = 0;
+            foreach ($params as $p) {
+                $sum += $p['sales_price'];
+            }
+
+            return $sum;
+
+        }
+
+
+        public function average_sales_today(){
+            $today = Carbon::today();
+            $tomorrow = $today->tomorrow();
+
+            $views = $this->sales->filter(
+                function ($entry) use ($today, $tomorrow) {
+                    return $entry->created_at >= $today && $entry->created_at < $tomorrow;
+                });
+
+            $params = $views->toArray();
+            $sum = 0;
+            foreach ($params as $p) {
+                $sum += $p['sales_price'];
+            }
+
+            return $sum/count($params);
+        }
+
+        public function average_sales_month(){
+            $today = Carbon::today();
+            $monthStart = $today->startOfMonth()->toDateTimeString();
+            $monthEnd = $today->endOfMonth()->toDateTimeString();
+
+            $views = $this->sales->filter(
+                function ($entry) use ($monthStart, $monthEnd) {
+                    return $entry->created_at >= $monthStart && $entry->created_at <= $monthEnd;
+                });
+
+            $params = $views->toArray();
+            $sum = 0;
+            foreach ($params as $p) {
+                $sum += $p['sales_price'];
+            }
+            return $sum/count($params);
         }
 
         private function figure_out_price()

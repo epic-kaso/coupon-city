@@ -8,6 +8,11 @@
 
     use Carbon\Carbon;
 
+    function percentage($niddle,$haystack){
+        $per = number_format($niddle/$haystack * 100,2);
+
+        return "{$per}%";
+    }
     function relative_date($datetime)
     {
         $c = Carbon::parse($datetime);
