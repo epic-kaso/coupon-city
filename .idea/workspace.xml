@@ -8,14 +8,7 @@
   </component>
   <component name="ChangeListManager">
     <list id="017275cb-a1d7-457a-9444-ce130e3b7cff" name="Default" comment="" />
-    <list default="true" id="ad1c1feb-a81e-48a2-a9e3-1acba1df3fda" name="Main" comment="Implemented Search feature&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Couponcity/Events/CouponPriceChanged.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Couponcity/EventListeners/CouponPriceChangedListener.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Couponcity/Coupon/UserCouponRefundHandler.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/emails/coupon-refund.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Couponcity/Coupon/CouponPresenter.php" afterPath="$PROJECT_DIR$/app/Couponcity/Coupon/CouponPresenter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Couponcity/Coupon/CouponSale.php" afterPath="$PROJECT_DIR$/app/Couponcity/Coupon/CouponSale.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/couponcity.php" afterPath="$PROJECT_DIR$/app/config/couponcity.php" />
+    <list default="true" id="ad1c1feb-a81e-48a2-a9e3-1acba1df3fda" name="Main" comment="User Refund Feature&#10;">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Couponcity.iws" />
@@ -39,10 +32,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CouponPresenter.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Couponcity/Coupon/CouponPresenter.php">
+      <file leaf-file-name="mail.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/config/mail.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="286" column="5" selection-start="9089" selection-end="9089" vertical-scroll-proportion="0.78916544" vertical-offset="6133" max-vertical-offset="6816">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3120">
               <folding />
             </state>
           </provider>
@@ -305,51 +298,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Couponcity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Couponcity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="coupon-city" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Couponcity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="EventListeners" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Couponcity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="coupon-city" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Couponcity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Coupon" />
+              <option name="myItemId" value="config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -491,7 +440,11 @@
       <created>1409309809844</created>
       <updated>1409309809844</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="User Refund Feature&#10;">
+      <created>1409315100276</created>
+      <updated>1409315100276</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -541,18 +494,14 @@
     <MESSAGE value="Merchant dashboard optimisations" />
     <MESSAGE value="bug fixes&#10;" />
     <MESSAGE value="Implemented Search feature&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented Search feature&#10;" />
+    <MESSAGE value="User Refund Feature&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="User Refund Feature&#10;" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/merchant_dashboard/coupon-details.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="0" selection-start="467" selection-end="467" vertical-scroll-proportion="0.46567163" vertical-offset="0" max-vertical-offset="4584" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/home/partials/_footer.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="186" column="6" selection-start="6439" selection-end="6439" vertical-scroll-proportion="0.2119403" vertical-offset="4322" max-vertical-offset="4992" />
@@ -853,6 +802,13 @@
     <entry file="file://$PROJECT_DIR$/app/Couponcity/Coupon/CouponPresenter.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="286" column="5" selection-start="9089" selection-end="9089" vertical-scroll-proportion="0.78916544" vertical-offset="6133" max-vertical-offset="6816">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/mail.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3120">
           <folding />
         </state>
       </provider>
