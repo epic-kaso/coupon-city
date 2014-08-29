@@ -1,15 +1,5 @@
 @extends('layouts.home',['categories'=>$categories])
 @section('content')
-
-<div class="inner-pad">
-
-    <div class="breadcrumb mb">
-        <a href="" class="bread-home">Home</a>/
-        <a href="">Food &amp; Drinks</a>/
-        &nbsp;&nbsp;Ladies and Women Fashion
-    </div>
-
-
     <div class="clearfix featured-category-deal mb">
 
 
@@ -31,7 +21,7 @@
             @if(isset($featured_deal) && !is_null($featured_deal->coupon))
             <section class="category-deal-big">
                 <div class="deal-img-big left">
-                    <a href="{{ URL::action('CouponController@getShow',['slug'=>$featured_deal->coupon->slug]) }}"><img
+                    <a href="{{ URL::action('CouponController@getIndex',['slug'=>$featured_deal->coupon->slug]) }}"><img
                             src="{{ $featured_deal->coupon->image_one->url() }}"></a>
                 </div>
 
@@ -71,7 +61,7 @@
             @foreach($current_category->coupons as $coupon)
 
             <li>
-                <a href="{{ URL::action('CouponController@getShow',['slug'=>$coupon->slug]) }}">
+                <a href="{{ URL::action('CouponController@getIndex',['slug'=>$coupon->slug]) }}">
                     <div class="deal-img"><img src="{{ $coupon->image_one->url('medium') }}"></div>
 
                     <div class="deal-details">
@@ -108,8 +98,6 @@
             <a href="">Last</a>
         </div>
     </div>
-
-</div>
 
 </div>
 @stop

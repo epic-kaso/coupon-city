@@ -18,7 +18,9 @@
         "creitive/breadcrumbs": "dev-master"
     },
     "require-dev": {
-        "way/generators": "2.*"
+        "way/generators": "2.*",
+        "mockery/mockery": "0.9.*",
+        "codeception/codeception": "*"
     },
     "autoload": {
         "classmap": [

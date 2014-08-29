@@ -249,17 +249,28 @@
             return 0.2 * $this->current_price();
         }
 
-        public function current_price()
+        public function current_price($format = true)
         {
             if (!$this->is_advanced_pricing) {
-                return number_format($this->new_price,0);
+                if($format){
+                    return number_format($this->new_price,0);
+                }else{
+                    return $this->new_price;
+                }
             } else {
                 $currentPrice = $this->figure_out_price();
                 $this->set_new_price($currentPrice);
-                return number_format($currentPrice,0);
+                if($format){
+                    return number_format($currentPrice,0);
+                }else{
+                    return $currentPrice;
+                }
             }
         }
 
+        public function savings(){
+            return number_format(($this->old_price - $this->current_price(false)),0);
+        }
         private function figure_out_price()
         {
             $sales_count = CouponSale::where('coupon_id', $this->id)->count();

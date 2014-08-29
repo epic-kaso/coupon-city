@@ -110,3 +110,5 @@
         </div>
         <!--End of header-->
         @include('partials._infos')
+
+        {{ BreadCrumbs::render() }}

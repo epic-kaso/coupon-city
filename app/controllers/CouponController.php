@@ -17,23 +17,11 @@
 
         public function __construct(CouponFormValidator $couponFormValidator)
         {
+            Breadcrumbs::addCrumb('coupon', 'coupon');
             $this->couponFormValidator = $couponFormValidator;
             parent::__construct();
             $this->beforeFilter('auth', ['only' => ['postGrabCoupon']]);
         }
-
-
-        /**
-         * Display a listing of the resource.
-         * GET /coupon
-         *
-         * @return Response
-         */
-        public function getIndex()
-        {
-            //
-        }
-
         /**
          * Store a newly created resource in storage.
          * POST /coupon
@@ -50,7 +38,7 @@
         }
 
 
-        public function getShow($slug = NULL)
+        public function getIndex($slug = NULL)
         {
 
 

@@ -9,6 +9,22 @@
   <component name="ChangeListManager">
     <list id="017275cb-a1d7-457a-9444-ce130e3b7cff" name="Default" comment="" />
     <list default="true" id="ad1c1feb-a81e-48a2-a9e3-1acba1df3fda" name="Main" comment="User Refund Feature&#10;">
+      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\app\views\home\cart.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\app\views\home\index.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\app\views\home\product-tm.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\xampp\htdocs\coupon-city\app\views\home\static.html" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/CouponController.php" afterPath="$PROJECT_DIR$/app/controllers/CouponController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/CouponListingController.php" afterPath="$PROJECT_DIR$/app/controllers/CouponListingController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Couponcity/Coupon/CouponPresenter.php" afterPath="$PROJECT_DIR$/app/Couponcity/Coupon/CouponPresenter.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/UserController.php" afterPath="$PROJECT_DIR$/app/controllers/UserController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/home/partials/_header.blade.php" afterPath="$PROJECT_DIR$/app/views/home/partials/_header.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/home/category_list.blade.php" afterPath="$PROJECT_DIR$/app/views/home/category_list.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/home.blade.php" afterPath="$PROJECT_DIR$/app/views/layouts/home.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/home/index.blade.php" afterPath="$PROJECT_DIR$/app/views/home/index.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/home/product.blade.php" afterPath="$PROJECT_DIR$/app/views/home/product.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes.php" afterPath="$PROJECT_DIR$/app/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/home/search.blade.php" afterPath="$PROJECT_DIR$/app/views/home/search.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Couponcity.iws" />
@@ -32,10 +48,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="mail.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/config/mail.php">
+      <file leaf-file-name="wallet.blade.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/home/wallet.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3120">
+            <state line="11" column="3" selection-start="438" selection-end="438" vertical-scroll-proportion="0.39402986" vertical-offset="0" max-vertical-offset="2448">
               <folding />
             </state>
           </provider>
@@ -59,10 +75,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/Couponcity/Coupon/UserOwnsCouponException.php" />
-        <option value="$PROJECT_DIR$/app/Couponcity/Events/UserCouponCreated.php" />
-        <option value="$PROJECT_DIR$/app/Couponcity/Coupon/InvalidCouponCodeException.php" />
-        <option value="$PROJECT_DIR$/app/views/partials/_infos.blade.php" />
         <option value="$PROJECT_DIR$/app/Couponcity/Coupon/RedeemCoupon.php" />
         <option value="$PROJECT_DIR$/app/Couponcity/EventListeners/CouponActivityLogger.php" />
         <option value="$PROJECT_DIR$/app/Couponcity/Coupon/LogCouponSaleCommandHandler.php" />
@@ -83,13 +95,9 @@
         <option value="$PROJECT_DIR$/app/views/merchant_dashboard/index.blade.php" />
         <option value="$PROJECT_DIR$/app/views/merchant_dashboard/coupon-details.blade.php" />
         <option value="$PROJECT_DIR$/app/views/merchant_dashboard/partials/_footer.blade.php" />
-        <option value="$PROJECT_DIR$/app/views/home/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Couponcity/User/UserPresenter.php" />
-        <option value="$PROJECT_DIR$/app/controllers/CouponController.php" />
-        <option value="$PROJECT_DIR$/app/views/home/product.blade.php" />
         <option value="$PROJECT_DIR$/app/views/home/account.blade.php" />
         <option value="$PROJECT_DIR$/app/models/CouponSubCategory.php" />
-        <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/app/Couponcity/Coupon/CouponUser.php" />
         <option value="$PROJECT_DIR$/app/Couponcity/Merchant/Merchant.php" />
         <option value="$PROJECT_DIR$/app/Couponcity/Merchant/MerchantPresenter.php" />
@@ -99,10 +107,7 @@
         <option value="$PROJECT_DIR$/app/tests/Couponcity/Coupon/CouponTest.php" />
         <option value="$PROJECT_DIR$/gulpfile.js" />
         <option value="$PROJECT_DIR$/app/Couponcity/Coupon/Coupon.php" />
-        <option value="$PROJECT_DIR$/app/views/home/search.blade.php" />
         <option value="$PROJECT_DIR$/app/controllers/HomeController.php" />
-        <option value="$PROJECT_DIR$/app/views/home/partials/_header.blade.php" />
-        <option value="$PROJECT_DIR$/app/routes.php" />
         <option value="$PROJECT_DIR$/app/Couponcity/Events/CouponPriceChanged.php" />
         <option value="$PROJECT_DIR$/app/Couponcity/Coupon/CouponSale.php" />
         <option value="$PROJECT_DIR$/app/views/emails/coupon-refund.blade.php" />
@@ -110,6 +115,17 @@
         <option value="$PROJECT_DIR$/app/Couponcity/EventListeners/CouponPriceChangedListener.php" />
         <option value="$PROJECT_DIR$/app/config/couponcity.php" />
         <option value="$PROJECT_DIR$/app/Couponcity/Coupon/CouponPresenter.php" />
+        <option value="$PROJECT_DIR$/app/controllers/CouponListingController.php" />
+        <option value="$PROJECT_DIR$/app/controllers/UserController.php" />
+        <option value="$PROJECT_DIR$/app/views/home/partials/_header.blade.php" />
+        <option value="$PROJECT_DIR$/app/controllers/CouponController.php" />
+        <option value="$PROJECT_DIR$/app/views/home/index.blade.php" />
+        <option value="$PROJECT_DIR$/app/routes.php" />
+        <option value="$PROJECT_DIR$/app/views/home/product.blade.php" />
+        <option value="$PROJECT_DIR$/app/views/layouts/home.blade.php" />
+        <option value="$PROJECT_DIR$/app/views/home/category_list.blade.php" />
+        <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/app/views/home/search.blade.php" />
       </list>
     </option>
   </component>
@@ -214,7 +230,29 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="emails" />
+              <option name="myItemId" value="layouts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Couponcity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="coupon-city" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="home" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -298,7 +336,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
+              <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -444,7 +482,11 @@
       <created>1409315100276</created>
       <updated>1409315100276</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="User Refund Feature&#10;">
+      <created>1409315160345</created>
+      <updated>1409315160345</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -463,7 +505,7 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25622255" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25622255" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25622255" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -502,56 +544,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/home/partials/_footer.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="186" column="6" selection-start="6439" selection-end="6439" vertical-scroll-proportion="0.2119403" vertical-offset="4322" max-vertical-offset="4992" />
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/EcmaScript.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="195" column="15" selection-start="3211" selection-end="3211" vertical-scroll-proportion="-6.535871" vertical-offset="9144" max-vertical-offset="22488" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/merchant_dashboard/partials/_footer.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="55" selection-start="731" selection-end="731" vertical-scroll-proportion="0.31625184" vertical-offset="0" max-vertical-offset="2448" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Couponcity/Coupon/BuyCouponCommand.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="6" selection-start="42" selection-end="42" vertical-scroll-proportion="0.07027818" vertical-offset="0" max-vertical-offset="683" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Couponcity/Coupon/BuyCouponCommandHandler.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="31" selection-start="1194" selection-end="1194" vertical-scroll-proportion="0.47291362" vertical-offset="805" max-vertical-offset="1488" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/home/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="21" selection-start="1015" selection-end="1015" vertical-scroll-proportion="0.28111273" vertical-offset="504" max-vertical-offset="2664" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Couponcity/User/UserPresenter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="50" selection-start="316" selection-end="316" vertical-scroll-proportion="0.56222546" vertical-offset="0" max-vertical-offset="683" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/home/product.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="65" selection-start="2059" selection-end="2059" vertical-scroll-proportion="0.33235726" vertical-offset="949" max-vertical-offset="4752" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/home/account.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="76" selection-start="1198" selection-end="1210" vertical-scroll-proportion="0.56222546" vertical-offset="456" max-vertical-offset="4584" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/CouponCategory.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="153" selection-end="153" vertical-scroll-proportion="0.24597365" vertical-offset="0" max-vertical-offset="696" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/database/migrations/2014_08_27_155223_create_subcategories_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="24" selection-start="246" selection-end="259" vertical-scroll-proportion="0.24597365" vertical-offset="144" max-vertical-offset="984" />
@@ -560,11 +552,6 @@
     <entry file="file://$PROJECT_DIR$/app/models/CouponSubCategory.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="1" selection-start="119" selection-end="119" vertical-scroll-proportion="0.17569546" vertical-offset="0" max-vertical-offset="683" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/UserController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="5" selection-start="289" selection-end="289" vertical-scroll-proportion="0.17569546" vertical-offset="0" max-vertical-offset="5160" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Couponcity/Coupon/CouponFormValidator.php">
@@ -599,16 +586,6 @@
         <state line="15" column="12" selection-start="427" selection-end="427" vertical-scroll-proportion="0.16705337" vertical-offset="240" max-vertical-offset="3960" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/CouponListingController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="12" selection-start="1445" selection-end="1445" vertical-scroll-proportion="0.0" vertical-offset="1368" max-vertical-offset="2544" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/CouponController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="133" column="12" selection-start="3518" selection-end="3518" vertical-scroll-proportion="0.22041763" vertical-offset="2905" max-vertical-offset="3336" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/MerchantDashboardController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="143" column="6" selection-start="4685" selection-end="4685" vertical-scroll-proportion="0.4283513" vertical-offset="3034" max-vertical-offset="3696" />
@@ -619,19 +596,9 @@
         <state line="120" column="4" selection-start="5041" selection-end="5041" vertical-scroll-proportion="0.41993958" vertical-offset="2602" max-vertical-offset="4992" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/BaseController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="28" selection-start="304" selection-end="304" vertical-scroll-proportion="0.51771957" vertical-offset="0" max-vertical-offset="1224" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/jquery-ujs.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1" column="0" selection-start="26" selection-end="26" vertical-scroll-proportion="0.035820894" vertical-offset="0" max-vertical-offset="10848" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="10" selection-start="1230" selection-end="1230" vertical-scroll-proportion="1.1405563" vertical-offset="253" max-vertical-offset="1512" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
@@ -660,50 +627,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/home/static.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="10368">
-          <folding>
-            <marker date="1409137000435" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1409137000435" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/home/category_list.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="0" selection-start="0" selection-end="4060" vertical-scroll-proportion="0.50149256" vertical-offset="0" max-vertical-offset="2904">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/home/search.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="21" selection-start="95" selection-end="95" vertical-scroll-proportion="0.105417274" vertical-offset="0" max-vertical-offset="1752">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/HomeController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="69" column="29" selection-start="1927" selection-end="1927" vertical-scroll-proportion="0.61346996" vertical-offset="1237" max-vertical-offset="1992">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/home/partials/_header.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="97" column="20" selection-start="3757" selection-end="3757" vertical-scroll-proportion="3.4746268" vertical-offset="0" max-vertical-offset="2808">
-          <folding>
-            <marker date="1409308995947" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1409308995947" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="28" selection-start="514" selection-end="514" vertical-scroll-proportion="0.4919473" vertical-offset="0" max-vertical-offset="683">
           <folding />
         </state>
       </provider>
@@ -799,16 +725,152 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Couponcity/Coupon/CouponPresenter.php">
+    <entry file="file://$PROJECT_DIR$/app/config/mail.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="286" column="5" selection-start="9089" selection-end="9089" vertical-scroll-proportion="0.78916544" vertical-offset="6133" max-vertical-offset="6816">
+        <state line="15" column="10" selection-start="583" selection-end="583" vertical-scroll-proportion="0.5270864" vertical-offset="0" max-vertical-offset="3120">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/mail.php">
+    <entry file="file://$PROJECT_DIR$/app/Couponcity/Coupon/CouponPresenter.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3120">
+        <state line="268" column="9" selection-start="8436" selection-end="8436" vertical-scroll-proportion="4.1625185" vertical-offset="3397" max-vertical-offset="7080">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/BaseController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="17" selection-start="293" selection-end="293" vertical-scroll-proportion="0.50149256" vertical-offset="0" max-vertical-offset="1224">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/CouponListingController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="58" selection-start="174" selection-end="220" vertical-scroll-proportion="0.28111273" vertical-offset="0" max-vertical-offset="2640">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/creitive/breadcrumbs/src/Creitive/Breadcrumbs/Breadcrumbs.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="448" column="0" selection-start="10337" selection-end="10337" vertical-scroll-proportion="0.35820895" vertical-offset="10512" max-vertical-offset="11256">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/UserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="47" selection-start="589" selection-end="589" vertical-scroll-proportion="0.35139093" vertical-offset="120" max-vertical-offset="5184">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/home/partials/_header.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="113" column="35" selection-start="4243" selection-end="4243" vertical-scroll-proportion="4.047761" vertical-offset="0" max-vertical-offset="2856">
+          <folding>
+            <marker date="1409316221481" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1409316221481" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/CouponController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="5" selection-start="473" selection-end="473" vertical-scroll-proportion="0.17910448" vertical-offset="0" max-vertical-offset="3048">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="49" selection-start="480" selection-end="480" vertical-scroll-proportion="0.4216691" vertical-offset="0" max-vertical-offset="683">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/home.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="17" selection-start="325" selection-end="325" vertical-scroll-proportion="0.28111273" vertical-offset="0" max-vertical-offset="683">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/home/about_us.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="816">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/home/account.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="76" selection-start="1198" selection-end="1210" vertical-scroll-proportion="-4.4816985" vertical-offset="3901" max-vertical-offset="4584">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/home/category_list.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="101" column="6" selection-start="3841" selection-end="3841" vertical-scroll-proportion="3.6179104" vertical-offset="0" max-vertical-offset="2616">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/home/contact.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1872">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/home/help_faq.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="816">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/home/how_it_works.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="840">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/home/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="50" selection-start="303" selection-end="303" vertical-scroll-proportion="0.25074628" vertical-offset="0" max-vertical-offset="2664">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="1" selection-start="538" selection-end="538" vertical-scroll-proportion="0.40263543" vertical-offset="109" max-vertical-offset="1560">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/home/product.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="179" column="2" selection-start="6983" selection-end="6983" vertical-scroll-proportion="0.74925375" vertical-offset="3794" max-vertical-offset="4464">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/home/search.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="53" column="6" selection-start="1886" selection-end="1886" vertical-scroll-proportion="0.71888727" vertical-offset="781" max-vertical-offset="1464">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/home/wallet.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="3" selection-start="438" selection-end="438" vertical-scroll-proportion="0.39402986" vertical-offset="0" max-vertical-offset="2448">
           <folding />
         </state>
       </provider>

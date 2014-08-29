@@ -9,6 +9,7 @@
 
     Route::controller('merchant-dashboard', 'MerchantDashboardController');
     Route::controller('forgot-password', 'RemindersController');
+    Route::get('coupon/{slug}','CouponController@getIndex');
     Route::controller('coupon', 'CouponController');
     Route::controller('category', 'CouponListingController');
 

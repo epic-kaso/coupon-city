@@ -25,7 +25,7 @@
                         <h3>{{ $item->name }}</h3>
 
                         <p>{{ $item->tag_line }}</p>
-                        <a href="{{ URL::action('CouponController@getShow',['slug'=>$item->slug]) }}">See Deal</a>
+                        <a href="{{ URL::action('CouponController@getIndex',['slug'=>$item->slug]) }}">See Deal</a>
                     </div>
                 </li>
                 @endforeach
@@ -38,7 +38,7 @@
                 @if(!empty($featured))
                 @foreach($featured as $item)
                 <li>
-                    <a href="{{ URL::action('CouponController@getShow',['slug'=>$item->slug]) }}"
+                    <a href="{{ URL::action('CouponController@getIndex',['slug'=>$item->slug]) }}"
                        title="{{ $item->name }}"><img src="{{ $item->image_one->url('medium') }}"></a>
                 </li>
                 @endforeach
@@ -61,7 +61,7 @@
         <ul class="clearfix">
             @foreach($section->coupons as $coupon)
             <li>
-                <a href="{{ URL::action('CouponController@getShow',['slug'=>$item->slug]) }}">
+                <a href="{{ URL::action('CouponController@getIndex',['slug'=>$item->slug]) }}">
                     <div class="deal-img"><img src="{{ $coupon->image_one->url('medium') }}"></div>
 
                     <div class="deal-details">

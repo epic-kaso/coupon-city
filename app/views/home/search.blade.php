@@ -1,15 +1,5 @@
 @extends('layouts.home',['categories'=>$categories])
 @section('content')
-
-<div class="inner-pad">
-
-    <div class="breadcrumb mb">
-        <a href="" class="bread-home">Home</a>/
-        <a href="">Food &amp; Drinks</a>/
-        &nbsp;&nbsp;Ladies and Women Fashion
-    </div>
-
-
     <div class="clearfix mb">
         <h2>Search Result for: {{ $search_phrase }}</h2>
     </div>
@@ -22,7 +12,7 @@
             @foreach($search_result as $coupon)
 
             <li>
-                <a href="{{ URL::action('CouponController@getShow',['slug'=>$coupon->slug]) }}">
+                <a href="{{ URL::action('CouponController@getIndex',['slug'=>$coupon->slug]) }}">
                     <div class="deal-img"><img src="{{ $coupon->image_one->url('medium') }}"></div>
 
                     <div class="deal-details">
@@ -60,8 +50,6 @@
             {{ $search_result->links() }}
         </div>
     </div>
-
-</div>
 
 </div>
 @stop

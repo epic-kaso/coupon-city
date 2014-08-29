@@ -1,15 +1,5 @@
 @extends('layouts.home',['categories'=>$categories])
 @section('content')
-
-<div class="inner-pad clearfix">
-    <div class="breadcrumb mb">
-        <a href="" class="bread-home">Home</a>/
-        <a href="">Categories</a>/
-        <a href="">Food &amp; Drinks</a>/
-        &nbsp;&nbsp;Ladies and Women Fashion
-    </div>
-
-
     <section class="deal clearfix mb">
         <div class="mb">
             <h1 class="majors">{{ $coupon->name }}</h1>
@@ -64,7 +54,7 @@
                 <ul class="price-discount-save clearfix">
                     <li>Value <span>₦{{ $coupon->present()->oldPrice }}</span></li>
                     <li>Discount <span>{{ $coupon->discount }}%<span></li>
-                    <li>Savings <span>₦{{ $coupon->old_price - $coupon->present()->current_price }}</span></li>
+                    <li>Savings <span>₦{{ $coupon->present()->savings }}</span></li>
                 </ul>
 
                 <a href="" class="gift-button"><span></span>Gift this deal</a>
@@ -161,7 +151,7 @@
         <ul class="clearfix">
             @foreach($related_deals as $deal)
             <li>
-                <a href="{{ URL::action('CouponController@getShow',['slug'=>$deal->slug]) }}">
+                <a href="{{ URL::action('CouponController@getIndex',['slug'=>$deal->slug]) }}">
                     <div class="deal-img"><img src="{{ $deal->image_one->url('thumb') }}"></div>
 
                     <div class="deal-details">
@@ -186,8 +176,6 @@
         @endif
     </div>
     <!--End related deals-->
-
-</div>
 
 </div>
 @stop

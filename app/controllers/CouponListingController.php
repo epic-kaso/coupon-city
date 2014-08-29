@@ -5,6 +5,10 @@
     class CouponListingController extends \BaseController
     {
 
+        public function __construct(){
+            Breadcrumbs::addCrumb('category', 'category');
+        }
+
         /**
          * Display a listing of the resource.
          * GET /couponlisting

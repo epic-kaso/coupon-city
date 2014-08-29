@@ -18,6 +18,7 @@
         public function __construct(CreateUserFormValidator $createUserFormValidator)
         {
             parent::__construct();
+            Breadcrumbs::addCrumb('user', 'user');
             $this->createUserFormValidator = $createUserFormValidator;
             $this->beforeFilter('csrf', array('on' => 'post'));
 
