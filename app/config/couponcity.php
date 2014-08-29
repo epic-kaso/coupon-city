@@ -8,7 +8,8 @@
 
     return [
         "listeners"   => [
-            'Couponcity\EventListeners\EmailNotifier'
+            'Couponcity\EventListeners\EmailNotifier',
+            'Couponcity\EventListeners\CouponPriceChangedListener'
         ],
         "admin_email" => 'gatekeeper@couponcity.com.ng'
     ];

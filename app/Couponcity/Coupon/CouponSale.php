@@ -31,6 +31,11 @@
 
         }
 
+        public function user()
+        {
+            return $this->belongsTo('Couponcity\User\User');
+        }
+
         public function coupon()
         {
             return $this->belongsTo('Couponcity\Coupon\Coupon');

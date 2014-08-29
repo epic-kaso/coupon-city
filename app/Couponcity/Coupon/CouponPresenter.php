@@ -9,11 +9,14 @@
     namespace Couponcity\Coupon;
 
     use Carbon\Carbon;
+    use Couponcity\Events\CouponPriceChanged;
+    use Laracasts\Commander\Events\EventGenerator;
     use Laracasts\Presenter\Presenter;
 
     class CouponPresenter extends Presenter
     {
 
+        use EventGenerator;
         public function status()
         {
             switch (strtolower($this->deal_status)) {
@@ -251,7 +254,9 @@
             if (!$this->is_advanced_pricing) {
                 return number_format($this->new_price,0);
             } else {
-                return number_format($this->figure_out_price(),0);
+                $currentPrice = $this->figure_out_price();
+                $this->set_new_price($currentPrice);
+                return number_format($currentPrice,0);
             }
         }
 
@@ -269,6 +274,14 @@
                 return $this->advanced_price_one_price;
             }
 
+        }
+
+        private function set_new_price($currentPrice)
+        {
+            if($this->new_price > $currentPrice){
+                $this->raise(new CouponPriceChanged($this->id,$currentPrice));
+            }
+            $this->new_price = $currentPrice;
         }
 
     }
