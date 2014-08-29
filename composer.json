@@ -14,7 +14,8 @@
         "codesleeve/laravel-stapler": "dev-master",
         "facebook/php-sdk-v4": "4.0.*",
         "guzzlehttp/guzzle": "~4.0",
-        "iron-io/iron_mq": "~1.4.8"
+        "iron-io/iron_mq": "~1.4.8",
+        "creitive/breadcrumbs": "dev-master"
     },
     "require-dev": {
         "way/generators": "2.*"

@@ -14,6 +14,8 @@
         public function __construct()
         {
 
+            Breadcrumbs::addCrumb('Home', '/');
+
             FacebookSession::setDefaultApplication(Config::get('facebook.key'), Config::get('facebook.secret'));
 
             $facebook_login_url = (new MyFacebookRedirectLoginHelper(URL::route('user-fb-login')))->getLoginUrl(array('email'));

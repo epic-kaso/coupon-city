@@ -34,15 +34,6 @@
             return $this->created_at->toDayDateTimeString();
         }
 
-        public function current_price()
-        {
-            if (!$this->is_advanced_pricing) {
-                return number_format($this->new_price,0);
-            } else {
-                return number_format($this->figure_out_price(),0);
-            }
-        }
-
         public function current_discount()
         {
             if (!$this->is_advanced_pricing) {
@@ -51,6 +42,21 @@
                 return $this->figure_out_discount();
             }
 
+        }
+
+        private function figure_out_discount()
+        {
+            $sales_count = CouponSale::where('coupon_id', $this->id)->count();
+
+            if ($sales_count <= $this->advanced_price_one_quantity) {
+                return $this->advanced_price_one_discount;
+            } elseif ($sales_count <= $this->advanced_price_two_quantity) {
+                return $this->advanced_price_two_discount;
+            } elseif ($sales_count <= $this->advanced_price_three_quantity) {
+                return $this->advanced_price_three_discount;
+            } else {
+                return $this->advanced_price_one_discount;
+            }
         }
 
         public function oldPrice()
@@ -117,10 +123,6 @@
             return $views->count();
         }
 
-        public function sales_all_time(){
-            return $this->sales->count();
-        }
-
         public function redemption_today()
         {
             $today = Carbon::today();
@@ -148,14 +150,18 @@
             return $views->count();
         }
 
-        public function redemption_all_time(){
-            return  $this->redemptions->count();
-        }
-
         public function redemption_all_time_percentage(){
             $value =  number_format(($this->redemption_all_time()/$this->sales_all_time() * 100),2);
             return "{$value}%";
 
+        }
+
+        public function redemption_all_time(){
+            return  $this->redemptions->count();
+        }
+
+        public function sales_all_time(){
+            return $this->sales->count();
         }
 
         public function earnings_today()
@@ -235,6 +241,20 @@
             return $sum/count($params);
         }
 
+        public function get_sales_commission()
+        {
+            return 0.2 * $this->current_price();
+        }
+
+        public function current_price()
+        {
+            if (!$this->is_advanced_pricing) {
+                return number_format($this->new_price,0);
+            } else {
+                return number_format($this->figure_out_price(),0);
+            }
+        }
+
         private function figure_out_price()
         {
             $sales_count = CouponSale::where('coupon_id', $this->id)->count();
@@ -249,26 +269,6 @@
                 return $this->advanced_price_one_price;
             }
 
-        }
-
-        private function figure_out_discount()
-        {
-            $sales_count = CouponSale::where('coupon_id', $this->id)->count();
-
-            if ($sales_count <= $this->advanced_price_one_quantity) {
-                return $this->advanced_price_one_discount;
-            } elseif ($sales_count <= $this->advanced_price_two_quantity) {
-                return $this->advanced_price_two_discount;
-            } elseif ($sales_count <= $this->advanced_price_three_quantity) {
-                return $this->advanced_price_three_discount;
-            } else {
-                return $this->advanced_price_one_discount;
-            }
-        }
-
-        public function get_sales_commission()
-        {
-            return 0.2 * $this->current_price();
         }
 
     }

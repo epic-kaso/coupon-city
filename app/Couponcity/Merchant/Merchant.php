@@ -95,41 +95,6 @@ class Merchant extends \Eloquent implements StaplerableInterface
         return $user;
     }
 
-
-
-
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = \Hash::make($value);
-    }
-
-    public function coupons()
-    {
-        return $this->hasMany('Couponcity\Coupon\Coupon');
-    }
-
-    public function getFullAddressAttribute(){
-        return $this->build_address();
-    }
-
-    private function build_address(){
-        $addr = "";
-
-        $addr .= $this->address_one;
-        $addr .= ",".$this->city;
-        $addr .= ".".$this->state ." State";
-
-        return $addr;
-    }
-    public static function totalCouponSales($id)
-    {
-        $response = static::where('id',$id)->with(['coupons' => function ($query) {
-                $query->with('sales', 'views', 'redemptions');
-            }])->first();
-
-        return $response->coupons;
-    }
-
     public static function totalCouponSalesToday($id){
         $response = static::totalCouponSales($id);
 
@@ -149,24 +114,13 @@ class Merchant extends \Eloquent implements StaplerableInterface
         ];
     }
 
-    public static function totalCouponSalesMonth($id){
-        $response = static::totalCouponSales($id);
+    public static function totalCouponSales($id)
+    {
+        $response = static::where('id',$id)->with(['coupons' => function ($query) {
+                $query->with('sales', 'views', 'redemptions');
+            }])->first();
 
-        $today = Carbon::today();
-        $monthStart = $today->startOfMonth()->toDateTimeString();
-        $monthEnd = $today->endOfMonth()->toDateTimeString();
-
-        $coupons = $response->filter(
-            function ($entry) use ($monthStart, $monthEnd) {
-                return $entry->created_at >= $monthStart && $entry->created_at <= $monthEnd;
-            });
-
-        return [
-            'sales_count'=> $coupons->count(),
-            'sales_revenue'=> static::earnings_month($response),
-            'view_count'=>static::views_month($response),
-            'redemption_count'=>static::redemptions_month($response)
-        ];
+        return $response->coupons;
     }
 
     public static function earnings_today($response)
@@ -191,6 +145,65 @@ class Merchant extends \Eloquent implements StaplerableInterface
 
         return $sum;
 
+    }
+
+    private static function views_today($response)
+    {
+        $today = Carbon::today();
+        $tomorrow = $today->tomorrow();
+
+        $coupons = $response->filter(
+            function ($entry) use ($today, $tomorrow) {
+                return $entry->created_at >= $today && $entry->created_at < $tomorrow;
+            });
+
+        $params = $coupons->toArray();
+        $sum = 0;
+        foreach ($params as $p) {
+            $sum += count($p['views']);
+        }
+
+        return $sum;
+
+    }
+
+    private static function redemptions_today($response)
+    {
+        $today = Carbon::today();
+        $tomorrow = $today->tomorrow();
+
+        $coupons = $response->filter(
+            function ($entry) use ($today, $tomorrow) {
+                return $entry->created_at >= $today && $entry->created_at < $tomorrow;
+            });
+
+        $params = $coupons->toArray();
+        $sum = 0;
+        foreach ($params as $p) {
+            $sum += count($p['redemptions']);
+        }
+
+        return $sum;
+    }
+
+    public static function totalCouponSalesMonth($id){
+        $response = static::totalCouponSales($id);
+
+        $today = Carbon::today();
+        $monthStart = $today->startOfMonth()->toDateTimeString();
+        $monthEnd = $today->endOfMonth()->toDateTimeString();
+
+        $coupons = $response->filter(
+            function ($entry) use ($monthStart, $monthEnd) {
+                return $entry->created_at >= $monthStart && $entry->created_at <= $monthEnd;
+            });
+
+        return [
+            'sales_count'=> $coupons->count(),
+            'sales_revenue'=> static::earnings_month($response),
+            'view_count'=>static::views_month($response),
+            'redemption_count'=>static::redemptions_month($response)
+        ];
     }
 
     public static function earnings_month($response)
@@ -237,45 +250,6 @@ class Merchant extends \Eloquent implements StaplerableInterface
         return $sum;
     }
 
-    private static function views_today($response)
-    {
-        $today = Carbon::today();
-        $tomorrow = $today->tomorrow();
-
-        $coupons = $response->filter(
-            function ($entry) use ($today, $tomorrow) {
-                return $entry->created_at >= $today && $entry->created_at < $tomorrow;
-            });
-
-        $params = $coupons->toArray();
-        $sum = 0;
-        foreach ($params as $p) {
-            $sum += count($p['views']);
-        }
-
-        return $sum;
-
-    }
-
-    private static function redemptions_today($response)
-    {
-        $today = Carbon::today();
-        $tomorrow = $today->tomorrow();
-
-        $coupons = $response->filter(
-            function ($entry) use ($today, $tomorrow) {
-                return $entry->created_at >= $today && $entry->created_at < $tomorrow;
-            });
-
-        $params = $coupons->toArray();
-        $sum = 0;
-        foreach ($params as $p) {
-            $sum += count($p['redemptions']);
-        }
-
-        return $sum;
-    }
-
     private static function redemptions_month($response)
     {
         $today = Carbon::today();
@@ -294,6 +268,30 @@ class Merchant extends \Eloquent implements StaplerableInterface
         }
 
         return $sum;
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = \Hash::make($value);
+    }
+
+    public function coupons()
+    {
+        return $this->hasMany('Couponcity\Coupon\Coupon');
+    }
+
+    public function getFullAddressAttribute(){
+        return $this->build_address();
+    }
+
+    private function build_address(){
+        $addr = "";
+
+        $addr .= $this->address_one;
+        $addr .= ",".$this->city;
+        $addr .= ".".$this->state ." State";
+
+        return $addr;
     }
 
 

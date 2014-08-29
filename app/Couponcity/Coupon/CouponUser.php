@@ -10,6 +10,7 @@ class CouponUser extends \Eloquent
     use EventGenerator;
 
     protected $fillable = ['coupon_id', 'user_id'];
+    protected $table = "coupon_user";
 
     public static function boot()
     {
@@ -18,18 +19,6 @@ class CouponUser extends \Eloquent
 
             return TRUE;
         });
-    }
-
-    protected $table = "coupon_user";
-
-    public function user()
-    {
-        return $this->belongsTo('Couponcity\User\User');
-    }
-
-    public function coupon()
-    {
-        return $this->belongsTo('Couponcity\Coupon\Coupon');
     }
 
     public static function generateUserCouponCode()
@@ -75,6 +64,16 @@ class CouponUser extends \Eloquent
         $coupon->raise(new CouponRedeemed($coupon));
 
         return $coupon;
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('Couponcity\User\User');
+    }
+
+    public function coupon()
+    {
+        return $this->belongsTo('Couponcity\Coupon\Coupon');
     }
 
 }

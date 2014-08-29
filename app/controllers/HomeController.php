@@ -1,6 +1,7 @@
 <?php
 
 
+    use Couponcity\Coupon\Coupon;
     use Couponcity\Coupon\CouponUser;
     use Couponcity\FrontEnd\FrontEnd;
     use Couponcity\User\User;
@@ -10,12 +11,16 @@
 
         protected $data = [];
         protected $frontEnd;
+        protected $couponUser;
+        protected $coupon;
 
 
-        public function __construct(FrontEnd $frontEnd)
+        public function __construct(FrontEnd $frontEnd,CouponUser $couponUser,Coupon $coupon)
         {
             parent::__construct();
             $this->frontEnd = $frontEnd;
+            $this->couponUser = $couponUser;
+            $this->coupon = $coupon;
         }
 
         public function getIndex()
@@ -48,7 +53,7 @@
 
         public function getAccount()
         {
-            $coupons = CouponUser::where('user_id', Auth::id())->with('coupon')->get();
+            $coupons = $this->couponUser->where('user_id', Auth::id())->with('coupon')->get();
             $this->data['my_coupons'] = $coupons;
 
             return View::make('home.account', $this->data);
@@ -60,5 +65,13 @@
             $this->data['wallet_transactions'] = $user->wallet_transactions;
 
             return View::make('home.wallet', $this->data);
+        }
+
+        public function getSearch(){
+            $search_phrase = trim(Input::get('q'));
+            if(empty($search_phrase))
+                return Redirect::back()->withError('Search String can\'t be empty');
+            $search_result = $this->coupon->search($search_phrase);
+            return View::make('home.search', $this->data)->with(compact('search_phrase','search_result'));
         }
     }

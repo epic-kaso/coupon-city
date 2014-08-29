@@ -126,7 +126,8 @@
             'Codesleeve\LaravelStapler\LaravelStaplerServiceProvider',
             'Aws\Laravel\AwsServiceProvider',
             'Laracasts\Commander\CommanderServiceProvider',
-            'Couponcity\EventListeners\EventListenersServiceProvider'
+            'Couponcity\EventListeners\EventListenersServiceProvider',
+            'Creitive\Breadcrumbs\BreadcrumbsServiceProvider'
 
         ),
 
@@ -194,6 +195,7 @@
             'URL'               => 'Illuminate\Support\Facades\URL',
             'Validator'         => 'Illuminate\Support\Facades\Validator',
             'View'              => 'Illuminate\Support\Facades\View',
+            'Breadcrumbs' => 'Creitive\Breadcrumbs\Facades\Breadcrumbs',
 
         ),
 

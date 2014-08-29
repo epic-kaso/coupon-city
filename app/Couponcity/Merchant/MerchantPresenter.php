@@ -33,6 +33,6 @@ class MerchantPresenter extends Presenter
     {
         $category = $this->business_category;
 
-        return "Food and Drinks";
+        return $category;
     }
 }

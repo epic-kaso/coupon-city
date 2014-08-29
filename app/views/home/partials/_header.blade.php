@@ -77,8 +77,8 @@
                 </ul>
 
                 <div class="search-bar right">
-                    <form>
-                        <input type="text" placeholder="Search...">
+                    <form action="{{ action('HomeController@getSearch') }}">
+                        <input type="text" name="q" placeholder="Search...">
                         <input class="search-button" value="Search" type="submit">
                     </form>
                 </div>

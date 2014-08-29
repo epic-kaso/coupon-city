@@ -98,6 +98,17 @@
             return $coupon;
         }
 
+        public static function topPerforming($merchant_id, $limit = 5)
+        {
+            $coupons = Coupon::where('merchant_id',$merchant_id)->with(['sales'=>function($query){
+
+                }])->take($limit)->get(['id','name','coupon_code','slug']);
+
+            return $coupons->sortBy(function($coupons){
+                return $coupons->sales->count();
+            },true);
+        }
+
         public function setNameAttribute($name)
         {
             $this->attributes['name'] = $name;
@@ -176,14 +187,7 @@
             return $this->save();
         }
 
-        public static function topPerforming($merchant_id, $limit = 5)
-        {
-            $coupons = Coupon::where('merchant_id',$merchant_id)->with(['sales'=>function($query){
-
-                }])->take($limit)->get(['id','name','coupon_code','slug']);
-
-            return $coupons->sortBy(function($coupons){
-                return $coupons->sales->count();
-            },true);
+        public function search($search_phrase,$perpage = 15){
+            return $this->where('name','LIKE',"%{$search_phrase}%")->simplePaginate($perpage);
         }
     }
