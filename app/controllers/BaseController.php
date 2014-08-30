@@ -10,9 +10,11 @@
         use CommanderTrait;
 
         protected $data = [];
+        protected $breadcrumbs;
 
         public function __construct()
         {
+            Breadcrumbs::addCssClasses("breadcrumb mb");
 
             Breadcrumbs::addCrumb('Home', '/');
 
