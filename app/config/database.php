@@ -55,9 +55,9 @@
             'mysql'  => array(
                 'driver'    => 'mysql',
                 'host'      => 'localhost',
-                'database'  => 'forge',
+                'database'  => 'couponcity',
                 'username'  => 'forge',
-                'password'  => 'forge',
+                'password'  => 'Z9CBrgtYWjOTmxKWUycU',
                 'charset'   => 'utf8',
                 'collation' => 'utf8_unicode_ci',
                 'prefix'    => '',
