@@ -11,6 +11,7 @@
 
         public function run()
         {
+            CouponCategory::truncate();
             CouponCategory::create([
                 'name' => 'Fashion'
             ]);

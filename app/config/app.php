@@ -13,7 +13,7 @@
         |
         */
 
-        'debug'           => true,
+        'debug'           => false,
 
         /*
         |--------------------------------------------------------------------------
@@ -78,7 +78,7 @@
         |
         */
 
-        'key'             => 'jfmdncjoielmnihju',
+        'key'             => 'jfmdncjoielmnihj',
 
         'cipher'          => MCRYPT_RIJNDAEL_128,
 
