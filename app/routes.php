@@ -12,5 +12,4 @@
     Route::get('coupon/{slug}','CouponController@getIndex');
     Route::controller('coupon', 'CouponController');
     Route::controller('category', 'CouponListingController');
-
     Route::controller('/', 'HomeController');
