@@ -18,7 +18,7 @@
         <input name="email" type="email" placeholder="you@example.com" required>
         <input name="password" type="password" placeholder="Password" required>
         <input name="password_confirmation" type="password" placeholder="Confirm Password" required>
-        <input name="area" type="text" placeholder="Your Area e.g Lekki">
+        <input name="business_area" type="text" placeholder="Your Area e.g Lekki">
 
         <p class="tcs">By continuing, I agree to CouponCity's <a href="">Terms and conditions</a>.</p>
         <input type="submit" value="Create Account" class="btn btn-submit">

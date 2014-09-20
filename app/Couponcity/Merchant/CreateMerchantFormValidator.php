@@ -17,6 +17,6 @@
         protected $rules = [
             'email'    => 'required|email|unique:merchants',
             'password' => 'required|min:5|confirmed',
-            'area'     => 'required'
+            'business_area'     => 'required'
         ];
     }

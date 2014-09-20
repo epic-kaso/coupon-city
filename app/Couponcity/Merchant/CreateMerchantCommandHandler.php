@@ -2,7 +2,6 @@
 
 use Laracasts\Commander\CommandHandler;
 use Laracasts\Commander\Events\DispatchableTrait;
-use Merchant;
 
 class CreateMerchantCommandHandler implements CommandHandler
 {
