@@ -43,13 +43,13 @@
 
 
             if (is_null($slug)) {
-                return App::abort(404, 'Not Found');
+                App::abort(404, 'Not Found');
             }
 
             $coupon = Coupon::where('slug', $slug)->with('sales')->first();
 
             if (is_null($coupon)) {
-                return App::abort(404, 'Not Found');
+                App::abort(404, 'Not Found');
             }
 
             $this->data['coupon'] = $coupon;

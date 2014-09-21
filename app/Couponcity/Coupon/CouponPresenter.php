@@ -154,7 +154,8 @@
         }
 
         public function redemption_all_time_percentage(){
-            $value =  number_format(($this->redemption_all_time()/$this->sales_all_time() * 100),2);
+            $value =  number_format(
+                (divide($this->redemption_all_time(),$this->sales_all_time()) * 100),2);
             return "{$value}%";
 
         }
@@ -223,7 +224,7 @@
                 $sum += $p['sales_price'];
             }
 
-            return $sum/count($params);
+            return divide($sum,count($params));
         }
 
         public function average_sales_month(){
@@ -241,7 +242,7 @@
             foreach ($params as $p) {
                 $sum += $p['sales_price'];
             }
-            return $sum/count($params);
+            return divide($sum,count($params));
         }
 
         public function get_sales_commission()
