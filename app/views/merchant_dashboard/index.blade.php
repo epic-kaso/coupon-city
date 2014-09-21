@@ -43,7 +43,7 @@
                                 <li>{{ $sales_today['view_count'] }} <span>Views</span></li>
                                 <li>{{ $sales_today['sales_count'] }} <span>Coupons Sold</span></li>
                                 <li>₦{{ $sales_today['sales_revenue'] }} <span>Amount Earned</span></li>
-                                <li>₦{{ number_format($sales_today['sales_revenue']/$sales_today['sales_count'],2) }} <span>Average Sale</span></li>
+                                <li>₦{{ number_format(divide($sales_today['sales_revenue'],$sales_today['sales_count']),2) }} <span>Average Sale</span></li>
                             </ul>
                         </div>
 
@@ -74,7 +74,7 @@
                     <li class="bbb">{{ $sales_month['view_count'] }} <span>Views</span></li>
                     <li>{{ $sales_month['sales_count'] }} <span>Coupons Sold</span></li>
                     <li>₦{{ $sales_month['sales_revenue'] }} <span>Amount Sold</span></li>
-                    <li>₦{{ number_format($sales_month['sales_revenue']/$sales_month['sales_count'],2) }} <span>Average Sale</span></li>
+                    <li>₦{{ number_format(divide($sales_month['sales_revenue'],$sales_month['sales_count']),2) }} <span>Average Sale</span></li>
                 </ul>
             </div>
 

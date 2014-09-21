@@ -8,7 +8,14 @@
 
     use Carbon\Carbon;
 
+    function divide($a,$b){
+        if($b == 0)
+            return 0;
+        return $a/$b;
+    }
     function percentage($niddle,$haystack){
+        if($haystack == 0)
+            return 0;
         $per = number_format($niddle/$haystack * 100,2);
 
         return "{$per}%";
