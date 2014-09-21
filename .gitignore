@@ -2,7 +2,6 @@
 .idea
 _ide_helper.php
 vendor
-composer.lock
 node_modules
 gulpfile.js
 package.json
