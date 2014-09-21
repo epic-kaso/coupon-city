@@ -52,7 +52,7 @@
             return [
                 'count' => $count,
                 'sales' => $revenue,
-                'average'=>number_format($revenue/$count,2)
+                'average'=>number_format(divide($revenue,$count),2)
             ];
         }
     }
