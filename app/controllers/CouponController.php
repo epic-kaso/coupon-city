@@ -40,8 +40,6 @@
 
         public function getIndex($slug = NULL)
         {
-
-
             if (is_null($slug)) {
                 App::abort(404, 'Not Found');
             }

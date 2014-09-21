@@ -45,7 +45,7 @@
         public function getShow($slug = NULL)
         {
             if (is_null($slug)) {
-                App::abort(404, 'Not Found');
+                return App::abort(404, 'Not Found');
             }
 
             $categories = CouponCategory::with(['coupons'])->get();
@@ -55,7 +55,7 @@
                     $query->where('category_id', $category->id);
                 }])->first();
             if (is_null($category)) {
-                App::abort(404, 'Not Found');
+                return App::abort(404, 'Not Found');
             }
 
             $this->data['current_category'] = $category;
