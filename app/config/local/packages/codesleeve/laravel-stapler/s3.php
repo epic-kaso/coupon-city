@@ -13,9 +13,9 @@
         |
         */
         's3_client_config' => [
-            'key'    => getenv('AWS_KEY'),
-            'secret' => getenv('AWS_SECRET'),
-            'region' => 'us-east-1',
+            'key'    => '',
+            'secret' => '',
+            'region' => '',
             'scheme' => 'http'
         ],
 
@@ -29,7 +29,7 @@
         |
         */
         's3_object_config' => [
-            'Bucket' => 'couponcity-storage',
+            'Bucket' => '',
             'ACL'    => 'public-read'
         ],
 
