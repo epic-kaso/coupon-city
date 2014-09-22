@@ -30,39 +30,25 @@
 
         public function __construct(array $attributes = array())
         {
+            $style = \Config::get('couponcity.coupon_image_style');
             $this->hasAttachedFile('image_one', [
-                'styles' => [
-                    'medium' => '300x300',
-                    'thumb'  => '100x100'
-                ]
+                'styles' => $style
             ]);
 
             $this->hasAttachedFile('image_two', [
-                'styles' => [
-                    'medium' => '300x300',
-                    'thumb'  => '100x100'
-                ]
+                'styles' => $style
             ]);
 
             $this->hasAttachedFile('image_three', [
-                'styles' => [
-                    'medium' => '300x300',
-                    'thumb'  => '100x100'
-                ]
+                'styles' => $style
             ]);
 
             $this->hasAttachedFile('image_four', [
-                'styles' => [
-                    'medium' => '300x300',
-                    'thumb'  => '100x100'
-                ]
+                'styles' => $style
             ]);
 
             $this->hasAttachedFile('image_five', [
-                'styles' => [
-                    'medium' => '300x300',
-                    'thumb'  => '100x100'
-                ]
+                'styles' => $style
             ]);
 
 

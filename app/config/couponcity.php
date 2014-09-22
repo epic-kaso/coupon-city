@@ -11,5 +11,9 @@
             'Couponcity\EventListeners\EmailNotifier',
             'Couponcity\EventListeners\CouponPriceChangedListener'
         ],
-        "admin_email" => 'gatekeeper@couponcity.com.ng'
+        "admin_email" => 'gatekeeper@couponcity.com.ng',
+        "coupon_image_style" => [
+            'medium' => '320x180',
+            'thumb'  => '160x90'
+        ]
     ];
