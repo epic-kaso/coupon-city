@@ -13,8 +13,17 @@
         ],
         "admin_email" => 'gatekeeper@couponcity.com.ng',
         "coupon_image_style" => [
-            'normal' =>'640x360',
-            'medium' => '320x180',
-            'thumb'  => '160x90'
+            'normal' =>[
+            'dimensions' => '640x360',
+                'convert_options' => ['jpeg_quality' => 70]
+            ],
+            'medium' => [
+                'dimensions' => '320x180',
+                'convert_options' => ['jpeg_quality' => 60]
+            ],
+            'thumb' =>[
+                'dimensions' => '160x90',
+                'convert_options' => ['jpeg_quality' => 50]
+            ]
         ]
     ];
