@@ -45,15 +45,13 @@
             "php artisan clear-compiled",
             "php artisan optimize",
             "php artisan migrate",
-            "php artisan db:seed",
-            "php artisan stapler:refresh Couponcity\\Coupon\\Coupon"
+            "php artisan db:seed"
         ],
         "post-update-cmd": [
             "php artisan clear-compiled",
             "php artisan optimize",
             "php artisan migrate",
-            "php artisan db:seed",
-            "php artisan stapler:refresh Couponcity\\Coupon\\Coupon"
+            "php artisan db:seed"
         ],
         "post-create-project-cmd": [
             "php artisan key:generate"
