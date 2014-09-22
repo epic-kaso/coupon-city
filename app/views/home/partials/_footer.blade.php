@@ -7,18 +7,18 @@
             <div class="clearfix">
                 <ul class="left">
                     <li><h3>HOME</h3></li>
-                    <li><a href="<?= URL::action('HomeController@getAbout') ?>">About Us</a></li>
-                    <li><a href="<?= URL::action('HomeController@getHelpFaq') ?>">Help</a></li>
-                    <li><a href="<?= URL::action('HomeController@getHowItWorks') ?>">How it works</a></li>
-                    <li><a href="<?= URL::action('HomeController@getContact') ?>">Contact Us</a></li>
+                    <li><a href="{{ URL::action('HomeController@getAbout') }}">About Us</a></li>
+                    <li><a href="{{ URL::action('HomeController@getHelpFaq') }}">Help</a></li>
+                    <li><a href="{{ URL::action('HomeController@getHowItWorks') }}">How it works</a></li>
+                    <li><a href="{{ URL::action('HomeController@getContact') }}">Contact Us</a></li>
                 </ul>
 
                 <ul class="left">
                     <li><h3>EXPLORE</h3></li>
-                    <li><a href="<?= URL::action('HomeController@getAbout') ?>">About Us</a></li>
-                    <li><a href="<?= URL::action('HomeController@getHelpFaq') ?>">Help</a></li>
-                    <li><a href="<?= URL::action('HomeController@getHowItWorks') ?>">How it works</a></li>
-                    <li><a href="<?= URL::action('HomeController@getContact') ?>">Contact Us</a></li>
+                    <li><a href="{{ URL::action('HomeController@getAbout') }}">About Us</a></li>
+                    <li><a href="{{ URL::action('HomeController@getHelpFaq') }}">Help</a></li>
+                    <li><a href="{{ URL::action('HomeController@getHowItWorks') }}">How it works</a></li>
+                    <li><a href="{{ URL::action('HomeController@getContact') }}">Contact Us</a></li>
                 </ul>
 
                 <ul class="left">
@@ -74,17 +74,17 @@
 
         <p>Welcome Back to CouponCity</p>
 
-        <a href="{{ $fb_url }}" class="social-login"><span></span> Sign in with facebook</a>
+        <a href="{{ $fb_url or '' }}" class="social-login"><span></span> Sign in with facebook</a>
 
         <p class="divide"></p>
 
-        <?= Form::open(['url' => URL::action('UserController@postLogin')]) ?>
-        <?= Form::email('email', '', ['placeholder' => 'Email']) ?>
-        <?= Form::password('password', '', ['placeholder' => 'Password']) ?>
+        {{ Form::open(['url' => URL::action('UserController@postLogin')]) }}
+        {{ Form::email('email', '', ['placeholder' => 'Email']) }}
+        {{ Form::password('password', '', ['placeholder' => 'Password']) }}
 
         <p class="checkbox-reg"><input type="checkbox" name="remember_me"> Remember me</p>
         <input type="submit" value="Login" class="text-button">
-        <?= Form::close() ?>
+        {{ Form::close() }}
 
         <ul class="clearfix">
             <li class="left register">Not a member? <a href="#register">Register</a></li>
@@ -101,20 +101,20 @@
         <p>Get deals covering your everyday purchases from gadgets to groceries, beauty and others at unbelieveable
             prices.</p>
 
-        <a href="{{ $fb_url }}" class="social-login"><span></span> Sign in with facebook</a>
+        <a href="{{ $fb_url or '' }}" class="social-login"><span></span> Sign in with facebook</a>
 
         <p class="divide"></p>
 
-        <?= Form::open(['url' => URL::action('UserController@postSignUp')]) ?>
-        <?= Form::email('email', '', ['placeholder' => 'Email']) ?>
-        <?= Form::password('password', '', ['placeholder' => 'Password']) ?>
-        <?= Form::password('password_confirmation', '', ['placeholder' => 'Confirm Password']) ?>
+        {{ Form::open(['url' => URL::action('UserController@postSignUp')]) }}
+        {{ Form::email('email', '', ['placeholder' => 'Email']) }}
+        {{ Form::password('password', '', ['placeholder' => 'Password']) }}
+        {{ Form::password('password_confirmation', '', ['placeholder' => 'Confirm Password']) }}
 
         <p class="sara">By clicking "Register" you accept our <a href="">Terms of Use</a> and <a href="">Privacy
                 Policy</a>.</p>
 
         <input type="submit" value="Register" class="text-button">
-        <?= Form::close() ?>
+        {{ Form::close() }}
 
         <ul>
             <li class="login">Already a member? <a href="#login">Login</a></li>
@@ -188,15 +188,15 @@
 
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="<?= URL::asset('js/vendor/jquery-1.10.1.min.js') ?>"><\/script>')</script>
+<script>window.jQuery || document.write('<script src="{{ URL::asset('js/vendor/jquery-1.10.1.min.js') }}"><\/script>')</script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
-<script src="<?= URL::asset('js/basic.js') ?>"></script>
-<script src="<?= URL::asset('js/modal.js') ?>"></script>
-<script src="<?= URL::asset('js/gauge.js') ?>"></script>
-<script src="<?= URL::asset('js/waypoints.min.js') ?>"></script>
-<script src="<?= URL::asset('js/plugin.min.js') ?>"></script>
-<script src="<?= URL::asset('js/countdown.min.js') ?>"></script>
-<script src="<?= URL::asset('js/main.js') ?>"></script>
+<script src="{{ URL::asset('js/basic.js') }}"></script>
+<script src="{{ URL::asset('js/modal.js') }}"></script>
+<script src="{{ URL::asset('js/gauge.js') }}"></script>
+<script src="{{ URL::asset('js/waypoints.min.js') }}"></script>
+<script src="{{ URL::asset('js/plugin.min.js') }}"></script>
+<script src="{{ URL::asset('js/countdown.min.js') }}"></script>
+<script src="{{ URL::asset('js/main.js') }}"></script>
 
 </body>
 </html>
