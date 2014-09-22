@@ -440,13 +440,14 @@ $(function () {
     };
 
     var target = document.getElementById('sales-guage'); // your canvas element
-
-    var gauge = new Gauge(target);
-    var reach = $(target).data('current-value') || 10;
-    gauge.setOptions(opts); // create sexy gauge!
-    gauge.maxValue = $(target).data('max-value') || 100; // set max gauge value
-    gauge.animationSpeed = 40; // set animation speed (32 is default value)
-    gauge.set(reach);
+    if(target != null) {
+        var gauge = new Gauge(target);
+        var reach = $(target).data('current-value') || 10;
+        gauge.setOptions(opts); // create sexy gauge!
+        gauge.maxValue = $(target).data('max-value') || 100; // set max gauge value
+        gauge.animationSpeed = 40; // set animation speed (32 is default value)
+        gauge.set(reach);
+    }
 
 
 });

@@ -192,6 +192,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
 <script src="<?= URL::asset('js/basic.js') ?>"></script>
 <script src="<?= URL::asset('js/modal.js') ?>"></script>
+<script src="<?= URL::asset('js/gauge.js') ?>"></script>
 <script src="<?= URL::asset('js/waypoints.min.js') ?>"></script>
 <script src="<?= URL::asset('js/plugin.min.js') ?>"></script>
 <script src="<?= URL::asset('js/countdown.min.js') ?>"></script>

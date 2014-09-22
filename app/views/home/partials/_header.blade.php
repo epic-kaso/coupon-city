@@ -18,10 +18,8 @@
 
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
 
-    <link rel="stylesheet" href="<?= URL::asset('css/normalize.min.css') ?>">
-    <link rel="stylesheet" href="<?= URL::asset('css/main.css'); ?>">
-
-    <script src="<?= URL::asset('js/vendor/modernizr-2.6.2-respond-1.1.0.min.js') ?>"></script>
+    <link rel="stylesheet" href="{{ URL::asset('css/normalize.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('css/main.css'); }}">
 </head>
 <body>
 <!--[if lt IE 7]>
@@ -57,10 +55,10 @@
 
                         <div class="inner-nav">
                             <ul>
-                                <li><a href="<?= action('HomeController@getAccount') ?>">My Coupons</a></li>
-                                <li><a href="<?= action('HomeController@getAccount') ?>">Account</a></li>
+                                <li><a href="{{ action('HomeController@getAccount') }}">My Coupons</a></li>
+                                <li><a href="{{ action('HomeController@getAccount') }}">Account</a></li>
                                 <li class="nav-help" target="_blank"><a href="">Help</em></a></li>
-                                <li><a href="<?= action('UserController@getLogout'); ?>">Logout</a></li>
+                                <li><a href="{{ action('UserController@getLogout'); }}">Logout</a></li>
                             </ul>
                         </div>
                     </li>

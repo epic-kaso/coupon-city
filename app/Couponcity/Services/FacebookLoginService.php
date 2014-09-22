@@ -39,7 +39,9 @@
             if (!$session) {
                 throw new \Exception('Invalid Session object passed');
             } else {
+
                 $me = $this->createFacebookMeRequest($session);
+                dd($me);
                 $response = $this->perform_facebook_signup($me);
                 return $response;
             }
@@ -48,7 +50,7 @@
         protected function perform_facebook_signup(GraphUser $fb_user)
         {
             $user = $this->createMemberUserFromFacebookUser($fb_user);
-
+            //dd($user);
             $password = $user->password;
 
             if (!empty($password)) {
@@ -116,9 +118,9 @@
          */
         protected function welcomeNewUser($user)
         {
-            $this->notificationService
-                ->byEmail('emails.default',['body'=>'Welcome'],$user->email,"Welcome to Couponcity");
-            Session::set(self::INCOMPLETE_USER_ID, $user->id);
+//            $this->notificationService
+//                ->byEmail('emails.default',['body'=>'Welcome'],$user->email,"Welcome to Couponcity");
+//            Session::set(self::INCOMPLETE_USER_ID, $user->id);
         }
 
         private function checkIfUserExists($user_email)
@@ -133,7 +135,7 @@
 
         private function createUserFromFbObj($fb_user)
         {
-            $user = $this->user->Create(['email' => $fb_user->getProperty('email')]);
+            $user = User::Create(['email' => $fb_user->getProperty('email')]);
             $user->first_name = $fb_user->getFirstName();
             $user->last_name = $fb_user->getLastName();
             $user->fb_oauth_id = $fb_user->getId();

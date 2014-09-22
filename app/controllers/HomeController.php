@@ -5,6 +5,7 @@
     use Couponcity\Coupon\CouponUser;
     use Couponcity\FrontEnd\FrontEnd;
     use Couponcity\User\User;
+    use lib\MyFacebookRedirectLoginHelper;
 
     class HomeController extends BaseController
     {
@@ -25,6 +26,11 @@
 
         public function getIndex()
         {
+
+            $facebook_login_url =  $this->fbHelper
+                ->getLoginUrl(array('email'));
+            $this->data['fb_url'] = $facebook_login_url;
+
             $this->data['snippet'] = $this->frontEnd->getLandingPageCouponSnippets();
             $this->data['featured'] = $this->frontEnd->getFeaturedDeals();
 

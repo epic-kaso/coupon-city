@@ -19,19 +19,18 @@
         protected $facebookLoginService;
 
         public function __construct(CreateUserFormValidator $createUserFormValidator,
-    FacebookLoginService $facebookLoginService)
+                                    FacebookLoginService $facebookLoginService)
         {
             parent::__construct();
             Breadcrumbs::addCrumb('user', 'user');
             $this->createUserFormValidator = $createUserFormValidator;
 
             $this->facebookLoginService = $facebookLoginService;
-            $this->callback_url = URL::route('user-fb-login');
-            $this->fbHelper = new MyFacebookRedirectLoginHelper($this->callback_url);
-
             $this->beforeFilter('csrf', array('on' => 'post'));
-
-            $this->beforeFilter('guest', ['except' => ['getLogout', 'postUpdate', 'postChangePassword']]);
+            $this->beforeFilter('guest',
+                ['except' =>
+                     ['getLogout', 'postUpdate', 'postChangePassword']
+                ]);
         }
 
 

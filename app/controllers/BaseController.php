@@ -3,6 +3,7 @@
     use Couponcity\User\User;
     use Facebook\FacebookSession;
     use Laracasts\Commander\CommanderTrait;
+    use lib\MyFacebookRedirectLoginHelper;
 
     class BaseController extends Controller
     {
@@ -11,21 +12,25 @@
 
         protected $data = [];
         protected $breadcrumbs;
+        public $fbHelper;
 
         public function __construct()
         {
             Breadcrumbs::addCssClasses("breadcrumb mb");
-
             Breadcrumbs::addCrumb('Home', '/');
 
-            FacebookSession::setDefaultApplication(Config::get('facebook.key'), Config::get('facebook.secret'));
-
-            $facebook_login_url = (new MyFacebookRedirectLoginHelper(URL::route('user-fb-login')))->getLoginUrl(array('email'));
+            FacebookSession::setDefaultApplication(
+                Config::get('facebook.key'),
+                Config::get('facebook.secret')
+            );
+            $this->fbHelper = new MyFacebookRedirectLoginHelper(
+                URL::route('user-fb-login')
+            );
 
             $data = [];
             $data['status'] = Session::get('status');
             $data['user'] = User::find(Auth::id());
-            $data['fb_url'] = $facebook_login_url;
+
 
 
             $this->data = $data;

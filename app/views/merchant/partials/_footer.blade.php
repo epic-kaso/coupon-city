@@ -7,6 +7,7 @@
 <script src="<?= URL::asset('js/basic.js') ?>"></script>
 <script src="<?= URL::asset('js/modal.js') ?>"></script>
 <script src="<?= URL::asset('js/waypoints.js') ?>"></script>
+<script src="<?= URL::asset('js/gauge.js') ?>"></script>
 <script src="<?= URL::asset('js/plugin.min.js') ?>"></script>
 <script src="<?= URL::asset('js/countdown.min.js') ?>"></script>
 <script src="<?= URL::asset('js/main.js') ?>"></script>
