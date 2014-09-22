@@ -36,7 +36,8 @@
             "app/helpers.php"
         ],
         "psr-4": {
-            "Couponcity\\": "app/Couponcity"
+            "Couponcity\\": "app/Couponcity",
+            "lib\\": "app/lib"
         }
     },
     "scripts": {

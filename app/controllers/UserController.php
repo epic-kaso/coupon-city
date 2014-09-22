@@ -1,11 +1,13 @@
 <?php
 
+    use Couponcity\Services\FacebookLoginService;
     use Couponcity\User\CreateUserCommand;
     use Couponcity\User\CreateUserFormValidator;
     use Couponcity\User\User;
     use Facebook\FacebookRequest;
     use Facebook\FacebookRequestException;
     use Facebook\GraphUser;
+    use lib\MyFacebookRedirectLoginHelper;
 
     class UserController extends \BaseController
     {
@@ -14,12 +16,19 @@
         protected $createUserFormValidator;
 
         protected $data = [];
+        protected $facebookLoginService;
 
-        public function __construct(CreateUserFormValidator $createUserFormValidator)
+        public function __construct(CreateUserFormValidator $createUserFormValidator,
+    FacebookLoginService $facebookLoginService)
         {
             parent::__construct();
             Breadcrumbs::addCrumb('user', 'user');
             $this->createUserFormValidator = $createUserFormValidator;
+
+            $this->facebookLoginService = $facebookLoginService;
+            $this->callback_url = URL::route('user-fb-login');
+            $this->fbHelper = new MyFacebookRedirectLoginHelper($this->callback_url);
+
             $this->beforeFilter('csrf', array('on' => 'post'));
 
             $this->beforeFilter('guest', ['except' => ['getLogout', 'postUpdate', 'postChangePassword']]);
@@ -107,7 +116,7 @@
 
         public function getSetPassword()
         {
-            $user_id = Session::get('incomplete_user_id', NULL);
+            $user_id = Session::get(FacebookLoginService::INCOMPLETE_USER_ID, NULL);
             if (is_null($user_id)) {
                 return Redirect::back()->withStatus('User id missing from session');
             } else {
@@ -139,29 +148,18 @@
 
         public function fbLogin()
         {
-
-            $helper = new MyFacebookRedirectLoginHelper(URL::route('user-fb-login'));
             try {
-                $session = $helper->getSessionFromRedirect();
+                $session = $this->fbHelper->getSessionFromRedirect();
+                $response = $this->facebookLoginService->facebookLogin($session);
+                if ($response == FacebookLoginService::GOTO_DASHBOARD) {
+                    return Redirect::intended(action('HomeController@getIndex'));
+                } else if ($response == FacebookLoginService::GOTO_SET_PASSWORD) {
+                    return Redirect::action('UserController@getSetPassword');
+                }
             } catch (FacebookRequestException $ex) {
-                dd($ex->getMessage());
-                exit();
+                return $ex->getMessage();
             } catch (\Exception $ex) {
-                dd($ex->getMessage());
-                exit();
-            }
-            if ($session) {
-                $me = (new FacebookRequest(
-                    $session, 'GET', '/me'
-                ))->execute()->getGraphObject(GraphUser::className());
-
-                dd($me);
-
-                return $this->perform_fb_signup($me);
-
-            } else {
-
-                dd('error occured. ended');
+                return $ex->getMessage();
             }
         }
 
@@ -191,26 +189,26 @@
             }
         }
 
-        protected function perform_fb_signup(GraphUser $fb_user)
-        {
-            $user = User::firstOrCreate(array('email' => $fb_user->getProperty('email')));
-            $user->first_name = $fb_user->getFirstName();
-            $user->last_name = $fb_user->getLastName();
-
-
-            if (!$user->oauth_enabled) {
-                $user->fb_oauth_id = $fb_user->getId();
-                $user->oauth_enabled = TRUE;
-            }
-            $user->save();
-            if (property_exists($user, 'password') && !empty($user->password) && is_string($user->password)) {
-                Auth::login($user);
-
-                return Redirect::intended('/');
-            } else {
-                Session::set('incomplete_user_id', $user->id);
-
-                return Redirect::action('UserController@getSetPassword');
-            }
-        }
+//        protected function perform_fb_signup(GraphUser $fb_user)
+//        {
+//            $user = User::firstOrCreate(array('email' => $fb_user->getProperty('email')));
+//            $user->first_name = $fb_user->getFirstName();
+//            $user->last_name = $fb_user->getLastName();
+//
+//
+//            if (!$user->oauth_enabled) {
+//                $user->fb_oauth_id = $fb_user->getId();
+//                $user->oauth_enabled = TRUE;
+//            }
+//            $user->save();
+//            if (property_exists($user, 'password') && !empty($user->password) && is_string($user->password)) {
+//                Auth::login($user);
+//
+//                return Redirect::intended('/');
+//            } else {
+//                Session::set('incomplete_user_id', $user->id);
+//
+//                return Redirect::action('UserController@getSetPassword');
+//            }
+//        }
     }
