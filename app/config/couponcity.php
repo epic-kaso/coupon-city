@@ -13,6 +13,7 @@
         ],
         "admin_email" => 'gatekeeper@couponcity.com.ng',
         "coupon_image_style" => [
+            'normal' =>'640x360',
             'medium' => '320x180',
             'thumb'  => '160x90'
         ]
