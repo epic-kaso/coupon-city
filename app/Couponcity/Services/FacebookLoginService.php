@@ -41,7 +41,7 @@
             } else {
 
                 $me = $this->createFacebookMeRequest($session);
-                dd($me);
+               // dd($me);
                 $response = $this->perform_facebook_signup($me);
                 return $response;
             }
