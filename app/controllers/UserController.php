@@ -120,7 +120,8 @@
                 return Redirect::back()->withStatus('User id missing from session');
             } else {
                 $user = User::find($user_id);
-                return View::make('user.set_password', array('email' => $user->email));
+                $this->data['email'] = $user->email;
+                return View::make('user.set_password',$this->data);
             }
         }
 
