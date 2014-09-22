@@ -9,7 +9,7 @@
 
     class UserController extends \BaseController
     {
-        protected $layout = 'layouts\home';
+        protected $layout = 'layouts.home';
 
         protected $createUserFormValidator;
 
