@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('layouts.basic')
 @section('content')
 <div class="row margin-top-10">
     <div class="col-sm-offset-4 col-sm-4 text-center">
