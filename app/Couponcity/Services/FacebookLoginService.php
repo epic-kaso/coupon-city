@@ -58,6 +58,7 @@
                 return static::GOTO_DASHBOARD;
             } else {
                 $this->welcomeNewUser($user);
+                Session::set(self::INCOMPLETE_USER_ID, $user->id);
                 return static::GOTO_SET_PASSWORD;
             }
         }
@@ -120,7 +121,7 @@
         {
 //            $this->notificationService
 //                ->byEmail('emails.default',['body'=>'Welcome'],$user->email,"Welcome to Couponcity");
-//            Session::set(self::INCOMPLETE_USER_ID, $user->id);
+//
         }
 
         private function checkIfUserExists($user_email)
