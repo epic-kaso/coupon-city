@@ -22,13 +22,16 @@
             $this->frontEnd = $frontEnd;
             $this->couponUser = $couponUser;
             $this->coupon = $coupon;
+            $facebook_login_url =  $this->fbHelper
+                ->getLoginUrl(array('email'));
+            $this->data['fb_url'] = $facebook_login_url;
         }
 
         public function getIndex()
         {
 
             $facebook_login_url =  $this->fbHelper
-                ->getLoginUrl(array('email'));
+                                        ->getLoginUrl(array('email'));
             $this->data['fb_url'] = $facebook_login_url;
 
             $this->data['snippet'] = $this->frontEnd->getLandingPageCouponSnippets();
@@ -59,6 +62,9 @@
 
         public function getAccount()
         {
+            $facebook_login_url =  $this->fbHelper
+                ->getLoginUrl(array('email'));
+            $this->data['fb_url'] = $facebook_login_url;
             $coupons = $this->couponUser->where('user_id', Auth::id())->with('coupon')->get();
             $this->data['my_coupons'] = $coupons;
 
@@ -67,6 +73,9 @@
 
         public function getWallet()
         {
+            $facebook_login_url =  $this->fbHelper
+                ->getLoginUrl(array('email'));
+            $this->data['fb_url'] = $facebook_login_url;
             $user = User::findOrFail(Auth::id())->with('wallet_transactions')->first();
             $this->data['wallet_transactions'] = $user->wallet_transactions;
 
@@ -74,6 +83,9 @@
         }
 
         public function getSearch(){
+            $facebook_login_url =  $this->fbHelper
+                ->getLoginUrl(array('email'));
+            $this->data['fb_url'] = $facebook_login_url;
             $search_phrase = trim(Input::get('q'));
             if(empty($search_phrase))
                 return Redirect::back()->withError('Search String can\'t be empty');

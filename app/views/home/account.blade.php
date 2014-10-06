@@ -11,7 +11,7 @@
                 Hey Guest,
             @endif
         </h2>
-        <br>
+        <br />
 
         <div class="clearfix">
             <a href="#my-deals">My Deals</a>
