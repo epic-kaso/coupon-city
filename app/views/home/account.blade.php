@@ -18,12 +18,14 @@
     <div class="deal-no-deal clearfix">
 
         @if(isset($my_coupons) && $my_coupons->count() <= 0)
-        <div class="if-no-deal">
-            <p>You have no deals yet.</p>
+         <div class="all-my-deals left account-deals" id="my-deals">
+            <div class="if-no-deal">
+                <p>You have no deals yet.</p>
 
-            <div class="no-deal"></div>
+                <div class="no-deal"></div>
 
-            <p>Get discounts at unbelievable prices. <a href="">Browse all deals.</a></p>
+                <p>Get discounts at unbelievable prices. <a href="">Browse all deals.</a></p>
+            </div>
         </div>
         @else
         <div class="all-my-deals left account-deals" id="my-deals">
@@ -57,7 +59,6 @@
             <div class="big-phone left"></div>
 
             <div class="how-to-redeem right">
-
                 <ol>
                     <li>Buy any deal that you like</li>
                     <li>Go to "My Deals" find the deal that you want to redeem</li>
@@ -75,26 +76,26 @@
 
             <br/>
 
-            <?= Form::model($user, ['url' => action('UserController@postUpdate')]) ?>
+            {{ Form::model($user, ['url' => action('UserController@postUpdate')]) }}
             <li>
                 <label>Firstname:</label>
-                <?= Form::text('first_name') ?>
+                {{ Form::text('first_name') }}
             </li>
 
             <li>
                 <label>Lastname:</label>
-                <?= Form::text('last_name') ?>
+                {{ Form::text('last_name') }}
             </li>
 
             <li>
                 <label>Mobile Number:</label>
-                <?= Form::text('phone') ?>
+                {{ Form::text('phone') }}
             </li>
 
             <li>
                 <input type="submit" class="text-button" value="Submit Changes">
             </li>
-            <?= Form::close() ?>
+            {{ Form::close() }}
         </div>
 
 
@@ -102,7 +103,7 @@
             <h2 class="majors">Change Your Password</h2>
             <br>
 
-            <?= Form::open(['url' => action('UserController@postChangePassword')]) ?>
+            {{ Form::open(['url' => action('UserController@postChangePassword')]) }}
 
             <li>
                 <label>Old Password:</label>
@@ -123,7 +124,7 @@
                 <input type="submit" class="text-button" value="Change Password">
             </li>
 
-            <?= Form::close() ?>
+            {{ Form::close() }}
         </div>
 
     </div>
