@@ -480,15 +480,13 @@ $(function () {
                 console.log($response);
                 if($data == 'Unauthorized'){
                     $('a[href=#login]').click();
-                    if(old_value){
-                        submit.prop('value',old_value).removeClass('disabled');
-                    }else{
-                        submit.prop('value',submit.data('action')).removeClass('disabled');
-                    }
-                    return;
                 }
-
-                //$('.flash').html($response.responseText).fadeIn(300).delay(3500).fadeOut(300);
+                if(old_value){
+                    submit.prop('value',old_value).removeClass('disabled');
+                }else{
+                    submit.prop('value',submit.data('action')).removeClass('disabled');
+                }
+                $('.flash').html($response.responseText).fadeIn(300).delay(3500).fadeOut(300);
             }
         });
         e.preventDefault();
