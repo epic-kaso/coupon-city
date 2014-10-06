@@ -6,6 +6,7 @@
     {
 
         public function __construct(){
+            parent::__construct();
             Breadcrumbs::addCrumb('category', 'category');
         }
 
@@ -44,6 +45,10 @@
 
         public function getShow($slug = NULL)
         {
+            $facebook_login_url =  $this->fbHelper
+                ->getLoginUrl(array('email'));
+            $this->data['fb_url'] = $facebook_login_url;
+
             if (is_null($slug)) {
                 return App::abort(404, 'Not Found');
             }

@@ -101,7 +101,7 @@
         <p>Get deals covering your everyday purchases from gadgets to groceries, beauty and others at unbelieveable
             prices.</p>
 
-        <a href="{{ $fb_url or '' }}" class="social-login"><span></span> Sign in with facebook</a>
+        <a href="{{ $fb_url or '#' }}" class="social-login"><span></span> Sign in with facebook</a>
 
         <p class="divide"></p>
 

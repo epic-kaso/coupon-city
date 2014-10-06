@@ -40,6 +40,10 @@
 
         public function getIndex($slug = NULL)
         {
+            $facebook_login_url =  $this->fbHelper
+                ->getLoginUrl(array('email'));
+            $this->data['fb_url'] = $facebook_login_url;
+
             if (is_null($slug)) {
                 App::abort(404, 'Not Found');
             }

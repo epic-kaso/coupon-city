@@ -22,9 +22,7 @@
             $this->frontEnd = $frontEnd;
             $this->couponUser = $couponUser;
             $this->coupon = $coupon;
-            $facebook_login_url =  $this->fbHelper
-                ->getLoginUrl(array('email'));
-            $this->data['fb_url'] = $facebook_login_url;
+
         }
 
         public function getIndex()
@@ -42,6 +40,9 @@
 
         public function getHowItWorks()
         {
+            $facebook_login_url =  $this->fbHelper
+                ->getLoginUrl(array('email'));
+            $this->data['fb_url'] = $facebook_login_url;
             return View::make('home.how_it_works', $this->data);
         }
 
@@ -52,6 +53,9 @@
 
         public function getContact()
         {
+            $facebook_login_url =  $this->fbHelper
+                ->getLoginUrl(array('email'));
+            $this->data['fb_url'] = $facebook_login_url;
             return View::make('home.contact', $this->data);
         }
 
