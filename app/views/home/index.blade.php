@@ -61,7 +61,7 @@
         <ul class="clearfix">
             @foreach($section->coupons as $coupon)
             <li>
-                <a href="{{ URL::action('CouponController@getIndex',['slug'=>$item->slug]) }}">
+                <a href="{{ URL::action('CouponController@getIndex',['slug'=>$coupon->slug]) }}">
                     <div class="deal-img"><img src="{{ $coupon->image_one->url('medium') }}"></div>
 
                     <div class="deal-details">
