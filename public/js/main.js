@@ -457,7 +457,6 @@ $(function () {
     $('form[data-remote]').on('submit',function(e){
         form = $(this);
 
-
         var submit = form.find('input[type="submit"]')
         var method = form.find('input[name="_method"]').val() || 'POST';
         var url = form.prop('action');
@@ -468,7 +467,8 @@ $(function () {
             type: method,
             url: url,
             data: form.serialize(),
-            success: function(){
+            success: function(response,xhr,data){
+                console.log(data);
                 submit.prop('value',submit.data('success-message'));
                 var message = form.data('remote-success-message');
 
@@ -477,13 +477,18 @@ $(function () {
                 }
             },
             error: function($response,$xhr,$data){
-                //console.log($response);
-                if(old_value){
-                    submit.prop('value',old_value).removeClass('disabled');
-                }else{
-                    submit.prop('value',submit.data('action')).removeClass('disabled');
+                console.log($response);
+                if($data == 'Unauthorized'){
+                    $('a[href=#login]').click();
+                    if(old_value){
+                        submit.prop('value',old_value).removeClass('disabled');
+                    }else{
+                        submit.prop('value',submit.data('action')).removeClass('disabled');
+                    }
+                    return;
                 }
-                $('.flash').html($response.responseText).fadeIn(300).delay(3500).fadeOut(300);
+
+                //$('.flash').html($response.responseText).fadeIn(300).delay(3500).fadeOut(300);
             }
         });
         e.preventDefault();

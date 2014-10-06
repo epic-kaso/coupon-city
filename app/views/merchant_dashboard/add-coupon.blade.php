@@ -4,10 +4,18 @@
     <div class="hold right">
         <div class="clearfix export-header">
             <h1 class="left">Create Coupon</h1>
-            <a href="<?= URL::action('MerchantDashboardController@getCoupons') ?>" class="btn right export">&laquo; See
+            <a href="{{ URL::action('MerchantDashboardController@getCoupons') }}" class="btn right export">&laquo; See
                 all Coupons</a>
         </div>
-        <?= Form::open(['url' => action('CouponController@postStore'), 'files' => true, 'class' => 'dialog-form', 'name' => 'coupon_form']) ?>
+        {{ Form::open(
+            [
+                'url' => action('CouponController@postStore'),
+                'files' => true,
+                'class' => 'dialog-form',
+                'name' => 'coupon_form'
+             ]
+           )
+        }}
 
         <div class="segment">
 
@@ -117,45 +125,45 @@
             </div>
 
 
-            <div class="segment-inner">
-                <p>You can turn on Advanced pricing here. Advanced Pricing lets you inspire more sales by dropping
-                    prices as customer number go up. <a href="">Learn more &raquo;</a></p>
+            {{--<div class="segment-inner">--}}
+                {{--<p>You can turn on Advanced pricing here. Advanced Pricing lets you inspire more sales by dropping--}}
+                    {{--prices as customer number go up. <a href="">Learn more &raquo;</a></p>--}}
 
-                <input type="checkbox" id="pricing-type" class="pricing-type" name="coupon[is_advanced_pricing]"
-                       value="1">
-                <label for="pricing-type" class="m-b">Turn On Advanced Pricing</label>
+                {{--<input type="checkbox" id="pricing-type" class="pricing-type" name="coupon[is_advanced_pricing]"--}}
+                       {{--value="1">--}}
+                {{--<label for="pricing-type" class="m-b">Turn On Advanced Pricing</label>--}}
 
-                <div class="advanced-type-pricing clearfix three-input">
-                    <a href="" ng-click="add_next_adv_price_form()">&laquo; Add Price Level</a>
-                    <input type="text" placeholder="New Price" class="left"
-                           name="coupon[advanced_price_one_price]">
-                    <input type="text" placeholder="% Discount" class="left"
-                           name="coupon[advanced_price_one_discount]">
-                    <input type="text" placeholder="No of Customers" class="right"
-                           name="coupon[advanced_price_one_quantity]">
+                {{--<div class="advanced-type-pricing clearfix three-input">--}}
+                    {{--<a href="" ng-click="add_next_adv_price_form()">&laquo; Add Price Level</a>--}}
+                    {{--<input type="text" placeholder="New Price" class="left"--}}
+                           {{--name="coupon[advanced_price_one_price]">--}}
+                    {{--<input type="text" placeholder="% Discount" class="left"--}}
+                           {{--name="coupon[advanced_price_one_discount]">--}}
+                    {{--<input type="text" placeholder="No of Customers" class="right"--}}
+                           {{--name="coupon[advanced_price_one_quantity]">--}}
 
-                    <div ng-show="adv_price_form.second.visible">
-                        <input type="text" placeholder="New Price" class="left"
-                               name="coupon[advanced_price_two_price]">
-                        <input type="text" placeholder="% Discount" class="left"
-                               name="coupon[advanced_price_two_discount]">
-                        <input type="text" placeholder="No of Customers" class="right"
-                               name="coupon[advanced_price_two_quantity]">
-                    </div>
+                    {{--<div ng-show="adv_price_form.second.visible">--}}
+                        {{--<input type="text" placeholder="New Price" class="left"--}}
+                               {{--name="coupon[advanced_price_two_price]">--}}
+                        {{--<input type="text" placeholder="% Discount" class="left"--}}
+                               {{--name="coupon[advanced_price_two_discount]">--}}
+                        {{--<input type="text" placeholder="No of Customers" class="right"--}}
+                               {{--name="coupon[advanced_price_two_quantity]">--}}
+                    {{--</div>--}}
 
-                    <div ng-show="adv_price_form.third.visible">
-                        <input type="text" placeholder="New Price" class="left"
-                               name="coupon[advanced_price_three_price]">
-                        <input type="text" placeholder="% Discount" class="left"
-                               name="coupon[advanced_price_three_discount]">
-                        <input type="text" placeholder="No of Customers" class="right"
-                               name="coupon[advanced_price_three_quantity]">
-                    </div>
-                </div>
-            </div>
+                    {{--<div ng-show="adv_price_form.third.visible">--}}
+                        {{--<input type="text" placeholder="New Price" class="left"--}}
+                               {{--name="coupon[advanced_price_three_price]">--}}
+                        {{--<input type="text" placeholder="% Discount" class="left"--}}
+                               {{--name="coupon[advanced_price_three_discount]">--}}
+                        {{--<input type="text" placeholder="No of Customers" class="right"--}}
+                               {{--name="coupon[advanced_price_three_quantity]">--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
         </div>
         <input type="submit" class="btn-submit btn" value="Create Coupon">
-        <?= Form::close() ?>
+        {{ Form::close() }}
     </div>
 
     <div class="merchant-footer">

@@ -15,7 +15,7 @@
         "coupon_image_style" => [
             'normal' =>[
             'dimensions' => '640x360',
-                'convert_options' => ['jpeg_quality' => 70]
+                'convert_options' => ['jpeg_quality' => 90]
             ],
             'medium' => [
                 'dimensions' => '320x180',

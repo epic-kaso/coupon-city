@@ -15,7 +15,7 @@
         |
         */
 
-        'driver'     => 'smtp',
+        'driver'     => 'log',
 
         'pretend'    => TRUE,
 

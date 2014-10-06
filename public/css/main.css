@@ -567,7 +567,7 @@ ol.bjqs-markers li.active-marker a:before {
 
 .slide-list-vert {
     width: 295px;
-    background: #fff;
+    background-color: #fff;
     height: 100%;
     position: absolute;
     left: 0;

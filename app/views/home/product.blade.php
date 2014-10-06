@@ -33,13 +33,16 @@
 
         <div class="right buy">
             @if($coupon->is_available())
-            <?=
+            {{
                 Form::open(['url'=> action('CouponController@postGrabCoupon',
-                    ['id' => $coupon->id]), 'data-remote', 'data-remote-success-message' => 'Successfully added coupon']) ?>
-            <?=
+                    ['id' => $coupon->id]), 'data-remote', 'data-remote-success-message' => 'Successfully added coupon']) }}
+            {{
                 Form::submit("Buy ₦{$coupon->present()->current_price}",
-                    ['class' => 'deal-button clearfix', 'data-success-message' => 'Successfully Grabbed!'])?>
-            <?= Form::close() ?>
+                    ['class' => 'deal-button clearfix',
+                    'data-success-message' => 'Successfully Grabbed!',
+                    'data-login-error-message'=>'Please Login'
+                    ])}}
+            {{ Form::close() }}
             @else
             <a href="" class="deal-button clearfix">
                 <span>Out of Stock</span>
@@ -53,7 +56,7 @@
             <div class="border">
                 <ul class="price-discount-save clearfix">
                     <li>Value <span>₦{{ $coupon->present()->oldPrice }}</span></li>
-                    <li>Discount <span>{{ $coupon->discount }}%<span></li>
+                    <li>Discount <span>{{ $coupon->discount }}%</span></li>
                     <li>Savings <span>₦{{ $coupon->present()->savings }}</span></li>
                 </ul>
 

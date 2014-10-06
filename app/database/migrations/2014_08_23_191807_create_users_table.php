@@ -25,7 +25,7 @@
                 $table->boolean('oauth_enabled');
                 $table->string('fb_oauth_id');
                 $table->boolean('is_profile_complete');
-                $table->decimal('wallet_balance');
+                $table->decimal('wallet_balance',16);
                 $table->timestamps();
             });
         }

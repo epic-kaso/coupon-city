@@ -1,5 +1,7 @@
 <?php
 
+    $filesystem = Config::getEnvironment() == 'production' ? 's3' : 'filesystem';
+
     return [
 
         /*
@@ -12,7 +14,7 @@
         |
         */
 
-        'storage'        => 's3',
+        'storage'        => $filesystem,//'s3',
         /*
         |--------------------------------------------------------------------------
         | Stapler Default Url
