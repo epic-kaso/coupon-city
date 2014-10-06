@@ -16,14 +16,11 @@
     </div>
 
     <div class="deal-no-deal clearfix">
-
         @if(isset($my_coupons) && $my_coupons->count() <= 0)
          <div class="all-my-deals left account-deals" id="my-deals">
             <div class="if-no-deal">
                 <p>You have no deals yet.</p>
-
                 <div class="no-deal"></div>
-
                 <p>Get discounts at unbelievable prices. <a href="">Browse all deals.</a></p>
             </div>
         </div>
