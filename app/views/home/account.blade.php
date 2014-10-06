@@ -4,8 +4,13 @@
 <div class="inner-pad clearfix">
 
     <div class="account-nav">
-        <h2 class="majors">Hey {{$user->present()->display_name}},</h2>
-
+        <h2 class="majors">
+            @if(!is_null($user))
+                Hey {{ $user->present()->display_name }},
+            @else
+                Hey {{ 'Guest' }},
+            @endif
+        </h2>
         <br>
 
         <div class="clearfix">
