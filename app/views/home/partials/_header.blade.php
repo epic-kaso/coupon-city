@@ -70,7 +70,6 @@
                     <li class="login"><a href="#register">Register</a></li>
                     <li class="login"><a href="#login">Login</a></li>
                     <!--Login if user is has not signed in-->
-
                     @endif
                 </ul>
 

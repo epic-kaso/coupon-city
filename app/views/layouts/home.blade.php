@@ -4,4 +4,3 @@
 @yield('content')
 </div>
 @include('home.partials._footer')
-
