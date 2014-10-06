@@ -5,10 +5,10 @@
 
     <div class="account-nav">
         <h2 class="majors">
-            @if(!is_null($user))
+            @if(isset($user) && !is_null($user))
                 Hey {{ $user->present()->display_name }},
             @else
-                Hey {{ 'Guest' }},
+                Hey Guest,
             @endif
         </h2>
         <br>
@@ -74,9 +74,10 @@
 
 
         <div class="left account-deals" id="my-account">
+            @if(isset($user) && !is_null($user))
             <h2 class="majors">Your Account <span>&raquo; {{ $user->email }}</span></h2>
-
             <br/>
+            @endif
 
             {{ Form::model($user, ['url' => action('UserController@postUpdate')]) }}
             <li>
