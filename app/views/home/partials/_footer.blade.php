@@ -61,6 +61,17 @@
     </div>
 </div>
 
+<!-- Notification Dialog -->
+<div class="notification-dialog">
+    <div class="body">
+        <div class="title">
+            <h2 id="title">Notificatiom</h2>
+        </div>
+        <div class="content">
+            <p></p>
+        </div>
+    </div>
+</div>
 
 <!--Login/Register-->
 
@@ -190,6 +201,12 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="{{ URL::asset('js/jquery.js') }}"><\/script>')</script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
+
+<!-- Added by Akachukwu: for Angularjs functionality -->
+<script src="{{ URL::asset('js/angular-app/lib/angular.min.js') }}"></script>
+<script src="{{ URL::asset('js/angular-app/app/start.js') }}"></script>
+
+
 <script src="{{ URL::asset('js/basic.js') }}"></script>
 <script src="{{ URL::asset('js/modal.js') }}"></script>
 <script src="{{ URL::asset('js/gauge.js') }}"></script>
@@ -197,6 +214,8 @@
 <script src="{{ URL::asset('js/plugin.min.js') }}"></script>
 <script src="{{ URL::asset('js/countdown.min.js') }}"></script>
 <script src="{{ URL::asset('js/main.js') }}"></script>
+
+
 
 </body>
 </html>

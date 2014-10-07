@@ -1,6 +1,6 @@
 @extends('layouts.home',['categories'=>$categories])
 @section('content')
-    <section class="deal clearfix mb">
+    <section class="deal clearfix mb" ng-controller="CouponItemController">
         <div class="mb">
             <h1 class="majors">{{ $coupon->name }}</h1>
 
@@ -33,26 +33,57 @@
 
         <div class="right buy">
             @if($coupon->is_available())
-            {{
-                Form::open(['url'=> action('CouponController@postGrabCoupon',
-                    ['id' => $coupon->id]), 'data-remote', 'data-remote-success-message' => 'Successfully added coupon']) }}
-            {{
-                Form::submit("Buy ₦{$coupon->present()->current_price}",
-                    ['class' => 'deal-button clearfix',
-                    'data-success-message' => 'Successfully Grabbed!',
-                    'data-login-error-message'=>'Please Login'
-                    ])}}
-            {{ Form::close() }}
+            <div class="product-buy">
+                <a
+                buy-product
+                href="#"
+                data-name="{{{ $coupon->name }}}"
+                data-price="{{{$coupon->new_price}}}"
+                data-poster="{{ $coupon->image_one->url() }}"
+                data-summary="{{$coupon->summary}}"
+                data-url="{{ action('CouponController@postBuyProduct',['id' => $coupon->id]) }}"
+                class="deal-button clearfix"
+                >{{{ "Buy for ₦{$coupon->present()->current_price}" }}}
+                </a>
+            {{--{{--}}
+                {{--Form::open(--}}
+                {{--['url'=> action('CouponController@postBuyProduct',['id' => $coupon->id]),--}}
+                 {{--'data-remote',--}}
+                 {{--'data-remote-success-message' => 'Successfully added coupon'--}}
+                 {{--])--}}
+            {{--}}--}}
+            {{--{{--}}
+                {{--Form::submit("Product for ₦{$coupon->present()->current_price}",--}}
+                    {{--['class' => 'deal-button clearfix',--}}
+                    {{--'data-success-message' => 'Successfully Grabbed!',--}}
+                    {{--'data-login-error-message'=>'Please Login'--}}
+                    {{--])}}--}}
+            {{--{{ Form::close() }}--}}
+            </div>
+            <div class="reservation-buy">
+                 <a
+                    buy-reservation
+                    href="#"
+                    data-url="{{ action('CouponController@postBuyReservationCoupon',
+                    ['id' => $coupon->id]) }}"
+                    class="deal-button clearfix"
+                    >{{{ "Reserve for ₦100" }}}
+                 </a>
+            {{--{{--}}
+                {{--Form::open(['url'=> action('CouponController@postBuyReservationCoupon',--}}
+                    {{--['id' => $coupon->id]), 'data-remote', 'data-remote-success-message' => 'Successfully added coupon']) }}--}}
+            {{--{{--}}
+                {{--Form::submit("Reservation for ₦100",--}}
+                    {{--['class' => 'deal-button clearfix'--}}
+                    {{--])}}--}}
+            {{--{{ Form::close() }}--}}
+            </div>
             @else
-            <a href="" class="deal-button clearfix">
+            <a class="deal-button clearfix">
                 <span>Out of Stock</span>
             </a>
             @endif
 
-
-            @if($coupon->is_advanced_pricing)
-            <a href="" class="price-details">Price Details <span>&#x25BC;</span></a>
-            @endif
             <div class="border">
                 <ul class="price-discount-save clearfix">
                     <li>Value <span>₦{{ $coupon->present()->oldPrice }}</span></li>

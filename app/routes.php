@@ -13,3 +13,4 @@
     Route::controller('coupon', 'CouponController');
     Route::controller('category', 'CouponListingController');
     Route::controller('/', 'HomeController');
+    Route::controller('credit-card','CreditCardPaymentController');

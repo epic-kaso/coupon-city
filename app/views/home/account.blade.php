@@ -96,6 +96,26 @@
             </li>
 
             <li>
+                <label>Shipping Address:</label>
+                {{ Form::text('address') }}
+            </li>
+
+            <li>
+                <label>Shipping City:</label>
+                {{ Form::text('city') }}
+            </li>
+
+             <li>
+                <label>Shipping State:</label>
+                {{ Form::text('state') }}
+            </li>
+
+             <li>
+                <label>Shipping Country:</label>
+                {{ Form::text('country') }}
+            </li>
+
+            <li>
                 <input type="submit" class="text-button" value="Submit Changes">
             </li>
             {{ Form::close() }}

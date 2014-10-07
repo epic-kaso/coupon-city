@@ -1,11 +1,11 @@
 <?php namespace Couponcity\Coupon;
 
+use Aws\CloudFront\Exception\Exception;
 use Couponcity\User\User;
 use Laracasts\Commander\CommandHandler;
 use Laracasts\Commander\Events\DispatchableTrait;
 
-class BuyCouponCommandHandler implements CommandHandler
-{
+class BuyProductCommandHandler implements CommandHandler {
 
     use DispatchableTrait;
 
@@ -25,20 +25,18 @@ class BuyCouponCommandHandler implements CommandHandler
             throw new NotEnoughMoneyException('Wallet Balance is not sufficient for transaction.');
         }
 
-        $coupon_user = $this->create_user_coupon($command);
+        $product_purchase = $this->create_user_purchase($command);
 
         $this->debit_user_account($user, $coupon);
 
-        $this->dispatchEventsFor($coupon_user);
+        $this->dispatchEventsFor($product_purchase);
 
-        return $coupon_user;
+        return $product_purchase;
     }
 
 
     private function  is_transaction_capable($user, $coupon)
     {
-
-
         if ($user->wallet_balance >= $coupon->present()->current_price) {
             return TRUE;
         } else {
@@ -46,9 +44,9 @@ class BuyCouponCommandHandler implements CommandHandler
         }
     }
 
-    private function create_user_coupon($command)
+    private function create_user_purchase($command)
     {
-        return CouponUser::grabCoupon($command->coupon_id, $command->user_id);
+        throw new Exception('has not implemented create_user_purchase @ BuyProductCommandHandler');
     }
 
     private function debit_user_account($user, $coupon)
@@ -57,4 +55,5 @@ class BuyCouponCommandHandler implements CommandHandler
         return $user->debitWallet($coupon->present()->current_price);
 
     }
+
 }

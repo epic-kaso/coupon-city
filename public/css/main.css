@@ -975,7 +975,7 @@ li.twitr a {
 
 /**User Login & Registration **/
 
-.login-register, .v-border, #add-funds, #price-details {
+.login-register, .v-border, #add-funds, #price-details ,.notification-dialog{
     padding: 10px;
     font-size: 14px;
     color: #777;
@@ -985,7 +985,7 @@ li.twitr a {
     position: relative;
 }
 
-.login-form, .register-form, .reset-password {
+.login-form, .register-form, .reset-password, .notification-dialog .body {
     border: 1px solid #e5e5e5;
     padding: 40px 30px;
     background: #fff;
@@ -3919,4 +3919,26 @@ p.view-price label {
 
 :not(#foo) > .segment-inner input[type='checkbox']:checked + label {
     background: url(../images/on-off.png) no-repeat top left;
+}
+
+/* Added by Akachukwu */
+.product-buy,.reservation-buy {
+    margin-bottom: 10px;
+}
+
+.product-buy .deal-button, .reservation-buy .deal-button{
+    width: 100%;
+}
+
+.reservation-buy .deal-button{
+    background-color: #0f75bc;
+}
+
+.disabled{
+    opacity: 0.7;
+}
+
+.notification-dialog{
+    width: 400px;
+    height: 300px;
 }

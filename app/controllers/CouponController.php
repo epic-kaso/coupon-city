@@ -1,6 +1,7 @@
 <?php
 
     use Couponcity\Coupon\BuyCouponCommand;
+    use Couponcity\Coupon\BuyProductCommand;
     use Couponcity\Coupon\Coupon;
     use Couponcity\Coupon\CouponFormValidator;
     use Couponcity\Coupon\CouponUser;
@@ -20,7 +21,9 @@
             Breadcrumbs::addCrumb('coupon', 'coupon');
             $this->couponFormValidator = $couponFormValidator;
             parent::__construct();
-            $this->beforeFilter('auth', ['only' => ['postGrabCoupon']]);
+            $this->beforeFilter('auth', ['only' =>
+                                             ['postBuyReservationCoupon','postBuyProduct']
+            ]);
         }
         /**
          * Store a newly created resource in storage.
@@ -101,32 +104,96 @@
          * @param $id
          * @return mixed
          */
-        public function postGrabCoupon($id)
+//        public function postGrabCoupon($id)
+//        {
+//            $coupon = Coupon::findOrFail($id);
+//
+//            $user_id = Auth::id();
+//
+//            try {
+//                $response = $this->execute(BuyCouponCommand::class, ['coupon_id' => $coupon->id, 'user_id' => $user_id]);
+//
+//            } catch (NotEnoughMoneyException $ex) {
+//                $response = $ex->getMessage();
+//                if (Request::ajax()) {
+//                    return Response::json($response, 403);
+//                } else {
+//                    return Redirect::back()->withError($response);
+//                }
+//            }
+//
+//            $this->execute(LogCouponSaleCommand::class, ['coupon' => $coupon]);
+//
+//            if (Request::ajax()) {
+//                return Response::json($response);
+//            } else {
+//                return Redirect::back()->withStatus('Coupon Bought Successfully!');
+//            }
+//
+//        }
+
+        public function postBuyReservationCoupon($id)
         {
             $coupon = Coupon::findOrFail($id);
 
             $user_id = Auth::id();
 
             try {
-                $response = $this->execute(BuyCouponCommand::class, ['coupon_id' => $coupon->id, 'user_id' => $user_id]);
+                $response = $this->execute(BuyCouponCommand::class,
+                    ['coupon_id' => $coupon->id, 'user_id' => $user_id]);
 
             } catch (NotEnoughMoneyException $ex) {
                 $response = $ex->getMessage();
                 if (Request::ajax()) {
-                    return Response::json($response, 403);
+                    return Response::json(['wallet_error'=>true], 403);
                 } else {
                     return Redirect::back()->withError($response);
                 }
             }
 
-            $this->execute(LogCouponSaleCommand::class, ['coupon' => $coupon]);
+            $this->execute(LogCouponSaleCommand::class,
+                [
+                    'coupon' => $coupon,
+                    'sales_type'=> LogCouponSaleCommand::SALES_TYPE_PRODUCT_RESERVATION
+                ]);
 
             if (Request::ajax()) {
                 return Response::json($response);
             } else {
                 return Redirect::back()->withStatus('Coupon Bought Successfully!');
             }
+        }
 
+
+        public function postBuyProduct($id)
+        {
+            $coupon = Coupon::findOrFail($id);
+
+            $user_id = Auth::id();
+
+            try {
+                $response = $this->execute(BuyProductCommand::class,
+                    ['coupon_id' => $coupon->id, 'user_id' => $user_id]);
+            } catch (NotEnoughMoneyException $ex) {
+                $response = $ex->getMessage();
+                if (Request::ajax()) {
+                    return Response::json(['wallet_error'=>true], 403);
+                } else {
+                    return Redirect::back()->withError($response);
+                }
+            }
+
+            $this->execute(LogCouponSaleCommand::class,
+                [
+                    'coupon' => $coupon,
+                    'sales_type'=> LogCouponSaleCommand::SALES_TYPE_PRODUCT_PURCHASE
+                ]);
+
+            if (Request::ajax()) {
+                return Response::json($response);
+            } else {
+                return Redirect::back()->withStatus('Coupon Bought Successfully!');
+            }
         }
 
     }

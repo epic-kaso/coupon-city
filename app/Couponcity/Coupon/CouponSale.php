@@ -22,7 +22,8 @@
                 'coupon_id'        => $command->coupon_id,
                 'sales_price'      => $command->sales_price,
                 'sales_commission' => $command->sales_commission,
-                'sales_date'       => $command->sales_date
+                'sales_date'       => $command->sales_date,
+                'sales_type'       => $command->sales_type
             ]);
 
             $couponsale->raise(new CouponSold($couponsale));
