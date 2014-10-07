@@ -11,7 +11,7 @@ App.directive('buyProduct',function(BuyProductService){
             var originalContent = element.text();
             var loadingContent = 'please wait...';
 
-            element.click(function(){
+            var action = function(){
                 setLoading(true);
                 var promise = BuyProductService.buy(attrs.url,
                     {   name: attrs.name,
@@ -20,7 +20,7 @@ App.directive('buyProduct',function(BuyProductService){
                         summary: attrs.summary
                     });
                 promise.then(function(data){
-                   console.log(data);
+                    console.log(data);
                 },function(response){
                     console.log(response.data);
                     if(response.data == 'Unauthorized'){
@@ -33,18 +33,21 @@ App.directive('buyProduct',function(BuyProductService){
 
                     setLoading(false);
                 });
-            });
+            };
 
             var setLoading = function(state){
                 if(state == true){
                     element.addClass('disabled');
                     element.text(loadingContent);
+                    element.unbind('click');
                 }else{
                     element.removeClass('disabled');
                     element.text(originalContent);
+                    element.bind('click',action);
                 }
-            }
+            };
 
+            element.bind('click',action);
 
         }
     }
@@ -57,8 +60,7 @@ App.directive('buyReservation',function(BuyReservationService){
         link: function(scope,element,attrs){
             var originalContent = element.text();
             var loadingContent = 'please wait...';
-
-            element.click(function(){
+            var action = function(){
                 setLoading(true);
                 var promise = BuyReservationService.buy(attrs.url);
                 promise.then(function(data){
@@ -66,22 +68,28 @@ App.directive('buyReservation',function(BuyReservationService){
                     setLoading(false);
                 },function(response){
                     if(response.data.wallet_error){
-                       scope.showNotification('Insufficient Wallet Balance, Please Fund Wallet and try Again');
+                        scope.showNotification('Insufficient Wallet Balance, Please Fund Wallet and try Again');
                     }
                     console.log('error');
                     setLoading(false);
                 });
-            });
+            };
+
+
 
             var setLoading = function(state){
                 if(state == true){
                     element.addClass('disabled');
                     element.text(loadingContent);
+                    element.unbind('click');
                 }else{
                     element.removeClass('disabled');
                     element.text(originalContent);
+                    element.bind('click',action);
                 }
-            }
+            };
+
+            element.bind('click',action);
         }
     }
 });
@@ -113,7 +121,7 @@ App.factory('BuyProductService',function($q,$http){
             if(response.data.wallet_error){
                 generateForm(coupon);
             }
-            deferred.resolve(response);
+            deferred.reject(response);
         });
 
         return deferred.promise;
