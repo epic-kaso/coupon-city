@@ -70,7 +70,13 @@ App.directive('buyReservation',function(BuyReservationService){
                     if(response.data.wallet_error){
                         scope.showNotification('Insufficient Wallet Balance, Please Fund Wallet and try Again');
                     }
-                    console.log('error');
+                    console.log(response.data);
+                    if(response.data == 'Unauthorized'){
+                        setLoading(false);
+                        //console.log('Showing login Dialog');
+                        scope.showLoginDialog();
+                    }
+                    console.log(arguments);
                     setLoading(false);
                 });
             };
