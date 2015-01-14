@@ -81,4 +81,16 @@ class User extends \Eloquent implements UserInterface, RemindableInterface, Stap
         return $this->save();
     }
 
+    public function hasAddress(){
+        return !is_null($this->address);
+    }
+
+    public function addAddress($address,$city,$state){
+        $this->address = $address;
+        $this->city = $city;
+        $this->state = $state;
+
+        $this->save();
+;    }
+
 }

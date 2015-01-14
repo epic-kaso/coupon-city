@@ -10,6 +10,7 @@
     use Couponcity\Coupon\NotEnoughMoneyException;
     use Couponcity\Coupon\PublishCouponCommand;
     use Couponcity\Coupon\UserOwnsCouponException;
+    use Couponcity\User\AddressUnavailableException;
 
     class CouponController extends \BaseController
     {
@@ -146,6 +147,13 @@
                 $response = $ex->getMessage();
                 if (Request::ajax()) {
                     return Response::json(['wallet_error'=>true], 403);
+                } else {
+                    return Redirect::back()->withError($response);
+                }
+            } catch(AddressUnavailableException $ex){
+                $response = $ex->getMessage();
+                if (Request::ajax()) {
+                    return Response::json(['address_error'=>true], 403);
                 } else {
                     return Redirect::back()->withError($response);
                 }

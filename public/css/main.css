@@ -975,7 +975,7 @@ li.twitr a {
 
 /**User Login & Registration **/
 
-.login-register, .v-border, #add-funds, #price-details ,.notification-dialog{
+.login-register, .v-border, #add-funds, #price-details ,.notification-dialog, .payment-modal{
     padding: 10px;
     font-size: 14px;
     color: #777;
@@ -985,7 +985,7 @@ li.twitr a {
     position: relative;
 }
 
-.login-form, .register-form, .reset-password, .notification-dialog .body {
+.login-form, .register-form, .reset-password, .notification-dialog .body,.payment-modal .body {
     border: 1px solid #e5e5e5;
     padding: 40px 30px;
     background: #fff;
@@ -3941,4 +3941,10 @@ p.view-price label {
 .notification-dialog{
     width: 400px;
     height: 300px;
+}
+
+.payment-modal{
+    width: 800px;
+    height: 800px;
+    overflow-y: scroll;
 }

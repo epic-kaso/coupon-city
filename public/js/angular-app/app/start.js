@@ -3,36 +3,82 @@
  */
 var App = angular.module('CouponcityBuyCoupon',[]);
 
-App.directive('buyProduct',function(BuyProductService){
+App.directive('creditCardForm',function(){
+    var generateMerchantRef = function(){
+        var date = Date.now() * Math.random();
+        return date.toString().substr(0,10);
+    };
+
+    var generateUserRef = function(){
+        var date = Date.now() * Math.random();
+        return date.toString().substr(0,10);
+    };
+
+    var setUpForm = function(element,scope){
+        var itemName = element.find('input[name=itemName]'),
+            itemPrice = element.find('input[name=itemPrice]'),
+            itemDesc = element.find('input[name=itemDesc]'),
+            successURL = element.find('input[name=successURL]'),
+            failedURL = element.find('input[name=failedURL]'),
+            merchantTransRef = element.find('input[name=merchantTransRef]'),
+            email = element.find('input[name=email]'),
+            customerName = element.find('input[name=customerName]'),
+            card = element.find('input[name=card]'),
+            transactionRef = element.find('input[name=transactionRef]');
+        var submit = element.find('input[type=submit]');
+
+        itemName.attr('value',scope.itemName);
+        itemPrice.attr('value',scope.itemPrice);
+        itemDesc.attr('value',scope.itemDesc);
+        successURL.attr('value',scope.successUrl);
+        failedURL.attr('value',scope.failedUrl);
+        merchantTransRef.attr('value',generateMerchantRef());
+        email.attr('value',scope.email);
+        customerName.attr('value',scope.customerName);
+        card.attr('value',scope.card);
+        transactionRef.attr('value',generateUserRef());
+
+        submit.click();
+    };
+
+   return {
+       restrict: 'EA',
+       templateUrl: 'creditCardForm.html',
+       replace: true,
+       transclude: true,
+       scope: {
+            'itemName': "@",
+            'itemPrice': "@",
+            'itemDesc': "@",
+            'successUrl': "@",
+            'failedUrl': "@",
+            'email': "@",
+            'customerName': "@",
+            'card': "="
+       },
+       link: function(scope,element,attrs){
+           var dialog = $('.notification-dialog');
+           scope.$watch('card',function(newv,oldv){
+               console.log(newv);
+               if(newv){
+                   setUpForm(element,scope);
+               }
+           });
+       }
+   }
+});
+App.directive('buyProduct',function($timeout){
     return {
         restrict: 'EA',
-        scope: true,
         link: function(scope,element,attrs){
             var originalContent = element.text();
             var loadingContent = 'please wait...';
 
             var action = function(){
                 setLoading(true);
-                var promise = BuyProductService.buy(attrs.url,
-                    {   name: attrs.name,
-                        price: attrs.price,
-                        poster: attrs.poster,
-                        summary: attrs.summary
-                    });
-                promise.then(function(data){
-                    console.log(data);
-                },function(response){
-                    console.log(response.data);
-                    if(response.data == 'Unauthorized'){
-
-                        setLoading(false);
-                        //console.log('Showing login Dialog');
-                        scope.showLoginDialog();
-                    }
-                    console.log(arguments);
-
+                $timeout(function(){
                     setLoading(false);
-                });
+                },3000);
             };
 
             var setLoading = function(state){
@@ -46,9 +92,7 @@ App.directive('buyProduct',function(BuyProductService){
                     element.bind('click',action);
                 }
             };
-
             element.bind('click',action);
-
         }
     }
 });
@@ -179,6 +223,10 @@ App.factory('BuyReservationService',function($q,$http){
 
 App.controller('CouponItemController',
     function($scope){
+        $scope.transactNow = false;
+        $scope.setTransactNow = function(param){
+            $scope.transactNow = param || false;
+        };
 
         $scope.showLoginDialog = function(){
             console.log('Show Login Dialog Called!');

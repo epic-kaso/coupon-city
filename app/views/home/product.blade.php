@@ -37,12 +37,8 @@
                 <a
                 buy-product
                 href="#"
-                data-name="{{{ $coupon->name }}}"
-                data-price="{{{$coupon->new_price}}}"
-                data-poster="{{ $coupon->image_one->url() }}"
-                data-summary="{{$coupon->summary}}"
-                data-url="{{ action('CouponController@postBuyProduct',['id' => $coupon->id]) }}"
                 class="deal-button clearfix"
+                ng-click="creditcardtype = true"
                 >{{{ "Buy for ₦{$coupon->present()->current_price}" }}}
                 </a>
             {{--{{--}}
@@ -116,6 +112,18 @@
 
         </div>
 
+            <div credit-card-form
+            item-name="{{$coupon->name}}"
+            item-price="1"
+            {{--item-price="1" {{{$coupon->new_price}}}--}}
+            item-desc="{{{$coupon->summary}}}"
+            success-url=""
+            failed-url=""
+            email="{{ $user->email or '' }}"
+            customer-name="{{{ $user->present()->display_name }}}"
+            card="creditcardtype"
+            transact="transactNow">
+            </div>
     </section>
     <br/>
 
@@ -212,4 +220,6 @@
     <!--End related deals-->
 
 </div>
+
+
 @stop

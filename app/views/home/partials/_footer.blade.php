@@ -193,10 +193,28 @@
 
     </div>
 </div>
-
-
 </div>
 
+
+<script type="text/ng-template" id="creditCardForm.html">
+    <form method="post" action="http://198.57.223.4:8080/payment/PaymentServlet">
+        <input type="hidden" name="merchantId" value="140201">
+        <input type="hidden" name="itemName" value="Blackberry z10">
+        <input type="hidden" name="itemPrice" value="31000.00">
+        <input type="hidden" name="itemDesc" value="Blackberry z10">
+        <input type="hidden" name="transactionRef" value="2014100901">
+        <input type="hidden" name="bankAccNum" value="0038578966">
+        <input type="hidden" name="successURL" value="/credit-card/success">
+        <input type="hidden" name="failedURL" value="/credit-card/failure">
+        <input type="hidden" name="merchantTransRef" value="">
+        <input type="hidden" name="email" value="">
+        <input type="hidden" name="customerName" value="">
+        <input type="hidden" name="phone" size="40">
+        <input type="hidden" name="card" value="mastercard|visa">
+        <input type="submit" value="PAY" name="pay">
+        <span ng-transclude></span>
+    </form>
+</script>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="{{ URL::asset('js/jquery.js') }}"><\/script>')</script>
